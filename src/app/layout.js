@@ -1,6 +1,6 @@
 import "./globals.css";
 import Footer from "@/components/Footer"
-import NextAuthProvider from "@/components/auth/provider";
+import NextAuthProvider from "../components/auth/Provider";
 
 // export const metadata = {
 //   title: "Create Next App",

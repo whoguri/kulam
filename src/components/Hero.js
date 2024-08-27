@@ -8,7 +8,7 @@ export default function Hero() {
                     </div>
                     <div className="w-3/5"></div>
                     <div className="w-1/5">
-                        <div>Text</div>
+                        <div className="bg-white py-3 px-2">Text</div>
                     </div>
                 </div>
             </div>

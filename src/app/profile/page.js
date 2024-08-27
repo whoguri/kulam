@@ -1,7 +1,8 @@
 import Image from "next/image";
+import Layout from "@/components/Layout"
 
 export default function Profile() {
-    return <div>
+    return <Layout title="Profile">
         <div className="max-w-7xl mx-auto py-10 h-screen">
             <div>
                 <div className="py-8 px-10 bg-white rounded-xl h-[90vh]">
@@ -24,5 +25,5 @@ export default function Profile() {
                 </div>
             </div>
         </div>
-    </div>
+    </Layout>
 }

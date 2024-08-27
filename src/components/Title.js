@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Banner from "./Banner";
 
 export default function Title() {
     return (<>
@@ -7,10 +8,8 @@ export default function Title() {
                 <div className="text-right text-white">
                     <div className="flex items-center gap-5 justify-end">
                         <hr className="w-44" />
-                        <h3 className="text-2xl">Kobe Katz Presents:</h3>
                     </div>
-                    <h2 className="text-[120px] leading-none uppercase py-3 font-bold text-text">All For One</h2>
-                    <h3 className="text-2xl">Together We Can Beat The Price</h3>
+                    <Banner title="all For One" />
                 </div>
                 <div className="flex gap-6 items-center justify-center pt-16 pb-12 relative z-20">
                     <button className="px-4 py-[6px] text-lg rounded-lg gradient-bg text-white">Advertiser 5</button>

@@ -1,5 +1,10 @@
 import Image from "next/image";
 import Layout from "@/components/Layout"
+import { APP_NAME } from "@/constents/constArray";
+
+export const metadata = {
+    title: `Profile | ${APP_NAME}`, description: "",
+};
 
 export default function Profile() {
     return <Layout title="Profile">

@@ -1,5 +1,6 @@
 import "./globals.css";
 import Footer from "@/components/Footer"
+import NextAuthProvider from "@/components/auth/provider";
 
 // export const metadata = {
 //   title: "Create Next App",
@@ -26,8 +27,10 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="poppins">
-        {children}
-        <Footer />
+        <NextAuthProvider>
+          {children}
+          <Footer />
+        </NextAuthProvider>
       </body>
     </html>
   );

@@ -1,15 +1,13 @@
+import prisma from "@/lib/prisma";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-import { PrismaClient } from "@prisma/client";
 // import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 // import bcrypt from 'bcrypt';
-import { PrismaAdapter } from "@auth/prisma-adapter";
-
-const prisma = new PrismaClient();
 
 export default NextAuth({
     //@ts-ignore
-    adapter: PrismaAdapter(),
+    adapter: PrismaAdapter(prisma),
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
@@ -58,7 +56,7 @@ export default NextAuth({
                 return {}
 
             //@ts-ignore
-            const u = await prisma.user.findFirst({ where: { email: token?.email }, include: { publishers: true } })
+            const u = await prisma.user.findFirst({ where: { email: token?.email } })
             if (!u || u.status !== "active")
                 return {}
 

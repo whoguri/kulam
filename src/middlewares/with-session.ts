@@ -1,6 +1,6 @@
+import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
-import prisma from "../../../../new/espy/src/lib/prisma";
 
 const withSession = (handler: any): any => {
     return async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {

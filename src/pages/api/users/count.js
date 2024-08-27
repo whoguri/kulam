@@ -1,5 +1,5 @@
+import withAdmin from '@/middlewares/with-admin';
 import prisma from '../../../lib/prisma'
-import withAdmin from '../../../middlewares/with-admin';
 
 const users = async (req, res) => {
     try {

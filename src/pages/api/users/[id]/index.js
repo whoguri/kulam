@@ -1,7 +1,7 @@
-import prisma from "../../../../lib/prisma";
-import withAdmin from "../../../../middlewares/with-admin";
-import bcrypt from 'bcrypt';
+import prisma from "@/lib/prisma";
+import withAdmin from "@/middlewares/with-admin";
 import { USER_SELECT } from "../../../../../prisma/select";
+// import bcrypt from 'bcrypt';
 
 const user = async (req, res) => {
     const data = req.body;
@@ -12,19 +12,21 @@ const user = async (req, res) => {
             if (user)
                 return res.status(400).json({ error: "User already exists with same email" });
 
-            if (data.password) {
-                const hashedPassword = await bcrypt.hash(data.password, 10);
-                data.password = hashedPassword
-            } else {
-                delete data.password
-            }
+            // if (data.password) {
+            //     const hashedPassword = await bcrypt.hash(data.password, 10);
+            //     data.password = hashedPassword
+            // } else {
+            //     delete data.password
+            // }
             const result = await prisma.user.update({ where: { "id": id }, data });
             res.status(200).json(result);
         } else if (req.method === "DELETE") {
             await prisma.user.delete({ where: { "id": id } });
             res.status(200).json(null);
         } else {
-            const result = await prisma.user.findUnique({ where: { "id": id }, select: USER_SELECT });
+            const result = await prisma.user.findUnique({
+                where: { "id": id }, select: USER_SELECT
+            });
             res.status(200).json(result);
         }
     } catch (err) {

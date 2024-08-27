@@ -65,5 +65,6 @@
   cursor: pointer;
   border: none;
   outline: 0;
-  color: white !;
+  color: white;
+  /* @apply te-whi\ */
 }

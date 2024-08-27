@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import Banner from "./Banner";
 
 export default function Header() {
     return (<>
@@ -30,7 +29,6 @@ export default function Header() {
                 <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
                 <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
             </div>
-            <Banner />
         </div>
     </>
     );

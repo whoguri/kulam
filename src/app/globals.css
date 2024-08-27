@@ -10,3 +10,60 @@
   font-family: "Poppins";
   font-style: normal;
 }
+
+.slick-next:before,
+.slick-prev:before {
+  opacity: 1;
+  font-size: 0px !important;
+}
+
+.slick-dots {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  bottom: -40px !important;
+  z-index: 10;
+  gap: 5px !important;
+}
+
+/* flex-direction: row; */
+.slick-dots li {
+  margin: 0px !important;
+  width: auto !important;
+}
+
+.slick-dots li button {
+  /* background: black !important; */
+  color: white !important;
+  height: 10px !important;
+  width: 10px !important;
+  border-radius: 100px !important;
+  cursor: pointer;
+  background-color: #F7C199 !important;
+  /* opacity: 50 !important; */
+}
+
+.slick-dots .slick-active button {
+  width: 20px !important;
+  height: 10px !important;
+  border-radius: 100px !important;
+  /* border: 1px solid white !important; */
+  background-color: #ffffff !important;
+}
+
+.slick-dots li button:before {
+  display: none;
+}
+
+.slick-next {
+  font-size: 0px;
+  line-height: 0;
+  top: 50%;
+  width: auto;
+  height: auto;
+  transform: 0, -50%;
+  cursor: pointer;
+  border: none;
+  outline: 0;
+  color: white !;
+}

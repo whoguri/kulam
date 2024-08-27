@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Banner from "./Banner";
-
 export default function Title() {
     return (<>
         <div className="bg-background relative overflow-hidden">

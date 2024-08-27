@@ -13,58 +13,64 @@
 
 .slick-next:before,
 .slick-prev:before {
-  opacity: 1;
-  font-size: 0px !important;
+  /* opacity: 1;
+  font-size: 0px !important; */
+  @apply opacity-[1] !text-[0px]
 }
 
 .slick-dots {
-  display: flex !important;
+  /* display: flex !important;
   align-items: center;
   justify-content: center;
   bottom: -40px !important;
   z-index: 10;
-  gap: 5px !important;
+  gap: 5px !important; */
+  @apply !flex items-center justify-center !-bottom-10 z-10 !gap-[5px]
 }
 
 /* flex-direction: row; */
 .slick-dots li {
-  margin: 0px !important;
-  width: auto !important;
+  /* margin: 0px !important;
+  width: auto !important; */
+  @apply !m-0 !w-auto
 }
 
 .slick-dots li button {
   /* background: black !important; */
-  color: white !important;
+  /* color: white !important;
   height: 10px !important;
   width: 10px !important;
   border-radius: 100px !important;
   cursor: pointer;
-  background-color: #F7C199 !important;
+  background-color: #F7C199 !important; */
   /* opacity: 50 !important; */
+  @apply !text-white !h-[10px] !w-[10px] !rounded-[100px] cursor-pointer !bg-[#F7C199]
 }
 
 .slick-dots .slick-active button {
-  width: 20px !important;
+  /* width: 20px !important;
   height: 10px !important;
-  border-radius: 100px !important;
+  border-radius: 100px !important; */
   /* border: 1px solid white !important; */
-  background-color: #ffffff !important;
+  /* background-color: #ffffff !important; */
+  @apply !w-5 !h-[10px] !rounded-[100px] !bg-white
 }
 
 .slick-dots li button:before {
-  display: none;
+  /* display: none; */
+  @apply hidden
 }
 
 .slick-next {
-  font-size: 0px;
+  /* font-size: 0px;
   line-height: 0;
   top: 50%;
   width: auto;
-  height: auto;
+  height: auto; */
   transform: 0, -50%;
-  cursor: pointer;
+  /* cursor: pointer;
   border: none;
   outline: 0;
-  color: white;
-  /* @apply te-whi\ */
+  color: white; */
+  @apply text-[0px] leading-[0] top-2/4 w-auto h-auto cursor-pointer border-none outline-0 text-white
 }

@@ -4,23 +4,23 @@ import Link from "next/link";
 export default function Footer() {
     return (<>
         <div className="bg-background">
-            <div className="max-w-7xl mx-auto py-7">
-                <div className="flex items-center justify-between text-white">
-                    <div className="flex gap-5">
-                        <h2 className="text-lg">Privacy Policy</h2>
-                        <h2 className="text-lg">Terms</h2>
-                        <h2 className="text-lg">Copyright Policy</h2>
+            <div className="md:max-w-7xl max-w-[90%] mx-auto md:py-7 py-5">
+                <div className="md:flex items-center justify-between text-white">
+                    <div className="flex md:gap-5 gap-3">
+                        <h2 className="md:text-lg text-sm">Privacy Policy</h2>
+                        <h2 className="md:text-lg text-sm">Terms</h2>
+                        <h2 className="md:text-lg text-sm">Copyright Policy</h2>
                     </div>
-                    <div>@ 2024 KULAM</div>
-                    <div className="flex gap-5 items-center">
+                    <div className="md:text-lg text-sm md:pt-0 pt-3">@ 2024 KULAM</div>
+                    <div className="flex md:gap-5 gap-3 items-center md:pt-0 pt-5">
                         <Link href="/">
-                            <Image src="/images/insta.svg" alt="insta" width={30} height={30} />
+                            <Image src="/images/insta.svg" alt="insta" width={30} height={30} className="md:w-[30px] w-[20px] md:h-[30px] h-[20px]" />
                         </Link>
                         <Link href="/">
-                            <Image src="/images/fb.svg" alt="fb" width={15} height={15} />
+                            <Image src="/images/fb.svg" alt="fb" width={15} height={15} className="md:w-[15px] w-[18px] md:h-[15px] h-[18px]" />
                         </Link>
                         <Link href="/">
-                            <Image src="/images/x.svg" alt="x" width={25} height={25} />
+                            <Image src="/images/x.svg" alt="x" width={25} height={25} className="md:w-[25px] w-[18px] md:h-[25px] h-[18px]" />
                         </Link>
                     </div>
                 </div>

@@ -1,5 +1,4 @@
 "use client"
-import Footer from "@/components/Footer";
 import Image from "next/image";
 import Slider from "react-slick";
 
@@ -49,7 +48,6 @@ export default function Polls() {
                 </div>
             </div>
         </div>
-        <Footer />
     </>
     );
 }

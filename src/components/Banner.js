@@ -6,7 +6,7 @@ export default function Banner({ title }) {
     const pathname = usePathname()
     const isHome = pathname === "/"
 
-    return <div className="bg-background">
+    return <div className="bg-background relative overflow-hidden">
         <div className="max-w-7xl mx-auto pt-10 relative z-20">
             {isHome &&
                 <div className="flex items-center gap-5 justify-end">
@@ -26,5 +26,8 @@ export default function Banner({ title }) {
             </div>}
             {isHome && <Image src="/images/title.svg" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0" />}
         </div>
+        <Image src="/images/title2.svg" width={50} height={50} className="w-[100px] mx-auto absolute top-10 z-10 left-0" />
+        <Image src="/images/title2.svg" width={50} height={50} className="w-[100px] mx-auto absolute top-0 z-10 -right-14 rotate-180" />
+
     </div>
 }

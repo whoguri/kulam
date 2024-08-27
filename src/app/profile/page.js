@@ -21,11 +21,8 @@ export default function Profile() {
                         </div>
                     </div>
                     <hr className="border-b border-black mt-5" />
-
                 </div>
-
             </div>
-
         </div>
     </div>
 }

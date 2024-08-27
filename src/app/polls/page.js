@@ -1,8 +1,4 @@
 "use client"
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Title from "@/components/Title";
 import Image from "next/image";
 import Slider from "react-slick";
 
@@ -18,8 +14,6 @@ export default function Polls() {
         arrows: true,
     };
     return (<>
-        <Header />
-        <Title />
         <div className="gradient-bg">
             <div className="max-w-7xl mx-auto pt-10 pb-20">
                 <div className="w-4/5 mx-auto">
@@ -54,7 +48,6 @@ export default function Polls() {
                 </div>
             </div>
         </div>
-        <Footer />
     </>
     );
 }

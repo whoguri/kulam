@@ -15,8 +15,8 @@ export default function Polls() {
     };
     return (<>
         <div className="gradient-bg">
-            <div className="max-w-7xl mx-auto pt-10 pb-20">
-                <div className="w-4/5 mx-auto">
+            <div className="md:max-w-7xl max-w-[90%] mx-auto pt-10 pb-20">
+                <div className="w-[70%] mx-auto">
                     <Slider {...settings}>
                         <div className="py-8 px-8 bg-white rounded-xl text-right">
                             <h2 className="text-4xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>

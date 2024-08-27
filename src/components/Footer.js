@@ -7,9 +7,9 @@ export default function Footer() {
             <div className="md:max-w-7xl max-w-[90%] mx-auto md:py-7 py-5">
                 <div className="md:flex items-center justify-between text-white">
                     <div className="flex md:gap-5 gap-3">
-                        <h2 className="md:text-lg text-sm">Privacy Policy</h2>
-                        <h2 className="md:text-lg text-sm">Terms</h2>
-                        <h2 className="md:text-lg text-sm">Copyright Policy</h2>
+                        <Link href="/privacy-policy" className="md:text-lg text-sm">Privacy Policy</Link>
+                        <Link href="/terms" className="md:text-lg text-sm">Terms</Link>
+                        <Link href="/copyright-policy" className="md:text-lg text-sm">Copyright Policy</Link>
                     </div>
                     <div className="md:text-lg text-sm md:pt-0 pt-3">@ 2024 KULAM</div>
                     <div className="flex md:gap-5 gap-3 items-center md:pt-0 pt-5">

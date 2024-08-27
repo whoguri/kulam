@@ -1,4 +1,5 @@
 "use client"
+import Layout from "@/components/Layout";
 import Image from "next/image";
 import Slider from "react-slick";
 
@@ -13,41 +14,69 @@ export default function Polls() {
         // autoplay: true,
         arrows: true,
     };
-    return (<>
+    return (<Layout title="Polls">
         <div className="gradient-bg">
             <div className="md:max-w-7xl max-w-[90%] mx-auto pt-10 pb-20">
-                <div className="w-[70%] mx-auto">
+                <div className="md:w-[70%] w-full mx-auto">
                     <Slider {...settings}>
-                        <div className="py-8 px-8 bg-white rounded-xl text-right">
-                            <h2 className="text-4xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
-                            <div className="flex">
-
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                            <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
+                            <div className="py-6">
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end my-2">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
                             </div>
+                            <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
-                        <div className="!flex justify-between gap-10 py-8 px-8 bg-white rounded-xl">
-                            <div className="w-[30%]">
-                                <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl" />
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                            <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
+                            <div className="py-6">
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end my-2">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
                             </div>
-                            <div className="text-right w-[70%]">
-                                <h2 className="text-[46px] font-bold">Running Banners RTL</h2>
-                                <p className="text-xl font-medium pt-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <button className="border border-white text-white px-4 py-[6px] mt-5 rounded-lg gradient-bg">Learn More</button>
-                            </div>
+                            <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
-                        <div className="!flex justify-between gap-10 py-8 px-8 bg-white rounded-xl">
-                            <div className="w-[30%]">
-                                <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl" />
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                            <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
+                            <div className="py-6">
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end my-2">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
+                                <div className="flex gap-7 items-center justify-end">
+                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <input type="radio" className="border border-background py-3 px-3 rounded-full" />
+                                </div>
                             </div>
-                            <div className="text-right w-[70%]">
-                                <h2 className="text-[46px] font-bold">Running Banners RTL</h2>
-                                <p className="text-xl font-medium pt-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                <button className="border border-white text-white px-4 py-[6px] mt-5 rounded-lg gradient-bg">Learn More</button>
-                            </div>
+                            <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
                     </Slider>
                 </div>
             </div>
         </div>
-    </>
+    </Layout>
     );
 }

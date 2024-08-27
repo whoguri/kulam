@@ -17,7 +17,7 @@ export default function Footer() {
                             <Image src="/images/insta.svg" alt="insta" width={30} height={30} className="md:w-[30px] w-[20px] md:h-[30px] h-[20px]" />
                         </Link>
                         <Link href="/">
-                            <Image src="/images/fb.svg" alt="fb" width={15} height={15} className="md:w-[15px] w-[18px] md:h-[15px] h-[18px]" />
+                            <Image src="/images/fb.svg" alt="fb" width={15} height={15} className="md:w-[25px] w-[18px] md:h-[25px] h-[18px]" />
                         </Link>
                         <Link href="/">
                             <Image src="/images/x.svg" alt="x" width={25} height={25} className="md:w-[25px] w-[18px] md:h-[25px] h-[18px]" />

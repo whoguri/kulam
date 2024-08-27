@@ -18,10 +18,10 @@ export default function Hero() {
             <div className="md:max-w-7xl max-w-[90%] mx-auto py-10">
                 <div className="md:flex gap-10 w-full">
                     <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between  md:mb-0 mb-5">
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 1</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 2</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 3</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 4</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 1</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 2</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 3</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Deal 4</div>
                     </div>
                     <div className="md:w-[70%] w-full">
                         <Slider {...settings}>
@@ -58,10 +58,10 @@ export default function Hero() {
                         </Slider>
                     </div>
                     <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14">
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
-                        <div className="bg-white w-full md:py-8 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
+                        <div className="bg-white w-full md:py-10 py-5 md:px-0 px-3 text-center md:text-xl text-sm font-medium rounded-xl">Text</div>
                     </div>
                 </div>
             </div>

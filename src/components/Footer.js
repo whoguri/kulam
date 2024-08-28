@@ -7,7 +7,7 @@ export default function Footer() {
 
     return (<>
         <div className="bg-background">
-            <div className="md:max-w-7xl max-w-[90%] mx-auto md:py-7 py-5">
+            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:py-7 py-5">
                 <div className="md:flex items-center justify-between text-white">
                     <div className="flex md:gap-5 gap-3">
                         <Link href="/privacy-policy" className="md:text-lg text-sm">Privacy Policy</Link>

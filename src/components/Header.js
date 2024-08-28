@@ -29,7 +29,7 @@ export default function Header() {
     }
     return (<>
         <div className="bg-background md:block hidden">
-            <div className="max-w-7xl mx-auto relative z-10">
+            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto relative z-10">
                 <div className="flex justify-between items-center relative z-10">
                     <div className="text-white flex gap-5">
                         <button className="bg-gradient-to-r from-primary to-primary-dark rounded-lg p-[1px]"

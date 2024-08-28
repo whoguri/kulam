@@ -15,7 +15,7 @@ export default function PollsComponent() {
     };
     return (<>
         <div className="gradient-bg">
-            <div className="md:max-w-7xl max-w-[90%] mx-auto pt-10 pb-20">
+            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
                 <div className="md:w-[70%] w-full mx-auto">
                     <Slider {...settings}>
                         <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-end">

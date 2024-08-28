@@ -45,10 +45,10 @@ export default function Header() {
                             <Link href="/" className="text-xl font-medium">Contact</Link>
                             <Link href="/" className="text-xl font-medium">Services</Link>
                             {status === "authenticated" && <Link href="/profile" className="text-xl font-medium">Profile</Link>}
-                            <Link href="/" className="text-xl font-medium">Hiring</Link>
+                            <Link href="/hiring" className="text-xl font-medium">Hiring</Link>
                             <Link href="/" className="text-xl font-medium">Discounts</Link>
                             <Link href="/" className="text-xl font-medium">Deals</Link>
-                            <Link href="/" className="text-xl font-medium">Polls</Link>
+                            <Link href="/polls" className="text-xl font-medium">Polls</Link>
                             <Link href="/" className="text-xl font-medium">Home</Link>
                         </div>
                         <Link href="/">

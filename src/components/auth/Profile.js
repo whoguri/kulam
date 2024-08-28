@@ -26,7 +26,7 @@ function Profile() {
                 <div className="py-8 px-10 bg-white rounded-xl h-[90vh]">
                     <div className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-5">
-                            <Image src={user?.image || "/images/user.png"} alt="user" height={170} width={170} />
+                            <Image src={user?.image || "/images/user.png"} alt="user" height={170} width={170} className='rounded-full' />
                             <div>
                                 <div className="capitalize text-[32px]">{user?.name}</div>
                                 <div className="capitalize text-xl">Member Since</div>

@@ -1,8 +1,8 @@
 "use client"
-
 import Slider from "react-slick";
 
 export default function PollsComponent() {
+
     const settings = {
         dots: true,
         infinite: true,
@@ -18,7 +18,7 @@ export default function PollsComponent() {
             <div className="md:max-w-7xl max-w-[90%] mx-auto pt-10 pb-20">
                 <div className="md:w-[70%] w-full mx-auto">
                     <Slider {...settings}>
-                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-end">
                             <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">
@@ -36,7 +36,7 @@ export default function PollsComponent() {
                             </div>
                             <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
-                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-end">
                             <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">
@@ -54,7 +54,7 @@ export default function PollsComponent() {
                             </div>
                             <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
-                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-right">
+                        <div className="md:py-8 py-4 md:px-8 px-4 bg-white rounded-xl text-end">
                             <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">

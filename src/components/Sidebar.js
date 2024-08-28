@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-
 export default function Sidebar({ open, setOpen }) {
     const pathname = usePathname()
     const ref = useRef(null);
@@ -56,9 +55,9 @@ export default function Sidebar({ open, setOpen }) {
         <div ref={ref} className={`md:hidden bg-background inset-y-0 md:w-[300px] w-3/4 fixed z-30 h-screen transition-all duration-300 ${open ? "left-0" : "-left-full"}`}>
 
             <div className="w-full flex flex-col justify-between mx-auto py-5 px-6">
-                <div className="flex items-start justify-between w-full pb-3">
+                <div className="flex items-center justify-between w-full pb-3">
                     <Link href="/">
-                        <Image src="/images/logo.png" alt="logo" width={70} height={70} className="" />
+                        <Image src="/images/logo.png" alt="logo" width={70} height={70} />
                     </Link>
                     <div className="cursor-pointer text-primary absolute right-6" onClick={() => { setOpen(false) }} ><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
                         <path fill="currentColor" fill-rule="evenodd" d="M6.793 6.793a1 1 0 0 1 1.414 0L12 10.586l3.793-3.793a1 1 0 1 1 1.414 1.414L13.414 12l3.793 3.793a1 1 0 0 1-1.414 1.414L12 13.414l-3.793 3.793a1 1 0 0 1-1.414-1.414L10.586 12L6.793 8.207a1 1 0 0 1 0-1.414" clip-rule="evenodd" />
@@ -68,11 +67,11 @@ export default function Sidebar({ open, setOpen }) {
                 <div className="flex flex-col justify-between h-[85vh] w-full">
                     <div className="w-full">
                         {MENU.map((e, i) => {
-                            return <Link onClick={() => { setOpen(false) }} key={i} href={e.link || "/"} className={`${pathname === e.id ? "font-bold" : "font-normal"} ${i !== 5 && "w-full"} p-3 hover:font-bold uppercase text-lg leading-8 block text-white whitespace-pre`}>{e.title}</Link>
+                            return <Link onClick={() => { setOpen(false) }} key={i} href={e.link || "/"} className={`${pathname === e.id ? "font-bold" : "font-normal"} ${i !== 5 && "w-full"} py-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}>{e.title}</Link>
                         })}
                     </div>
 
-                    <button className="bg-gradient-to-r from-primary to-primary-dark rounded-lg px-4 py-[6px] text-base"
+                    <button className="bg-gradient-to-r from-primary to-primary-dark rounded-lg px-4 py-[6px] text-white text-base"
                         onClick={() => {
                             if (status === "authenticated") {
                                 signOut()

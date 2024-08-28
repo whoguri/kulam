@@ -11,7 +11,7 @@ export default function Hero() {
         slidesToScroll: 1,
         autoplaySpeed: 3000,
         autoplay: true,
-        arrows: true,
+        arrows: false,
     };
     return (<>
         <div className="">

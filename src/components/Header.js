@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { getError } from "../../helper"
+import Sidebar from "../components/Sidebar"
 
 export default function Header() {
     const [sending, setSending] = useState(false)
     const { status } = useSession()
+    const [open, setOpen] = useState(false)
 
     const googleLogin = async () => {
         try {
@@ -23,8 +25,8 @@ export default function Header() {
         }
     }
     return (<>
-        <div className="bg-background">
-            <div className="max-w-7xl mx-auto relative z-10">
+        <div className="bg-background md:block hidden">
+            <div className="max-w-7xl mx-auto relative z-10 ">
                 <div className="flex justify-between items-center relative z-10">
                     <div className="text-white flex gap-5">
                         <button className="bg-gradient-to-r from-primary to-primary-dark rounded-lg p-[1px]"
@@ -59,6 +61,26 @@ export default function Header() {
                 <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
                 <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
             </div>
+        </div>
+
+        <div className="md:hidden block bg-background -mb-[1px]">
+            <div className="flex justify-between items-start relative z-10 w-full px-3 py-2">
+
+                <Link href="/">
+                    <Image src="/images/logo.png" alt="logo" width={70} height={70} />
+                </Link>d
+
+                <span className="cursor-pointer md:hidden text-primary " onClick={() => { setOpen(true) }}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24">
+                        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" />
+                    </svg>
+                </span>
+
+            </div>
+            {/* <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
+            <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
+            <Sidebar open={open} setOpen={setOpen} />
+
         </div>
     </>
     );

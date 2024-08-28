@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
+    const d = new Date();
+    let year = d.getFullYear();
+
     return (<>
         <div className="bg-background">
             <div className="md:max-w-7xl max-w-[90%] mx-auto md:py-7 py-5">
@@ -11,7 +14,7 @@ export default function Footer() {
                         <Link href="/terms" className="md:text-lg text-sm">Terms</Link>
                         <Link href="/copyright-policy" className="md:text-lg text-sm">Copyright Policy</Link>
                     </div>
-                    <div className="md:text-lg text-sm md:pt-0 pt-3">@ 2024 KULAM</div>
+                    <div className="md:text-lg text-sm md:pt-0 pt-3">@ {year} KULAM</div>
                     <div className="flex md:gap-5 gap-3 items-center md:pt-0 pt-5">
                         <Link href="/">
                             <Image src="/images/insta.svg" alt="insta" width={30} height={30} className="md:w-[30px] w-[20px] md:h-[30px] h-[20px]" />

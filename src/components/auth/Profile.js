@@ -21,22 +21,22 @@ function Profile() {
         return "loading.."
     }
     return (<Layout title="Profile">
-        {(user && user?.id) && <div className="max-w-7xl mx-auto py-10 h-screen">
+        {(user && user?.id) && <div className="max-w-7xl md:mx-auto mx-3 py-10 h-screen">
             <div>
-                <div className="py-8 px-10 bg-white rounded-xl h-[90vh]">
-                    <div className="flex items-center justify-between w-full">
-                        <div className="flex items-center gap-5">
-                            <Image src={user?.image || "/images/user.png"} alt="user" height={170} width={170} className='rounded-full' />
+                <div className="py-8 md:px-10 px-3 bg-white rounded-xl md:w-[80%] w-full mx-auto h-[90vh]">
+                    <div className="flex md:flex-row flex-col items-center justify-between w-full">
+                        <div className="flex items-center w-full gap-5">
+                            <Image src={user?.image || "/images/user.png"} alt="user" height={170} width={170} className='rounded-full md:h-[170px] md:w-[170px] h-20 w-20' />
                             <div>
-                                <div className="capitalize text-[32px]">{user?.name}</div>
-                                <div className="capitalize text-xl">Member Since</div>
-                                <div className="capitalize text-xl">{formatDate(user?.registerOn, "MM yyyy")}</div>
+                                <div className="capitalize md:text-[32px] text-2xl">{user?.name}</div>
+                                <div className="capitalize md:text-xl text-base md:py-1">Member Since</div>
+                                <div className="capitalize md:text-xl text-base">{formatDate(user?.registerOn, "MM yyyy")}</div>
                             </div>
                         </div>
-                        <div>
-                            <div className="capitalize text-[32px]">My Balance</div>
-                            <div className="capitalize text-xl">2000</div>
-                            <div className="text-xl font-semibold text-[#0039CC] underline underline-offset-8 pt-1"> Copy referral link</div>
+                        <div className='md:mt-0 mt-5'>
+                            <div className="capitalize md:text-[32px] text-2xl">My Balance</div>
+                            <div className="capitalize md:text-xl text-base md:py-1">2000</div>
+                            <div className="md:text-xl text-base font-semibold text-[#0039CC] underline underline-offset-8 pt-1"> Copy referral link</div>
                         </div>
                     </div>
                     <hr className="border-b border-black mt-5" />

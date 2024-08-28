@@ -28,13 +28,13 @@ function Profile() {
                         <div className="flex items-center w-full gap-5">
                             <Image src={user?.image || "/images/user.png"} alt="user" height={170} width={170} className='rounded-full md:h-[170px] md:w-[170px] h-20 w-20' />
                             <div>
-                                <div className="capitalize md:text-[32px] text-2xl">{user?.name}</div>
+                                <div className="capitalize  text-2xl">{user?.name}</div>
                                 <div className="capitalize md:text-xl text-base md:py-1">Member Since</div>
                                 <div className="capitalize md:text-xl text-base">{formatDate(user?.registerOn, "MM yyyy")}</div>
                             </div>
                         </div>
                         <div className='md:mt-0 mt-5'>
-                            <div className="capitalize md:text-[32px] text-2xl">My Balance</div>
+                            <div className="capitalize text-2xl">My Balance</div>
                             <div className="capitalize md:text-xl text-base md:py-1">2000</div>
                             <div className="md:text-xl text-base font-semibold text-[#0039CC] underline underline-offset-8 pt-1"> Copy referral link</div>
                         </div>

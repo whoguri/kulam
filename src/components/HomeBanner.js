@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export default function HomeBanner() {
     return <div className="bg-background relative overflow-hidden">
-        <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 relative z-20">
+        <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-5 relative z-20">
             <div className="flex items-center md:gap-5 gap-2 justify-end">
                 <hr className="md:w-44 w-16" />
                 <h3 className="md:text-2xl text-base text-end text-primary">Kobe Katz Presents:</h3>

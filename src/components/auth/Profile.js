@@ -57,7 +57,7 @@ function Profile() {
                             </div>
                         </div>
                         <div className='md:mt-0 mt-5'>
-                            <div className='flex items-center gap-5'>
+                            <div className='flex items-center '>
                                 <div className='md:hidden'></div>
                                 <div>
                                     <div className="capitalize text-xl">My Balance</div>

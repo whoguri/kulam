@@ -27,7 +27,7 @@ export default function Hero() {
                         <Slider {...settings}>
                             <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">
-                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full max-h-52" />
+                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full " />
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>
@@ -37,7 +37,7 @@ export default function Hero() {
                             </div>
                             <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">
-                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full max-h-52" />
+                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full" />
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>
@@ -47,7 +47,7 @@ export default function Hero() {
                             </div>
                             <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">
-                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full max-h-52" />
+                                    <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full" />
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>

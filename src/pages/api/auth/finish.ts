@@ -12,8 +12,20 @@ const finish = async (req: NextApiRequest, res: NextApiResponse) => {
             if (!data.role)
                 return res.status(400).json({ error: "Missing role" });
             const code = randomBytes(4).toString('hex')
-            const result = await prisma.user.update({ where: { "id": id }, data: { role: data.role, referralCode: code } });
+            let ref = undefined
+            if (data.referredBy) {
+                const refUser = await prisma.user.findFirst({ where: { referralCode: data.referredBy } })
+                if (!refUser)
+                    return res.status(400).json({ error: "Wrong code" });
+                ref = refUser.id
+            }
 
+            const result = await prisma.user.update({
+                where: { "id": id }, data: {
+                    role: data.role, referralCode: code,
+                    referredByUser: !ref ? undefined : { connect: { id: ref } }
+                }
+            });
             res.status(200).json(result);
         } else {
             res.status(405).json(null);

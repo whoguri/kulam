@@ -3,7 +3,6 @@
 import { useSearchParams } from 'next/navigation'
 import React, { Suspense } from 'react'
 import { useEffect } from 'react'
-import Loading from '../Loading'
 
 function SaveRefCode_() {
     const search = useSearchParams()
@@ -21,5 +20,5 @@ function SaveRefCode_() {
 
 
 export default function SaveRefCode() {
-    return <Suspense fallback={<Loading />}><SaveRefCode_ /></Suspense>
+    return <Suspense fallback={<></>}><SaveRefCode_ /></Suspense>
 }

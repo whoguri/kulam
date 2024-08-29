@@ -19,18 +19,18 @@ export default function PollsComponent() {
                 <div className="md:w-[70%] w-full mx-auto">
                     <Slider {...settings}>
                         <div className="md:p-8 p-4 bg-white rounded-xl text-end">
-                            <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
+                            <h2 className="subheading">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <h2 className="paragraph">Opt yes 1</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end my-2">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <h2 className="paragraph">Opt yes 2</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <h2 className="paragraph">Opt yes 3</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                             </div>
@@ -40,15 +40,15 @@ export default function PollsComponent() {
                             <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <h2 className="paragraph">Opt yes 1</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end my-2">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <h2 className="paragraph">Opt yes 2</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <h2 className="paragraph">Opt yes 3</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                             </div>
@@ -58,15 +58,15 @@ export default function PollsComponent() {
                             <h2 className="md:text-4xl text-xl font-bold">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>
                             <div className="py-6">
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-bold">Opt yes 1</h2>
+                                    <h2 className="paragraph">Opt yes 1</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end my-2">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 2</h2>
+                                    <h2 className="paragraph">Opt yes 2</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                                 <div className="flex gap-7 items-center justify-end">
-                                    <h2 className="md:text-[22px] text-sm font-medium">Opt yes 3</h2>
+                                    <h2 className="paragraph">Opt yes 3</h2>
                                     <input type="radio" className="border border-background py-3 px-3 rounded-full" />
                                 </div>
                             </div>

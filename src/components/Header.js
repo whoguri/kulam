@@ -41,9 +41,9 @@ export default function Header() {
                                     googleLogin()
                                 }
                             }}
-
                             disabled={sending}>
-                            <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark">{status === "authenticated" ? "Log out" : "Get Started"}</span>
+
+                            <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">{status === "authenticated" ? "Log out" : "Get Started"}</span>
                         </button>
 
                         {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
@@ -72,8 +72,9 @@ export default function Header() {
                         </Link>
                     </div>
                 </div>
-                <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
-                <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
+
+                <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
+                <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
             </div>
         </div>
 

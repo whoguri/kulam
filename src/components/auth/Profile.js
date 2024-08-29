@@ -21,7 +21,7 @@ function Profile() {
         return "loading.."
     }
     return (<Layout title="Profile">
-        {(user && user?.id) && <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10 h-screen">
+        {(user && user?.id) && <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
             <div>
                 <div className="md:p-8 p-4 bg-white rounded-xl md:w-[80%] w-full mx-auto h-[90vh]">
                     <div className="flex md:flex-row flex-col items-center justify-between w-full">

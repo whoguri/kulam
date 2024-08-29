@@ -63,6 +63,40 @@ model User {
   referredByUser User?  @relation("UserToReferrals", fields: [referredBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
   referrals      User[] @relation("UserToReferrals")
 
-  accounts Account[]
-  sessions Session[]
+  accounts  Account[]
+  sessions  Session[]
+  deals     Deal[]
+  discounts Discount[]
+}
+
+model Deal {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  amount       Float
+  description  String
+  createdAt    DateTime @default(now())
+  advertiserId String?  @db.ObjectId
+  advertiser   User?    @relation(fields: [advertiserId], references: [id])
+}
+
+model Discount {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  amount       Float
+  description  String
+  createdAt    DateTime @default(now())
+  advertiserId String?  @db.ObjectId
+  advertiser   User?    @relation(fields: [advertiserId], references: [id])
+}
+
+enum AC_TYPE {
+  HIRING
+  SERVICES
+}
+
+model AppContent {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  type        AC_TYPE  @unique
+  description String
+  createdAt   DateTime @default(now())
 }

@@ -82,7 +82,7 @@ export default function Header() {
             <div className="flex justify-between items-start relative z-10 w-full px-3 py-2">
                 <Link href="/">
                     <Image src="/images/logo.jpeg" alt="logo" width={70} height={70} />
-                </Link>d
+                </Link>
 
                 <span className="cursor-pointer md:hidden text-primary" onClick={() => { setOpen(true) }}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24">

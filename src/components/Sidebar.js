@@ -85,7 +85,7 @@ export default function Sidebar({ open, setOpen }) {
                 </div>
             </div>
         </div>
-        {/* {open && <div onClick={() => { setOpen(false) }} className="z-10 block fixed inset-0 w-full h-screen bg-black opacity-50">
-        </div>} */}
+        {open && <div onClick={() => { setOpen(false) }} className="z-10 block fixed inset-0 w-full h-screen bg-black opacity-50">
+        </div>}
     </div>
 }

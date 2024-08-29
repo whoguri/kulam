@@ -68,7 +68,7 @@ export default function Header() {
                             <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""} `}>Home</Link>
                         </div>
                         <Link href="/">
-                            <Image src="/images/logo.png" alt="logo" width={135} height={112} className="w-[110px]" />
+                            <Image src="/images/logo.jpeg" alt="logo" width={135} height={112} className="w-[110px]" />
                         </Link>
                     </div>
                 </div>
@@ -81,7 +81,7 @@ export default function Header() {
         <div className="md:hidden block bg-background -mb-[1px]">
             <div className="flex justify-between items-start relative z-10 w-full px-3 py-2">
                 <Link href="/">
-                    <Image src="/images/logo.png" alt="logo" width={70} height={70} />
+                    <Image src="/images/logo.jpeg" alt="logo" width={70} height={70} />
                 </Link>d
 
                 <span className="cursor-pointer md:hidden text-primary" onClick={() => { setOpen(true) }}>

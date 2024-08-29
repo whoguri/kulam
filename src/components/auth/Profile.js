@@ -10,6 +10,7 @@ import axios from 'axios'
 import { getError } from 'helper'
 import Loading from "../Loading"
 import { toast } from 'react-toastify'
+import ReferralTree from "./ReferralTree"
 
 function Profile() {
     const { status } = useSession()
@@ -70,6 +71,10 @@ function Profile() {
                         </div>
                     </div>
                     <hr className="border-b border-black mt-5" />
+
+                    <div>
+                        <ReferralTree tree={user.tree} />
+                    </div>
                 </div>
             </div>
         </div>}

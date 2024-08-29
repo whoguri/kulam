@@ -46,7 +46,7 @@ function Profile() {
     return (<Layout title="Profile">
         {loading ? <Loading /> : <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
             <div>
-                <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto min-h-[90vh]">
+                <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
                     <div className="flex md:flex-row flex-col items-center justify-between w-full">
                         <div className="flex items-center w-full gap-5">
                             <Image src={sessionUser?.image || "/images/user.png"} alt="user" height={150} width={150} className='border rounded-full md:h-[130px] md:w-[130px] h-20 w-20' />
@@ -78,6 +78,7 @@ function Profile() {
                         <h1 className='paragraph mb-2'>Referral Tree</h1>
                         {(user.tree || []).sort((a, b) => a.referrals.length > b.referrals.length ? -1 : 1).map((e, i) => <ReferralTree index={i} tree={e} key={i} isLast={(user.tree.length - 1) === i} />)}
                     </div>
+
                 </div>
             </div>
         </div>}

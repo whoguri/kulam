@@ -24,12 +24,10 @@ const profile = async (req, res) => {
 
             res.status(200).json(result);
         } else {
-            const result = await prisma.user.findUnique({
-                where: { "id": id }, select: USER_SELECT
-            });
+            const result = await prisma.user.findUnique({ where: { "id": id }, select: USER_SELECT });
             const tree = await getReferralTree(id);
 
-            res.status(200).json({ ...result, tree });
+            res.status(200).json({ ...result, tree: tree.referrals });
         }
     } catch (err) {
         console.error(err)

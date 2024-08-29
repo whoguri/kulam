@@ -21,7 +21,7 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
-  user              User    @relation(fields: [userId], references: [id])
+  user              User    @relation(fields: [userId], references: [id], onUpdate: NoAction, onDelete: NoAction)
 
   @@unique([provider, providerAccountId])
 }
@@ -31,16 +31,7 @@ model Session {
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id])
-}
-
-model VerificationToken {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
+  user         User     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 enum UserStatus {
@@ -56,16 +47,22 @@ enum Role {
 }
 
 model User {
-  id            String      @id @default(auto()) @map("_id") @db.ObjectId
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String      @unique
+  email         String     @unique
   emailVerified DateTime?
   image         String?
-  status        UserStatus  @default(active)
-  role          Role        @default(tbd)
-  registerOn    DateTime?   @default(now())
+  status        UserStatus @default(active)
+  role          Role       @default(tbd)
+  registerOn    DateTime?  @default(now())
   lastLogin     DateTime?
 
-  accounts      Account[]
-  sessions      Session[]
+  referralCode String? @unique
+  referredBy   String? @db.ObjectId
+
+  referredByUser User?  @relation("UserToReferrals", fields: [referredBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  referrals      User[] @relation("UserToReferrals")
+
+  accounts Account[]
+  sessions Session[]
 }

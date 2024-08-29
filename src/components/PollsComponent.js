@@ -14,7 +14,7 @@ export default function PollsComponent() {
         arrows: false,
     };
     return (<>
-        <div className="gradient-bg">
+        <div className="">
             <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
                 <div className="md:w-[70%] w-full mx-auto">
                     <Slider {...settings}>

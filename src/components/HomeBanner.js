@@ -17,9 +17,9 @@ export default function HomeBanner() {
                 <button className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg gradient-bg text-white">Advertiser 2</button>
                 <button className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg gradient-bg text-white">Advertiser 1</button>
             </div>
-            <Image src="/images/title.svg" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0" />
+            <Image src="/images/title.svg" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]" />
         </div>
-        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-10 z-10 left-0" />
-        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
+        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-10 z-10 left-0 max-h-20" />
+        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180 max-h-20" />
     </div>
 }

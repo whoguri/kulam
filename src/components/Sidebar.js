@@ -47,11 +47,11 @@ export default function Sidebar({ open, setOpen }) {
         { title: "Profile", link: "/profile" },
         { title: "Hiring", link: "/hiring" },
         { title: "Discounts", link: "/" },
-        { title: "Deals", link: "/" },
+        { title: "Deals", link: "/deals" },
         { title: "Polls", link: "/polls" },
         { title: "Home", link: "/" },
     ]
-    return <div >
+    return <div>
         <div ref={ref} className={`md:hidden bg-background inset-y-0 md:w-[300px] w-3/4 fixed z-30 h-screen transition-all duration-300 ${open ? "left-0" : "-left-full"}`}>
 
             <div className="w-full flex flex-col justify-between mx-auto py-5 px-6">

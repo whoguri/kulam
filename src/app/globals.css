@@ -74,3 +74,15 @@
   color: white; */
   @apply text-[0px] leading-[0] top-2/4 w-auto h-auto cursor-pointer border-none outline-0 text-white
 }
+
+.heading {
+  @apply 2xl:text-4xl xl:text-3xl text-xl font-bold
+}
+
+.subheading {
+  @apply 2xl:text-4xl xl:text-3xl text-xl font-bold
+}
+
+.paragraph {
+  @apply 2xl:text-lg xl:text-base text-sm font-medium
+}

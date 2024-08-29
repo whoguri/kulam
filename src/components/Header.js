@@ -51,17 +51,17 @@ export default function Header() {
                     <div className="flex items-center gap-20">
                         <div className="flex gap-6 text-white">
 
-                            <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""}`}>Contact</Link>
+                            <Link href="/contact" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/contact" ? "border-b-2 border-white" : ""}`}>Contact</Link>
 
-                            <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium   ${pathname === "/" ? "border-b-2 border-white" : ""}`}>Services</Link>
+                            <Link href="/services" className={`2xl:text-xl xl:text-lg text-base font-medium   ${pathname === "/services" ? "border-b-2 border-white" : ""}`}>Services</Link>
 
                             {status === "authenticated" && <Link href="/profile" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/profile" ? "border-b-2 border-white" : ""} `}>Profile</Link>}
 
                             <Link href="/hiring" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/hiring" ? "border-b-2 border-white" : ""}`}>Hiring</Link>
 
-                            <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""}`}>Discounts</Link>
+                            <Link href="/discounts" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/discounts" ? "border-b-2 border-white" : ""}`}>Discounts</Link>
 
-                            <Link href="deals" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""} `}>Deals</Link>
+                            <Link href="/deals" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/deals" ? "border-b-2 border-white" : ""} `}>Deals</Link>
 
                             <Link href="/polls" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/polls" ? "border-b-2 border-white" : ""} `}>Polls</Link>
 

@@ -17,22 +17,7 @@ const profile = async (req, res) => {
             Object.entries(data).forEach(item => {
                 newData[item[0]] = item[1]
             })
-            // if (newData.password) {
-            //     const user = await prisma.user.findUnique({ where: { id } })
-            //     if (!user || !user.password)
-            //         return res.status(401).json({ error: "No user found" });
 
-            //     const passwordMatch = await bcrypt.compare(newData.oldPassword || "", user.password || "");
-            //     if (!passwordMatch) {
-            //         return res.status(400).json({ error: "Wrong oldPassword" });
-            //     }
-            //     delete newData.oldPassword
-            //     const hashedPassword = await bcrypt.hash(newData.password, 10);
-            //     newData.password = hashedPassword
-            // } else {
-            //     delete newData.password
-            //     delete newData.oldPassword
-            // }
             const result = await prisma.user.update({ where: { "id": id }, data: newData });
             if (result && result.password)
                 delete result.password
@@ -42,7 +27,9 @@ const profile = async (req, res) => {
             const result = await prisma.user.findUnique({
                 where: { "id": id }, select: USER_SELECT
             });
-            res.status(200).json(result);
+            const tree = await getReferralTree(id);
+
+            res.status(200).json({ ...result, tree });
         }
     } catch (err) {
         console.error(err)
@@ -50,4 +37,25 @@ const profile = async (req, res) => {
     }
 
 };
+
+async function getReferralTree(userId) {
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+            referrals: true,
+        },
+    });
+
+    if (!user) return null;
+
+    const tree = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        referrals: await Promise.all(user.referrals.map(ref => getReferralTree(ref.id))),
+    };
+
+    return tree;
+}
+
 export default withSession(profile)

@@ -79,7 +79,7 @@ export default function Header() {
         </div>
 
         <div className="md:hidden block bg-background -mb-[1px]">
-            <div className="flex justify-between items-center relative z-10 w-full px-3 py-2">
+            <div className="flex justify-between items-start relative z-10 w-full px-3 py-2">
                 <Link href="/">
                     <Image src="/images/logo.jpeg" alt="logo" width={70} height={70} />
                 </Link>d

@@ -49,7 +49,7 @@ function Profile() {
                 <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
                     <div className="flex md:flex-row flex-col items-center justify-between w-full">
                         <div className="flex items-center w-full gap-5">
-                            <Image src={sessionUser?.image || "/images/user.png"} alt="user" height={150} width={150} className='border rounded-full md:h-[130px] md:w-[130px] h-20 w-20' />
+                            <Image src={sessionUser?.image || "/images/user.png"} alt="user" height={150} width={150} className='border rounded-full 2xl:h-[130px] xl:h-24 2xl:w-[130px] xl:w-24 h-20 w-20' />
                             <div>
                                 <div className="capitalize text-xl">{user?.name}</div>
                                 <div className="capitalize text-base">Member Since</div>

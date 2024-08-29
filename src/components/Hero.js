@@ -31,7 +31,7 @@ export default function Hero() {
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>
-                                    <p className="paragraph:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    <p className="paragraph 2xl:pt-4 xl:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                     <button className="border border-white text-white px-4 py-[6px] md:mt-6 mt-4 md:text-lg text-sm rounded-lg gradient-bg">Learn More</button>
                                 </div>
                             </div>
@@ -41,7 +41,7 @@ export default function Hero() {
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>
-                                    <p className="paragraph:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    <p className="paragraph 2xl:pt-4 xl:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                     <button className="border border-white text-white px-4 py-[6px] md:mt-6 mt-4 md:text-lg text-sm rounded-lg gradient-bg">Learn More</button>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@ export default function Hero() {
                                 </div>
                                 <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                     <h2 className="subheading">Running Banners RTL</h2>
-                                    <p className="paragraph:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    <p className="paragraph 2xl:pt-4 xl:pt-4 pt-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                                     <button className="border border-white text-white px-4 py-[6px] md:mt-6 mt-4 md:text-lg text-sm rounded-lg gradient-bg">Learn More</button>
                                 </div>
                             </div>

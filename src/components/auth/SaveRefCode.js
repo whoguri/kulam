@@ -5,7 +5,7 @@ import React, { Suspense } from 'react'
 import { useEffect } from 'react'
 import Loading from '../Loading'
 
-function SaveRefCode() {
+function SaveRefCode_() {
     const search = useSearchParams()
     const code = search.get('ref')
 
@@ -15,7 +15,11 @@ function SaveRefCode() {
         }
     }, [code])
 
-    return (<Suspense fallback={<Loading />}><></></Suspense>)
+    return (<></>)
 }
 
-export default SaveRefCode
+
+
+export default function SaveRefCode() {
+    return <Suspense fallback={<Loading />}><SaveRefCode_ /></Suspense>
+}

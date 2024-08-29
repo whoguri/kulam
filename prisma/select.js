@@ -4,7 +4,7 @@ export const USER_SELECT = {
     name: true,
     status: true,
     role: true,
-    // company: true,
+    referralCode: true,
     registerOn: true,
     lastLogin: true,
     // loginType: true

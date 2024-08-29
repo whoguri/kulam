@@ -61,7 +61,7 @@ export default function Header() {
 
                             <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""}`}>Discounts</Link>
 
-                            <Link href="/" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""} `}>Deals</Link>
+                            <Link href="deals" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""} `}>Deals</Link>
 
                             <Link href="/polls" className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/polls" ? "border-b-2 border-white" : ""} `}>Polls</Link>
 

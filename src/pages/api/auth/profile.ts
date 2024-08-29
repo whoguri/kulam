@@ -1,10 +1,11 @@
-// import bcrypt from 'bcrypt';
-
 import withSession from "@/middlewares/with-session";
 import { USER_SELECT } from "../../../../prisma/select";
+import prisma from "@/lib/prisma";
+import { NextApiRequest, NextApiResponse } from "next";
 
-const profile = async (req, res) => {
+const profile = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
+    //@ts-ignore
     const id = req.user.id
     try {
         if (req.method === "PUT") {
@@ -13,14 +14,14 @@ const profile = async (req, res) => {
                 if (user)
                     return res.status(400).json({ error: "User already exists with same email" });
             }
-            const newData = {}
+            const newData: any = {}
             Object.entries(data).forEach(item => {
                 newData[item[0]] = item[1]
             })
 
             const result = await prisma.user.update({ where: { "id": id }, data: newData });
-            if (result && result.password)
-                delete result.password
+            // if (result && result.password)
+            //     delete result.password
 
             res.status(200).json(result);
         } else {
@@ -29,14 +30,14 @@ const profile = async (req, res) => {
 
             res.status(200).json({ ...result, tree: tree.referrals });
         }
-    } catch (err) {
+    } catch (err: any) {
         console.error(err)
         res.status(403).json({ error: err?.message || "Error occured." });
     }
 
 };
 
-async function getReferralTree(userId) {
+async function getReferralTree(userId: string) {
     const user = await prisma.user.findUnique({
         where: { id: userId },
         include: {
@@ -46,7 +47,7 @@ async function getReferralTree(userId) {
 
     if (!user) return null;
 
-    const tree = {
+    const tree: any = {
         id: user.id,
         name: user.name,
         email: user.email,

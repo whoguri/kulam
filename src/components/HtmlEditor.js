@@ -1,28 +1,18 @@
-import dynamic from "next/dynamic"
-import { editorFormats, editorModules } from "../../helper"
-const QuillNoSSRWrapper = dynamic(import('react-quill'), {
-    ssr: false,
-    loading: () => <p>Loading ...</p>,
-})
+import { editorFormats, editorModules } from "helper"
+import ReactQuill from "react-quill"
 
-
-export default function HtmlEditor(
-    { isRequired = false, readOnly = false, inlineLabel = false, onChange, label, value, setValue, formProps, errors, clearErrors, containerClass = "" }
-) {
+export default function HtmlEditor({ isRequired = false, onChange, label, value, setValue, formProps, errors, clearErrors }) {
     let error = ""
     if (errors)
         error = errors[formProps?.name]?.type
     if (error === "pattern") {
         error = errors[formProps?.name]?.message
     }
-    return <div className={`editor w-full mb-4 relative ${containerClass}`}>
-        {inlineLabel ?
-            <label className="inline absolute left-1.5 top-4 px-1 bg-white capitalize pb-1 !font-bold text-xs z-[1]">{label}{isRequired && <span className="text-red-500">*</span>}</label>
-            : <label className="inline absolute left-1.5 -top-2 px-1 bg-white capitalize pb-1 font-medium text-xs z-[1]">{label}{isRequired && <span className="text-red-500">*</span>}</label>}
-
-        <QuillNoSSRWrapper modules={editorModules} formats={editorFormats} theme="snow"
-            // readOnly={readOnly}
-
+    return <div className="w-full relative">
+        {label && <label className="input-label">{label}{isRequired ? <span className="text-red-500">*</span> : ""}</label>}
+        <ReactQuill
+            modules={editorModules} formats={editorFormats}
+            theme="snow"
             onChange={(e) => {
                 if (e && clearErrors) {
                     clearErrors(formProps?.name)
@@ -36,7 +26,6 @@ export default function HtmlEditor(
             }}
             value={value}
         />
-        {error && <div className="capitalize text-xs font-medium text-red-500 mt-1">{error}</div>}
-
+        {error && <div className="input-error">{error}</div>}
     </div>
 }

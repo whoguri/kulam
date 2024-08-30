@@ -8,7 +8,7 @@ const hiring = async (req: NextApiRequest, res: NextApiResponse) => {
         if (req.method === "PUT") {
             const result = await prisma.appContent.upsert({
                 where: { type: "HIRING" },
-                create: { type: "HIRING", description: data.description }, update: { description: data.description }
+                create: { type: "HIRING", description: data.description, createdAt: new Date() }, update: { description: data.description }
             });
             res.status(200).json(result);
         } else {

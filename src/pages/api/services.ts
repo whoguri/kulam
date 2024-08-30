@@ -6,7 +6,10 @@ const service = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
         if (req.method === "PUT") {
-            const result = await prisma.appContent.upsert({ where: { type: "SERVICES" }, data: });
+            const result = await prisma.appContent.upsert({
+                where: { type: "SERVICES" },
+                create: { type: "HIRING", description: data.description, createdAt: new Date() }, update: { description: data.description }
+            });
             res.status(200).json(result);
         } else {
             const result = await prisma.appContent.findFirst({ where: { type: "SERVICES" } });

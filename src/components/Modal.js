@@ -1,7 +1,8 @@
 "use client"
+import { max } from "date-fns";
 import { useEffect, useRef } from "react";
 
-export default function Modal({ onClose, children, title, width, closeButton = true, overlayClass,
+export default function Modal({ onClose, children, title, width, maxWidth, closeButton = true, overlayClass,
     showHeader = true, modalBodyClass = "", footer }) {
     const ref = useRef(null);
 
@@ -31,7 +32,7 @@ export default function Modal({ onClose, children, title, width, closeButton = t
         </div>
         <div className="fixed inset-0 z-10 custom-modal">
             <div className="flex justify-center p-4 md:p-0">
-                <div ref={ref} className={`custom-modal max-h-[90vh] overflow-hidden scrollbar-none relative transform overflow-y-visible rounded-lg text-left text-lg shadow-xl transition-all ${width ? width : "w-full"} md:my-8 md:max-w-[500px] max-w-full`}>
+                <div ref={ref} className={`custom-modal max-h-[90vh] overflow-hidden scrollbar-none relative transform overflow-y-visible rounded-lg text-left text-lg shadow-xl transition-all ${width ? width : "w-full"} ${maxWidth ? maxWidth : "max-w-[500px]"}  md:my-8 max-w-full`}>
                     {showHeader && <div className="bg-primary flex justify-between items-center rounded-t-lg z-50 border-b px-8 py-3 text-white">
                         <p className="capitalize">{title || "title"}</p>
                         {closeButton && <div onClick={() => { onClose() }} className="cursor-pointer">

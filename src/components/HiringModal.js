@@ -22,7 +22,7 @@ export default function HiringModal() {
     const getHiring = async () => {
         try {
             console.log(">>>")
-            const res = await axios.get("/api/hiring/")
+            const res = await axios.get("/api/hiring")
             const data = res.data
             Object.keys(data).forEach((e) => {
                 if (e !== "id") {
@@ -33,7 +33,7 @@ export default function HiringModal() {
             setLoading(false)
         } catch (e) {
             console.log(e)
-            toast.error(getError(e))
+            // toast.error(getError(e))
 
             // setLoading(false)
         }
@@ -61,23 +61,18 @@ export default function HiringModal() {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
 
-    return (<Modal title="Edit User" width="w-[50%]" >
+    return (<Modal title="Edit User" maxWidth="max-w-[800px]" >
         <form onSubmit={handleSubmit(onSubmit)}>
 
-            {/* <div className="grid grid-cols-1 gap-4">
-                <Input label="Name"
-                    formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
-            </div> */}
+            <Input label="Type"
+                formProps={{ ...register("type", { required: true }) }} isRequired={true} errors={errors} />
 
-            <div className="mb-10">
-                <Input label="Name"
-                    formProps={{ ...register("description", { required: true }) }} isRequired={true} errors={errors} />
-
-                {/* <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
-                    formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} /> */}
+            <div className="my-7">
+                <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
+                    formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
             </div>
             <div className="flex justify-end items-end">
-                <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold '>
+                <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                     {sending ? "Saving" : "Save"}
                 </button>
             </div>

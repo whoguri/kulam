@@ -28,7 +28,6 @@ export default function Footer() {
                         <a href="https://www.twitter.com/" target="_blank">
                             <Image src="/images/x.svg" alt="x" width={25} height={25} className="2xl:w-[25px] w-[18px] 2xl:h-[25px] h-[18px]" />
                         </a>
-
                     </div>
                 </div>
             </div>

@@ -1,19 +1,15 @@
 import Modal from "../components/Modal"
 import HtmlEditor from "../components/HtmlEditor"
-import Input from "../components/Input"
 import { toast } from "react-toastify"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { getError } from "helper"
 
-export default function HiringModal() {
+export default function HiringModal({ onSave, onClose }) {
     const [loading, setLoading] = useState(false)
-    const [hiring, setHiring] = ("")
     const [sending, setSending] = useState(false)
-    const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({
-
-    })
+    const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
         getHiring()
@@ -21,7 +17,6 @@ export default function HiringModal() {
 
     const getHiring = async () => {
         try {
-            console.log(">>>")
             const res = await axios.get("/api/hiring")
             const data = res.data
             Object.keys(data).forEach((e) => {
@@ -29,24 +24,22 @@ export default function HiringModal() {
                     setValue(e, data[e])
                 }
             })
-            setHiring(data)
             setLoading(false)
         } catch (e) {
             console.log(e)
-            // toast.error(getError(e))
-
+            toast.error(getError(e))
             // setLoading(false)
         }
     }
 
     const onSubmit = async (data) => {
         try {
-            console.log(data)
             setSending(true)
             const res = await axios.put("/api/hiring", data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
-                setSending(false)
+                onSave()
+                // setSending(false)
             } else {
                 toast.error("Something went wrong")
                 setSending(false)
@@ -61,12 +54,8 @@ export default function HiringModal() {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
 
-    return (<Modal title="Edit User" maxWidth="max-w-[800px]" >
+    return (<Modal title="Edit User" maxWidth="max-w-[800px]" onClose={onClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
-
-            <Input label="Type"
-                formProps={{ ...register("type", { required: true }) }} isRequired={true} errors={errors} />
-
             <div className="my-7">
                 <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
                     formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />

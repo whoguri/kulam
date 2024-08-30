@@ -1,5 +1,4 @@
 "use client"
-import { max } from "date-fns";
 import { useEffect, useRef } from "react";
 
 export default function Modal({ onClose, children, title, width, maxWidth, closeButton = true, overlayClass,

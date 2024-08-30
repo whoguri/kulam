@@ -207,6 +207,12 @@
   font-size: 14px;
 }
 
+.document-editor .ql-container.ql-snow .ql-editor {
+  max-height: 65vh;
+  min-height: 65vh;
+  overflow-y: auto;
+}
+
 .input-error {
   @apply text-xs font-medium text-red-500 mt-1 text-start first-letter:capitalize
 }

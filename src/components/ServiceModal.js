@@ -1,25 +1,25 @@
-import Modal from "../components/Modal"
-import HtmlEditor from "../components/HtmlEditor"
-import { toast } from "react-toastify"
 import axios from "axios"
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
 import { getError } from "helper"
+import { useEffect, useState } from "react"
+import Modal from "./Modal"
+import HtmlEditor from "./HtmlEditor"
+import { useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 
-export default function HiringModal({ onSave, onClose }) {
+export default function ServiceModal({ onSave, onClose }) {
     const [loading, setLoading] = useState(false)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
-        getHiring()
+        getService()
     }, [])
 
-    const getHiring = async () => {
+    const getService = async () => {
         try {
-            const res = await axios.get("/api/hiring")
+            const res = await axios.get("/api/services")
             const data = res.data
-            Object.keys(data).forEach((e) => {
+            Object.keys(data || {}).forEach((e) => {
                 if (e !== "id") {
                     setValue(e, data[e])
                 }
@@ -35,7 +35,7 @@ export default function HiringModal({ onSave, onClose }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            const res = await axios.put("/api/hiring", data)
+            const res = await axios.put("/api/services", data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
@@ -57,7 +57,7 @@ export default function HiringModal({ onSave, onClose }) {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
 
-    return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="Service" maxWidth="max-w-[800px]" onClose={onClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="my-7">
                 <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}

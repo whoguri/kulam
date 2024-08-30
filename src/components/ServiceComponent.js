@@ -18,7 +18,7 @@ export default function ServiceComponent({ description }) {
                         edit
                     </button>
                 </div>
-                <div className="paragraph text-center ql-editor">
+                <div className="ql-editor">
                     <div className="" dangerouslySetInnerHTML={{ __html: description || "" }}></div>
                 </div>
             </div>

@@ -223,7 +223,7 @@
 
 .slider-to-left {
   display: flex;
-  animation: slide-to-left 20s linear infinite;
+  animation: slide-to-left 10s linear infinite;
 }
 
 @keyframes slide-to-left {

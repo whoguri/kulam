@@ -35,10 +35,6 @@ export default function Hero() {
                                 <Image src="/images/2.jpeg" alt="2" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
                                 <Image src="/images/3.jpeg" alt="3" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
                                 <Image src="/images/4.jpeg" alt="4" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
-                                {/* <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 1</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 2</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 3</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 4</div> */}
                             </div>
                         </div>
                         <div className="md:hidden block">
@@ -47,10 +43,6 @@ export default function Hero() {
                                 <Image src="/images/2.jpeg" alt="2" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
                                 <Image src="/images/3.jpeg" alt="3" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
                                 <Image src="/images/4.jpeg" alt="4" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
-                                {/* <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 1</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 2</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 3</div>
-                        <div className="bg-white w-full 2xl:py-9 xl:py-8 py-5 2xl:px-0 xl:px-0 px-3 text-center paragraph rounded-xl">Deal 4</div> */}
                             </div>
                         </div>
                     </div>
@@ -91,10 +83,22 @@ export default function Hero() {
                         </Slider>
                     </div>
                     <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14">
-                        <Image src="/images/5.jpeg" alt="5" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
-                        <Image src="/images/6.jpeg" alt="6" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
-                        <Image src="/images/7.jpeg" alt="7" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
-                        <Image src="/images/8.jpeg" alt="8" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                        <div className="md:block hidden">
+                            <div className=" flex md:flex-col flex-row md:gap-10 gap-3">
+                                <Image src="/images/5.jpeg" alt="5" width={225} height={224} className="rounded-xl md:w-full w-28 h-28  object-cover" />
+                                <Image src="/images/6.jpeg" alt="6" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                                <Image src="/images/7.jpeg" alt="7" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                                <Image src="/images/8.jpeg" alt="8" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                            </div>
+                        </div>
+                        <div className="md:hidden block">
+                            <div className=" slider-to-left flex md:flex-col flex-row md:gap-10 gap-3">
+                                <Image src="/images/5.jpeg" alt="5" width={225} height={224} className="rounded-xl md:w-full w-28 h-28  object-cover" />
+                                <Image src="/images/6.jpeg" alt="6" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                                <Image src="/images/7.jpeg" alt="7" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                                <Image src="/images/8.jpeg" alt="8" width={225} height={224} className="rounded-xl w-full h-28 object-cover" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

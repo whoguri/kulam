@@ -5,8 +5,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const service = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
-        if (req.method === "put") {
-            const result = await prisma.appContent.upsert({ where: { type: "SERVICES" }, data });
+        if (req.method === "PUT") {
+            const result = await prisma.appContent.upsert({ where: { type: "SERVICES" }, data: });
             res.status(200).json(result);
         } else {
             const result = await prisma.appContent.findFirst({ where: { type: "SERVICES" } });

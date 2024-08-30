@@ -59,7 +59,7 @@ export default function HiringModal({ onSave, onClose }) {
 
     return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="my-7">
+            <div className="mb-7">
                 <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
                     formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
             </div>

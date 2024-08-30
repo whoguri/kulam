@@ -45,11 +45,11 @@ export default function Sidebar({ open, setOpen }) {
     { title: "Home", link: "/" },
     { title: "Polls", link: "/polls" },
     { title: "Deals", link: "/deals" },
-    { title: "Discounts", link: "/" },
+    { title: "Discounts", link: "/discounts" },
     { title: "Hiring", link: "/hiring" },
     { title: "Profile", link: "/profile" },
-    { title: "Services", link: "/" },
-    { title: "Contact", link: "/" },
+    { title: "Services", link: "/services" },
+    { title: "Contact", link: "/contact" },
 
   ]
   return (

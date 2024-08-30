@@ -12,7 +12,9 @@ module.exports = {
         "primary": "#F5BC46",
         'primary-dark': "#ee7b31",
         "secondary": "#EF7D32",
+        "input": "#D9D9D9"
       },
+
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

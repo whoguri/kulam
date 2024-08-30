@@ -5,8 +5,11 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const hiring = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
-        if (req.method === "put") {
-            const result = await prisma.appContent.upsert({ where: { type: "HIRING" }, data });
+        if (req.method === "PUT") {
+            const result = await prisma.appContent.upsert({
+                where: { type: "HIRING" },
+                create: { type: "HIRING", description: data.description }, update: { description: data.description }
+            });
             res.status(200).json(result);
         } else {
             const result = await prisma.appContent.findFirst({ where: { type: "HIRING" } });

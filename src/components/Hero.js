@@ -26,7 +26,7 @@ export default function Hero() {
     ]
     return (<>
         <div>
-            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
+            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-full mx-auto py-10">
                 <div className="md:flex gap-10 w-full">
                     <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mb-0 mb-5 overflow-hidden">
                         <div className="md:block hidden">
@@ -46,12 +46,12 @@ export default function Hero() {
                             </div>
                         </div>
                     </div>
-                    <div className="md:w-[70%] w-full">
+                    <div className="md:w-[70%] w-[90%] mx-auto">
                         <Slider {...settings}>
                             {PROJECTS.map((e, i) => <div key={i}>
                                 <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                     <div className="md:w-[30%] w-full">
-                                        <Image src={e.img} alt="{e.img}" width={225} height={224} className="rounded-xl md:w-[225px] w-full md:h-[225px] h-[200px] object-contain" />
+                                        <Image src={e.img} alt="{e.img}" width={225} height={224} className="rounded-xl md:w-[225px] w-full md:h-[225px] h-[200px] object-cover" />
                                     </div>
                                     <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
                                         <h2 className="subheading">{e.title}</h2>
@@ -82,7 +82,7 @@ export default function Hero() {
                             </div> */}
                         </Slider>
                     </div>
-                    <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14">
+                    <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14 overflow-hidden">
                         <div className="md:block hidden">
                             <div className=" flex md:flex-col flex-row md:gap-10 gap-3">
                                 <Image src="/images/5.jpeg" alt="5" width={225} height={224} className="rounded-xl md:w-full w-28 h-28  object-cover" />

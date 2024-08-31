@@ -4,10 +4,11 @@ import Slider from "react-slick";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "helper";
-import DealsModal from "./DealsModal"
+import DiscountsModal from "./DiscountsModal";
 
-export default function DealsComponent() {
-    const [openDeal, setOpenDeal] = useState(false)
+
+export default function DiscountsComponent() {
+    const [openDiscount, setOpenDiscount] = useState(false)
     const [selId, setSelId] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
@@ -18,7 +19,7 @@ export default function DealsComponent() {
 
     const getList = async () => {
         try {
-            const res = await axios.get("/api/deals")
+            const res = await axios.get("/api/discounts")
             setList(res.data || [])
             setLoading(false)
         } catch (e) {
@@ -42,11 +43,12 @@ export default function DealsComponent() {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
     return <div>
-        {openDeal && <DealsModal
+
+        {openDiscount && <DiscountsModal
             id={selId}
             onClose={() => {
                 setSelId("")
-                setOpenDeal(false)
+                setOpenDiscount(false)
             }}
             onSave={() => { getList() }}
         />}
@@ -54,8 +56,8 @@ export default function DealsComponent() {
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
             <div className="md:w-[70%] w-full mx-auto">
                 <div className="capitalize heading text-center 2xl:pb-8 xl:pb-6 pb-4">
-                    <button onClick={() => { setOpenDeal(true) }} >
-                        Add Deal
+                    <button onClick={() => { setOpenDiscount(true) }} >
+                        Add Discount
                     </button>
                 </div>
                 <Slider {...settings}>
@@ -64,13 +66,11 @@ export default function DealsComponent() {
                             {list.map((e, i) => <div key={i} className="bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg cursor-pointer"
                                 onClick={() => {
                                     setSelId(e.id)
-                                    setOpenDeal(true)
+                                    setOpenDiscount(true)
                                 }}>
                                 <h2 className="subheading">{e.amount}</h2>
                                 <p className="paragraph 2xl:pt-3 xl:pt-2 pt-2">{e.name}</p>
                             </div>)}
-
-
                         </div>
                     </div>
                     <div>
@@ -78,13 +78,11 @@ export default function DealsComponent() {
                             {list.map((e, i) => <div key={i} className="bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg cursor-pointer"
                                 onClick={() => {
                                     setSelId(e.id)
-                                    setOpenDeal(true)
+                                    setOpenDiscount(true)
                                 }}>
                                 <h2 className="subheading">{e.amount}</h2>
                                 <p className="paragraph 2xl:pt-3 xl:pt-2 pt-2">{e.name}</p>
                             </div>)}
-
-
                         </div>
                     </div>
                 </Slider>

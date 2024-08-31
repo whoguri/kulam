@@ -65,7 +65,7 @@ function UpdateRole() {
                     if (e === "admin") {
                         return null
                     }
-                    return <div onClick={() => { setRole(e) }} key={e} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e ? "border-primary bg-primary text-white" : " border-secondary-light cursor-pointer hover:text-primary hover:border-primary"}`}>
+                    return <div onClick={() => { setRole(e) }} key={e} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e ? "border-primary bg-primary text-white" : " border-primary-dark cursor-pointer hover:text-primary hover:border-primary"}`}>
                         {e}
                     </div>
                 })}

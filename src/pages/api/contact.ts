@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 const contact = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
-        if (req.method === "post") {
+        if (req.method === "POST") {
             res.status(200).json({});
         } else {
             res.status(404).json(null);

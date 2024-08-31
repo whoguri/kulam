@@ -62,12 +62,7 @@ export default function Sidebar({ open, setOpen }) {
         <div className="w-full flex flex-col justify-between mx-auto py-5 px-6 ">
           <div className="flex items-center justify-between w-full pb-3 ">
             <Link href="/">
-              <Image
-                src="/images/logo.jpeg"
-                alt="logo"
-                width={70}
-                height={70}
-              />
+              <Image src="/images/logo.jpeg" alt="logo" width={70} height={70} />
             </Link>
             <div
               className="cursor-pointer text-primary absolute right-6"
@@ -75,17 +70,11 @@ export default function Sidebar({ open, setOpen }) {
                 setOpen(false);
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  fill-rule="evenodd"
-                  d="M6.793 6.793a1 1 0 0 1 1.414 0L12 10.586l3.793-3.793a1 1 0 1 1 1.414 1.414L13.414 12l3.793 3.793a1 1 0 0 1-1.414 1.414L12 13.414l-3.793 3.793a1 1 0 0 1-1.414-1.414L10.586 12L6.793 8.207a1 1 0 0 1 0-1.414"
-                  clipRule="evenodd"
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+              > <path fill="currentColor"
+                fill-rule="evenodd"
+                d="M6.793 6.793a1 1 0 0 1 1.414 0L12 10.586l3.793-3.793a1 1 0 1 1 1.414 1.414L13.414 12l3.793 3.793a1 1 0 0 1-1.414 1.414L12 13.414l-3.793 3.793a1 1 0 0 1-1.414-1.414L10.586 12L6.793 8.207a1 1 0 0 1 0-1.414"
+                clipRule="evenodd"
                 />
               </svg>
             </div>
@@ -97,15 +86,11 @@ export default function Sidebar({ open, setOpen }) {
                 return (
                   <Link
                     onClick={() => {
-                      setOpen(false);
+                      setOpen(false)
                     }}
                     key={i}
                     href={e.link || "/"}
-                    className={`${pathname === e.id ? "font-bold" : "font-normal"
-                      } ${i !== 5 && "w-full"
-                      } py-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}
-                  >
-                    {e.title}
+                    className={`${pathname === e.link ? "border-b border-white" : "font-normal"} ${i !== 5 && "w-full"} py-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}>{e.title}
                   </Link>
                 );
               })}

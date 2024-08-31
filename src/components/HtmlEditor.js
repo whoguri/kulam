@@ -1,6 +1,10 @@
+"use client"
 import { editorFormats, editorModules } from "helper"
-import ReactQuill from "react-quill"
+import dynamic from 'next/dynamic';
 
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false
+});
 export default function HtmlEditor({ isRequired = false, onChange, label, value, setValue, formProps, errors, clearErrors }) {
     let error = ""
     if (errors)
@@ -8,7 +12,7 @@ export default function HtmlEditor({ isRequired = false, onChange, label, value,
     if (error === "pattern") {
         error = errors[formProps?.name]?.message
     }
-    return <div className="w-full relative">
+    return <div className="w-full relative editor">
         {label && <label className="input-label">{label}{isRequired ? <span className="text-red-500">*</span> : ""}</label>}
         <ReactQuill
             modules={editorModules} formats={editorFormats}

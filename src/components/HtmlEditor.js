@@ -1,6 +1,10 @@
+"use client"
 import { editorFormats, editorModules } from "helper"
-import ReactQuill from "react-quill"
+import dynamic from 'next/dynamic';
 
+const ReactQuill = dynamic(() => import('react-quill'), {
+    ssr: false
+});
 export default function HtmlEditor({ isRequired = false, onChange, label, value, setValue, formProps, errors, clearErrors }) {
     let error = ""
     if (errors)

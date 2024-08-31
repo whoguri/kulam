@@ -42,14 +42,14 @@ export default function Sidebar({ open, setOpen }) {
   }, []);
 
   const MENU = [
-    { title: "Home", link: "/" },
-    { title: "Polls", link: "/polls" },
-    { title: "Deals", link: "/deals" },
-    { title: "Discounts", link: "/discounts" },
-    { title: "Hiring", link: "/hiring" },
-    { title: "Profile", link: "/profile" },
-    { title: "Services", link: "/services" },
-    { title: "Contact", link: "/contact" },
+    { title: "ראשי", link: "/" },
+    { title: "סקרים", link: "/polls" },
+    { title: "דילים", link: "/deals" },
+    { title: "הנחות", link: "/discounts" },
+    { title: "דרושים", link: "/hiring" },
+    { title: "הגדרות", link: "/profile" },
+    { title: "שירותים", link: "/services" },
+    { title: "צור קשר", link: "/contact" },
 
   ]
   return (
@@ -59,8 +59,8 @@ export default function Sidebar({ open, setOpen }) {
         className={`md:hidden bg-background inset-y-0 md:w-[300px] w-3/4 fixed z-30 h-screen transition-all duration-300 ${open ? "left-0" : "-left-full"
           }`}
       >
-        <div className="w-full flex flex-col justify-between mx-auto py-5 px-6">
-          <div className="flex items-center justify-between w-full pb-3">
+        <div className="w-full flex flex-col justify-between mx-auto py-5 px-6 ">
+          <div className="flex items-center justify-between w-full pb-3 ">
             <Link href="/">
               <Image src="/images/logo.jpeg" alt="logo" width={70} height={70} />
             </Link>

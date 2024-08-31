@@ -11,7 +11,6 @@ module.exports = {
         "background": "#090B27",
         "primary": "#F5BC46",
         'primary-dark': "#ee7b31",
-        "secondary": "#EF7D32",
         "input": "#D9D9D9"
       },
 

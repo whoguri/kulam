@@ -65,7 +65,7 @@ export default function DiscountsModal({ onSave, onClose, id }) {
     return (<Modal title="Service" maxWidth="max-w-[800px]" onClose={onClose}>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
                 <Input label="Name"
                     formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
 

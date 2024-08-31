@@ -1,25 +1,29 @@
+import axios from "axios"
+import { getError } from "helper"
+import { useEffect, useState } from "react"
 import Modal from "./Modal"
 import HtmlEditor from "./HtmlEditor"
-import { toast } from "react-toastify"
-import axios from "axios"
-import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { getError } from "helper"
+import { toast } from "react-toastify"
+import Input from "../components/Input"
 
-export default function HiringModal({ onSave, onClose }) {
+export default function DealsModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(false)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
-        getHiring()
-    }, [])
+        if (id)
+            getDeals()
+        else
+            setLoading(false)
+    }, [id])
 
-    const getHiring = async () => {
+    const getDeals = async () => {
         try {
-            const res = await axios.get("/api/hiring")
+            const res = await axios.get("/api/deals/" + id)
             const data = res.data
-            Object.keys(data).forEach((e) => {
+            Object.keys(data || {}).forEach((e) => {
                 if (e !== "id") {
                     setValue(e, data[e])
                 }
@@ -35,15 +39,16 @@ export default function HiringModal({ onSave, onClose }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            const res = await axios.put("/api/hiring", data)
+            let res = null;
+            if (id) {
+                res = await axios.put("/api/deals/" + id, data)
+            } else {
+                res = await axios.post("/api/deals", data)
+            }
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
-                // setSending(false)
-            }
-
-            else {
-                toast.error("Something went wrong")
+                onClose()
                 setSending(false)
             }
         } catch (error) {
@@ -57,9 +62,17 @@ export default function HiringModal({ onSave, onClose }) {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
 
-    return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="Service" maxWidth="max-w-[800px]" onClose={onClose}>
+
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mb-7">
+            <div className="grid grid-cols-2 gap-3">
+                <Input label="Name"
+                    formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
+
+                <Input label="Amount" formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }}
+                    isRequired={true} errors={errors} type="number" />
+            </div>
+            <div className="my-6">
                 <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
                     formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
             </div>

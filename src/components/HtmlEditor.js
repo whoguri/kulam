@@ -8,7 +8,7 @@ export default function HtmlEditor({ isRequired = false, onChange, label, value,
     if (error === "pattern") {
         error = errors[formProps?.name]?.message
     }
-    return <div className="w-full relative">
+    return <div className="w-full relative editor">
         {label && <label className="input-label">{label}{isRequired ? <span className="text-red-500">*</span> : ""}</label>}
         <ReactQuill
             modules={editorModules} formats={editorFormats}

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Loading from "./Loading";
+import NoData from "./NoData";
 
 export default function PollsComponent() {
     const { status, data } = useSession()
@@ -14,13 +15,13 @@ export default function PollsComponent() {
     const isAdvertiser = user?.role === ADVERTISER
     const router = useRouter()
     const [loading, setLoading] = useState(false)
-
+    const [list, getList] = useState([])
 
     useEffect(() => {
         if (status === "authenticated" && isAdvertiser) {
             router.push("/")
         } else if (status === "authenticated") {
-            getlist()
+            getList()
         }
     }, [status])
 
@@ -106,7 +107,7 @@ export default function PollsComponent() {
                             </div>
                             <button className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Skip</button>
                         </div>
-                    </Slider> : "no data")}
+                    </Slider> : <NoData />)}
                 </div>
             </div>
         </div>

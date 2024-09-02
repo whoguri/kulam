@@ -118,7 +118,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "src/components/NoData.js"
   ],
   "exclude": [
     "node_modules"

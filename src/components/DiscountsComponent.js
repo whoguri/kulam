@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { ADMIN } from "../constents/constArray"
 import Layout from "./Layout";
 import Loading from "./Loading"
+import NoData from "./NoData";
 
 export default function DiscountsComponent() {
     const { status, data } = useSession()
@@ -47,7 +48,7 @@ export default function DiscountsComponent() {
         arrows: false,
     };
     if (status === "loading") {
-        return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
+        return <Loading />
     }
     return <Layout title="Discounts">
         <div>
@@ -95,7 +96,7 @@ export default function DiscountsComponent() {
                                 </div>)}
                             </div>
                         </div>
-                    </Slider> : "no data")}
+                    </Slider> : <NoData />)}
                 </div>?
             </div>
         </div>

@@ -1,4 +1,3 @@
-import Layout from "@/components/Layout";
 import { APP_NAME } from "@/constents/constArray";
 import DiscountsComponent from "../../components/DiscountsComponent"
 export const metadata = {
@@ -7,7 +6,5 @@ export const metadata = {
 
 export default function Discounts() {
 
-    return <Layout title="Discounts">
-        <DiscountsComponent />
-    </Layout>
+    return <DiscountsComponent />
 }

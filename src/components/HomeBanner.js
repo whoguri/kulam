@@ -1,8 +1,10 @@
 "use client"
 import Image from "next/image"
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function HomeBanner() {
+  const { status } = useSession()
   return (
     <div className="bg-background relative overflow-hidden">
       <div className="  flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
@@ -22,7 +24,7 @@ export default function HomeBanner() {
           <motion.div
             animate={{ scale: [1, 0.5, 1.1, 1] }}
             transition={{ duration: 1.4 }}
-            // className="animate-breathing "
+          // className="animate-breathing "
           >
             <Image
               src="/images/handshake.jpg"
@@ -47,7 +49,7 @@ export default function HomeBanner() {
                 googleLogin();
               }
             }}
-            // disabled={sending}
+          // disabled={sending}
           >
             <span class="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45 "></span>
 

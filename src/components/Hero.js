@@ -7,48 +7,49 @@ export default function Hero() {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 3000,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplaySpeed: 3000,
+        autoplaySpeed: 5500,
         autoplay: true,
         arrows: false,
     };
     const PROJECTS = [
-        {
-            img: "/images/1.jpeg",
-            title: "כולם בשביל כולם",
-            subtitle: ` הוזלת יוקר המחיה באמצעות קנייה כמותית והטבות ארגוניות.
+      {
+        img: "/images/1.png",
+        title: "כולם בשביל כולם",
+        subtitle: ` הוזלת יוקר המחיה באמצעות קנייה כמותית והטבות ארגוניות.
  יצירת הזדמנויות בתחומים שונים על ידי ארגון משותף של משאבים ושירותים.
 עזרה שיווקית עסקית לכל חבר בארגון המעוניין לקדם את מקצועו דרך אתר החברה, תוך מתן הנחה קבועה של לא פחות מ-10% לחברי הארגון.`,
-        },
-        {
-            img: "/images/2.jpeg",
-            title: "כולם בשביל כולם",
-            subtitle: `יצירת עבודות מותאמות לחברי הארגון לפי חתך גילאים, במאמץ לכוון לעבודות נוספות לשעות הפנאי.
+      },
+      {
+        img: "/images/2.png",
+        title: "כולם בשביל כולם",
+        subtitle: `יצירת עבודות מותאמות לחברי הארגון לפי חתך גילאים, במאמץ לכוון לעבודות נוספות לשעות הפנאי.
 מתן שירותים נוספים לחברי הארגון לשיפור איכות החיים ולהוזלתם.
  חסכון משמעותי בתחומים שונים כגון ביטוחים ודלק, על ידי כוח קנייה גדול ומרוכז.`,
-        },
-        {
-            img: "/images/4.jpeg",
-            title: "כולם בשביל כולם",
-            subtitle: ` עלות שותפות נמוכה של 10 ש"ח לחודש, הניתנת למחיקה על ידי צירוף 4 חברים נוספים (Get Four Pay No More).
+      },
+      {
+        img: "/images/3.png",
+        title: "כולם בשביל כולם",
+        subtitle: ` עלות שותפות נמוכה של 10 ש"ח לחודש, הניתנת למחיקה על ידי צירוף 4 חברים נוספים (Get Four Pay No More).
 הנחות קבועות והוזלות משתנות לחברי הארגון על בסיס קנייה כמותית פעם בשבוע.`,
-        },
-        {
-            img: "/images/5.jpeg",
-            title: "כולם בשביל כולם",
-            subtitle: ` שקיפות ניהולית כאשר 5 ש"ח מתוך דמי החברות מוחזרים לחברי הארגון כתמלוגים ו-80% מהחצי השני מיועדים להגדלת ההטבות, והשאר לניהול ותפעול האתר והשטח.
+      },
+      {
+        img: "/images/1.png",
+        title: "כולם בשביל כולם",
+        subtitle: ` שקיפות ניהולית כאשר 5 ש"ח מתוך דמי החברות מוחזרים לחברי הארגון כתמלוגים ו-80% מהחצי השני מיועדים להגדלת ההטבות, והשאר לניהול ותפעול האתר והשטח.
  עידוד כלכלי להגדלת הארגון למקסימום חברים, במטרה להגיע למעל חצי מיליון חברים, ואחר כך אפילו להשפיע פוליטית דרך מושבים שיבחרו דמוקרטית על ידי הארגון.`,
-        },
-        {
-            img: "/images/6.jpeg",
-            title: "כולם בשביל כולם",
-            subtitle: `נמשיך לשתף פעולה ולעזור אחד לשני לשפר את איכות החיים של כולנו!`,
-        },
+     
+      },
+      {
+        img: "/images/5.png",
+        title: "כולם בשביל כולם",
+        subtitle: `נמשיך לשתף פעולה ולעזור אחד לשני לשפר את איכות החיים של כולנו!`,
+      },
 
-        //   { img: "/images/7.jpeg", title: "כולם בשביל כולם", subtitle: "" },
-        //   { img: "/images/8.jpeg", title: "כולם בשביל כולם", subtitle: "" },
+      //   { img: "/images/7.jpeg", title: "כולם בשביל כולם", subtitle: "" },
+      //   { img: "/images/8.jpeg", title: "כולם בשביל כולם", subtitle: "" },
     ];
     
     return (
@@ -126,17 +127,18 @@ export default function Hero() {
                 <Slider {...settings}>
                   {PROJECTS.map((e, i) => (
                     <div key={i} className="px-[2px]">
-                      <div className="min-h-[38px] md:min-h-[500px] md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl h-96">
-                        <div className="md:w-[30%] w-full">
+                      <div className="min-h-[42px] md:min-h-[500px] md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl h-96">
+                        <div className="md:w-[30%] w-full ">
+                          
                           <Image
-                            src={`/images/${i + 1}.png` || "/images/1.png"}
-                            alt="{e.img}"
-                            width={200}
-                            height={400}
-                            className=" object-fill mx-auto"
+                            src={`${e.img}`}
+                            alt={`/images/${i + 1}.png`}
+                            width={150}
+                            height={200}
+                            className=" object-fill mx-auto "
                           />
                         </div>
-                        <div className="text-end md:w-[70%] w-full md:pt-0 pt-6">
+                        <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                           <h2 className="subheading">{e.title}</h2>
                           <p className="md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 rtl text-right">
                             {e.subtitle}

@@ -107,7 +107,7 @@ export default function Sidebar({ open, setOpen }) {
               }}
               disabled={sending}
             >
-              {status === "authenticated" ? "Log out" : "Get Started"}
+              {status === "authenticated" ? "יציאה" : "כניסה"}
             </button>
           </div>
         </div>

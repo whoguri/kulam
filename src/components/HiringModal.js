@@ -5,6 +5,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { getError } from "helper"
+import Loading from "./Loading"
 
 export default function HiringModal({ onSave, onClose }) {
     const [loading, setLoading] = useState(false)
@@ -54,7 +55,7 @@ export default function HiringModal({ onSave, onClose }) {
 
 
     if (loading) {
-        return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
+        return <Loading />
     }
 
     return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>

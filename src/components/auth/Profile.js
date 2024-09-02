@@ -27,7 +27,7 @@ function Profile() {
     }, [status])
 
     if (status === "loading") {
-        return "loading.."
+        return <Loading />
     }
 
     const getProfile = async () => {

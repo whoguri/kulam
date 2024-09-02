@@ -70,7 +70,7 @@ export default function DiscountsComponent() {
                     {loading ? <Loading /> : ((list && list.length > 0) ? <Slider {...settings}>
                         {chunkedList.map((chunk, chunkIndex) => (
                             <div key={chunkIndex} className="!grid md:grid-cols-4 grid-cols-2 2xl:gap-5 xl:gap-5 gap-4">
-                                {chunk.map((e, i) => <div key={i} className="relative bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg cursor-pointer">
+                                {chunk.map((e, i) => <div key={i} className="relative bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg">
                                     {isAdmin && <button type="button" className="z-[2] absolute end-2 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm "
                                         onClick={() => {
                                             setSelId(e.id)
@@ -83,7 +83,7 @@ export default function DiscountsComponent() {
                                 </div>)}
                             </div>))}
                     </Slider> : <NoData />)}
-                </div>?
+                </div>
             </div>
         </div>
     </Layout>

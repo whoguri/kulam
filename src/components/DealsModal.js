@@ -62,7 +62,7 @@ export default function DealsModal({ onSave, onClose, id }) {
         return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
     }
 
-    return (<Modal title="Service" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="Deal" maxWidth="max-w-[800px]" onClose={onClose}>
 
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid md:grid-cols-2 grid-cols-1 gap-3">

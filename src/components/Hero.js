@@ -84,7 +84,7 @@ export default function Hero() {
                             <Slider {...settings}>
                                 {PROJECTS.map((e, i) => (
                                     <div key={i} className="px-[2px]">
-                                        <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
+                                        <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl md:min-h-[290px] min-h-[412px] md:max-h-[290px] max-h-[412px]">
                                             <div className="md:w-[30%] w-full">
                                                 <Image src={e.img} alt="{e.img}" width={225} height={224} className="rounded-xl md:w-[225px] w-full md:h-[225px] h-[200px] object-cover" />
 

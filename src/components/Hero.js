@@ -1,6 +1,5 @@
 "use client"
 import Image from "next/image";
-import { title } from "process";
 import Slider from "react-slick";
 
 export default function Hero() {
@@ -146,11 +145,11 @@ export default function Hero() {
                           {/* <button className="border border-white text-white px-4 py-[6px] md:mt-6 mt-4 md:text-lg text-sm rounded-lg gradient-bg">
                             Learn More
                           </button> */}
-                        </div>
                       </div>
                     </div>
-                  ))}
-                  {/* <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
+                  </div>
+                ))}
+                {/* <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">
                                     <Image src="/images/dummy.jfif" alt="dummy" width={225} height={224} className="rounded-xl md:w-[225px] w-full" />
                                 </div>
@@ -170,77 +169,77 @@ export default function Hero() {
                                     <button className="border border-white text-white px-4 py-[6px] md:mt-6 mt-4 md:text-lg text-sm rounded-lg gradient-bg">Learn More</button>
                                 </div>
                             </div> */}
-                </Slider>
-              </div>
-              <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14 overflow-hidden">
-                <div className="md:block hidden">
-                  <div className=" flex md:flex-col flex-row md:gap-10 gap-3">
-                    <Image
-                      src="/images/5.jpeg"
-                      alt="5"
-                      width={225}
-                      height={224}
-                      className="rounded-xl md:w-full w-28 h-28  object-cover"
-                    />
-                    <Image
-                      src="/images/6.jpeg"
-                      alt="6"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                    <Image
-                      src="/images/7.jpeg"
-                      alt="7"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                    <Image
-                      src="/images/8.jpeg"
-                      alt="8"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                  </div>
+              </Slider>
+            </div>
+            <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14 overflow-hidden">
+              <div className="md:block hidden">
+                <div className=" flex md:flex-col flex-row md:gap-10 gap-3">
+                  <Image
+                    src="/images/5.jpeg"
+                    alt="5"
+                    width={225}
+                    height={224}
+                    className="rounded-xl md:w-full w-28 h-28  object-cover"
+                  />
+                  <Image
+                    src="/images/6.jpeg"
+                    alt="6"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
+                  <Image
+                    src="/images/7.jpeg"
+                    alt="7"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
+                  <Image
+                    src="/images/8.jpeg"
+                    alt="8"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
                 </div>
-                <div className="md:hidden block">
-                  <div className=" slider-to-left flex md:flex-col flex-row md:gap-10 gap-3">
-                    <Image
-                      src="/images/5.jpeg"
-                      alt="5"
-                      width={225}
-                      height={224}
-                      className="rounded-xl md:w-full w-28 h-28  object-cover"
-                    />
-                    <Image
-                      src="/images/6.jpeg"
-                      alt="6"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                    <Image
-                      src="/images/7.jpeg"
-                      alt="7"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                    <Image
-                      src="/images/8.jpeg"
-                      alt="8"
-                      width={225}
-                      height={224}
-                      className="rounded-xl w-full h-28 object-cover"
-                    />
-                  </div>
+              </div>
+              <div className="md:hidden block">
+                <div className=" slider-to-left flex md:flex-col flex-row md:gap-10 gap-3">
+                  <Image
+                    src="/images/5.jpeg"
+                    alt="5"
+                    width={225}
+                    height={224}
+                    className="rounded-xl md:w-full w-28 h-28  object-cover"
+                  />
+                  <Image
+                    src="/images/6.jpeg"
+                    alt="6"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
+                  <Image
+                    src="/images/7.jpeg"
+                    alt="7"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
+                  <Image
+                    src="/images/8.jpeg"
+                    alt="8"
+                    width={225}
+                    height={224}
+                    className="rounded-xl w-full h-28 object-cover"
+                  />
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }

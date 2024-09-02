@@ -2,7 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-const ImageReveal = ({ cycleSpeed = 500, pixersPerCycle = 10 }) => {
+const ImageReveal = () => {
+  const cycleSpeed = 500
+  const pixersPerCycle = 10
   const canvasRef = useRef(null);
   const imageRef = useRef(null);
   const [revealedPixers, setRevealedPixers] = useState([]);

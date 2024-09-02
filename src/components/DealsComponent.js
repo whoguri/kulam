@@ -5,16 +5,30 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "helper";
 import DealsModal from "./DealsModal"
+import { ADMIN, ADVERTISER } from "@/constents/constArray";
+import Loading from "./Loading";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function DealsComponent() {
+    const { status, data } = useSession()
+    const user = data?.user || {}
+    const isAdmin = user?.role === ADMIN
+    const isAdvertiser = user?.role === ADVERTISER
     const [openDeal, setOpenDeal] = useState(false)
     const [selId, setSelId] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     useEffect(() => {
-        getList()
-    }, [])
+        if (status === "authenticated" && (isAdmin || isAdvertiser)) {
+            getList()
+        } else if (status !== "loading") {
+            router.push("/")
+        }
+    }, [status])
+
 
     const getList = async () => {
         try {
@@ -38,8 +52,8 @@ export default function DealsComponent() {
         autoplay: true,
         arrows: false,
     };
-    if (loading) {
-        return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
+    if (status === "loading") {
+        return <Loading />
     }
     return <div>
         {openDeal && <DealsModal
@@ -53,11 +67,11 @@ export default function DealsComponent() {
 
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
             <div className="md:w-[70%] w-full mx-auto">
-                <div className="capitalize heading text-center 2xl:pb-8 xl:pb-6 pb-4">
+                {(isAdmin) || (isAdvertiser) && < div className="capitalize heading text-center 2xl:pb-8 xl:pb-6 pb-4">
                     <button onClick={() => { setOpenDeal(true) }} >
                         Add Deal
                     </button>
-                </div>
+                </div>}
                 <Slider {...settings}>
                     <div>
                         <div className="!grid md:grid-cols-4 grid-cols-2 2xl:gap-5 xl:gap-5 gap-4">
@@ -69,8 +83,6 @@ export default function DealsComponent() {
                                 <h2 className="subheading">{e.amount}</h2>
                                 <p className="paragraph 2xl:pt-3 xl:pt-2 pt-2">{e.name}</p>
                             </div>)}
-
-
                         </div>
                     </div>
                     <div>
@@ -90,5 +102,5 @@ export default function DealsComponent() {
                 </Slider>
             </div>
         </div>
-    </div>
+    </div >
 }

@@ -90,7 +90,7 @@ export default function Sidebar({ open, setOpen }) {
                     }}
                     key={i}
                     href={e.link || "/"}
-                    className={`${pathname === e.link ? "border-b border-white" : "font-normal"} ${i !== 5 && "w-full"} py-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}>{e.title}
+                    className={`${pathname === e.link ? "border-b border-white" : "font-normal"} ${i !== 5 && "w-full"} my-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}>{e.title}
                   </Link>
                 );
               })}

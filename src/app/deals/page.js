@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function Deals() {
-    return <Layout title="Deals">
+    return <div>
         <DealsComponent />
-    </Layout>
+    </div>
 }

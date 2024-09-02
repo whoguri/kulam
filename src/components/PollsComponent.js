@@ -51,7 +51,6 @@ export default function PollsComponent() {
         <div>
             <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
                 <div className="md:w-[70%] w-full mx-auto">
-
                     {loading ? <Loading /> : ((list && list.length > 0) ? <Slider {...settings}>
                         <div className="md:p-8 p-4 bg-white rounded-xl text-end">
                             <h2 className="subheading">Lorem Ipsum is simply dummy text of the printing and typesetting ?industry.</h2>

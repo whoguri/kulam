@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Loading() {
-    return <div className="w-full text-center pt-20">
+    return <div className="w-full flex items-center justify-center h-screen text-center mx-auto gradient-bg">
         <div className="loadingio-spinner-reload-nq4q5u6dq7r"><div className="ldio-x2uulkbinbj">
             <div><div></div><div></div><div></div></div>
         </div></div>

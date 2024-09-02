@@ -5,23 +5,23 @@ import { motion } from "framer-motion";
 export default function HomeBanner() {
   return (
     <div className="bg-background relative overflow-hidden">
-      <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
-        <div className="flex flex-col items-right md:gap-5 gap-0 items-end ">
+      <div className="  flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
+        <div className= "flex flex-col items-center xl:items-end  md:gap-5 gap-0  ">
           {/* <hr className="md:w-44 w-16" /> */}
-          <h3 className="md:text-sm text-sm text-right text-primary">
+          <h3 className="md:text-sm text-sm md:text-right text-primary tracking-widest">
             קובי כץ מציג
           </h3>
           <motion.h2
             animate={{ scale: [1, 1.2, 0.6, 1, 1], rotate: [0, 3, 0] }}
             transition={{ duration: 1.4 }}
-            className="z-10 xl:text-7xl text-5xl md:text-6xl leading-none uppercase md:py-1  font-bold text-primary text-end"
+            className="z-10 xl:text-8xl text-5xl md:text-6xl leading-none uppercase md:py-1  font-bold text-primary text-end"
           >
             כולם בשביל כולם
           </motion.h2>
           <motion.div
             animate={{ scale: [1, .5, 1.1, 1] }}
             transition={{ duration: 1.4 }}
-            className="flex flex-col items-end w-full"
+            className=" "
           >
             <Image
               src="/images/handshake.jpg"
@@ -33,7 +33,7 @@ export default function HomeBanner() {
           </motion.div>
         </div>
 
-        <h3 className="font-thin text-[1.8rem]  md:text-4xl xl:text-[2.4rem] text-end text-secondary tracking-widest pb-10">
+        <h3 className="  text-center  xl:text-right  z-50  font-thin text-[1.8rem]  md:text-4xl   text-white tracking-widest pb-4 w-full">
           יחד נוזיל את יוקר המחיה
         </h3>
 

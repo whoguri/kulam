@@ -1,6 +1,6 @@
-import Hero from "@/components/Hero";
+import Hero from "@/components/home/Hero";
 import Header from "@/components/Header"
-import HomeBanner from "@/components/HomeBanner"
+import HomeBanner from "@/components/home/HomeBanner"
 import { APP_NAME } from "@/constents/constArray";
 
 export const metadata = {

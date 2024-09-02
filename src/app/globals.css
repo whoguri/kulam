@@ -219,20 +219,16 @@
 
 
 
-
-
 .slider-to-left {
   display: flex;
-  animation: slide-to-left 10s linear infinite;
 }
 
 @keyframes slide-to-left {
-
   0% {
-    transform: translate(0);
+    transform: translateX(0);
   }
 
   100% {
-    transform: translate(-100%);
+    transform: translateX(calc(-1 * var(--total-width)));
   }
 }

@@ -96,21 +96,21 @@ function Users() {
             onSave={() => { getList(page, limit) }}
         />}
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
-            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
+            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
                 <div className='w-full overflow-x-auto'>
-                    <table className='w-full'>
+                    <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold'>#</th>
-                                <th className='text-[#337AB7] text-end py-2 px-3 font-bold'>Name
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                <th className='py-2 px-3 font-bold md:w-[10%] text-start'>#</th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Name
+                                    <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }} />
                                 </th>
-                                <th className='text-[#337AB7] text-end py-2 px-3 font-bold'>Role
-                                    <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Role
+                                    <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={role}
                                         onChange={(e) => {
                                             setRole(e.target.value)
@@ -120,14 +120,14 @@ function Users() {
                                         })}
                                     </select>
                                 </th>
-                                <th className='text-[#337AB7] text-end py-2 px-3 font-bold'>Balance
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Balance
+                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {
                                             setBalance(e.target.value)
                                         }} />
                                 </th>
-                                <th></th>
+                                <th className='md:w-[15%]'></th>
                             </tr>
                         </thead>
                         <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
@@ -136,7 +136,7 @@ function Users() {
                                     <td className='py-2 px-3'>{index + 1}</td>
                                     <td className='py-2 px-3'>{e.name}</td>
                                     <td className='py-2 px-3'>{e.role}</td>
-                                    <td className='py-2 px3'>rr</td>
+                                    <td className='py-2 px3'>ID</td>
                                     <td className='py-2 px-3'>
                                         <div className='flex gap-2'>
 

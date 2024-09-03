@@ -59,7 +59,7 @@ export default function UserModal({ onSave, onClose, id }) {
 
 
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
-        {!loading ? <Loading /> :
+        {loading ? <Loading /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
                     <Input label="Name"

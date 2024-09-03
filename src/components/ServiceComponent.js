@@ -3,7 +3,6 @@ import ServiceModal from "../components/ServiceModal"
 import { useEffect, useState } from "react"
 import { ADMIN } from "../constents/constArray"
 import { useSession } from "next-auth/react"
-import Loading from "./Loading"
 import Layout from "./Layout"
 
 export default function ServiceComponent({ description }) {
@@ -11,11 +10,7 @@ export default function ServiceComponent({ description }) {
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
     const [openUser, setOpenUser] = useState(false)
-    const [loading, setLoading] = useState(false)
 
-    if (status === "loading") {
-        return <Loading />
-    }
     return <Layout title="more services"
         buttonTitle={isAdmin && "edit"}
         onClickButton={() => { setOpenUser(true) }}>
@@ -33,9 +28,9 @@ export default function ServiceComponent({ description }) {
                     </button>
                 </div>} */}
 
-                {loading ? <Loading /> : <div className="ql-editor">
+                <div className="ql-editor">
                     <div className="" dangerouslySetInnerHTML={{ __html: description || "" }}></div>
-                </div>}
+                </div>
             </div>
         </div>
     </Layout>

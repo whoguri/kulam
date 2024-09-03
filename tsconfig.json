@@ -119,7 +119,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src/components/NoData.js"
+    "src/components/NoData.js",
+    "src/components/SelectBox.js"
   ],
   "exclude": [
     "node_modules"

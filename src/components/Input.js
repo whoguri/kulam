@@ -32,7 +32,7 @@ export default function Input({ isRequired,
     }
 
     return (<div className="">
-        {label && <label className="text-sm inter font-bold pb-1">{label}{isRequired ? <span className="text-red-500">*</span> : ""}</label>}
+        {label && <label className="text-sm font-bold pb-1">{label}{isRequired ? <span className="text-red-500">*</span> : ""}</label>}
         <div className="relative">
             <input step={step} onChange={onChange} className={`${inputClass} disabled:bg-gray-200 w-full py-2 px-3 rounded-xl focus-visible:outline-none first-letter:capitalize placeholder:capitalize border border-input text-sm ${icon ? "" : "px-2"} `}
                 placeholder={placeholder || label} type={type}

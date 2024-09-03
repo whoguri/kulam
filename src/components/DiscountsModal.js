@@ -6,9 +6,10 @@ import HtmlEditor from "./HtmlEditor"
 import { useForm } from "react-hook-form"
 import { toast } from "react-toastify"
 import Input from "./Input"
+import Loading from "./Loading"
 
 export default function DiscountsModal({ onSave, onClose, id }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
@@ -58,7 +59,7 @@ export default function DiscountsModal({ onSave, onClose, id }) {
     }
 
     if (loading) {
-        return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
+        return <Loading />
     }
 
     return (<Modal title="Discount" maxWidth="max-w-[800px]" onClose={onClose}>

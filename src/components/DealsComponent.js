@@ -13,23 +13,18 @@ import Layout from "./Layout";
 import NoData from "./NoData";
 
 export default function DealsComponent() {
-    const { status, data } = useSession()
+    const { data } = useSession()
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
     const isAdvertiser = user?.role === ADVERTISER
     const [openDeal, setOpenDeal] = useState(false)
     const [selId, setSelId] = useState("")
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
-    const router = useRouter()
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        if (status === "authenticated" && (isAdmin || isAdvertiser)) {
-            getList()
-        } else if (status !== "loading") {
-            router.push("/")
-        }
-    }, [status])
+        getList()
+    }, [])
 
 
     const getList = async () => {
@@ -54,9 +49,6 @@ export default function DealsComponent() {
         autoplay: true,
         arrows: false,
     };
-    if (status === "loading") {
-        return <Loading />
-    }
 
     const chunkedList = chunkArray((list || []), 12);
 
@@ -78,7 +70,6 @@ export default function DealsComponent() {
 
                 {loading ? <Loading /> : ((list && list.length > 0) ? <Slider {...settings}>
                     {chunkedList.map((chunk, chunkIndex) => (
-
                         <div key={chunkIndex} className="!grid md:grid-cols-4 grid-cols-2 2xl:gap-5 xl:gap-5 gap-4">
                             {chunk.map((e, i) => <div key={i} className="relative bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg"
                             >
@@ -93,10 +84,6 @@ export default function DealsComponent() {
                                 <p className="paragraph 2xl:pt-3 xl:pt-2 pt-2">{e.name}</p>
                             </div>)}
                         </div>))}
-
-                    <div>
-
-                    </div>
                 </Slider> : <NoData />)}
             </div>
         </div>

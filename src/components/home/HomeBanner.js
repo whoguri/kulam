@@ -3,7 +3,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 
-export default function HomeBanner() {
+export default function HomeBanner({ deals = [] }) {
   const { status } = useSession()
   return (
     <div className="bg-background relative overflow-hidden ">
@@ -66,21 +66,11 @@ export default function HomeBanner() {
           {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
         </div>
         <div className="grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20">
-          <button className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing ">
-            Deal 1
-          </button>
-          <button className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing ">
-            Deal 2
-          </button>
-          <button className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing ">
-            Deal 3
-          </button>
-          <button className="hidden lg:block  md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing">
-            Deal 4
-          </button>
-          <button className=" hidden lg:block md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing">
-            Deal 5
-          </button>
+          {deals.map((e, i) => {
+            return <button key={i} className="md:px-4 px-3 py-[6px] md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing ">
+              <span className="line-clamp-1">{e.name}</span>
+            </button>
+          })}
         </div>
         <Image
           src="/images/title.svg"

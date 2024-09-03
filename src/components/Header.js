@@ -7,10 +7,14 @@ import { getError } from "../../helper";
 import Sidebar from "../components/Sidebar";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
+import { ADVERTISER } from "@/constents/constArray";
 
 export default function Header() {
   const [sending, setSending] = useState(false);
-  const { status } = useSession();
+  const { status, data } = useSession();
+  const user = data?.user || {}
+  const isAdvertiser = user?.role === ADVERTISER
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -27,6 +31,24 @@ export default function Header() {
       setSending(false);
     }
   };
+
+  const MENU = [
+    { title: "ראשי", link: "/" },
+    { title: "דילים", link: "/deals" },
+    { title: "הנחות", link: "/discounts" },
+    { title: "דרושים", link: "/hiring" },
+    { title: "שירותים", link: "/services" },
+    { title: "צור קשר", link: "/contact" },
+
+  ]
+  if (status === "authenticated") {
+    MENU.splice(1, 0, { title: "הגדרות", link: "/profile" })
+  }
+
+  if (status === "authenticated" && !isAdvertiser) {
+    MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
+
+  }
   return (
     <>
       <div className="bg-background md:block hidden">
@@ -52,80 +74,16 @@ export default function Header() {
               {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
             </div>
             <div className="flex items-center gap-0 pt-2 ">
-              <div className="flex gap-6 text-white cursor-pointer">
-                <Link
-                  href="/contact"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/contact" ? "border-b-2 border-white" : ""
-                  }`}
-                >
-                  צור קשר
-                </Link>
-
-                <Link
-                  href="/services"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium   ${
-                    pathname === "/services" ? "border-b-2 border-white" : ""
-                  }`}
-                >
-                  שירותים
-                </Link>
-
-                {status === "authenticated" && (
-                  <Link
-                    href="/profile"
-                    className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                      pathname === "/profile" ? "border-b-2 border-white" : ""
-                    } `}
+              <div className="flex gap-6 text-white cursor-pointer flex-row-reverse">
+                {MENU.map((e, i) => {
+                  return <Link key={i}
+                    href={e.link}
+                    className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === e.link ? "border-b-2 border-white" : ""
+                      }`}
                   >
-                    הגדרות
+                    {e.title}
                   </Link>
-                )}
-
-                <Link
-                  href="/hiring"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/hiring" ? "border-b-2 border-white" : ""
-                  }`}
-                >
-                  דרושים
-                </Link>
-
-                <Link
-                  href="/discounts"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/discounts" ? "border-b-2 border-white" : ""
-                  }`}
-                >
-                  הנחות
-                </Link>
-
-                <Link
-                  href="/deals"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/deals" ? "border-b-2 border-white" : ""
-                  } `}
-                >
-                  דילים
-                </Link>
-
-                <Link
-                  href="/polls"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/polls" ? "border-b-2 border-white" : ""
-                  } `}
-                >
-                  סקרים
-                </Link>
-
-                <Link
-                  href="/"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/" ? "border-b-2 border-white" : ""
-                  } `}
-                >
-                  ראשי
-                </Link>
+                })}
               </div>
               <Link href="/">
                 <Image

@@ -119,27 +119,29 @@ export default function Contact() {
                         <div className="flex items-end flex-col md:gap-4 gap-3">
                             <div className="text-white flex md:gap-4 gap-1 items-center">
                                 <div>
-                                    <h3 className="md:text-base text-sm">+1012 3456 789</h3>
+                                    <h3 className="md:text-base text-sm text-end">+1012 3456 789</h3>
                                 </div>
                                 <Image src="/Images/phone.svg" alt="phone" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
 
                             <div className="text-white flex md:gap-4 gap-1 items-center">
                                 <div>
-                                    <h3 className="md:text-base text-sm">demo@gmail.com</h3>
+                                    <h3 className="md:text-base text-sm text-end">demo@gmail.com</h3>
                                 </div>
                                 <Image src="/Images/email.svg" alt="email" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                             <div className="text-white flex md:gap-4 gap-1 items-start">
                                 <div>
-                                    <h3 className="md:text-base text-sm">132 Dartmouth Street Boston, Massachusetts 02156 United States</h3>
+                                    <h3 className="md:text-base text-sm text-end">132 Dartmouth Street Boston, Massachusetts 02156 United States</h3>
                                 </div>
                                 <Image src="/Images/location.svg" alt="location" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                         </div>
 
-                        <div>
-                            <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] absolute bottom-5 left-4 z-0" />
+                        <div className="flex items-center justify-between w-full">
+                            <div>
+                                <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] absolute bottom-5 left-4 z-0" />
+                            </div>
 
                             <div className="flex 2xl:gap-5 gap-3 items-center justify-end">
                                 <a href="https://www.instagram.com/" target="_blank">

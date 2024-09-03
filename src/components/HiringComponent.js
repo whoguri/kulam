@@ -3,19 +3,14 @@ import { ADMIN } from "@/constents/constArray"
 import HiringModal from "../components/HiringModal"
 import { useState } from "react"
 import { useSession } from "next-auth/react"
-import Loading from "./Loading"
 import Layout from "./Layout"
 
 export default function HiringComponent({ description }) {
-    const { status, data } = useSession()
+    const { data } = useSession()
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
     const [openUser, setOpenUser] = useState(false)
-    const [loading, setLoading] = useState(false)
 
-    if (status === "loading") {
-        return <Loading />
-    }
 
     return <Layout title="hiring"
         buttonTitle={isAdmin && "edit"}
@@ -33,9 +28,9 @@ export default function HiringComponent({ description }) {
                         edit
                     </button>
                 </div>} */}
-                {loading ? <Loading /> : <div className="ql-editor">
+                <div className="ql-editor">
                     <div className="" dangerouslySetInnerHTML={{ __html: description || "" }}></div>
-                </div>}
+                </div>
             </div>
         </div>
     </Layout>

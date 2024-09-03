@@ -26,10 +26,6 @@ function Profile() {
         }
     }, [status])
 
-    if (status === "loading") {
-        return <Loading />
-    }
-
     const getProfile = async () => {
         try {
             setLoading(true)

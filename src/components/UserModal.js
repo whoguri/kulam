@@ -1,30 +1,29 @@
-import axios from "axios"
-import { getError } from "helper"
+
 import { useEffect, useState } from "react"
-import Modal from "./Modal"
-import HtmlEditor from "./HtmlEditor"
-import { useForm } from "react-hook-form"
-import { toast } from "react-toastify"
 import Input from "./Input"
 import Loading from "./Loading"
+import axios from "axios"
+import { toast } from "react-toastify"
+import Modal from "./Modal"
+import { useForm } from "react-hook-form"
+import SelectBox from "./SelectBox"
+import { ROLES, STATUS } from "@/constents/constArray"
 
-export default function DiscountsModal({ onSave, onClose, id }) {
+export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
         if (id)
-            getDiscount()
-        else
-            setLoading(false)
+            getUser()
     }, [id])
 
-    const getDiscount = async () => {
+    const getUser = async () => {
         try {
-            const res = await axios.get("/api/discounts/" + id)
+            const res = await axios.get("/api/users/" + id)
             const data = res.data
-            Object.keys(data || {}).forEach((e) => {
+            Object.keys(data).forEach((e) => {
                 if (e !== "id") {
                     setValue(e, data[e])
                 }
@@ -40,16 +39,16 @@ export default function DiscountsModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            let res = null;
-            if (id) {
-                res = await axios.put("/api/discounts/" + id, data)
-            } else {
-                res = await axios.post("/api/discounts", data)
-            }
+            const res = await axios.put("/api/users", + id, data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
                 onClose()
+                // setSending(false)
+            }
+
+            else {
+                toast.error("Something went wrong")
                 setSending(false)
             }
         } catch (error) {
@@ -58,20 +57,30 @@ export default function DiscountsModal({ onSave, onClose, id }) {
         }
     }
 
-    return (<Modal title="Discount" maxWidth="max-w-[800px]" onClose={onClose}>
-        {loading ? <Loading style={{ background: "transparent", height: "400px" }} /> :
+
+    return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
+        {loading ? <Loading /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
                     <Input label="Name"
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
 
-                    <Input label="Amount" formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }}
-                        isRequired={true} errors={errors} type="number" />
+
+                    <SelectBox label="Status" clearErrors={clearErrors}
+                        formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
+                        {STATUS.map((e, i) => {
+                            return <option value={e} key={e} className="capitalize">{e}</option>
+                        })}
+                    </SelectBox>
+
+                    <SelectBox label="Role" clearErrors={clearErrors}
+                        formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
+                        {ROLES.map((e, i) => {
+                            return <option value={e} key={e} className="capitalize">{e}</option>
+                        })}
+                    </SelectBox>
                 </div>
-                <div className="my-6">
-                    <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
-                        formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
-                </div>
+
                 <div className="flex justify-end items-end">
                     <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                         {sending ? "Saving" : "Save"}

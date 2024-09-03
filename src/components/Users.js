@@ -1,13 +1,17 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import Layout from './Layout'
-import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { ADMIN } from '../constents/constArray'
+import { ADMIN, ROLES } from '../constents/constArray'
 import Loading from './Loading'
-import axios from 'axios'
 import NoData from './NoData'
 import Image from 'next/image'
+import UserModal from "./UserModal"
+import { useRouter } from 'next/navigation'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import Pagination from "./Pagination"
+let timeout = null
 
 function Users() {
     const { status, data } = useSession()
@@ -15,19 +19,62 @@ function Users() {
     const isAdmin = user?.role === ADMIN
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [openUser, setOpenUser] = useState(false)
     const router = useRouter()
+    const [name, setName] = useState(null)
+    const [role, setRole] = useState("")
+    const [balance, setBalance] = useState("")
+    const [page, setPage] = useState(0)
+    const [limit, setLimit] = useState(10)
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         if (status === "authenticated" && isAdmin) {
-            getList()
+            getList(0, limit)
         } else if (status === "unauthenticated") {
             router.push("/")
         }
-    }, [status])
+    }, [status, role])
 
-    const getList = async () => {
+    useEffect(() => {
+        if (name !== null) {
+            if (timeout)
+                clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                getList(0, limit)
+                getCount()
+            }, 1000);
+        }
+    }, [name])
+
+    const getCount = async () => {
         try {
-            const res = await axios.get("/api/users")
+            let url = `/api/users/count?`
+            if (name) {
+                url = url + "name=" + name + "&"
+            }
+            if (role) {
+                url = url + "role=" + role + "&"
+            }
+            const res = await axios.get(url)
+            setCount(res.data)
+        } catch (e) {
+        }
+    }
+
+    const getList = async (p, l) => {
+        try {
+            setLoading(true)
+            setPage(p)
+            setLimit(l)
+            let url = `/api/users?limit=${l}&skip=${l * p}`
+            if (name) {
+                url = url + "name=" + name + "&"
+            }
+            if (role) {
+                url = url + "role=" + role + "&"
+            }
+            const res = await axios.get(url)
             setList(res.data || [])
             setLoading(false)
         } catch (e) {
@@ -36,58 +83,88 @@ function Users() {
         }
     }
 
-    return (<Layout title="Users">
-        <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
-            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
-                <table className='w-full overflow-x-auto'>
-                    <thead>
-                        <tr>
-                            <th className='py-2 px-3'>#</th>
-                            <th className='text-[#337AB7] text-end py-2 px-3'>Name
-                                <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal' />
-                            </th>
-                            <th className='text-[#337AB7] text-end py-2 px-3'>Role
-                                <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal' />
-                            </th>
-                            <th className='text-[#337AB7] text-end py-2 px-3'>Balance
-                                <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal' />
-                            </th>
-                            {/* <th></th> */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {/* <tr>
-                            <td></td>
-                            <td>
-                                <input />
-                            </td>
-                            <td>
-                                <input />
-                            </td>
-                            <td>
-                                <input />
-                            </td>
-                        </tr> */}
+    if (status === "loading") {
+        return <Loading />
+    }
 
-                        {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
+    return (<Layout title="Users">
+        {openUser && <UserModal
+            id={openUser}
+            onClose={() => {
+                setOpenUser(false)
+            }}
+            onSave={() => { getList(page, limit) }}
+        />}
+        <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
+            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
+                <div className='w-full overflow-x-auto'>
+                    <table className='md:w-full w-max'>
+                        <thead>
+                            <tr>
+                                <th className='py-2 px-3 font-bold md:w-[10%] text-start'>#</th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Name
+                                    <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
+                                        value={name}
+                                        onChange={(e) => {
+                                            setName(e.target.value)
+                                        }} />
+                                </th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Role
+                                    <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
+                                        value={role}
+                                        onChange={(e) => {
+                                            setRole(e.target.value)
+                                        }} >
+                                        {ROLES.map((e, i) => {
+                                            return <option value={e} key={e} className="">{e}</option>
+                                        })}
+                                    </select>
+                                </th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Balance
+                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
+                                        value={balance}
+                                        onChange={(e) => {
+                                            setBalance(e.target.value)
+                                        }} />
+                                </th>
+                                <th className='md:w-[15%]'></th>
+                            </tr>
+                        </thead>
+                        <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
                             (list && list.length > 0) ? list.map((e, index) => {
-                                return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"}`}>
-                                    <td className='py-2 px-4'>{index + 1}</td>
-                                    <td className='py-2 px-4'>rr</td>
-                                    <td className='py-2 px-4'>{e.role}</td>
-                                    <td className='py-2 px-4'>rr</td>
-                                    <td className='py-2 px-4'>
+                                return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} text-sm`}>
+                                    <td className='py-2 px-3'>{index + 1}</td>
+                                    <td className='py-2 px-3'>{e.name}</td>
+                                    <td className='py-2 px-3'>{e.role}</td>
+                                    <td className='py-2 px3'>ID</td>
+                                    <td className='py-2 px-3'>
                                         <div className='flex gap-2'>
+
                                             <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button>
-                                            <button><Image src="/images/pencil.svg" alt='view' height={20} width={20} /></button>
-                                            <button><Image src="/images/delete.svg" alt='view' height={20} width={20} /></button>
+
+                                            <button
+                                                onClick={() => {
+                                                    setOpenUser(e.id)
+                                                }}>
+
+                                                <Image src="/images/pencil.svg" alt='view' height={20} width={20} /></button>
+
+                                            {/* <button><Image src="/images/delete.svg" alt='view' height={20} width={20} /></button> */}
                                         </div>
                                     </td>
                                 </tr>
-                            }) : <NoData />
+                            }) : <tr><td colSpan={5} className='text-center'><NoData /></td></tr>
                         )}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <Pagination count={count} limit={limit} page={page} setLimit={(l) => {
+                    getList(0, l)
+                }}
+                    setPage={(p) => {
+                        getList(p, limit)
+                    }}
+                />
             </div>
         </div>
     </Layout>)

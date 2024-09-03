@@ -2,10 +2,14 @@ import prisma from '@/lib/prisma';
 import withSession from '@/middlewares/with-session';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const deals = async (req: NextApiRequest, res: NextApiResponse) => {
+const deals = async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
     const data = req.body;
     try {
+        const user = req?.user
+        const isAdmin = user?.role === "admin"
         if (req.method === "POST") {
+            if (!req.user)
+                res.status(401).json({ error: "Unauthorized" });
             const result = await prisma.deal.create({ data });
             res.status(200).json(result);
         } else {
@@ -13,6 +17,9 @@ const deals = async (req: NextApiRequest, res: NextApiResponse) => {
             const q: any = {
                 where: {},
                 // orderBy: { name: 'desc' },
+            }
+            if (!isAdmin) {
+                q.where.advertiserId = user.id
             }
             if (name) {
                 q.where.name = { contains: name, mode: "insensitive" }

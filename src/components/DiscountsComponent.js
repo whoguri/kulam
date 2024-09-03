@@ -12,14 +12,14 @@ import Loading from "./Loading"
 import NoData from "./NoData";
 
 export default function DiscountsComponent() {
-    const { status, data } = useSession()
+    const { data } = useSession()
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
 
     const [openDiscount, setOpenDiscount] = useState(false)
     const [selId, setSelId] = useState("")
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getList()
@@ -47,9 +47,6 @@ export default function DiscountsComponent() {
         autoplay: true,
         arrows: false,
     };
-    if (status === "loading") {
-        return <Loading />
-    }
 
     const chunkedList = chunkArray((list || []), 12);
 

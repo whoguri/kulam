@@ -63,47 +63,62 @@ function Users() {
                     <table className='w-full'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3'>#</th>
-                                <th className='text-[#337AB7] text-end py-2 px-3 '>Name
+                                {/* <th className='py-2 px-3'>#</th> */}
+                                {/* <th className='text-[#337AB7] text-end py-2 px-3 '>Name
                                     <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
                                         value={name}
                                         onChange={(e) => {
                                             setError("")
                                             setName(e.target.value)
                                         }} />
-                                </th>
-                                <th className='text-[#337AB7] text-end py-2 px-3'>Role
+                                </th> */}
+                                {/* <th className='text-[#337AB7] text-end py-2 px-3'>Role
                                     <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
                                         value={role}
                                         onChange={(e) => {
                                             setError("")
                                             setRole(e.target.value)
                                         }} />
-                                </th>
-                                <th className='text-[#337AB7] text-end py-2 px-3'>Balance
+                                </th> */}
+                                {/* <th className='text-[#337AB7] text-end py-2 px-3'>Balance
                                     <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
                                         value={balance}
                                         onChange={(e) => {
                                             setError("")
                                             setBalance(e.target.value)
                                         }} />
-                                </th>
+                                </th> */}
                                 {/* <th className=''></th> */}
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <tr>
-                            <td></td>
-                            <td>
-                                <input />
-                            </td>
-                            <td>
-                                <input />
-                            </td>
-                            <td>
-                                <input />
-                            </td>
-                        </tr> */}
+                            <tr>
+                                <td className='py-2 px-3 font-bold'>#</td>
+                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Name
+                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                        value={name}
+                                        onChange={(e) => {
+                                            setError("")
+                                            setName(e.target.value)
+                                        }} />
+                                </td>
+                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Role
+                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                        value={role}
+                                        onChange={(e) => {
+                                            setError("")
+                                            setRole(e.target.value)
+                                        }} />
+                                </td>
+                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Balance
+                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                        value={balance}
+                                        onChange={(e) => {
+                                            setError("")
+                                            setBalance(e.target.value)
+                                        }} />
+                                </td>
+                            </tr>
 
                             {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
                                 (list && list.length > 0) ? list.map((e, index) => {

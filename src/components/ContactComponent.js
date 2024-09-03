@@ -138,8 +138,10 @@ export default function Contact() {
                             </div>
                         </div>
 
-                        <div>
-                            <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] absolute bottom-5 left-4 z-0" />
+                        <div className="flex items-center justify-between w-full">
+                            <div>
+                                <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] absolute bottom-5 left-4 z-0" />
+                            </div>
 
                             <div className="flex 2xl:gap-5 gap-3 items-center justify-end">
                                 <a href="https://www.instagram.com/" target="_blank">

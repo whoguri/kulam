@@ -32,7 +32,7 @@ export default function DealsDetail() {
         }
     }
 
-    return <Layout title="Deals Detail">
+    return <Layout title="Deal">
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
             {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh] md:w-[70%] w-full mx-auto">
                 <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name}</div>

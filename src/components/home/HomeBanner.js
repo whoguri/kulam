@@ -1,12 +1,14 @@
-"use client"
-import Image from "next/image"
+"use client";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 
 export default function HomeBanner() {
   const { status } = useSession()
   return (
-    <div className="bg-background relative overflow-hidden">
+    <div className="bg-background relative overflow-hidden ">
+      <div className="reys"></div>
+      <div className="tv"></div>
       <div className="  flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
         <div className="flex flex-col items-center xl:items-end  md:gap-5 gap-0  ">
           {/* <hr className="md:w-44 w-16" /> */}
@@ -27,7 +29,7 @@ export default function HomeBanner() {
           // className="animate-breathing "
           >
             <Image
-              src="/images/handshake.jpg"
+              src="/images/handshaketr.png"
               alt="logo"
               width={333}
               height={112}

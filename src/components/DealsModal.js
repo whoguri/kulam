@@ -10,12 +10,16 @@ import { ADMIN } from "@/constents/constArray"
 import SelectBox from "./SelectBox"
 import Loading from "./Loading"
 import { useSession } from "next-auth/react"
+import Image from "next/image"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
+import { storage } from "../constents/firebase"
 
 export default function DealsModal({ onSave, onClose, id }) {
     const { data } = useSession()
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
     const [advertisers, setAdvertisers] = useState([])
+    const [image, setImage] = useState(null)
 
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
@@ -49,6 +53,17 @@ export default function DealsModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
+
+            if (image) {
+                const array = image.name.split(".")
+                const ext = array[array.length - 1]
+                const storageRef = ref(storage, `deals/image/${new Date().getTime()}.${ext}`)
+                const snap = await uploadBytes(storageRef, image)
+                const d = await getDownloadURL(storageRef)
+                data.image = d
+            }
+
+
             if (isAdmin) {
                 let advertiserId = data.advertiserId
                 delete data.advertiserId
@@ -100,6 +115,27 @@ export default function DealsModal({ onSave, onClose, id }) {
 
                     <Input label="Amount" formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }}
                         isRequired={true} errors={errors} type="number" />
+
+                    <div>
+                        <label className="text-sm font-medium mb-1 block capitalize">Image</label>
+                        <div className="grid grid-cols-2 items-start gap-4">
+                            <label htmlFor="image" className="border-2 bg-white cursor-pointer hover:bg-light flex items-center justify-center h-24 border-dashed border-slate-300 p-1 rounded-lg">
+                                <Image src="/images/plus.svg" alt="add" height={20} width={20} className="text-2xl" />
+                                <input type="file" className="hidden" id="image" accept=".jpg, .jpeg, .png, .gif"
+                                    onChange={(e) => {
+                                        setImage(e.target.files[0]);
+                                    }} />
+                            </label>
+                            {(image || watch("image")) && <div className="border-2 overflow-hidden h-24 flex border-dashed border-slate-300 rounded-lg">
+                                {image ? <Image placeholder="empty" height={100} width={200} alt={watch("name")}
+                                    src={URL.createObjectURL(image)} className="w-full h-auto object-contain" /> : (
+                                    !watch("image") ? null :
+                                        <Image placeholder="empty" height={100} width={200} alt={watch("name")}
+                                            src={watch("image") || ""} className="w-full h-auto object-contain" />)}
+                            </div>}
+                        </div>
+
+                    </div>
                 </div>
                 <div className="my-6">
                     <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}

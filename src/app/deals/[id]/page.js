@@ -37,7 +37,7 @@ export default function DealsDetail() {
             {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh] md:w-[70%] w-full mx-auto">
                 <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name}</div>
                 <div className="py-4">
-                    <Image src="/images/2.jpeg" alt="deal" height={200} width={350} className="mx-auto rounded-md w-auto" />
+                    <Image src={deal.image} alt="deal" height={200} width={350} className="mx-auto rounded-md w-auto" />
                 </div>
                 <div className="paragraph 2xl:pt-4 xl:pt-4 pt-2" dangerouslySetInnerHTML={{ __html: deal.description }} />
             </div>}

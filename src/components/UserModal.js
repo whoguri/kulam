@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import SelectBox from "./SelectBox"
 
 export default function UserModal({ onSave, onClose, id }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 

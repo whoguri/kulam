@@ -8,7 +8,7 @@ import { toast } from "react-toastify"
 import Input from "../components/Input"
 
 export default function DealsModal({ onSave, onClose, id }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 

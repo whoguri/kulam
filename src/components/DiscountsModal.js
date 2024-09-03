@@ -9,7 +9,7 @@ import Input from "./Input"
 import Loading from "./Loading"
 
 export default function DiscountsModal({ onSave, onClose, id }) {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 

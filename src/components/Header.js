@@ -55,18 +55,16 @@ export default function Header() {
               <div className="flex gap-6 text-white cursor-pointer">
                 <Link
                   href="/contact"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/contact" ? "border-b-2 border-white" : ""
-                  }`}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/contact" ? "border-b-2 border-white" : ""
+                    }`}
                 >
                   צור קשר
                 </Link>
 
                 <Link
                   href="/services"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium   ${
-                    pathname === "/services" ? "border-b-2 border-white" : ""
-                  }`}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium   ${pathname === "/services" ? "border-b-2 border-white" : ""
+                    }`}
                 >
                   שירותים
                 </Link>
@@ -74,9 +72,8 @@ export default function Header() {
                 {status === "authenticated" && (
                   <Link
                     href="/profile"
-                    className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                      pathname === "/profile" ? "border-b-2 border-white" : ""
-                    } `}
+                    className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/profile" ? "border-b-2 border-white" : ""
+                      } `}
                   >
                     הגדרות
                   </Link>
@@ -84,45 +81,40 @@ export default function Header() {
 
                 <Link
                   href="/hiring"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/hiring" ? "border-b-2 border-white" : ""
-                  }`}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/hiring" ? "border-b-2 border-white" : ""
+                    }`}
                 >
                   דרושים
                 </Link>
 
                 <Link
                   href="/discounts"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/discounts" ? "border-b-2 border-white" : ""
-                  }`}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/discounts" ? "border-b-2 border-white" : ""
+                    }`}
                 >
                   הנחות
                 </Link>
 
                 <Link
                   href="/deals"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/deals" ? "border-b-2 border-white" : ""
-                  } `}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/deals" ? "border-b-2 border-white" : ""
+                    } `}
                 >
                   דילים
                 </Link>
 
-                <Link
+                {status === "authenticated" && <Link
                   href="/polls"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/polls" ? "border-b-2 border-white" : ""
-                  } `}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/polls" ? "border-b-2 border-white" : ""
+                    } `}
                 >
                   סקרים
-                </Link>
+                </Link>}
 
                 <Link
                   href="/"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${
-                    pathname === "/" ? "border-b-2 border-white" : ""
-                  } `}
+                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""
+                    } `}
                 >
                   ראשי
                 </Link>

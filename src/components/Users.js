@@ -16,7 +16,7 @@ function Users() {
     const user = data?.user || {}
     const isAdmin = user?.role === ADMIN
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [openUser, setOpenUser] = useState(false)
     const router = useRouter()
     const [name, setName] = useState("")

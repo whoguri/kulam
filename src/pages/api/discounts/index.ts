@@ -2,10 +2,13 @@ import prisma from '@/lib/prisma';
 import withSession from '@/middlewares/with-session';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-const discounts = async (req: NextApiRequest, res: NextApiResponse) => {
+const discounts = async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
     const data = req.body;
     try {
         if (req.method === "POST") {
+            if (!req.user)
+                res.status(401).json({ error: "Unauthorized" });
+
             const result = await prisma.discount.create({ data });
             res.status(200).json(result);
         } else {

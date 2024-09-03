@@ -7,10 +7,14 @@ import { getError } from "../../helper";
 import Sidebar from "../components/Sidebar";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
+import { ADVERTISER } from "@/constents/constArray";
 
 export default function Header() {
   const [sending, setSending] = useState(false);
-  const { status } = useSession();
+  const { status, data } = useSession();
+  const user = data?.user || {}
+  const isAdvertiser = user?.role === ADVERTISER
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -103,7 +107,7 @@ export default function Header() {
                   דילים
                 </Link>
 
-                {status === "authenticated" && <Link
+                {(status === "authenticated" && !isAdvertiser) && <Link
                   href="/polls"
                   className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/polls" ? "border-b-2 border-white" : ""
                     } `}

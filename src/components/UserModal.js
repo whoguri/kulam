@@ -58,9 +58,6 @@ export default function UserModal({ onSave, onClose, id }) {
         }
     }
 
-    if (loading) {
-        return <Loading />
-    }
 
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
 

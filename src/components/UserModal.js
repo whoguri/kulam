@@ -7,6 +7,7 @@ import { toast } from "react-toastify"
 import Modal from "./Modal"
 import { useForm } from "react-hook-form"
 import SelectBox from "./SelectBox"
+import { ROLES, STATUS } from "@/constents/constArray"
 
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
@@ -16,8 +17,6 @@ export default function UserModal({ onSave, onClose, id }) {
     useEffect(() => {
         if (id)
             getUser()
-        else
-            setLoading(false)
     }, [id])
 
     const getUser = async () => {
@@ -60,32 +59,33 @@ export default function UserModal({ onSave, onClose, id }) {
 
 
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
+        {!loading ? <Loading /> :
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+                    <Input label="Name"
+                        formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <Input label="Name"
-                    formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
 
+                    <SelectBox label="Status" clearErrors={clearErrors}
+                        formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
+                        {STATUS.map((e, i) => {
+                            return <option value={e} key={e} className="capitalize">{e}</option>
+                        })}
+                    </SelectBox>
 
-                <SelectBox label="Status" clearErrors={clearErrors}
-                    formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
-                    <option>Active</option>
-                    <option >Inactive</option>
-                </SelectBox>
+                    <SelectBox label="Role" clearErrors={clearErrors}
+                        formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
+                        {ROLES.map((e, i) => {
+                            return <option value={e} key={e} className="capitalize">{e}</option>
+                        })}
+                    </SelectBox>
+                </div>
 
-                <SelectBox label="Role" clearErrors={clearErrors}
-                    formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
-                    <option value="ADMIN">Admin</option>
-                    <option value="ADVERTISER">Avertiser</option>
-                    <option value="USER">User</option>
-                </SelectBox>
-            </div>
-
-            <div className="flex justify-end items-end">
-                <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
-                    {sending ? "Saving" : "Save"}
-                </button>
-            </div>
-        </form>
+                <div className="flex justify-end items-end">
+                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                        {sending ? "Saving" : "Save"}
+                    </button>
+                </div>
+            </form>}
     </Modal>)
 }

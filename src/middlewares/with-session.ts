@@ -7,12 +7,11 @@ const withSession = (handler: any): any => {
         const session: any = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
 
         if (!session) {
-            return res.status(401).json({ error: 'Unauthorized' })
+            // return res.status(401).json({ error: 'Unauthorized' })
         } else {
-            const user = await prisma.user.findUnique({ where: { email: session.email, status: "active" } })
-            if (!user || user.status !== "active")
+            const user = await prisma.user.findUnique({ where: { email: session.email } })
+            if (user && user?.status !== "active")
                 return res.status(401).json({ error: 'Unauthorized' })
-
             req.user = user
         }
         return handler(req, res);

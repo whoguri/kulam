@@ -202,9 +202,7 @@
 }
 
 .editor .ql-editor {
-  min-height: 260px;
-  max-height: 350px;
-  font-size: 14px;
+  @apply !text-start text-sm min-h-[260px] max-h-[350px] overflow-y-auto
 }
 
 .document-editor .ql-container.ql-snow .ql-editor {
@@ -216,8 +214,6 @@
 .input-error {
   @apply text-xs font-medium text-red-500 mt-1 text-start first-letter:capitalize
 }
-
-
 
 .slider-to-left {
   display: flex;
@@ -255,4 +251,13 @@
 
   opacity: 0.18;
   z-index: 1;
+}
+
+
+.editor .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+  @apply !end-0 !right-[inherit]
+}
+
+.editor .ql-toolbar.ql-snow .ql-formats {
+  @apply !me-5 !ms-0
 }

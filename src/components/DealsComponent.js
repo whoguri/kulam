@@ -8,7 +8,6 @@ import DealsModal from "./DealsModal"
 import { ADMIN, ADVERTISER } from "@/constents/constArray";
 import Loading from "./Loading";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Layout from "./Layout";
 import NoData from "./NoData";
 

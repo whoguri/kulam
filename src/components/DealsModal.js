@@ -58,10 +58,6 @@ export default function DealsModal({ onSave, onClose, id }) {
     }
 
 
-    if (loading) {
-        return <div className="text-primary text-4xl font-medium h-[calc(100vh-72px)] flex items-center justify-center">Loading....</div>
-    }
-
     return (<Modal title="Deal" maxWidth="max-w-[800px]" onClose={onClose}>
 
         <form onSubmit={handleSubmit(onSubmit)}>

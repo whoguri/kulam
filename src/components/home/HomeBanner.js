@@ -42,7 +42,7 @@ export default function HomeBanner() {
           יחד נוזיל את יוקר המחיה
         </h3>
         <div className="  text-white flex flex-col gap-5 pt-0 w-full items-center xl:hidden md:hidden ">
-          <button
+          {status === "unauthenticated" && <button
             className="cursor-pointer mx-auto relative overflow-hidden rounded-lg "
             onClick={() => {
               if (status === "authenticated") {
@@ -58,7 +58,7 @@ export default function HomeBanner() {
             <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm ">
               {status === "authenticated" ? "יציאה" : "כניסה"}
             </span>
-          </button>
+          </button>}
           <p className="text-center 2xl:text-lg xl:text-base text-sm">
             הצטרפו אלינו ותהנו מהטבות והצעות מיוחדות
           </p>

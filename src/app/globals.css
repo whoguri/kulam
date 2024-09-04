@@ -203,6 +203,14 @@
 
 }
 
+.ql-editor {
+  text-align: end !important;
+}
+
+.ql-editor ul {
+  text-align: end !important;
+}
+
 .editor .ql-editor {
   @apply !text-start text-sm min-h-[260px] max-h-[350px] overflow-y-auto
 }

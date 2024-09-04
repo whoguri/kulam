@@ -2,9 +2,26 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
+import { getError } from "helper";
+import { useState } from "react";
 
 export default function HomeBanner({ deals = [] }) {
   const { status } = useSession()
+  const [sending, setSending] = useState(false)
+
+  const googleLogin = async () => {
+    try {
+      setSending(true)
+      const res = await signIn("google", { callbackUrl: "/" })
+      if (res?.status === 200) {
+        window.location.reload()
+      }
+    } catch (e) {
+      console.error(e)
+      toast.error(getError(e))
+      setSending(false)
+    }
+  }
   return (
     <div className="bg-background relative overflow-hidden ">
       <div className="reys"></div>
@@ -51,7 +68,7 @@ export default function HomeBanner({ deals = [] }) {
                 googleLogin();
               }
             }}
-          // disabled={sending}
+            disabled={sending}
           >
             <span class="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45 "></span>
 

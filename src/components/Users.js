@@ -31,6 +31,7 @@ function Users() {
     useEffect(() => {
         if (status === "authenticated" && isAdmin) {
             getList(0, limit)
+            getCount()
         } else if (status === "unauthenticated") {
             router.push("/")
         }
@@ -59,6 +60,7 @@ function Users() {
             const res = await axios.get(url)
             setCount(res.data)
         } catch (e) {
+            console.log(e)
         }
     }
 
@@ -67,7 +69,7 @@ function Users() {
             setLoading(true)
             setPage(p)
             setLimit(l)
-            let url = `/api/users?limit=${l}&skip=${l * p}`
+            let url = `/api/users?limit=${l}&skip=${l * p}&`
             if (name) {
                 url = url + "name=" + name + "&"
             }
@@ -83,9 +85,9 @@ function Users() {
         }
     }
 
-    if (status === "loading") {
-        return <Loading />
-    }
+    // if (status === "loading") {
+    //     return <Loading />
+    // }
 
     return (<Layout title="Users">
         {openUser && <UserModal
@@ -115,17 +117,18 @@ function Users() {
                                         onChange={(e) => {
                                             setRole(e.target.value)
                                         }} >
+                                        <option value={""} className="">All</option>
                                         {ROLES.map((e, i) => {
                                             return <option value={e} key={e} className="">{e}</option>
                                         })}
                                     </select>
                                 </th>
                                 <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Balance
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
+                                    {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {
                                             setBalance(e.target.value)
-                                        }} />
+                                        }} /> */}
                                 </th>
                                 <th className='md:w-[15%]'></th>
                             </tr>
@@ -133,15 +136,13 @@ function Users() {
                         <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
                             (list && list.length > 0) ? list.map((e, index) => {
                                 return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} text-sm`}>
-                                    <td className='py-2 px-3'>{index + 1}</td>
+                                    <td className='py-2 px-3'>{(page * limit) + (index + 1)}</td>
                                     <td className='py-2 px-3'>{e.name}</td>
                                     <td className='py-2 px-3'>{e.role}</td>
-                                    <td className='py-2 px3'>ID</td>
+                                    <td className='py-2 px3'>0</td>
                                     <td className='py-2 px-3'>
                                         <div className='flex gap-2'>
-
-                                            <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button>
-
+                                            {/* <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button> */}
                                             <button
                                                 onClick={() => {
                                                     setOpenUser(e.id)

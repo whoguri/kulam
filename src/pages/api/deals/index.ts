@@ -19,7 +19,7 @@ const deals = async (req: NextApiRequest & { user?: any }, res: NextApiResponse)
                 // orderBy: { name: 'desc' },
             }
             if (!isAdmin) {
-                q.where.advertiserId = user.id
+                q.where.advertiserId = user?.id
             }
             if (name) {
                 q.where.name = { contains: name, mode: "insensitive" }

@@ -20,7 +20,6 @@ export default function DealsModal({ onSave, onClose, id }) {
     const isAdmin = user?.role === ADMIN
     const [advertisers, setAdvertisers] = useState([])
     const [image, setImage] = useState(null)
-
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
@@ -117,7 +116,7 @@ export default function DealsModal({ onSave, onClose, id }) {
                         isRequired={true} errors={errors} type="number" />
 
                     <div>
-                        <label className="text-sm font-medium mb-1 block capitalize">Image</label>
+                        <label className="text-sm font-bold mb-1 block capitalize">Image</label>
                         <div className="grid grid-cols-2 items-start gap-4">
                             <label htmlFor="image" className="border-2 bg-white cursor-pointer hover:bg-light flex items-center justify-center h-24 border-dashed border-slate-300 p-1 rounded-lg">
                                 <Image src="/images/plus.svg" alt="add" height={20} width={20} className="text-2xl" />

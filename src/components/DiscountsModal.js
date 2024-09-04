@@ -73,7 +73,7 @@ export default function DiscountsModal({ onSave, onClose, id }) {
                         formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
                 </div>
                 <div className="flex justify-end items-end">
-                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                         {sending ? "Saving" : "Save"}
                     </button>
                 </div>

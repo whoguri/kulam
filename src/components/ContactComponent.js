@@ -73,8 +73,8 @@ export default function Contact() {
                         <h2 className="subheading !font-normal text-center">Interested in our service?
                             Send us a message</h2>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Name<span className="text-red-600">*</span></h3>
-                            <input placeholder="Enter your name" type="text" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Name<span className="text-red-500">*</span></h3>
+                            <input placeholder="Enter your name" type="text" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={name}
                                 onChange={(e) => {
                                     setError("")
@@ -83,8 +83,8 @@ export default function Contact() {
                             {(error === "Name is required" || error === "Name is too short") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Email address<span className="text-red-600">*</span></h3>
-                            <input placeholder="Enter your name" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end" type="email"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Email address<span className="text-red-500">*</span></h3>
+                            <input placeholder="Enter your name" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
                                 value={email}
                                 onChange={(e) => {
                                     setError("")
@@ -93,8 +93,8 @@ export default function Contact() {
                             {(error === "Enter email" || error === "Invalid email") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Message<span className="text-red-600">*</span></h3>
-                            <textarea rows={4} placeholder="Hint" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Message<span className="text-red-500">*</span></h3>
+                            <textarea rows={4} placeholder="Hint" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={message}
                                 onChange={(e) => {
                                     setError("")

@@ -90,7 +90,7 @@ export default function DealsComponent() {
 }
 
 function Item({ isAdmin, isAdvertiser, setSelId, setOpenDeal, e, i }) {
-    return <div key={i} className="relative bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg"    >
+    return <div key={i} className="relative bg-white 2xl:py-8 xl:py-7 py-7 2xl:px-0 xl:px-0 px-3 text-center rounded-lg">
         {(isAdmin || isAdvertiser) && <button type="button" className="z-[2] absolute end-2 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm"
             onClick={() => {
                 setSelId(e.id)

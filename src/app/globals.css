@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  direction: rtl;
+} */
+
 .gradient-bg {
   background-image: linear-gradient(to right, #F5BC46, #ee7b31);
 }
@@ -197,6 +201,14 @@
   border-top: none !important;
   overflow: hidden;
 
+}
+
+.ql-editor {
+  text-align: end !important;
+}
+
+.ql-editor ul {
+  text-align: end !important;
 }
 
 .editor .ql-editor {

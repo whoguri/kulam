@@ -44,7 +44,9 @@ function UpdateRole() {
                 setSending(false)
                 router.push("/")
                 window.location.reload()
-                localStorage.clear()
+                if (user?.referredBy) {
+                    localStorage.clear()
+                }
             } else {
                 toast.error("Something went wrong")
                 setSending(false)

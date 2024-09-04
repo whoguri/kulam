@@ -2,15 +2,17 @@
 
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { useEffect } from 'react'
 import AddReffrelCode from "./AddReffrelCode"
 
 function SaveRefCode_() {
     const { status, data } = useSession()
     const search = useSearchParams()
+    const user = data?.user || {}
     const code = search.get('ref')
-    // const[openRefModal]
+    const [openRefModal, setOpenRefModal] = useState(false)
+
     useEffect(() => {
         if (code) {
             localStorage.setItem('referredBy', code)
@@ -19,13 +21,13 @@ function SaveRefCode_() {
             if (user?.referredBy) {
                 localStorage.clear()
             } else {
-
+                setOpenRefModal(true)
             }
         }
     }, [code, status])
 
     return (<>
-        {/* <AddReffrelCode /> */}
+        <AddReffrelCode open={openRefModal} setOpen={setOpenRefModal} />
     </>)
 }
 

@@ -83,9 +83,9 @@ function Users() {
         }
     }
 
-    if (status === "loading") {
-        return <Loading />
-    }
+    // if (status === "loading") {
+    //     return <Loading />
+    // }
 
     return (<Layout title="Users">
         {openUser && <UserModal

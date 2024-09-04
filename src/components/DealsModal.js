@@ -20,7 +20,6 @@ export default function DealsModal({ onSave, onClose, id }) {
     const isAdmin = user?.role === ADMIN
     const [advertisers, setAdvertisers] = useState([])
     const [image, setImage] = useState(null)
-
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})

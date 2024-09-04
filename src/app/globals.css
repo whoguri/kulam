@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+
+
 .gradient-bg {
   background-image: linear-gradient(to right, #F5BC46, #ee7b31);
 }
@@ -113,7 +117,7 @@
   height: 115.61999999999999px;
   border: 16.919999999999998px solid;
   border-radius: 50%;
-  border-color: transparent white white white;
+  border-color: transparent #090B27 #090B27 #090B27;
   box-sizing: border-box;
   position: absolute;
   transform: rotate(45deg);
@@ -133,7 +137,7 @@
   width: 0;
   height: 0;
   border: 16.919999999999998px solid;
-  border-color: transparent transparent transparent white;
+  border-color: transparent transparent transparent #090B27;
   transform: translate(70.5px, 4.2299999999999995px);
 }
 

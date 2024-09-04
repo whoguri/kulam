@@ -1,5 +1,5 @@
 "use client"
-import { ADVERTISER } from "@/constents/constArray";
+import { ADMIN, ADVERTISER } from "@/constents/constArray";
 import { getError } from "helper";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -8,12 +8,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function Sidebar({ open, setOpen }) {
+export default function Sidebar({ open, setOpen, MENU }) {
   const pathname = usePathname()
   const ref = useRef(null);
-  const { status, data } = useSession();
-  const user = data?.user || {}
-  const isAdvertiser = user?.role === ADVERTISER
+  const { status } = useSession();
   const [sending, setSending] = useState(false)
 
   const googleLogin = async () => {
@@ -44,23 +42,6 @@ export default function Sidebar({ open, setOpen }) {
     }
   }, []);
 
-  const MENU = [
-    { title: "ראשי", link: "/" },
-    { title: "דילים", link: "/deals" },
-    { title: "הנחות", link: "/discounts" },
-    { title: "דרושים", link: "/hiring" },
-    { title: "שירותים", link: "/services" },
-    { title: "צור קשר", link: "/contact" },
-
-  ]
-  if (status === "authenticated") {
-    MENU.splice(1, 0, { title: "הגדרות", link: "/profile" })
-  }
-
-  if (status === "authenticated" && !isAdvertiser) {
-    MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
-
-  }
   return (
     <div>
       <div

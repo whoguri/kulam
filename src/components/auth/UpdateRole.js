@@ -8,10 +8,9 @@ import { ROLES } from '../../constents/constArray'
 import Modal from '../Modal'
 import { getError } from '../../../helper'
 
-function UpdateRole() {
+function UpdateRole({ open }) {
     const { data, status } = useSession()
     const user = data?.user || {}
-    const [open, setOpen] = useState(false)
     const [role, setRole] = useState("")
     const [sending, setSending] = useState(false)
     const router = useRouter()
@@ -24,13 +23,10 @@ function UpdateRole() {
 
     useEffect(() => {
         if (status === "authenticated") {
-            if (user?.role === "tbd") {
-                setOpen(true)
-            }
+
         }
     }, [status, user])
 
-    console.log(referredBy)
     const onSubmit = async () => {
         try {
             if (!role) {
@@ -58,7 +54,7 @@ function UpdateRole() {
     }
 
     return (<>
-        {open && <Modal title="Update Role" onClose={() => { setOpen(true) }} closeButton={false}
+        {open && <Modal title="Update Role" closeButton={false}
             footer={<button disabled={sending} onClick={() => { onSubmit() }} type='button' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                 {sending ? "Saving" : "Save"}
             </button>} >

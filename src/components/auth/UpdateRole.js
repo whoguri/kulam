@@ -37,8 +37,9 @@ function UpdateRole({ open }) {
             const res = await axios.put("/api/auth/finish", { role, referredBy: referredBy || "" })
             if (res.status === 200) {
                 toast.success("Updated Successfully")
-                setSending(false)
-                router.push("/")
+                localStorage.removeItem("referredBy")
+                // setSending(false)
+                // router.push("/")
                 window.location.reload()
                 if (user?.referredBy) {
                     localStorage.clear()

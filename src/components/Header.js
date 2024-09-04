@@ -7,13 +7,14 @@ import { getError } from "../../helper";
 import Sidebar from "../components/Sidebar";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
-import { ADVERTISER } from "@/constents/constArray";
+import { ADMIN, ADVERTISER } from "@/constents/constArray";
 
 export default function Header() {
   const [sending, setSending] = useState(false);
   const { status, data } = useSession();
   const user = data?.user || {}
   const isAdvertiser = user?.role === ADVERTISER
+  const isAdmin = user?.role === ADMIN
 
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -50,6 +51,9 @@ export default function Header() {
 
   }
 
+  if (status === "authenticated" && isAdmin) {
+    MENU.push({ title: "Users", link: "/users" })
+  }
   return (
     <>
       <div className="bg-background md:block hidden">
@@ -110,7 +114,7 @@ export default function Header() {
         </div>
         {/* <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
             <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
-        <Sidebar open={open} setOpen={setOpen} />
+        <Sidebar open={open} setOpen={setOpen} MENU={MENU} />
       </div>
     </>
   );

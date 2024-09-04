@@ -66,7 +66,7 @@ export default function Header() {
                 }}
                 disabled={sending}
               >
-                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm ">
+                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
                   {status === "authenticated" ? "יציאה" : "כניסה"}
                 </span>
               </button>
@@ -78,7 +78,7 @@ export default function Header() {
                 {MENU.map((e, i) => {
                   return <Link key={i}
                     href={e.link}
-                    className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === e.link ? "border-b-2 border-white" : ""
+                    className={`2xl:text-xl xl:text-lg text-base font-medium capitalize ${pathname === e.link ? "border-b-2 border-white" : ""
                       }`}
                   >
                     {e.title}

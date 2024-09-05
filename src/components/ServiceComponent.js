@@ -28,8 +28,10 @@ export default function ServiceComponent({ description }) {
                     </button>
                 </div>} */}
 
-                <div className="ql-editor">
-                    <div dangerouslySetInnerHTML={{ __html: description || "" }}></div>
+                <div className="ql-snow">
+                    <div className="ql-editor">
+                        <div className="ql-direction-rtl" dangerouslySetInnerHTML={{ __html: description || "" }} />
+                    </div>
                 </div>
             </div>
         </div>

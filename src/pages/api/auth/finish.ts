@@ -23,7 +23,11 @@ const finish = async (req: NextApiRequest, res: NextApiResponse) => {
             const result = await prisma.user.update({
                 where: { "id": id }, data: {
                     role: data.role, referralCode: code,
-                    referredByUser: !ref ? undefined : { connect: { id: ref } }
+                    referredByUser: !ref ? undefined : { connect: { id: ref } },
+                    name: data.name,
+                    phone: data.phone,
+                    socialId: data.socialId,
+                    city: data.city
                 }
             });
             res.status(200).json(result);

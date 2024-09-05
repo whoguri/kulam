@@ -67,7 +67,7 @@ function Profile() {
                 </div>
                 <hr className="border-b border-black my-5" />
                 <div>
-                    <h1 className='paragraph mb-2 text-end'>Referral Tree</h1>
+                    <h1 className='paragraph mb-2 text-end'>My Referrals</h1>
                     {(user.tree || []).sort((a, b) => a.referrals.length > b.referrals.length ? -1 : 1).map((e, i) => <ReferralTree index={i} tree={e} key={i} isLast={(user.tree.length - 1) === i} />)}
                 </div>
             </div>

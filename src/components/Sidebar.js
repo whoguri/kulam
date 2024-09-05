@@ -1,4 +1,5 @@
-"use client";
+"use client"
+import { ADMIN, ADVERTISER } from "@/constents/constArray";
 import { getError } from "helper";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
@@ -7,11 +8,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function Sidebar({ open, setOpen }) {
-  const pathname = usePathname();
+export default function Sidebar({ open, setOpen, MENU }) {
+  const pathname = usePathname()
   const ref = useRef(null);
   const { status } = useSession();
-  const [sending, setSending] = useState(false);
+  const [sending, setSending] = useState(false)
 
   const googleLogin = async () => {
     try {
@@ -41,16 +42,6 @@ export default function Sidebar({ open, setOpen }) {
     }
   }, []);
 
-  const MENU = [
-    { title: "ראשי", link: "/" },
-    { title: "סקרים", link: "/polls" },
-    { title: "דילים", link: "/deals" },
-    { title: "הנחות", link: "/discounts" },
-    { title: "דרושים", link: "/hiring" },
-    { title: "הגדרות", link: "/profile" },
-    { title: "שירותים", link: "/services" },
-    { title: "צור קשר", link: "/contact" },
-  ];
   return (
     <div>
       <div
@@ -93,7 +84,7 @@ export default function Sidebar({ open, setOpen }) {
           </div>
 
           <div className="flex flex-col justify-between h-[85vh] w-full">
-            <div className="w-full">
+            <div className="w-full grid gap-y-4">
               {MENU.map((e, i) => {
                 return (
                   <Link
@@ -102,15 +93,7 @@ export default function Sidebar({ open, setOpen }) {
                     }}
                     key={i}
                     href={e.link || "/"}
-                    className={`${
-                      pathname === e.link
-                        ? "border-b border-white"
-                        : "font-normal"
-                    } ${
-                      i !== 5 && "w-full"
-                    } my-2 hover:font-bold capitalize text-lg leading-8 block text-white whitespace-pre`}
-                  >
-                    {e.title}
+                    className={`${pathname === e.link ? "border-b border-white pb-1" : "font-normal"} ${i !== 5 && "w-full"}  hover:font-bold capitalize text-lg leading-none block text-white whitespace-pre`}>{e.title}
                   </Link>
                 );
               })}

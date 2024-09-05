@@ -73,8 +73,8 @@ export default function Contact() {
                         <h2 className="subheading !font-normal text-center">Interested in our service?
                             Send us a message</h2>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Name<span className="text-red-600">*</span></h3>
-                            <input placeholder="Enter your name" type="text" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Name<span className="text-red-500">*</span></h3>
+                            <input placeholder="Enter your name" type="text" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={name}
                                 onChange={(e) => {
                                     setError("")
@@ -83,8 +83,8 @@ export default function Contact() {
                             {(error === "Name is required" || error === "Name is too short") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Email address<span className="text-red-600">*</span></h3>
-                            <input placeholder="Enter your name" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end" type="email"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Email address<span className="text-red-500">*</span></h3>
+                            <input placeholder="Enter your name" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
                                 value={email}
                                 onChange={(e) => {
                                     setError("")
@@ -93,8 +93,8 @@ export default function Contact() {
                             {(error === "Enter email" || error === "Invalid email") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Message<span className="text-red-600">*</span></h3>
-                            <textarea rows={4} placeholder="Hint" className="border border-gray-300 rounded-lg w-full py-1 px-3 focus:outline-none text-end"
+                            <h3 className="paragraph pt-4 pb-2 text-end">Message<span className="text-red-500">*</span></h3>
+                            <textarea rows={4} placeholder="Hint" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={message}
                                 onChange={(e) => {
                                     setError("")
@@ -119,27 +119,29 @@ export default function Contact() {
                         <div className="flex items-end flex-col md:gap-4 gap-3">
                             <div className="text-white flex md:gap-4 gap-1 items-center">
                                 <div>
-                                    <h3 className="md:text-base text-sm">+1012 3456 789</h3>
+                                    <h3 className="md:text-base text-sm text-end">+1012 3456 789</h3>
                                 </div>
                                 <Image src="/Images/phone.svg" alt="phone" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
 
                             <div className="text-white flex md:gap-4 gap-1 items-center">
                                 <div>
-                                    <h3 className="md:text-base text-sm">demo@gmail.com</h3>
+                                    <h3 className="md:text-base text-sm text-end">demo@gmail.com</h3>
                                 </div>
                                 <Image src="/Images/email.svg" alt="email" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                             <div className="text-white flex md:gap-4 gap-1 items-start">
                                 <div>
-                                    <h3 className="md:text-base text-sm">132 Dartmouth Street Boston, Massachusetts 02156 United States</h3>
+                                    <h3 className="md:text-base text-sm text-end">132 Dartmouth Street Boston, Massachusetts 02156 United States</h3>
                                 </div>
                                 <Image src="/Images/location.svg" alt="location" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                         </div>
 
-                        <div>
-                            <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] absolute bottom-5 left-4 z-0" />
+                        <div className="flex items-center justify-between w-full">
+                            <div>
+                                <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] md:max-h-20 absolute bottom-5 left-4 z-0" />
+                            </div>
 
                             <div className="flex 2xl:gap-5 gap-3 items-center justify-end">
                                 <a href="https://www.instagram.com/" target="_blank">

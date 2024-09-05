@@ -53,7 +53,6 @@ export default function HiringModal({ onSave, onClose }) {
         }
     }
 
-
     return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading style={{ background: "transparent", height: "400px" }} /> :
             <form onSubmit={handleSubmit(onSubmit)}>

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './Layout'
 import { useSession } from 'next-auth/react'
-import { ADMIN } from '../constents/constArray'
+import { ADMIN, ROLES } from '../constents/constArray'
 import Loading from './Loading'
 import NoData from './NoData'
 import Image from 'next/image'
@@ -10,6 +10,8 @@ import UserModal from "./UserModal"
 import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Pagination from "./Pagination"
+let timeout = null
 
 function Users() {
     const { status, data } = useSession()
@@ -19,22 +21,62 @@ function Users() {
     const [loading, setLoading] = useState(true)
     const [openUser, setOpenUser] = useState(false)
     const router = useRouter()
-    const [name, setName] = useState("")
+    const [name, setName] = useState(null)
     const [role, setRole] = useState("")
     const [balance, setBalance] = useState("")
-
+    const [page, setPage] = useState(0)
+    const [limit, setLimit] = useState(10)
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         if (status === "authenticated" && isAdmin) {
-            getList()
+            getList(0, limit)
+            getCount()
         } else if (status === "unauthenticated") {
             router.push("/")
         }
-    }, [status])
+    }, [status, role])
 
-    const getList = async () => {
+    useEffect(() => {
+        if (name !== null) {
+            if (timeout)
+                clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                getList(0, limit)
+                getCount()
+            }, 1000);
+        }
+    }, [name])
+
+    const getCount = async () => {
         try {
-            const res = await axios.get("/api/users")
+            let url = `/api/users/count?`
+            if (name) {
+                url = url + "name=" + name + "&"
+            }
+            if (role) {
+                url = url + "role=" + role + "&"
+            }
+            const res = await axios.get(url)
+            setCount(res.data)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const getList = async (p, l) => {
+        try {
+            setLoading(true)
+            setPage(p)
+            setLimit(l)
+            let url = `/api/users?limit=${l}&skip=${l * p}&`
+            if (name) {
+                url = url + "name=" + name + "&"
+            }
+            if (role) {
+                url = url + "role=" + role + "&"
+            }
+            const res = await axios.get(url)
             setList(res.data || [])
             setLoading(false)
         } catch (e) {
@@ -43,111 +85,87 @@ function Users() {
         }
     }
 
-    if (status === "loading") {
-        return <Loading />
-    }
+    // if (status === "loading") {
+    //     return <Loading />
+    // }
 
     return (<Layout title="Users">
-
         {openUser && <UserModal
             id={openUser}
             onClose={() => {
                 setOpenUser(false)
             }}
-            onSave={() => { getList() }}
+            onSave={() => { getList(page, limit) }}
         />}
-
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
-            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
+            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
                 <div className='w-full overflow-x-auto'>
-                    <table className='w-full'>
+                    <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                {/* <th className='py-2 px-3'>#</th> */}
-                                {/* <th className='text-[#337AB7] text-end py-2 px-3 '>Name
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                <th className='py-2 px-3 font-bold md:w-[10%] text-start'>#</th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Name
+                                    <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
-                                            setError("")
                                             setName(e.target.value)
                                         }} />
-                                </th> */}
-                                {/* <th className='text-[#337AB7] text-end py-2 px-3'>Role
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                </th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Role
+                                    <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={role}
                                         onChange={(e) => {
-                                            setError("")
                                             setRole(e.target.value)
-                                        }} />
-                                </th> */}
-                                {/* <th className='text-[#337AB7] text-end py-2 px-3'>Balance
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
+                                        }} >
+                                        <option value={""} className="">All</option>
+                                        {ROLES.map((e, i) => {
+                                            return <option value={e} key={e} className="">{e}</option>
+                                        })}
+                                    </select>
+                                </th>
+                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Balance
+                                    {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {
-                                            setError("")
                                             setBalance(e.target.value)
-                                        }} />
-                                </th> */}
-                                {/* <th className=''></th> */}
+                                        }} /> */}
+                                </th>
+                                <th className='md:w-[15%]'></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td className='py-2 px-3 font-bold'>#</td>
-                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Name
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
-                                        value={name}
-                                        onChange={(e) => {
-                                            setError("")
-                                            setName(e.target.value)
-                                        }} />
-                                </td>
-                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Role
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
-                                        value={role}
-                                        onChange={(e) => {
-                                            setError("")
-                                            setRole(e.target.value)
-                                        }} />
-                                </td>
-                                <td className='text-[#337AB7] text-end py-2 px-3 font-bold'>Balance
-                                    <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm text-end font-normal'
-                                        value={balance}
-                                        onChange={(e) => {
-                                            setError("")
-                                            setBalance(e.target.value)
-                                        }} />
-                                </td>
-                            </tr>
+                        <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
+                            (list && list.length > 0) ? list.map((e, index) => {
+                                return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} text-sm`}>
+                                    <td className='py-2 px-3'>{(page * limit) + (index + 1)}</td>
+                                    <td className='py-2 px-3'>{e.name}</td>
+                                    <td className='py-2 px-3'>{e.role}</td>
+                                    <td className='py-2 px3'>0</td>
+                                    <td className='py-2 px-3'>
+                                        <div className='flex gap-2'>
+                                            {/* <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button> */}
+                                            <button
+                                                onClick={() => {
+                                                    setOpenUser(e.id)
+                                                }}>
 
-                            {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
-                                (list && list.length > 0) ? list.map((e, index) => {
-                                    return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} text-sm`}>
-                                        <td className='py-2 px-3'>{index + 1}</td>
-                                        <td className='py-2 px-3'>{e.name}</td>
-                                        <td className='py-2 px-3'>{e.role}</td>
-                                        <td className='py-2 px3'>rr</td>
-                                        <td className='py-2 px-3'>
-                                            <div className='flex gap-2'>
+                                                <Image src="/images/pencil.svg" alt='view' height={20} width={20} /></button>
 
-                                                <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button>
-
-                                                <button
-                                                    onClick={() => {
-                                                        setOpenUser(e.id)
-                                                    }}>
-
-                                                    <Image src="/images/pencil.svg" alt='view' height={20} width={20} /></button>
-
-                                                {/* <button><Image src="/images/delete.svg" alt='view' height={20} width={20} /></button> */}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }) : <tr><td colSpan={5} className='text-center'><NoData /></td></tr>
-                            )}
+                                            {/* <button><Image src="/images/delete.svg" alt='view' height={20} width={20} /></button> */}
+                                        </div>
+                                    </td>
+                                </tr>
+                            }) : <tr><td colSpan={5} className='text-center'><NoData /></td></tr>
+                        )}
                         </tbody>
                     </table>
                 </div>
+                <Pagination count={count} limit={limit} page={page} setLimit={(l) => {
+                    getList(0, l)
+                }}
+                    setPage={(p) => {
+                        getList(p, limit)
+                    }}
+                />
             </div>
         </div>
     </Layout>)

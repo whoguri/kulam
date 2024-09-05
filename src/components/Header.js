@@ -7,10 +7,15 @@ import { getError } from "../../helper";
 import Sidebar from "../components/Sidebar";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
+import { ADMIN, ADVERTISER } from "@/constents/constArray";
 
 export default function Header() {
   const [sending, setSending] = useState(false);
-  const { status } = useSession();
+  const { status, data } = useSession();
+  const user = data?.user || {}
+  const isAdvertiser = user?.role === ADVERTISER
+  const isAdmin = user?.role === ADMIN
+
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -27,6 +32,28 @@ export default function Header() {
       setSending(false);
     }
   };
+
+  const MENU = [
+    { title: "ראשי", link: "/" },
+    { title: "דילים", link: "/deals" },
+    { title: "הנחות", link: "/discounts" },
+    { title: "דרושים", link: "/hiring" },
+    { title: "שירותים", link: "/services" },
+    { title: "צור קשר", link: "/contact" },
+
+  ]
+  if (status === "authenticated") {
+    MENU.splice(1, 0, { title: "הגדרות", link: "/profile" })
+  }
+
+  if (status === "authenticated" && !isAdvertiser) {
+    MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
+
+  }
+
+  if (status === "authenticated" && isAdmin) {
+    MENU.push({ title: "Users", link: "/users" })
+  }
   return (
     <>
       <div className="bg-background md:block hidden">
@@ -42,107 +69,33 @@ export default function Header() {
                     googleLogin();
                   }
                 }}
-                disabled={sending}
-              >
-                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm ">
+                disabled={sending}>
+                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
                   {status === "authenticated" ? "יציאה" : "כניסה"}
                 </span>
               </button>
 
               {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
             </div>
-            <div className="flex items-center gap-0 pt-2 ">
-              <div className="flex gap-6 text-white cursor-pointer">
-                <Link
-                  href="/contact"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/contact" ? "border-b-2 border-white" : ""
-                    }`}
-                >
-                  צור קשר
-                </Link>
-
-                <Link
-                  href="/services"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium   ${pathname === "/services" ? "border-b-2 border-white" : ""
-                    }`}
-                >
-                  שירותים
-                </Link>
-
-                {status === "authenticated" && (
-                  <Link
-                    href="/profile"
-                    className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/profile" ? "border-b-2 border-white" : ""
-                      } `}
-                  >
-                    הגדרות
+            <div className="flex items-center gap-0 pt-2">
+              <div className="flex gap-6 text-white cursor-pointer flex-row-reverse">
+                {MENU.map((e, i) => {
+                  return <Link key={i} href={e.link}
+                    className={`2xl:text-xl xl:text-lg text-base font-medium capitalize ${pathname === e.link ? "border-b-2 border-white" : ""}`}>{e.title}
                   </Link>
-                )}
+                })}
 
-                <Link
-                  href="/hiring"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/hiring" ? "border-b-2 border-white" : ""
-                    }`}
-                >
-                  דרושים
-                </Link>
-
-                <Link
-                  href="/discounts"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/discounts" ? "border-b-2 border-white" : ""
-                    }`}
-                >
-                  הנחות
-                </Link>
-
-                <Link
-                  href="/deals"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/deals" ? "border-b-2 border-white" : ""
-                    } `}
-                >
-                  דילים
-                </Link>
-
-                {status === "authenticated" && <Link
-                  href="/polls"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/polls" ? "border-b-2 border-white" : ""
-                    } `}
-                >
-                  סקרים
-                </Link>}
-
-                <Link
-                  href="/"
-                  className={`2xl:text-xl xl:text-lg text-base font-medium ${pathname === "/" ? "border-b-2 border-white" : ""
-                    } `}
-                >
-                  ראשי
-                </Link>
               </div>
               <Link href="/">
-                <Image
-                  src="/images/logo.jpeg"
-                  alt="logo"
-                  width={135}
-                  height={112}
-                  className="w-[110px] md:hidden"
-                />
+                <Image src="/images/logo.jpeg" alt="logo" width={135} height={112} className="w-[110px] md:hidden" />
               </Link>
             </div>
           </div>
 
           <Image
-            src="/images/header.svg"
-            width={50}
-            height={30}
-            className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]"
-          />
-          <Image
-            src="/images/header2.svg"
-            width={50}
-            height={30}
-            className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]"
-          />
+            src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
+
+          <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
         </div>
       </div>
 
@@ -156,27 +109,12 @@ export default function Header() {
             className="cursor-pointer md:hidden text-primary"
             onClick={() => {
               setOpen(true);
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28px"
-              height="28px"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeWidth="2"
-                d="M5 7h14M5 12h14M5 17h14"
-              />
-            </svg>
-          </span>
+            }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" /></svg> </span>
         </div>
         {/* <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
             <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
-        <Sidebar open={open} setOpen={setOpen} />
+        <Sidebar open={open} setOpen={setOpen} MENU={MENU} />
       </div>
     </>
   );

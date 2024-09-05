@@ -58,29 +58,25 @@ export default function DiscountsModal({ onSave, onClose, id }) {
         }
     }
 
-    if (loading) {
-        return <Loading />
-    }
-
     return (<Modal title="Discount" maxWidth="max-w-[800px]" onClose={onClose}>
+        {loading ? <Loading style={{ background: "transparent", height: "400px" }} /> :
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+                    <Input label="Name"
+                        formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <Input label="Name"
-                    formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
-
-                <Input label="Amount" formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }}
-                    isRequired={true} errors={errors} type="number" />
-            </div>
-            <div className="my-6">
-                <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
-                    formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
-            </div>
-            <div className="flex justify-end items-end">
-                <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
-                    {sending ? "Saving" : "Save"}
-                </button>
-            </div>
-        </form>
+                    <Input label="Amount" formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }}
+                        isRequired={true} errors={errors} type="number" />
+                </div>
+                <div className="my-6">
+                    <HtmlEditor isRequired={true} label="Description" value={watch("description")} setValue={setValue}
+                        formProps={{ ...register("description", { required: true }) }} errors={errors} clearErrors={clearErrors} />
+                </div>
+                <div className="flex justify-end items-end">
+                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                        {sending ? "Saving" : "Save"}
+                    </button>
+                </div>
+            </form>}
     </Modal>)
 }

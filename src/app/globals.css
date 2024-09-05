@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* body {
+  direction: rtl;
+} */
+
 .gradient-bg {
   background-image: linear-gradient(to right, #F5BC46, #ee7b31);
 }
@@ -88,8 +92,6 @@
   @apply 2xl:text-lg xl:text-base text-sm font-medium
 }
 
-
-
 @keyframes ldio-x2uulkbinbj {
   0% {
     transform: rotate(0)
@@ -115,7 +117,7 @@
   height: 115.61999999999999px;
   border: 16.919999999999998px solid;
   border-radius: 50%;
-  border-color: transparent #090b27 #090b27 #090b27;
+  border-color: transparent #090B27 #090B27 #090B27;
   box-sizing: border-box;
   position: absolute;
   transform: rotate(45deg);
@@ -135,7 +137,7 @@
   width: 0;
   height: 0;
   border: 16.919999999999998px solid;
-  border-color: transparent transparent transparent #090b27;
+  border-color: transparent transparent transparent #090B27;
   transform: translate(70.5px, 4.2299999999999995px);
 }
 
@@ -201,10 +203,16 @@
 
 }
 
+.ql-editor {
+  text-align: end !important;
+}
+
+.ql-editor ul {
+  text-align: end !important;
+}
+
 .editor .ql-editor {
-  min-height: 260px;
-  max-height: 350px;
-  font-size: 14px;
+  @apply !text-start text-sm min-h-[260px] max-h-[350px] overflow-y-auto
 }
 
 .document-editor .ql-container.ql-snow .ql-editor {
@@ -216,8 +224,6 @@
 .input-error {
   @apply text-xs font-medium text-red-500 mt-1 text-start first-letter:capitalize
 }
-
-
 
 .slider-to-left {
   display: flex;
@@ -233,7 +239,7 @@
   }
 }
 
-.reys{
+.reys {
   position: absolute;
   width: 100vw;
   height: 100%;
@@ -243,15 +249,25 @@
   opacity: 0.12;
   z-index: -0;
 }
-.tv{
+
+.tv {
   position: absolute;
-    width: 96vw;
-    height: 96%;
-     background-color: rgba(31, 75, 140, 0.711); 
-     /* border:20px solid rgb(94, 136, 252); */
-     border-radius: 15%;
-   
-    
-     opacity: 0.18; 
-    z-index: 1;
+  width: 96vw;
+  height: 96%;
+  background-color: rgba(31, 75, 140, 0.711);
+  /* border:20px solid rgb(94, 136, 252); */
+  border-radius: 15%;
+
+
+  opacity: 0.18;
+  z-index: 1;
+}
+
+
+.editor .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+  @apply !end-0 !right-[inherit]
+}
+
+.editor .ql-toolbar.ql-snow .ql-formats {
+  @apply !me-5 !ms-0
 }

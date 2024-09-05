@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function ProfilePage() {
-    return <Layout title="Profile">
+    return <Layout title="חשבון אישי">
         <Profile />
     </Layout>
 }

@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { getError } from "helper";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function HomeBanner({ deals = [] }) {
   const { status } = useSession()
@@ -53,11 +54,7 @@ export default function HomeBanner({ deals = [] }) {
           {status === "unauthenticated" && <button
             className="cursor-pointer mx-auto relative overflow-hidden rounded-lg"
             onClick={() => {
-              if (status === "authenticated") {
-                signOut();
-              } else if (status === "unauthenticated") {
-                googleLogin();
-              }
+              googleLogin();
             }}
             disabled={sending}
           >

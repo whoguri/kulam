@@ -36,6 +36,9 @@ function SaveRefCode_() {
                     localStorage.removeItem("referredBy")
                 if (code)
                     gotoHome()
+                else if (!user?.socialId) {
+                    setOpen(true)
+                }
             }
         } else if (status === "unauthenticated") {
             if (code) {

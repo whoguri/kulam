@@ -32,7 +32,7 @@ function Users() {
         if (status === "authenticated" && isAdmin) {
             getList(0, limit)
             getCount()
-        } else if (status === "unauthenticated") {
+        } else if (status !== "loading") {
             router.push("/")
         }
     }, [status, role])

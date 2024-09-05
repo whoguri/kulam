@@ -8,4 +8,7 @@ export const USER_SELECT = {
     registerOn: true,
     lastLogin: true,
     // loginType: true
+    phone: true,
+    city: true,
+    socialId: true
 }

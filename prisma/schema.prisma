@@ -56,6 +56,9 @@ model User {
   role          Role       @default(tbd)
   registerOn    DateTime?  @default(now())
   lastLogin     DateTime?
+  socialId          String?
+  phone          String?
+  city          String?
 
   referralCode String? @unique
   referredBy   String? @db.ObjectId

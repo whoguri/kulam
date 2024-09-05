@@ -85,11 +85,11 @@ function UpdateRole({ open }) {
             </button>} >
             {user.role === "tbd" && <div className='grid md:grid-cols-2 gap-8'>
                 {ROLES.map((e, i) => {
-                    if (e === "admin") {
+                    if (e.value === "admin") {
                         return null
                     }
-                    return <div onClick={() => { setRole(e) }} key={e} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e ? "border-primary bg-primary text-white" : " border-primary-dark cursor-pointer hover:text-primary hover:border-primary"}`}>
-                        {e}
+                    return <div onClick={() => { setRole(e.value) }} key={e.value} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e.value ? "border-primary bg-primary text-white" : " border-primary-dark cursor-pointer hover:text-primary hover:border-primary"}`}>
+                        {e.label}
                     </div>
                 })}
             </div>}

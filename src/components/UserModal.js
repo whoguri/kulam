@@ -75,7 +75,7 @@ export default function UserModal({ onSave, onClose, id }) {
                     <SelectBox label="Status" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
                         {STATUS.map((e, i) => {
-                            return <option value={e} key={e} className="capitalize">{e}</option>
+                            return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
 
@@ -85,7 +85,7 @@ export default function UserModal({ onSave, onClose, id }) {
                     <SelectBox label="Role" clearErrors={clearErrors}
                         formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
                         {ROLES.map((e, i) => {
-                            return <option value={e} key={e} className="capitalize">{e}</option>
+                            return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
                 </div>

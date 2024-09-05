@@ -42,8 +42,9 @@ export default function Header() {
     { title: "צור קשר", link: "/contact" },
 
   ]
+const userNick = user?.name || user?.email
   if (status === "authenticated") {
-    MENU.splice(1, 0, { title: "הגדרות", link: "/profile" })
+    MENU.splice(1, 0, { title:` חשבון אישי   ${userNick} `, link: "/profile" });
   }
 
   if (status === "authenticated" && !isAdvertiser) {

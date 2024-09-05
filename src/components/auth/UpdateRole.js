@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { ROLES } from '../../constents/constArray'
 import Modal from '../Modal'
 import { getError } from '../../../helper'
+import InputWithValue from '../InputWithValue'
 
 function UpdateRole({ open }) {
     const { data, status } = useSession()
@@ -15,6 +16,10 @@ function UpdateRole({ open }) {
     const [sending, setSending] = useState(false)
     const router = useRouter()
     const [referredBy, setReferredBy] = useState("")
+    const [name, setName] = useState()
+    const [phone, setPhone] = useState("")
+    const [city, setCity] = useState("")
+    const [socialId, setSocialId] = useState("")
 
     useEffect(() => {
         if (typeof window !== "undefined")
@@ -23,7 +28,10 @@ function UpdateRole({ open }) {
 
     useEffect(() => {
         if (status === "authenticated") {
-
+            setName(user?.name)
+            if (role !== "tbd") {
+                setRole(user.role)
+            }
         }
     }, [status, user])
 
@@ -33,8 +41,24 @@ function UpdateRole({ open }) {
                 toast.error("Select Role")
                 return
             }
+            if (!name) {
+                toast.error("Enter Name")
+                return
+            }
+            if (!phone) {
+                toast.error("Enter Phone")
+                return
+            }
+            if (!city) {
+                toast.error("Enter City")
+                return
+            }
+            if (!socialId) {
+                toast.error("Enter Social Id")
+                return
+            }
             setSending(true)
-            const res = await axios.put("/api/auth/finish", { role, referredBy: referredBy || "" })
+            const res = await axios.put("/api/auth/finish", { role, referredBy: referredBy || "", name, phone, city, socialId })
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 localStorage.removeItem("referredBy")
@@ -59,15 +83,25 @@ function UpdateRole({ open }) {
             footer={<button disabled={sending} onClick={() => { onSubmit() }} type='button' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                 {sending ? "Saving" : "Save"}
             </button>} >
-            <div className='grid md:grid-cols-2 gap-8'>
+            {user.role === "tbd" && <div className='grid md:grid-cols-2 gap-8'>
                 {ROLES.map((e, i) => {
-                    if (e === "admin") {
+                    if (e.value === "admin") {
                         return null
                     }
-                    return <div onClick={() => { setRole(e) }} key={e} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e ? "border-primary bg-primary text-white" : " border-primary-dark cursor-pointer hover:text-primary hover:border-primary"}`}>
-                        {e}
+                    return <div onClick={() => { setRole(e.value) }} key={e.value} className={`text-center border px-8 py-10 md:text-2xl capitalize font-medium rounded-lg transition-all duration-300  ${role === e.value ? "border-primary bg-primary text-white" : " border-primary-dark cursor-pointer hover:text-primary hover:border-primary"}`}>
+                        {e.label}
                     </div>
                 })}
+            </div>}
+            <div className='grid md:grid-cols-2 gap-x-4 gap-y-2'>
+                <InputWithValue label='Name' value={name}
+                    onChange={(e) => { setName(e.target.value) }} />
+                <InputWithValue label='Phone' value={phone} type='number'
+                    onChange={(e) => { setPhone(e.target.value) }} />
+                <InputWithValue label='City' value={city}
+                    onChange={(e) => { setCity(e.target.value) }} />
+                <InputWithValue label='Social Id' value={socialId}
+                    onChange={(e) => { setSocialId(e.target.value) }} />
             </div>
         </Modal>}
     </>)

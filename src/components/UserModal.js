@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react"
 import Input from "./Input"
 import Loading from "./Loading"
@@ -57,26 +56,36 @@ export default function UserModal({ onSave, onClose, id }) {
         }
     }
 
-
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
                     <Input label="Name"
-                        formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} />
+                        formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
+                    <Input label="Social Id"
+                        formProps={{ ...register("socialId", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+
+                    <Input label="email"
+                        formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+
+                    <Input label="Phone"
+                        formProps={{ ...register("phone", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} type="number" clearErrors={clearErrors} />
 
                     <SelectBox label="Status" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
                         {STATUS.map((e, i) => {
-                            return <option value={e} key={e} className="capitalize">{e}</option>
+                            return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
+
+                    <Input label="City"
+                        formProps={{ ...register("city", { required: true, }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <SelectBox label="Role" clearErrors={clearErrors}
                         formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
                         {ROLES.map((e, i) => {
-                            return <option value={e} key={e} className="capitalize">{e}</option>
+                            return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
                 </div>

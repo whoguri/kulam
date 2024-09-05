@@ -32,7 +32,7 @@ function Users() {
         if (status === "authenticated" && isAdmin) {
             getList(0, limit)
             getCount()
-        } else if (status === "unauthenticated") {
+        } else if (status !== "loading") {
             router.push("/")
         }
     }, [status, role])
@@ -103,15 +103,18 @@ function Users() {
                     <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold md:w-[10%] text-start'>#</th>
-                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Name
+                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>Social Id</th>
+
+                                <th className=' py-2 px-3 font-bold text-start '>Name
                                     <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }} />
                                 </th>
-                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Role
+                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>Email</th>
+                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>City</th>
+                                <th className='py-2 px-3 font-bold text-start'>Role
                                     <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={role}
                                         onChange={(e) => {
@@ -119,40 +122,29 @@ function Users() {
                                         }} >
                                         <option value={""} className="">All</option>
                                         {ROLES.map((e, i) => {
-                                            return <option value={e} key={e} className="">{e}</option>
+                                            return <option value={e.value} key={e.value} className="">{e.value}</option>
                                         })}
                                     </select>
                                 </th>
-                                <th className='text-[#337AB7] py-2 px-3 font-bold md:w-[25%] text-start'>Balance
+                                <th className='py-2 px-3 font-bold text-start capitalize align-top'>earning
                                     {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {
                                             setBalance(e.target.value)
                                         }} /> */}
                                 </th>
-                                <th className='md:w-[15%]'></th>
                             </tr>
                         </thead>
                         <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
                             (list && list.length > 0) ? list.map((e, index) => {
-                                return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} text-sm`}>
-                                    <td className='py-2 px-3'>{(page * limit) + (index + 1)}</td>
+                                const role = ROLES.find(el => el.value === e.role)
+                                return <tr className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`} onClick={() => { setOpenUser(e.id) }}>
+                                    <td className='py-2 px-3'>{e.socialId}</td>
                                     <td className='py-2 px-3'>{e.name}</td>
-                                    <td className='py-2 px-3'>{e.role}</td>
+                                    <td className='py-2 px-3'>{e.email}</td>
+                                    <td className='py-2 px-3'>{e.city}</td>
+                                    <td className='py-2 px-3'>{role?.label}</td>
                                     <td className='py-2 px3'>0</td>
-                                    <td className='py-2 px-3'>
-                                        <div className='flex gap-2'>
-                                            {/* <button><Image src="/images/view.svg" alt='view' height={20} width={20} /></button> */}
-                                            <button
-                                                onClick={() => {
-                                                    setOpenUser(e.id)
-                                                }}>
-
-                                                <Image src="/images/pencil.svg" alt='view' height={20} width={20} /></button>
-
-                                            {/* <button><Image src="/images/delete.svg" alt='view' height={20} width={20} /></button> */}
-                                        </div>
-                                    </td>
                                 </tr>
                             }) : <tr><td colSpan={5} className='text-center'><NoData /></td></tr>
                         )}

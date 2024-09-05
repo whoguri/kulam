@@ -34,7 +34,9 @@ export default function Pagination(props) {
                     setPage(page - 1)
                 }
             }} disabled={page === 0} className="disabled:pointer-events-none disabled:opacity-60 hover:bg-blue-50 hover:text-white cursor-pointer transition duration-300 ease-in-out  md:px-2 md:py-2 px-1 py-1 rounded-s-md flex items-center justify-center text-xs md:text-sm outline-0">
-                <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6L14 18Z" /></svg>
+                {/* <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6L14 18Z" /></svg> */}
+                <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6l4.6-4.6Z" /></svg>
+
                 <span className="sr-only">First</span>
             </button>
 
@@ -58,8 +60,9 @@ export default function Pagination(props) {
                 }
             }} disabled={!(page < parseInt(pageCount))} className="disabled:opacity-60 disabled:pointer-events-none hover:bg-blue-500 hover:text-white cursor-pointer font-medium block lg:px-2 lg:py-2 px-2 py-1 rounded-e-lg text-xs lg:text-sm outline-0">
                 <span className="sr-only">Last</span>
-                <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6l4.6-4.6Z" /></svg>
+                {/* <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.6 12L8 7.4L9.4 6l6 6l-6 6L8 16.6l4.6-4.6Z" /></svg> */}
 
+                <svg className="md:h-5 md:w-5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m14 18l-6-6l6-6l1.4 1.4l-4.6 4.6l4.6 4.6L14 18Z" /></svg>
             </button>
         </div>
         <div>

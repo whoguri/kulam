@@ -96,7 +96,7 @@ function UpdateRole({ open }) {
             <div className='grid md:grid-cols-2 gap-x-4 gap-y-2'>
                 <InputWithValue label='Name' value={name}
                     onChange={(e) => { setName(e.target.value) }} />
-                <InputWithValue label='Phone' value={phone}
+                <InputWithValue label='Phone' value={phone} type='number'
                     onChange={(e) => { setPhone(e.target.value) }} />
                 <InputWithValue label='City' value={city}
                     onChange={(e) => { setCity(e.target.value) }} />

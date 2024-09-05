@@ -39,7 +39,11 @@ export default function DealsList() {
                     <div className="py-4">
                         <Image src={deal.image} alt="deal" height={266} width={350} placeholder="empty" className="mx-auto rounded-md w-auto h-[266px]" />
                     </div>}
-                <div className="ql-editor" dangerouslySetInnerHTML={{ __html: deal.description }} />
+                <div className="ql-snow">
+                    <div className="ql-editor">
+                        <div className="ql-direction-rtl" dangerouslySetInnerHTML={{ __html: deal.description || "" }} />
+                    </div>
+                </div>
             </div>}
         </div>
     </Layout>

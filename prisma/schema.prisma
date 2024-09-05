@@ -56,8 +56,8 @@ model User {
   role          Role       @default(tbd)
   registerOn    DateTime?  @default(now())
   lastLogin     DateTime?
-  socialId          String?
-  phone          String?
+  socialId      String?
+  phone         String?
   city          String?
 
   referralCode String? @unique
@@ -76,7 +76,7 @@ model User {
 model Deal {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   name         String
-  image         String ?
+  image        String?
   amount       Float
   description  String
   createdAt    DateTime @default(now())

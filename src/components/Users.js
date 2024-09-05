@@ -135,7 +135,7 @@ function Users() {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>  {loading ? <tr><td colSpan={5} className='text-center'><Loading /></td></tr> : (
+                        <tbody>  {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
                             (list && list.length > 0) ? list.map((e, index) => {
                                 const role = ROLES.find(el => el.value === e.role)
                                 return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`} onClick={() => { setOpenUser(e.id) }}>
@@ -146,7 +146,7 @@ function Users() {
                                     <td className='py-2 px-3'>{role?.label}</td>
                                     <td className='py-2 px3'>0</td>
                                 </tr>
-                            }) : <tr><td colSpan={5} className='text-center'><NoData /></td></tr>
+                            }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
                         )}
                         </tbody>
                     </table>

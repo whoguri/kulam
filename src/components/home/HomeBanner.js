@@ -58,7 +58,7 @@ export default function HomeBanner({ deals = [] }) {
             }}
             disabled={sending}
           >
-            <span class="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
+            <span className="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
 
             <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
               {status === "authenticated" ? "יציאה" : "כניסה"}

@@ -38,7 +38,7 @@ export default function UserModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            const res = await axios.put("/api/users", + id, data)
+            const res = await axios.put("/api/users/" + id, data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
@@ -70,7 +70,7 @@ export default function UserModal({ onSave, onClose, id }) {
                         formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="Phone"
-                        formProps={{ ...register("phone", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} type="number" clearErrors={clearErrors} />
+                        formProps={{ ...register("phone", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <SelectBox label="Status" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>

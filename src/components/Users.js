@@ -100,21 +100,21 @@ function Users() {
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
             <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
                 <div className='w-full overflow-x-auto'>
-                    <table className='md:w-full w-max'>
+                    <table className='md:w-full w-max md:table-fixed'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>Social Id</th>
+                                <th className='py-2 px-3 font-bold text-start md:w-[12%] align-top'>Social Id</th>
 
-                                <th className=' py-2 px-3 font-bold text-start '>Name
+                                <th className=' py-2 px-3 font-bold text-start md:w-[23%]'>Name
                                     <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }} />
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>Email</th>
-                                <th className='py-2 px-3 font-bold text-start whitespace-pre align-top'>City</th>
-                                <th className='py-2 px-3 font-bold text-start'>Role
+                                <th className='py-2 px-3 font-bold text-start md:w-[25%] align-top'>Email</th>
+                                <th className='py-2 px-3 font-bold text-start md:w-[15%] align-top'>City</th>
+                                <th className='py-2 px-3 font-bold text-start md:w-[15%]'>Role
                                     <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={role}
                                         onChange={(e) => {
@@ -126,7 +126,7 @@ function Users() {
                                         })}
                                     </select>
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start capitalize align-top'>earning
+                                <th className='py-2 px-3 font-bold text-start capitalize align-top md:w-[10%]'>earning
                                     {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {
@@ -140,11 +140,11 @@ function Users() {
                                 const role = ROLES.find(el => el.value === e.role)
                                 return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`} onClick={() => { setOpenUser(e.id) }}>
                                     <td className='py-2 px-3'>{e.socialId}</td>
-                                    <td className='py-2 px-3'>{e.name}</td>
-                                    <td className='py-2 px-3'>{e.email}</td>
+                                    <td className='py-2 px-3 md:overflow-hidden'>{e.name}</td>
+                                    <td className='py-2 px-3 md:overflow-hidden'>{e.email}</td>
                                     <td className='py-2 px-3'>{e.city}</td>
                                     <td className='py-2 px-3'>{role?.label}</td>
-                                    <td className='py-2 px3'>0</td>
+                                    <td className='py-2 px-3'>0</td>
                                 </tr>
                             }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
                         )}

@@ -80,7 +80,7 @@ export default function Hero() {
                       </div>
                       <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                         <h2 className="subheading">{e.title}</h2>
-                        <div className=" md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-right rtl">
+                        <div className=" md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-end rtl">
                           {e.subtitle.split("\n\n").map((paragraph, pIndex) => (
                             <p key={pIndex} className="mb-4">
                               {paragraph.trim()}

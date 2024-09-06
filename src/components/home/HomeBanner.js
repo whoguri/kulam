@@ -30,7 +30,7 @@ export default function HomeBanner({ deals = [] }) {
       <div className="flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
         <div className="flex flex-col items-center xl:items-end md:gap-5 gap-0">
           {/* <hr className="md:w-44 w-16" /> */}
-          <h3 className="md:text-sm text-sm md:text-right text-primary tracking-widest">
+          <h3 className="md:text-sm text-sm md:text-end text-primary tracking-widest">
             קובי כץ מציג
           </h3>
 
@@ -47,7 +47,7 @@ export default function HomeBanner({ deals = [] }) {
           </motion.div>
         </div>
 
-        <h3 className="text-center xl:text-right z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
+        <h3 className="text-center xl:text-end z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
           יחד נוזיל את יוקר המחיה
         </h3>
         <div className="text-white flex flex-col gap-5 pt-0 w-full items-center xl:hidden md:hidden ">

@@ -45,9 +45,9 @@ export default NextAuth({
         async signIn({ account, profile, user }) {
             if (account?.provider === 'google') {
             }
-            const u = await prisma.user.findFirst({ where: { email: profile?.email, status: "active" } })
-            if (!u)
-                return false
+            // const u = await prisma.user.findFirst({ where: { email: profile?.email } })
+            // if (!u)
+            //     return false
             return true
         },
         async jwt({ token, user }) {
@@ -59,8 +59,8 @@ export default NextAuth({
                 return {}
 
             //@ts-ignore
-            const u = await prisma.user.findFirst({ where: { email: token?.email, status: "active" } })
-            if (!u || u.status !== "active")
+            const u = await prisma.user.findFirst({ where: { email: token?.email } })
+            if (!u)
                 return {}
 
             //@ts-ignore

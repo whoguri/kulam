@@ -26,7 +26,7 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(200).json(result);
         } else {
             const result = await prisma.user.findFirst({ where: { "id": id }, select: USER_SELECT });
-            const tree = await getReferralTree(id);
+            const tree = await getReferralTree(id, 1);
 
             res.status(200).json({ ...result, tree: tree.referrals });
         }
@@ -37,7 +37,7 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
 
 };
 
-async function getReferralTree(userId: string) {
+async function getReferralTree(userId: string, n: number) {
     const user = await prisma.user.findFirst({
         where: { id: userId },
         include: {
@@ -51,7 +51,7 @@ async function getReferralTree(userId: string) {
         id: user.id,
         name: user.name,
         email: user.email,
-        referrals: await Promise.all(user.referrals.map(ref => getReferralTree(ref.id))),
+        referrals: n < 2 ? await Promise.all(user.referrals.map(ref => getReferralTree(ref.id, n + 1))) : [],
     };
 
     return tree;

@@ -17,6 +17,7 @@ function Profile() {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
+  const [open, setOpen] = useState(-1)
 
   useEffect(() => {
     if (status === "authenticated") {
@@ -103,6 +104,8 @@ function Profile() {
                     tree={e}
                     key={i}
                     isLast={user.tree.length - 1 === i}
+                    open={open}
+                    setOpen={setOpen}
                   />
                 ))}
             </div>

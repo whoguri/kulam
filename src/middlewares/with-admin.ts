@@ -7,7 +7,7 @@ const withAdmin = (handler: NextApiHandler): any => {
         // const session: any = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
         // if (!session)
         //     return res.status(401).json({ error: 'Unauthorized' })
-        // const user = await prisma.user.findUnique({ where: { email: session.email, status: "active", role: "admin" } })
+        // const user = await prisma.user.findFirst({ where: { email: session.email, status: "active", role: "admin" } })
         // if (!user)
         //     return res.status(401).json({ error: 'Unauthorized' })
         // req.user = user

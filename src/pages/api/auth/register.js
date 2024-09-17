@@ -1,15 +1,15 @@
 import prisma from '../../../lib/prisma'
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 const register = async (req, res) => {
     const data = req.body;
     try {
         if (req.method === "POST") {
-            const user = await prisma.user.findFirst({ where: { email: data.email } });
+            const user = await prisma.user.findFirst({ where: { userName: data.userName } });
             if (user)
-                return res.status(400).json({ error: "User already exists with same email" });
-            // const hashedPassword = await bcrypt.hash(data.password, 10);
-            // data.password = hashedPassword
+                return res.status(400).json({ error: "User already exists with same userName" });
+            const hashedPassword = await bcrypt.hash(data.password, 10);
+            data.password = hashedPassword
             data.registerOn = new Date()
             data.loginType = "EMAIL"
             const result = await prisma.user.create({ data });

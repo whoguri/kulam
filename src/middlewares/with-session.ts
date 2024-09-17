@@ -9,7 +9,7 @@ const withSession = (handler: any): any => {
         if (!session) {
             // return res.status(401).json({ error: 'Unauthorized' })
         } else {
-            const user = await prisma.user.findUnique({ where: { email: session.email } })
+            const user = await prisma.user.findFirst({ where: { email: session.email } })
             if (user && user?.status !== "active")
                 return res.status(401).json({ error: 'Unauthorized' })
             req.user = user

@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
-// import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-// import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 
 export default NextAuth({
     //@ts-ignore
@@ -13,33 +13,33 @@ export default NextAuth({
             clientId: process.env.GOOGLE_CLIENT_ID || "",
             clientSecret: process.env.GOOGLE_CLIENT_SECRET || ""
         }),
-        // CredentialsProvider({
-        //     name: "Credentials",
-        //     credentials: {
-        //         email: { label: "email", type: "text", placeholder: "email" },
-        //         password: { label: "Password", type: "password", placeholder: "password" }
-        //     },
-        //     async authorize(credentials, req) {
-        //         const { email, password }: any = credentials
-        //         const user = await prisma.user.findUnique({ where: { email }, include: { publishers: true } })
-        //         if (user) {
-        //             const passwordMatch = await bcrypt.compare(password || "", user.password || "");
-        //             if (!passwordMatch) {
-        //                 throw new Error('Wrong email or password')
-        //             }
+        CredentialsProvider({
+            name: "Credentials",
+            credentials: {
+                userName: { label: "userName", type: "text", placeholder: "userName" },
+                password: { label: "Password", type: "password", placeholder: "password" }
+            },
+            async authorize(credentials, req) {
+                const { userName, password }: any = credentials
+                const user = await prisma.user.findUnique({ where: { userName }, })
+                if (user) {
+                    const passwordMatch = await bcrypt.compare(password || "", user.password || "");
+                    if (!passwordMatch) {
+                        throw new Error('Wrong email or password')
+                    }
 
-        //             //@ts-ignore
-        //             delete user.password
-        //             if (user.status === "active") {
-        //                 await prisma.user.update({ where: { email }, data: { lastLogin: new Date() } })
-        //                 return user
-        //             } else {
-        //                 throw new Error('Account is inactive contact Admin')
-        //             }
-        //         }
-        //         throw new Error('Wrong email or password')
-        //     }
-        // })
+                    //@ts-ignore
+                    delete user.password
+                    if (user.status === "active") {
+                        // await prisma.user.update({ where: { userName }, data: { lastLogin: new Date() } })
+                        return user
+                    } else {
+                        throw new Error('Account is inactive contact Admin')
+                    }
+                }
+                throw new Error('Wrong email or password')
+            }
+        })
     ],
     callbacks: {
         async signIn({ account, profile, user }) {

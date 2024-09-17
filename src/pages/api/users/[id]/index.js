@@ -24,7 +24,7 @@ const user = async (req, res) => {
             await prisma.user.delete({ where: { "id": id } });
             res.status(200).json(null);
         } else {
-            const result = await prisma.user.findUnique({
+            const result = await prisma.user.findFirst({
                 where: { "id": id }, select: USER_SELECT
             });
             res.status(200).json(result);

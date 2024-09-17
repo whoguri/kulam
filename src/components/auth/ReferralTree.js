@@ -1,12 +1,13 @@
 
 function ReferralNode({ node, level, index, isLast, open, setOpen }) {
     return (<div onClick={() => {
-        if (open === index) {
-            setOpen(-1)
-        } else {
-            setOpen(index)
-        }
-    }} className={`cursor-pointer ${(open === index && level === 1) ? "text-background bg-gray-50" : (level === 1 ? "hover:text-background" : "")}  ${level === 1 ? "border-b border-x md:px-6 px-4 md:py-6 py-4 text-xl font-bold" : "text-lg font-normal"}  ${isLast ? "rounded-b-md" : ""} ${index === 0 ? "border-t rounded-t-md" : ""}`}>
+        if (node.referrals.length > 0)
+            if (open === index) {
+                setOpen(-1)
+            } else {
+                setOpen(index)
+            }
+    }} className={`${node.referrals.length > 0 ? "cursor-pointer" : ""} ${(open === index && level === 1) ? "text-background bg-gray-50" : (level === 1 ? "hover:text-background" : "")}  ${level === 1 ? "border-b border-x md:px-6 px-4 md:py-6 py-4 text-xl font-bold" : "text-lg font-normal"}  ${isLast ? "rounded-b-md" : ""} ${index === 0 ? "border-t rounded-t-md" : ""}`}>
         <div className="flex justify-between items-center">
             <div>
                 {(level === 1 && node.referrals.length > 0) && <button type="button"

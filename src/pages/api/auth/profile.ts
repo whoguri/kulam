@@ -51,7 +51,7 @@ async function getReferralTree(userId: string, n: number) {
         id: user.id,
         name: user.name,
         email: user.email,
-        referrals: n < 2 ? await Promise.all(user.referrals.map(ref => getReferralTree(ref.id, n + 1))) : [],
+        referrals: n < 3 ? await Promise.all(user.referrals.map(ref => getReferralTree(ref.id, n + 1))) : [],
     };
 
     return tree;

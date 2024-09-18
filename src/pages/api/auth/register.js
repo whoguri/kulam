@@ -11,7 +11,7 @@ const register = async (req, res) => {
             const hashedPassword = await bcrypt.hash(data.password, 10);
             data.password = hashedPassword
             data.registerOn = new Date()
-            data.loginType = "EMAIL"
+            // data.loginType = "EMAIL"
             const result = await prisma.user.create({ data });
             res.status(200).json(result);
 

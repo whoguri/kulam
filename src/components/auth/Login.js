@@ -44,7 +44,7 @@ export default function Login() {
             {/* <Link href="/forgot-password" className="text-sm text-primary">Forgot password?</Link> */}
         </div>
         <div className="!w-full flex flex-col justify-center gap-4 mt-5">
-            <button className="border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
+            <button className="disabled:pointer-events-none disabled:opacity-80 border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
                 disabled={sending}>Login
             </button>
         </div>

@@ -51,7 +51,7 @@ function AuthModal({ onClose }) {
                 </div>
 
                 <button type="button"
-                    className="mb-4 w-full border border-primary-dark block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
+                    className="disabled:pointer-events-none disabled:opacity-80 mb-4 w-full border border-primary-dark block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
                     onClick={googleLogin} disabled={sending}>Continue with google</button>
             </div>
         </div>

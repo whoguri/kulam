@@ -16,7 +16,6 @@ export default function Register() {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            data.name = ""
             if (code) {
                 data.referredBy = code
             }
@@ -65,14 +64,14 @@ export default function Register() {
                 </div>
             </div>}
             <div className="grid grid-cols-1 gap-3">
-                <Input label="Phone" formProps={{ ...register("phone", { required: true }) }}
+                <Input label="User Name" formProps={{ ...register("userName", { required: true }) }}
                     isRequired={true} errors={errors} />
                 <Input label="Password" formProps={{ ...register("password", { required: true }) }}
                     isRequired={true} errors={errors} />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                    <Input label="User Name" formProps={{ ...register("userName", { required: true }) }}
-                        isRequired={true} errors={errors} />
                     <Input label='Name' formProps={{ ...register("name", { required: true }) }}
+                        isRequired={true} errors={errors} />
+                    <Input label="Phone" formProps={{ ...register("phone", { required: true }) }}
                         isRequired={true} errors={errors} />
                     <Input label='City' formProps={{ ...register("city", { required: true }) }}
                         isRequired={true} errors={errors} />
@@ -84,7 +83,7 @@ export default function Register() {
             {/* <Link href="/forgot-password" className="text-sm text-primary">Forgot password?</Link> */}
         </div>
         <div className="!w-full flex flex-col justify-center gap-4  mt-5">
-            <button type='submit' className="border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
+            <button type='submit' className="disabled:pointer-events-none disabled:opacity-80 border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
                 disabled={sending}>Regsiter
             </button>
         </div>

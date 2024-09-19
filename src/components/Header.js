@@ -8,6 +8,7 @@ import Sidebar from "../components/Sidebar";
 import { toast } from "react-toastify";
 import { usePathname } from "next/navigation";
 import { ADMIN, ADVERTISER } from "@/constents/constArray";
+import AuthModal from "./auth/AuthModal"
 
 export default function Header() {
   const [sending, setSending] = useState(false);
@@ -15,23 +16,24 @@ export default function Header() {
   const user = data?.user || {}
   const isAdvertiser = user?.role === ADVERTISER
   const isAdmin = user?.role === ADMIN
+  const [openAuthModal, setOpenAuthModal] = useState(false)
 
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  const googleLogin = async () => {
-    try {
-      setSending(true);
-      const res = await signIn("google", { callbackUrl: "/" });
-      if (res?.status === 200) {
-        window.location.reload();
-      }
-    } catch (e) {
-      console.error(e);
-      toast.error(getError(e));
-      setSending(false);
-    }
-  };
+  // const googleLogin = async () => {
+  //   try {
+  //     setSending(true);
+  //     const res = await   { callbackUrl: "/" });
+  //     if (res?.status === 200) {
+  //       window.location.reload();
+  //     }
+  //   } catch (e) {
+  //     console.error(e);
+  //     toast.error(getError(e));
+  //     setSending(false);
+  //   }
+  // };
 
   const MENU = [
     { title: "ראשי", link: "/" },
@@ -42,9 +44,9 @@ export default function Header() {
     { title: "צור קשר", link: "/contact" },
 
   ]
-const userNick = user?.name || user?.email
+  const userNick = user?.name || user?.email
   if (status === "authenticated") {
-    MENU.splice(1, 0, { title:` חשבון אישי   ${userNick} `, link: "/profile" });
+    MENU.splice(1, 0, { title: ` חשבון אישי   ${userNick} `, link: "/profile" });
   }
 
   if (status === "authenticated" && !isAdvertiser) {
@@ -57,6 +59,7 @@ const userNick = user?.name || user?.email
   }
   return (
     <>
+      {openAuthModal && <AuthModal onClose={() => setOpenAuthModal(false)} />}
       <div className="bg-background md:block hidden">
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto relative z-10">
           <div className="flex justify-between items-center relative z-10">
@@ -67,7 +70,7 @@ const userNick = user?.name || user?.email
                   if (status === "authenticated") {
                     signOut();
                   } else if (status === "unauthenticated") {
-                    googleLogin();
+                    setOpenAuthModal(true)
                   }
                 }}
                 disabled={sending}>
@@ -115,7 +118,8 @@ const userNick = user?.name || user?.email
         </div>
         {/* <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
             <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
-        <Sidebar open={open} setOpen={setOpen} MENU={MENU} />
+        <Sidebar open={open} setOpen={setOpen} MENU={MENU}
+          setOpenAuthModal={setOpenAuthModal} />
       </div>
     </>
   );

@@ -1,30 +1,18 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { signIn, useSession } from "next-auth/react";
-import { getError } from "helper";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import AuthModal from "../auth/AuthModal";
 
 export default function HomeBanner({ deals = [] }) {
   const { status } = useSession()
-  const [sending, setSending] = useState(false)
+  const [openAuthModal, setOpenAuthModal] = useState(false)
 
-  const googleLogin = async () => {
-    try {
-      setSending(true)
-      const res = await signIn("google", { callbackUrl: "/" })
-      if (res?.status === 200) {
-        window.location.reload()
-      }
-    } catch (e) {
-      console.error(e)
-      toast.error(getError(e))
-      setSending(false)
-    }
-  }
+
   return (
     <div className="bg-background relative overflow-hidden">
+      {openAuthModal && <AuthModal onClose={() => { setOpenAuthModal(false) }} />}
       <div className="reys"></div>
       <div className="tv"></div>
       <div className="flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
@@ -54,10 +42,8 @@ export default function HomeBanner({ deals = [] }) {
           {status === "unauthenticated" && <button
             className="cursor-pointer mx-auto relative overflow-hidden rounded-lg"
             onClick={() => {
-              googleLogin();
-            }}
-            disabled={sending}
-          >
+              setOpenAuthModal(true)
+            }}>
             <span className="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
 
             <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">

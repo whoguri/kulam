@@ -12,6 +12,19 @@ const register = async (req, res) => {
             data.password = hashedPassword
             data.registerOn = new Date()
             // data.loginType = "EMAIL"
+
+            if (data.referredBy) {
+                const refUser = await prisma.user.findFirst({ where: { referralCode: data.referredBy } })
+                if (!refUser)
+                    return res.status(400).json({ error: "Wrong code" });
+                data.referredByUser = { connect: { id: refUser.id } }
+                data.role = "user"
+            }
+
+            delete data.referredBy
+            const code = randomBytes(4).toString('hex')
+            data.referralCode = code
+            console.log(data)
             const result = await prisma.user.create({ data });
             res.status(200).json(result);
 

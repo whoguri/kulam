@@ -43,6 +43,7 @@ export default NextAuth({
     ],
     callbacks: {
         async signIn({ account, profile, user }) {
+            console.error("<<<<< signIn", account, profile, user);
             if (account?.provider === 'google') {
             }
             // const u = await prisma.user.findFirst({ where: { email: profile?.email } })
@@ -55,11 +56,12 @@ export default NextAuth({
         },
         //@ts-ignore
         async session({ session, token, user }) {
-            if (!token)
-                return {}
+            console.error("<<<<< session", session, token, user);
+            // if (!token)
+            //     return {}
 
             //@ts-ignore
-            const u = await prisma.user.findFirst({ where: { email: token?.email } })
+            const u = await prisma.user.findFirst({ where: { id: token?.sub } })
             if (!u)
                 return {}
 
@@ -73,18 +75,22 @@ export default NextAuth({
     },
     events: {
         async signIn(e) {
-            const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
+            console.error(">>>>>signIn", e);
+
+            // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
             // if (u_)
             //     await prisma.user.update({ where: { email: e?.user?.email || "" }, data: { lastLogin: new Date() } })
         },
         async createUser(e) {
+            console.error(">>>>>createUser", e);
             if (e?.user?.email) {
-                const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
+                // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
                 // if (u_ && !u_.password)
                 //     await prisma.user.update({ where: { email: e?.user?.email }, data: { registerOn: new Date(), lastLogin: new Date(), loginType: "GOOGLE" } })
             }
         },
         async session(e) {
+            console.error(">>>>>session", e);
         },
     },
     logger: {

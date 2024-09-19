@@ -1,32 +1,14 @@
 "use client"
-import { ADMIN, ADVERTISER } from "@/constents/constArray";
-import { getError } from "helper";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "react-toastify";
+import { useEffect, useRef } from "react";
 
-export default function Sidebar({ open, setOpen, MENU }) {
+export default function Sidebar({ open, setOpen, MENU, setOpenAuthModal }) {
   const pathname = usePathname()
   const ref = useRef(null);
   const { status } = useSession();
-  const [sending, setSending] = useState(false)
-
-  const googleLogin = async () => {
-    try {
-      setSending(true);
-      const res = await signIn("google", { callbackUrl: "/" });
-      if (res?.status === 200) {
-        window.location.reload();
-      }
-    } catch (e) {
-      console.error(e);
-      toast.error(getError(e));
-      setSending(false);
-    }
-  };
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -84,11 +66,10 @@ export default function Sidebar({ open, setOpen, MENU }) {
                 if (status === "authenticated") {
                   signOut();
                 } else if (status === "unauthenticated") {
-                  googleLogin();
+                  setOpen(false)
+                  setOpenAuthModal(true)
                 }
-              }}
-              disabled={sending}
-            >
+              }}  >
               {status === "authenticated" ? "יציאה" : "כניסה"}
             </button>
           </div>

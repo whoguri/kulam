@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="poppins">
         <NextAuthProvider>
-          <ToastContainer className="!z-[9999]" />
+          <ToastContainer className="!z-[9999999]" />
           <div className="md:min-h-[calc(100vh-86px)] min-h-[calc(100vh-140px)] bg-background">
             {children}
           </div>

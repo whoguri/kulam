@@ -35,9 +35,9 @@ export default function Login() {
     return (<form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="w-full">
             <div className="grid grid-cols-1 gap-y-3">
-                <Input label="User Name" formProps={{ ...register("userName", { required: true }) }}
+                <Input label="שם משתמש" formProps={{ ...register("userName", { required: true }) }}
                     isRequired={true} errors={errors} />
-                <Input label="Password" formProps={{ ...register("password", { required: true }) }}
+                <Input label="סיסמא" formProps={{ ...register("password", { required: true }) }}
                     isRequired={true} errors={errors} />
             </div>
 
@@ -45,7 +45,7 @@ export default function Login() {
         </div>
         <div className="!w-full flex flex-col justify-center gap-4 mt-5">
             <button className="disabled:pointer-events-none disabled:opacity-80 border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
-                disabled={sending}>Login
+                disabled={sending}>כניסה לחשבון
             </button>
         </div>
     </form>

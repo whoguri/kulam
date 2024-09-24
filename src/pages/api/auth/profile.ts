@@ -9,14 +9,15 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.user.id
     try {
         if (req.method === "PUT") {
-            if (data.email) {
-                const user = await prisma.user.findFirst({ where: { email: data.email, id: { not: id } } });
+            if (data.userName) {
+                const user = await prisma.user.findFirst({ where: { userName: data.userName, id: { not: id } } });
                 if (user)
-                    return res.status(400).json({ error: "User already exists with same email" });
+                    return res.status(400).json({ error: "User already exists with same user name" });
             }
             const newData: any = {}
             Object.entries(data).forEach(item => {
-                newData[item[0]] = item[1]
+                if (["socialId", "phone", "city", "userName", "image", "name"].includes(item[0]))
+                    newData[item[0]] = item[1]
             })
 
             const result = await prisma.user.update({ where: { "id": id }, data: newData });

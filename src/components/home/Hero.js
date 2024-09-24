@@ -58,8 +58,8 @@ export default function Hero() {
     },
   ];
 
-  const IMAGES_1 = ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg"];
-  const IMAGES_2 = ["5.jpeg", "6.jpeg", "7.jpeg", "8.jpeg"];
+  const IMAGES_1 = [{ title: "title1", img: "1.jpeg" }, { title: "title2", img: "2.jpeg" }, { title: "title3", img: "3.jpeg" }, { title: "title4", img: "4.jpeg" }];
+  const IMAGES_2 = [{ title: "title5", img: "5.jpeg" }, { title: "title6", img: "6.jpeg" }, { title: "title7", img: "7.jpeg" }, { title: "title8", img: "8.jpeg" }];
   return (
     <>
       <div>

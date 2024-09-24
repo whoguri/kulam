@@ -50,7 +50,7 @@ export default function Register() {
         <div className="w-full">
             {!code && <div>
                 <label className="text-sm font-bold pb-1"> הרשם כמשתמש רגיל או כמפרסם נא לבחור סוג משתמש<span className="text-red-500">*</span></label>
-                <div className='flex gap-8 mb-4'>
+                <div className='flex md:gap-8 mb-4 md:flow-row flex-col'>
                     {ROLES.map((e, i) => {
                         if (e.value === "admin") {
                             return null
@@ -58,7 +58,7 @@ export default function Register() {
                         return (
                             <label
                                 htmlFor={e.value}
-                                className="flex items-center gap-2"
+                                className="flex items-center gap-2 md:text-lg text-sm"
                             >
                                 <input
                                     value={e.value}
@@ -70,13 +70,11 @@ export default function Register() {
                                         setValue("role", e.target.value);
                                     }}
                                     key={e.value}
-                                    className={`mt-1 w-4 h-4`}
+                                    className={`mt-1 md:w-4 md:h-4 w-3 h-3`}
                                 />
                                 <span className="capitalize inline-flex leading-none">
                                     אנירוצה להרשם כ
-                                    {e.value === "user"
-                                        ? "משתמש רגיל"
-                                        : "מפרסם"}
+                                    {e.label}
                                 </span>
                             </label>
                         );
@@ -84,8 +82,16 @@ export default function Register() {
                 </div>
             </div>}
             <div className="grid grid-cols-1 gap-3">
-                <Input label="בחירת שם משתמש" formProps={{ ...register("userName", { required: true }) }}
-                    isRequired={true} errors={errors} />
+                <div>
+                    <InputWithValue label="בחירת שם משתמש" isRequired={true}
+                        value={watch("userName")}
+                        onChange={(e) => {
+                            const v = e.target.value.trim()
+                            setValue("userName", v)
+                        }} />
+                    <Input type='hidden' formProps={{ ...register("userName", { required: true }) }}
+                        isRequired={true} errors={errors} />
+                </div>
                 <Input label="בחירת סיסמא" formProps={{ ...register("password", { required: true }) }}
                     isRequired={true} errors={errors} />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">

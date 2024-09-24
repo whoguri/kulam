@@ -89,9 +89,8 @@ function Profile() {
                 </button>
               </form>
 
-              <div className="flex items-start gap-5 text-end md:w-auto w-full">
-                <div className='grow'>
-                  <div className='md:hidden block mb-4'>{user?.email || user?.userName}</div>
+              <div className="flex md:flex-row flex-col-reverse items-start justify-end gap-5 text-end w-full">
+                <div className=' md:w-auto w-full'>
                   <div className="capitalize md:text-xl text-base">
                     חבר החל מ
                   </div>
@@ -117,15 +116,15 @@ function Profile() {
                     העתק קישור להזמנה
                   </button>
                 </div>
-                <div>
+                <div className='md:text-end text-center md:w-auto w-full'>
                   <Image
                     src={sessionUser?.image || "/images/user.svg"}
                     alt="user"
                     height={150}
                     width={150}
-                    className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] xl:w-20 h-16 w-16"
+                    className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
                   />
-                  <div className='mt-4 md:block hidden'>{user?.email || user?.userName}</div>
+                  <div className='mt-4'>{user?.email || user?.userName}</div>
                 </div>
               </div>
             </div>

@@ -72,19 +72,36 @@ function Profile() {
       ) : (
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
           <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
-            <div className="flex md:flex-row flex-col-reverse md:items-start items-end md:justify-between w-full">
-              <div className="md:mt-0 mt-5">
-                <div>
-                  <div className="capitalize md:text-xl text-base md:text-start text-end">
+            <div className="md:grid md:grid-cols-2 flex  flex-col-reverse  w-full">
+              <form className='md:w-auto w-full md:mt-0 mt-6' onSubmit={handleSubmit(onSubmit)} style={{ direction: "rtl" }}>
+                <div className="text-start capitalize grid md:grid-cols-2 grid-cols-1  md:gap-x-4 gap-x-2">
+                  <Input label='Name' errors={errors} isRequired={true}
+                    formProps={{ ...register("name", { required: true }) }} />
+                  <Input label='Phone' errors={errors} isRequired={true}
+                    formProps={{ ...register("phone", { required: true }) }} type='number' />
+                  <Input label='City' errors={errors} isRequired={true}
+                    formProps={{ ...register("city", { required: true }) }} />
+                  <Input label='Social Id' errors={errors} isRequired={true}
+                    formProps={{ ...register("socialId", { required: true }) }} />
+                </div>
+                <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
+                  {sending ? "Saving" : "Save"}
+                </button>
+              </form>
+
+              <div className="flex items-start gap-5 text-end md:w-auto w-full">
+                <div className='grow'>
+                  <div className='md:hidden block mb-4'>{user?.email || user?.userName}</div>
+                  <div className="capitalize md:text-xl text-base">
                     חבר החל מ
                   </div>
-                  <div className="capitalize md:text-base text-sm md:text-start text-end">
+                  <div className="capitalize md:text-base text-sm">
                     {formatDate(user?.registerOn, "MMM yyyy")}
                   </div>
-                  <div className="capitalize md:text-xl text-base md:text-start text-end mt-4">
+                  <div className="capitalize md:text-xl text-base mt-4">
                     ההכנסות שלי
                   </div>
-                  <div className="capitalize md:text-base text-sm md:text-start text-end">
+                  <div className="capitalize md:text-base text-sm">
                     ₪2000
                   </div>
                   <button
@@ -100,31 +117,16 @@ function Profile() {
                     העתק קישור להזמנה
                   </button>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-5 text-end md:w-auto w-full">
-                <form className='grow' onSubmit={handleSubmit(onSubmit)} style={{ direction: "rtl" }}>
-                  <div className="text-start capitalize grid md:grid-cols-2 grid-cols-1  md:gap-x-4 gap-x-2">
-                    <Input label='Name' errors={errors} isRequired={true}
-                      formProps={{ ...register("name", { required: true }) }} />
-                    <Input label='Phone' errors={errors} isRequired={true}
-                      formProps={{ ...register("phone", { required: true }) }} type='number' />
-                    <Input label='City' errors={errors} isRequired={true}
-                      formProps={{ ...register("city", { required: true }) }} />
-                    <Input label='Social Id' errors={errors} isRequired={true}
-                      formProps={{ ...register("socialId", { required: true }) }} />
-                  </div>
-                  <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
-                    {sending ? "Saving" : "Save"}
-                  </button>
-                </form>
-                <Image
-                  src={sessionUser?.image || "/images/user.png"}
-                  alt="user"
-                  height={150}
-                  width={150}
-                  className="border rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] xl:w-20 h-16 w-16"
-                />
+                <div>
+                  <Image
+                    src={sessionUser?.image || "/images/user.svg"}
+                    alt="user"
+                    height={150}
+                    width={150}
+                    className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] xl:w-20 h-16 w-16"
+                  />
+                  <div className='mt-4 md:block hidden'>{user?.email || user?.userName}</div>
+                </div>
               </div>
             </div>
             <hr className="border-b border-black my-5" />

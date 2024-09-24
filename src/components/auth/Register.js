@@ -7,6 +7,7 @@ import axios from 'axios'
 import { getError } from "../../../helper"
 import { toast } from 'react-toastify'
 import { BASE_URL, ROLES } from '@/constents/constArray'
+import InputWithValue from '../InputWithValue'
 
 export default function Register() {
     const [sending, setSending] = useState(false)
@@ -55,29 +56,29 @@ export default function Register() {
                             return null
                         }
                         return (
-                          <label
-                            htmlFor={e.value}
-                            className="flex items-center gap-2"
-                          >
-                            <input
-                              value={e.value}
-                              checked={watch("role") === e.value}
-                              name="role"
-                              id={e.value}
-                              type="radio"
-                              onChange={(e) => {
-                                setValue("role", e.target.value);
-                              }}
-                              key={e.value}
-                              className={`mt-1 w-4 h-4`}
-                            />
+                            <label
+                                htmlFor={e.value}
+                                className="flex items-center gap-2"
+                            >
+                                <input
+                                    value={e.value}
+                                    checked={watch("role") === e.value}
+                                    name="role"
+                                    id={e.value}
+                                    type="radio"
+                                    onChange={(e) => {
+                                        setValue("role", e.target.value);
+                                    }}
+                                    key={e.value}
+                                    className={`mt-1 w-4 h-4`}
+                                />
                                 <span className="capitalize inline-flex leading-none">
-                                      אנירוצה להרשם כ
-                              {e.value === "user"
-                                ? "משתמש רגיל"
-                                : "מפרסם"}
-                            </span>
-                          </label>
+                                    אנירוצה להרשם כ
+                                    {e.value === "user"
+                                        ? "משתמש רגיל"
+                                        : "מפרסם"}
+                                </span>
+                            </label>
                         );
                     })}
                 </div>

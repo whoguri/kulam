@@ -7,6 +7,7 @@ import axios from 'axios'
 import { getError } from "../../../helper"
 import { toast } from 'react-toastify'
 import { BASE_URL, ROLES } from '@/constents/constArray'
+import InputWithValue from '../InputWithValue'
 
 export default function Register() {
     const [sending, setSending] = useState(false)
@@ -64,8 +65,16 @@ export default function Register() {
                 </div>
             </div>}
             <div className="grid grid-cols-1 gap-3">
-                <Input label="User Name" formProps={{ ...register("userName", { required: true }) }}
-                    isRequired={true} errors={errors} />
+                <div>
+                    <InputWithValue label="User Name" isRequired={true}
+                        value={watch("userName")}
+                        onChange={(e) => {
+                            const v = e.target.value.trim()
+                            setValue("userName", v)
+                        }} />
+                    <Input type='hidden' formProps={{ ...register("userName", { required: true }) }}
+                        isRequired={true} errors={errors} />
+                </div>
                 <Input label="Password" formProps={{ ...register("password", { required: true }) }}
                     isRequired={true} errors={errors} />
                 <div className="grid md:grid-cols-2 grid-cols-1 gap-3">

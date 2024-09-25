@@ -58,17 +58,27 @@ export default function Hero() {
     },
   ];
 
-  const IMAGES_1 = [{ title: "title1", img: "1.jpeg" }, { title: "title2", img: "2.jpeg" }, { title: "title3", img: "3.jpeg" }, { title: "title4", img: "4.jpeg" }];
-  const IMAGES_2 = [{ title: "title5", img: "5.jpeg" }, { title: "title6", img: "6.jpeg" }, { title: "title7", img: "7.jpeg" }, { title: "title8", img: "8.jpeg" }];
+  const IMAGES_1 = [
+    { title: "title1", img: "1.jpeg" },
+    { title: "title2", img: "2.jpeg" },
+    { title: "title3", img: "3.jpeg" },
+    { title: "title4", img: "4.jpeg" },
+  ];
+  const IMAGES_2 = [
+    { title: "title5", img: "5.jpeg" },
+    { title: "title6", img: "6.jpeg" },
+    { title: "title7", img: "7.jpeg" },
+    { title: "title8", img: "8.jpeg" },
+  ];
   return (
     <>
       <div>
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-full mx-auto py-10">
           <div className="md:flex gap-10 w-full">
             <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mb-0 mb-5 overflow-hidden">
-              <DesktopSideImages IMAGES={IMAGES_1} imgLabels={imgLabels1} />
+              <DesktopSideImages IMAGES={IMAGES_1} />
 
-              <MobileImageSlider IMAGES={IMAGES_1} imgLabels={imgLabels1} />
+              <MobileImageSlider IMAGES={IMAGES_1} />
             </div>
             <div className="md:w-[70%] w-[90%] mx-auto">
               <Slider {...settings}>
@@ -121,8 +131,8 @@ export default function Hero() {
               </Slider>
             </div>
             <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14 overflow-hidden">
-              <DesktopSideImages IMAGES={IMAGES_2} imgLabels={imgLabels2} />
-              <MobileImageSlider IMAGES={IMAGES_2} imgLabels={imgLabels2} />
+              <DesktopSideImages IMAGES={IMAGES_2} />
+              <MobileImageSlider IMAGES={IMAGES_2} />
             </div>
           </div>
         </div>

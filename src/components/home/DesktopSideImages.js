@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image";
+import React from "react";
 
 function DesktopSideImages({ IMAGES = [] }) {
     return (<div className="md:block hidden">
@@ -15,4 +15,4 @@ function DesktopSideImages({ IMAGES = [] }) {
     </div>)
 }
 
-export default DesktopSideImages
+export default DesktopSideImages;

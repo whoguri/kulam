@@ -66,9 +66,9 @@ export default function Hero() {
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-full mx-auto py-10">
           <div className="md:flex gap-10 w-full">
             <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mb-0 mb-5 overflow-hidden">
-              <DesktopSideImages IMAGES={IMAGES_1} />
+              <DesktopSideImages IMAGES={IMAGES_1} imgLabels={imgLabels1} />
 
-              <MobileImageSlider IMAGES={IMAGES_1} />
+              <MobileImageSlider IMAGES={IMAGES_1} imgLabels={imgLabels1} />
             </div>
             <div className="md:w-[70%] w-[90%] mx-auto">
               <Slider {...settings}>
@@ -76,7 +76,13 @@ export default function Hero() {
                   <div key={i} className="px-[2px]">
                     <div className="min-h-[42px] md:min-h-[500px] md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl h-96">
                       <div className="md:w-[30%] w-full">
-                        <Image src={`${e.img}`} alt={`/images/${i + 1}.png`} width={150} height={200} className="object-fill mx-auto" />
+                        <Image
+                          src={`${e.img}`}
+                          alt={`/images/${i + 1}.png`}
+                          width={150}
+                          height={200}
+                          className="object-fill mx-auto"
+                        />
                       </div>
                       <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                         <h2 className="subheading">{e.title}</h2>
@@ -91,7 +97,6 @@ export default function Hero() {
                     </div>
                   </div>
                 ))}
-
 
                 {/* <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">
@@ -116,8 +121,8 @@ export default function Hero() {
               </Slider>
             </div>
             <div className="md:w-[15%] w-full grid grid-cols-2 md:flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mt-0 mt-14 overflow-hidden">
-              <DesktopSideImages IMAGES={IMAGES_2} />
-              <MobileImageSlider IMAGES={IMAGES_2} />
+              <DesktopSideImages IMAGES={IMAGES_2} imgLabels={imgLabels2} />
+              <MobileImageSlider IMAGES={IMAGES_2} imgLabels={imgLabels2} />
             </div>
           </div>
         </div>

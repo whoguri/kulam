@@ -58,8 +58,18 @@ export default function Hero() {
     },
   ];
 
-  const IMAGES_1 = [{ title: "title1", img: "1.jpeg" }, { title: "title2", img: "2.jpeg" }, { title: "title3", img: "3.jpeg" }, { title: "title4", img: "4.jpeg" }];
-  const IMAGES_2 = [{ title: "title5", img: "5.jpeg" }, { title: "title6", img: "6.jpeg" }, { title: "title7", img: "7.jpeg" }, { title: "title8", img: "8.jpeg" }];
+  const IMAGES_1 = [
+    { title: "ביטוחים", img: "1.jpeg" },
+    { title: "משכנתאות", img: "2.jpeg" },
+    { title: "טיסות", img: "3.jpeg" },
+    { title: "בתי מלון", img: "4.jpeg" },
+  ];
+  const IMAGES_2 = [
+    { title: "דלק", img: "5.jpeg" },
+    { title: "סופר מרקטים", img: "6.jpeg" },
+    { title: "מוצרי אלקטרוניקה", img: "7.jpeg" },
+    { title: "רביטים", img: "8.jpeg" },
+  ];
   return (
     <>
       <div>
@@ -76,7 +86,13 @@ export default function Hero() {
                   <div key={i} className="px-[2px]">
                     <div className="min-h-[42px] md:min-h-[500px] md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl h-96">
                       <div className="md:w-[30%] w-full">
-                        <Image src={`${e.img}`} alt={`/images/${i + 1}.png`} width={150} height={200} className="object-fill mx-auto" />
+                        <Image
+                          src={`${e.img}`}
+                          alt={`/images/${i + 1}.png`}
+                          width={150}
+                          height={200}
+                          className="object-fill mx-auto"
+                        />
                       </div>
                       <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                         <h2 className="subheading">{e.title}</h2>
@@ -91,7 +107,6 @@ export default function Hero() {
                     </div>
                   </div>
                 ))}
-
 
                 {/* <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">

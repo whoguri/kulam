@@ -2,34 +2,34 @@
 import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 
-export default function MobileImageSlider({ IMAGES = [] }) {
-    const sliderRef = useRef(null);
+export default function MobileImageSlider({ IMAGES = [], imgLabels = [] }) {
+  const sliderRef = useRef(null);
 
-    useEffect(() => {
-        const slider = sliderRef.current;
-        const totalWidth = slider.scrollWidth / 2; // Total width of all images in the slider
+  useEffect(() => {
+    const slider = sliderRef.current;
+    const totalWidth = slider.scrollWidth / 2; // Total width of all images in the slider
 
-        slider.style.setProperty('--total-width', `${totalWidth}px`);
+    slider.style.setProperty("--total-width", `${totalWidth}px`);
 
-        const clone = slider.innerHTML; // Clone the content
-        slider.innerHTML += clone; // Append the cloned content
+    const clone = slider.innerHTML; // Clone the content
+    slider.innerHTML += clone; // Append the cloned content
 
-        const animation = slider.animate(
-            [
-                { transform: 'translateX(0)' },
-                { transform: `translateX(-${totalWidth}px)` }
-            ],
-            {
-                duration: 10000, // 10 seconds
-                iterations: Infinity,
-                easing: 'linear'
-            }
-        );
+    const animation = slider.animate(
+      [
+        { transform: "translateX(0)" },
+        { transform: `translateX(-${totalWidth}px)` },
+      ],
+      {
+        duration: 10000, // 10 seconds
+        iterations: Infinity,
+        easing: "linear",
+      }
+    );
 
-        return () => {
-            animation.cancel(); // Clean up the animation on component unmount
-        };
-    }, []);
+    return () => {
+      animation.cancel(); // Clean up the animation on component unmount
+    };
+  }, []);
 
     return (
         <div className="md:hidden block">

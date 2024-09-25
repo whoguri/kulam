@@ -59,16 +59,16 @@ export default function Hero() {
   ];
 
   const IMAGES_1 = [
-    { title: "title1", img: "1.jpeg" },
-    { title: "title2", img: "2.jpeg" },
-    { title: "title3", img: "3.jpeg" },
-    { title: "title4", img: "4.jpeg" },
+    { title: "ביטוחים", img: "1.jpeg" },
+    { title: "משכנתאות", img: "2.jpeg" },
+    { title: "טיסות", img: "3.jpeg" },
+    { title: "בתי מלון", img: "4.jpeg" },
   ];
   const IMAGES_2 = [
-    { title: "title5", img: "5.jpeg" },
-    { title: "title6", img: "6.jpeg" },
-    { title: "title7", img: "7.jpeg" },
-    { title: "title8", img: "8.jpeg" },
+    { title: "דלק", img: "5.jpeg" },
+    { title: "סופר מרקטים", img: "6.jpeg" },
+    { title: "מוצרי אלקטרוניקה", img: "7.jpeg" },
+    { title: "רביטים", img: "8.jpeg" },
   ];
   return (
     <>

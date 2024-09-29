@@ -68,7 +68,7 @@ export default function Hero() {
     { title: "דלק", img: "5.jpeg" },
     { title: "סופר מרקטים", img: "6.jpeg" },
     { title: "מוצרי אלקטרוניקה", img: "7.jpeg" },
-    { title: "רביטים", img: "8.jpeg" },
+    { title: "רהיטים", img: "8.jpeg" },
   ];
   return (
     <>

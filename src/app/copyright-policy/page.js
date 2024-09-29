@@ -6,7 +6,7 @@ export const metadata = {
 };
 
 export default function CopyRight() {
-    return <Layout title="CopyRight Policy">
+    return <Layout title="מדיניות האתר">
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
 
             <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">

@@ -63,26 +63,26 @@ export default function UserModal({ onSave, onClose, id }) {
                     <Input label="Name"
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="Social Id"
+                    <Input label="תעודת זהות"
                         formProps={{ ...register("socialId", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="email"
+                    <Input label="מייל"
                         formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="Phone"
+                    <Input label="טלפון"
                         formProps={{ ...register("phone", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <SelectBox label="Status" clearErrors={clearErrors}
+                    <SelectBox label="סטאטוס" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
                         {STATUS.map((e, i) => {
                             return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
 
-                    <Input label="City"
+                    <Input label="עיר"
                         formProps={{ ...register("city", { required: true, }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <SelectBox label="Role" clearErrors={clearErrors}
+                    <SelectBox label="תפקיד" clearErrors={clearErrors}
                         formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
                         {ROLES.map((e, i) => {
                             return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>

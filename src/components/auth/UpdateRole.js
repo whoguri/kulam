@@ -38,23 +38,23 @@ function UpdateRole({ open }) {
     const onSubmit = async () => {
         try {
             if (!role) {
-                toast.error("Select Role")
+                toast.error("בחר סוג משתמש")
                 return
             }
             if (!name) {
-                toast.error("Enter Name")
+                toast.error("שם מלא ")
                 return
             }
             if (!phone) {
-                toast.error("Enter Phone")
+                toast.error("מספר נייד")
                 return
             }
             if (!city) {
-                toast.error("Enter City")
+                toast.error("עיר")
                 return
             }
             if (!socialId) {
-                toast.error("Enter Social Id")
+                toast.error("מספר תעודת זהות")
                 return
             }
             setSending(true)
@@ -94,13 +94,13 @@ function UpdateRole({ open }) {
                 })}
             </div>}
             <div className='grid md:grid-cols-2 gap-x-4 gap-y-2'>
-                <InputWithValue label='Name' value={name}
+                <InputWithValue label='שם' value={name}
                     onChange={(e) => { setName(e.target.value) }} />
-                <InputWithValue label='Phone' value={phone} type='number'
+                <InputWithValue label='נייד' value={phone} type='number'
                     onChange={(e) => { setPhone(e.target.value) }} />
-                <InputWithValue label='City' value={city}
+                <InputWithValue label='עיר' value={city}
                     onChange={(e) => { setCity(e.target.value) }} />
-                <InputWithValue label='Social Id' value={socialId}
+                <InputWithValue label='תעודת זהות' value={socialId}
                     onChange={(e) => { setSocialId(e.target.value) }} />
             </div>
         </Modal>}

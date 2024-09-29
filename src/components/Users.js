@@ -103,9 +103,9 @@ function Users() {
                     <table className='md:w-full w-max md:table-fixed'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold text-start md:w-[12%] align-top'>Social Id</th>
+                                <th className='py-2 px-3 font-bold text-start md:w-[12%] align-top'>תעודת זהות</th>
 
-                                <th className=' py-2 px-3 font-bold text-start md:w-[23%]'>Name
+                                <th className=' py-2 px-3 font-bold text-start md:w-[23%]'>שם
                                     <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
@@ -120,13 +120,13 @@ function Users() {
                                         onChange={(e) => {
                                             setRole(e.target.value)
                                         }} >
-                                        <option value={""} className="">All</option>
+                                        <option value={""} className="">הכל</option>
                                         {ROLES.map((e, i) => {
                                             return <option value={e.value} key={e.value} className="">{e.value}</option>
                                         })}
                                     </select>
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start capitalize align-top md:w-[10%]'>earning
+                                <th className='py-2 px-3 font-bold text-start capitalize align-top md:w-[10%]'>הכנסות
                                     {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
                                         onChange={(e) => {

@@ -18,23 +18,23 @@ export default function Contact() {
         try {
             setError("")
             if (!name) {
-                setError("Name is required");
+                setError("חסר שם");
                 return;
             } else if (name.length < 4) {
-                setError("Name is short");
+                setError("שם קצר מדיי");
                 return;
             }
 
             if (!email) {
-                setError("Enter email")
+                setError("הכנס מייל")
                 return
             } if (email && !validEmailRgx.test(email)) {
-                setError("Invalid email")
+                setError("מייל לא תקין")
                 return;
             }
 
             if (!message) {
-                setError("Message is required");
+                setError("הכנס הודעה");
                 return;
             } else if (message.length < 4) {
                 setError("Message is short");
@@ -70,10 +70,9 @@ export default function Contact() {
             <div className="md:w-[70%] w-full mx-auto">
                 <div className="grid md:grid-cols-2 grid-cols-1 md:p-8 p-4 md:gap-10 gap-7 bg-white rounded-xl">
                     <div>
-                        <h2 className="subheading !font-normal text-center">Interested in our service?
-                            Send us a message</h2>
+                        <h2 className="subheading !font-normal text-center">מעוניין בשירותינו? צור קשר</h2>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Name<span className="text-red-500">*</span></h3>
+                            <h3 className="paragraph pt-4 pb-2 text-end">שם מלא<span className="text-red-500">*</span></h3>
                             <input placeholder="Enter your name" type="text" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={name}
                                 onChange={(e) => {
@@ -83,7 +82,7 @@ export default function Contact() {
                             {(error === "Name is required" || error === "Name is too short") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Email address<span className="text-red-500">*</span></h3>
+                            <h3 className="paragraph pt-4 pb-2 text-end">כתובת אי-מייל<span className="text-red-500">*</span></h3>
                             <input placeholder="Enter your name" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
                                 value={email}
                                 onChange={(e) => {
@@ -93,7 +92,7 @@ export default function Contact() {
                             {(error === "Enter email" || error === "Invalid email") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
-                            <h3 className="paragraph pt-4 pb-2 text-end">Message<span className="text-red-500">*</span></h3>
+                            <h3 className="paragraph pt-4 pb-2 text-end">הודעה<span className="text-red-500">*</span></h3>
                             <textarea rows={4} placeholder="Hint" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={message}
                                 onChange={(e) => {
@@ -107,14 +106,14 @@ export default function Contact() {
                                 onClick={() => {
                                     onSubmit()
                                 }}>
-                                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm text-white">Submit</span>
+                                <span className="inline-block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm text-white">שליחה</span>
                             </button>
                         </div>
                     </div>
                     <div className="bg-background px-5 md:py-6 py-10 rounded-[10px] flex flex-col justify-between md:gap-3 gap-6 relative z-10">
                         <div className="text-white">
-                            <h2 className="2xl:text-3xl xl:text-2xl text-lg font-semibold text-end">Contact Information</h2>
-                            <h3 className="2xl:text-2xl xl:text-lg text-sm text-[#C9C9C9] text-end">Say something to start a live chat!</h3>
+                            <h2 className="2xl:text-3xl xl:text-2xl text-lg font-semibold text-end">פרטי יצירת קשר</h2>
+                            <h3 className="2xl:text-2xl xl:text-lg text-sm text-[#C9C9C9] text-end"> נשמח לעמוד לרשותך</h3>
                         </div>
                         <div className="flex items-end flex-col md:gap-4 gap-3">
                             <div className="text-white flex md:gap-4 gap-1 items-center">
@@ -132,7 +131,7 @@ export default function Contact() {
                             </div>
                             <div className="text-white flex md:gap-4 gap-1 items-start">
                                 <div>
-                                    <h3 className="md:text-base text-sm text-end">132 Dartmouth Street Boston, Massachusetts 02156 United States</h3>
+                                    <h3 className="md:text-base text-sm text-end">רחוב סמילנסקי 4 תל אביב</h3>
                                 </div>
                                 <Image src="/Images/location.svg" alt="location" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>

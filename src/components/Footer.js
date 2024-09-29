@@ -10,12 +10,12 @@ export default function Footer() {
             <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:py-7 py-5">
                 <div className="md:flex items-center justify-between text-white">
                     <div className="flex md:gap-5 gap-3 md:justify-start justify-end">
-                        <Link href="/privacy-policy" className="2xl:text-lg text-base">Privacy Policy</Link>
-                        <Link href="/terms" className="2xl:text-lg text-base">Terms</Link>
-                        <Link href="/copyright-policy" className="2xl:text-lg text-base">Copyright Policy</Link>
+                        <Link href="/privacy-policy" className="2xl:text-lg text-base">פרטיות</Link>
+                        <Link href="/terms" className="2xl:text-lg text-base">שאלות נפוצות</Link>
+                        <Link href="/copyright-policy" className="2xl:text-lg text-base">מדיניות האתר</Link>
                     </div>
 
-                    <div className="2xl:text-lg text-base md:pt-0 pt-3 md:text-start text-end">@ {year} KULAM</div>
+                    <div className="2xl:text-lg text-base md:pt-0 pt-3 md:text-start text-end">@ {year} כוךם בשביל כולם</div>
                     <div className="flex 2xl:gap-5 gap-3 items-center justify-end md:pt-0 pt-5">
                         <a href="https://www.instagram.com/" target="_blank">
                             <Image src="/images/insta.svg" alt="insta" width={30} height={30} className="2xl:w-[30px] w-[20px] 2xl:h-[30px] h-[20px]" />

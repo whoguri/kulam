@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default function Polls() {
-    return <Layout title="Polls">
+    return <Layout title="סקרים">
         <PollsCompnent />
     </Layout>
 }

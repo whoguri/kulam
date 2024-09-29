@@ -75,17 +75,17 @@ function Profile() {
             <div className="md:grid md:grid-cols-2 flex  flex-col-reverse  w-full">
               <form className='md:w-auto w-full md:mt-0 mt-6' onSubmit={handleSubmit(onSubmit)} style={{ direction: "rtl" }}>
                 <div className="text-start capitalize grid md:grid-cols-2 grid-cols-1  md:gap-x-4 gap-x-2">
-                  <Input label='Name' errors={errors} isRequired={true}
+                  <Input label='שם' errors={errors} isRequired={true}
                     formProps={{ ...register("name", { required: true }) }} />
-                  <Input label='Phone' errors={errors} isRequired={true}
+                  <Input label='טלפון' errors={errors} isRequired={true}
                     formProps={{ ...register("phone", { required: true }) }} type='number' />
-                  <Input label='City' errors={errors} isRequired={true}
+                  <Input label='עיר' errors={errors} isRequired={true}
                     formProps={{ ...register("city", { required: true }) }} />
-                  <Input label='Social Id' errors={errors} isRequired={true}
+                  <Input label='תעודת זהות' errors={errors} isRequired={true}
                     formProps={{ ...register("socialId", { required: true }) }} />
                 </div>
                 <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
-                  {sending ? "Saving" : "Save"}
+                  {sending ? "שומר.." : "שמירה"}
                 </button>
               </form>
 

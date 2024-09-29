@@ -11,7 +11,7 @@ export default function HiringComponent({ description }) {
     const isAdmin = user?.role === ADMIN
     const [openUser, setOpenUser] = useState(false)
 
-    return <Layout title="hiring"
+    return <Layout title="דרושים"
         buttonTitle={isAdmin && "edit"}
         onClickButton={() => { setOpenUser(true) }} >
 

@@ -51,7 +51,7 @@ export default function DealsComponent() {
     };
 
     const chunkedList = chunkArray((list || []), 12);
-    return <Layout title="Deals"
+    return <Layout title="דילים"
         buttonTitle={(isAdmin || isAdvertiser) && "add"}
         onClickButton={() => { setOpenDeal(true) }} >
 

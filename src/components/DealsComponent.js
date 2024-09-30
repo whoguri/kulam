@@ -21,6 +21,7 @@ export default function DealsComponent() {
     const [selId, setSelId] = useState("")
     const [list, setList] = useState([])
     const [loading, setLoading] = useState(true)
+    const [index, setIndex] = useState(0)
 
     useEffect(() => {
         getList()
@@ -46,8 +47,14 @@ export default function DealsComponent() {
         slidesToShow: 1,
         slidesToScroll: 1,
         autoplaySpeed: 3000,
-        autoplay: true,
+        // autoplay: true,
         arrows: false,
+        afterChange: i => (
+            setIndex(i)
+        ),
+        customPaging: i => (<div className="mx-[2px]">
+            <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
+        </div>)
     };
 
     const chunkedList = chunkArray((list || []), 12);

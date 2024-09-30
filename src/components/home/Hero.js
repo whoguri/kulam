@@ -3,19 +3,34 @@ import Image from "next/image";
 import Slider from "react-slick";
 import MobileImageSlider from "./MobileImageSlider";
 import DesktopSideImages from "./DesktopSideImages";
+import { useState } from "react";
 
 export default function Hero() {
+  const [index, setIndex] = useState(0)
   const settings = {
     dots: true,
     infinite: true,
     speed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplaySpeed: 5500,
+    autoplaySpeed: 4500,
     autoplay: true,
     arrows: false,
-    pauseOnHover: true, // Stop sliding on hover
-    pauseOnFocus: true, // Stop sliding on focus
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    afterChange: i => (
+      setIndex(i)
+    ),
+    appendDots: dots => (
+      <div className="p-1" >
+        <ul className="m-0"> {dots} </ul>
+      </div>
+    ),
+    customPaging: i => (
+      <div className="mx-[2px]">
+        <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
+      </div>
+    )
   };
 
   const PROJECTS = [

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Loading from "./Loading";
-import NoData from "./NoData";
 
 export default function PollsComponent() {
     const { status, data } = useSession()
@@ -14,6 +13,7 @@ export default function PollsComponent() {
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [list, getList] = useState([])
+    const [index, setIndex] = useState(0)
 
     useEffect(() => {
         if (status !== "authenticated" || isAdvertiser) {
@@ -32,6 +32,17 @@ export default function PollsComponent() {
         autoplaySpeed: 3000,
         // autoplay: true,
         arrows: false,
+        afterChange: i => (
+            setIndex(i)
+        ),
+        // appendDots: dots => (
+        //     <div className="p-1" >
+        //         <ul className="m-0"> {dots} </ul>
+        //     </div>
+        // ),
+        customPaging: i => (<div className="mx-[2px]">
+            <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
+        </div>)
     };
 
     if (status === "loading") {

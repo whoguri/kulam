@@ -21,16 +21,14 @@ export default function Hero() {
     afterChange: i => (
       setIndex(i)
     ),
-    appendDots: dots => (
-      <div className="p-1" >
-        <ul className="m-0"> {dots} </ul>
-      </div>
-    ),
-    customPaging: i => (
-      <div className="mx-[2px]">
-        <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
-      </div>
-    )
+    // appendDots: dots => (
+    //   <div className="p-1" >
+    //     <ul className="m-0"> {dots} </ul>
+    //   </div>
+    // ),
+    customPaging: i => (<div className="mx-[2px]">
+      <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
+    </div>)
   };
 
   const PROJECTS = [

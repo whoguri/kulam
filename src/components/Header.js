@@ -97,9 +97,9 @@ export default function Header() {
           </div>
 
           <Image
-            src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
+            src="/images/header.svg" alt="kulam" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
 
-          <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
+          <Image src="/images/header2.svg" alt="kulam" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
         </div>
       </div>
 

@@ -50,7 +50,7 @@ async function getReferralTree(userId: string, n: number) {
 
     const tree: any = {
         id: user.id,
-        name: user.name,
+        name: user.name || user.userName,
         email: user.email,
         referrals: n < 3 ? await Promise.all(user.referrals.map(ref => getReferralTree(ref.id, n + 1))) : [],
     };

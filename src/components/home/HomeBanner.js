@@ -63,14 +63,14 @@ export default function HomeBanner({ deals = [] }) {
             </button>
           })}
         </div>
-        <Image src="/images/title.svg" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]" />
+        <Image src="/images/title.svg" alt="kulam" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]" />
       </div>
 
       <Image
-        src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-10 z-10 left-0" />
+        src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-10 z-10 left-0" />
 
       <Image
-        src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
+        src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
     </div>
   );
 }

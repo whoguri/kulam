@@ -18,8 +18,8 @@ export default function Banner({ title = "", buttonType = "button", onClickButto
                 <h2 className="2xl:text-[120px] xl:text-8xl text-5xl leading-none uppercase font-bold text-text text-end text-primary">{title}</h2>
             </div>
         </div>
-        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-10 z-10 left-0" />
-        <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
+        <img src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-10 z-10 left-0" />
+        <img src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
     </div>
 
 }

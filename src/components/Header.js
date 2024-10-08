@@ -96,10 +96,10 @@ export default function Header() {
             </div>
           </div>
 
-          <Image
+          <img
             src="/images/header.svg" alt="kulam" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
 
-          <Image src="/images/header2.svg" alt="kulam" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
+          <img src="/images/header2.svg" alt="kulam" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0 max-h-[71px]" />
         </div>
       </div>
 
@@ -116,8 +116,8 @@ export default function Header() {
             }}>
             <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="M5 7h14M5 12h14M5 17h14" /></svg> </span>
         </div>
-        {/* <Image src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
-            <Image src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
+        {/* <img src="/images/header.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" />
+            <img src="/images/header2.svg" width={50} height={30} className="w-[350px] absolute top-0 mx-auto inset-0" /> */}
         <Sidebar open={open} setOpen={setOpen} MENU={MENU}
           setOpenAuthModal={setOpenAuthModal} />
       </div>

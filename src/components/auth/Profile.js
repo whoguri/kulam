@@ -117,7 +117,7 @@ function Profile() {
                   </button>
                 </div>
                 <div className='md:text-end text-center md:w-auto w-full'>
-                  <Image
+                  <img
                     src={sessionUser?.image || "/images/user.svg"}
                     alt="user"
                     height={150}

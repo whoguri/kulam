@@ -120,37 +120,37 @@ export default function Contact() {
                                 <div>
                                     <h3 className="md:text-base text-sm text-end">+1012 3456 789</h3>
                                 </div>
-                                <Image src="/Images/phone.svg" alt="phone" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
+                                <img src="/Images/phone.svg" alt="phone" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
 
                             <div className="text-white flex md:gap-4 gap-1 items-center">
                                 <div>
                                     <h3 className="md:text-base text-sm text-end">demo@gmail.com</h3>
                                 </div>
-                                <Image src="/Images/email.svg" alt="email" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
+                                <img src="/Images/email.svg" alt="email" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                             <div className="text-white flex md:gap-4 gap-1 items-start">
                                 <div>
                                     <h3 className="md:text-base text-sm text-end">רחוב סמילנסקי 4 תל אביב</h3>
                                 </div>
-                                <Image src="/Images/location.svg" alt="location" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
+                                <img src="/Images/location.svg" alt="location" width={20} height={20} className="md:w-5 w-4 md:h-5 h-4" />
                             </div>
                         </div>
 
                         <div className="flex items-center justify-between w-full">
                             <div>
-                                <Image src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] md:max-h-20 absolute bottom-5 left-4 z-0" />
+                                <img src="/images/title2.svg" width={50} height={50} className="md:w-[100px] w-[60px] md:max-h-20 absolute bottom-5 left-4 z-0" />
                             </div>
 
                             <div className="flex 2xl:gap-5 gap-3 items-center justify-end">
                                 <a href="https://www.instagram.com/" target="_blank">
-                                    <Image src="/images/insta.svg" alt="insta" width={30} height={30} className="2xl:w-[30px] w-[18px] 2xl:h-[30px] h-[18px]" />
+                                    <img src="/images/insta.svg" alt="insta" width={30} height={30} className="2xl:w-[30px] w-[18px] 2xl:h-[30px] h-[18px]" />
                                 </a>
                                 <a href="https://www.facebook.com/" target="_blank">
-                                    <Image src="/images/fb.svg" alt="fb" width={15} height={15} className="2xl:w-[25px] w-[16px] 2xl:h-[25px] h-[16px]" />
+                                    <img src="/images/fb.svg" alt="fb" width={15} height={15} className="2xl:w-[25px] w-[16px] 2xl:h-[25px] h-[16px]" />
                                 </a>
                                 <a href="https://www.twitter.com/" target="_blank">
-                                    <Image src="/images/x.svg" alt="x" width={25} height={25} className="2xl:w-[25px] w-[16px] 2xl:h-[25px] h-[16px]" />
+                                    <img src="/images/x.svg" alt="x" width={25} height={25} className="2xl:w-[25px] w-[16px] 2xl:h-[25px] h-[16px]" />
                                 </a>
                             </div>
                         </div>

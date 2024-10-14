@@ -36,7 +36,8 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
                         userName: true,
                         email: true,
                         phone: true,
-                    }
+                    },
+                    orderBy: { registerOn: "desc" }
                 }
             }
         });

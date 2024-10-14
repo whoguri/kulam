@@ -81,8 +81,8 @@ function Profile() {
                     formProps={{ ...register("phone", { required: true }) }} type='number' />
                   <Input label='עיר' errors={errors} isRequired={true}
                     formProps={{ ...register("city", { required: true }) }} />
-                  <Input label='תעודת זהות' errors={errors} isRequired={true}
-                    formProps={{ ...register("socialId", { required: true }) }} />
+                  <Input label='תעודת זהות' errors={errors} isRequired={false}
+                    formProps={{ ...register("socialId", { required: false }) }} />
                 </div>
                 <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
                   {sending ? "שומר.." : "שמירה"}

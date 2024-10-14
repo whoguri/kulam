@@ -101,8 +101,8 @@ export default function Register() {
                         isRequired={true} errors={errors} />
                     <Input label='מיקום בארץ' formProps={{ ...register("city", { required: true }) }}
                         isRequired={true} errors={errors} />
-                    <Input label='תעודת זהות' formProps={{ ...register("socialId", { required: true }) }}
-                        isRequired={true} errors={errors} />
+                    <Input label='תעודת זהות' formProps={{ ...register("socialId", { required: false }) }}
+                        isRequired={false} errors={errors} />
                 </div>
             </div>
 

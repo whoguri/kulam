@@ -64,10 +64,10 @@ export default function UserModal({ onSave, onClose, id }) {
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="תעודת זהות"
-                        formProps={{ ...register("socialId", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                        formProps={{ ...register("socialId", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="מייל"
-                        formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                    {/* <Input label="מייל"
+                        formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} /> */}
 
                     <Input label="טלפון"
                         formProps={{ ...register("phone", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />

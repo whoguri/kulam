@@ -7,7 +7,7 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.user.id
     try {
         const { s }: any = req.query
-        const where: any = { referredBy: id }
+        const where: any = { referredBy: id, status: "active" }
         if (s) {
             where.OR = [{ email: { contains: s, mode: "insensitive" } },
             { phone: { contains: s, mode: "insensitive" } },

@@ -26,6 +26,7 @@ function Profile() {
   const [treeData, setTreeData] = useState([])
   const [treeCount, setTreeCount] = useState(0)
   const [page, setPage] = useState(0)
+  const limit = 2
   const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
   useEffect(() => {
@@ -57,10 +58,10 @@ function Profile() {
 
   const getTree = async (p) => {
     try {
-      let res = await axios.get(`/api/auth/tree?page=${p || page}`)
+      let res = await axios.get(`/api/auth/tree?page=${p}`)
       const data = res.data
-      if (data.referrals)
-        setTreeData(data.referrals || [])
+      if (data)
+        setTreeData(data || [])
     } catch (error) {
       console.log(getError(error))
     }
@@ -146,13 +147,22 @@ function Profile() {
                   </button>
                 </div>
                 <div className='md:text-end text-center md:w-auto w-full'>
-                  <img
-                    src={sessionUser?.image || "/images/user.svg"}
-                    alt="user"
-                    height={150}
-                    width={150}
-                    className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
-                  />
+                  {sessionUser?.image ?
+                    <Image
+                      src={sessionUser?.image || "/images/user.svg"}
+                      alt="user"
+                      height={150}
+                      width={150}
+                      className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
+                    />
+                    :
+                    <img
+                      src={sessionUser?.image || "/images/user.svg"}
+                      alt="user"
+                      height={150}
+                      width={150}
+                      className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
+                    />}
                   <div className='mt-4'>{user?.email || user?.userName}</div>
                 </div>
               </div>
@@ -160,28 +170,29 @@ function Profile() {
             <hr className="border-b border-black my-5" />
             <div>
               <h1 className="paragraph mb-2 text-end">חברים שהצטרפו דרכי</h1>
-              {(treeData || [])
-                .sort((a, b) =>
-                  a.referrals.length > b.referrals.length ? -1 : 1
-                )
-                .map((e, i) => (
-                  <ReferralTree
-                    index={i}
-                    tree={e}
-                    key={i}
-                    isLast={treeData.length - 1 === i}
-                    open={open}
-                    setOpen={setOpen}
-                  />
-                ))}
+
+              {/*  .sort((a, b) =>
+                 a.referrals.length > b.referrals.length ? -1 : 1
+              ) */}
+
+              {(treeData || []).map((e, i) => (
+                <ReferralTree
+                  index={i}
+                  tree={e}
+                  key={i}
+                  isLast={treeData.length - 1 === i}
+                  open={open}
+                  setOpen={setOpen}
+                />
+              ))}
 
               <div style={{ direction: "rtl" }}>
                 {/* {treeCount > 20 &&  */}
                 <Pagination isHide={true} count={treeCount}
-                  limit={2} page={page}
+                  limit={limit} page={page}
                   setPage={(p) => {
                     setPage(p)
-                    getList(p, 20)
+                    getTree(p, 20)
                   }} />
                 {/* } */}
               </div>

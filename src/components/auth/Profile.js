@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 function Profile() {
   const { status, data } = useSession()
   const sessionUser = data?.user || {}
+  const hasEmail = sessionUser?.email || ''
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
@@ -77,8 +78,8 @@ function Profile() {
                 <div className="text-start capitalize grid md:grid-cols-2 grid-cols-1  md:gap-x-4 gap-x-2">
                   <Input label='שם' errors={errors} isRequired={true}
                     formProps={{ ...register("name", { required: true }) }} />
-                  <Input label='טלפון' errors={errors} isRequired={true}
-                    formProps={{ ...register("phone", { required: true }) }} type='number' />
+                  <Input label='טלפון' errors={errors} isRequired={hasEmail ? false : true}
+                    formProps={{ ...register("phone", { required: hasEmail ? false : true }) }} type='number' />
                   <Input label='עיר' errors={errors} isRequired={true}
                     formProps={{ ...register("city", { required: true }) }} />
                   <Input label='תעודת זהות' errors={errors} isRequired={false}

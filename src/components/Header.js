@@ -44,7 +44,7 @@ export default function Header() {
     { title: "צור קשר", link: "/contact" },
 
   ]
-  const userNick = user?.name || user?.email || ""
+  const userNick = user?.name || user?.userName || user?.email || ""
   if (status === "authenticated") {
     MENU.splice(1, 0, { title: ` חשבון אישי   ${userNick} `, link: "/profile" });
   }

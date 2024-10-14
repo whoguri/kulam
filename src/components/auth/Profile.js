@@ -32,7 +32,7 @@ function Profile() {
   useEffect(() => {
     if (status === "authenticated") {
       getProfile()
-      getTree()
+      getTree(0)
       getTreeCount()
     } else if (status === "unauthenticated") {
       router.push("/")
@@ -50,7 +50,7 @@ function Profile() {
       setValue("city", data.city)
       setLoading(false)
     } catch (error) {
-      console.log(getError(error))
+      console.error(getError(error))
       setLoading(false)
     }
   }
@@ -63,7 +63,7 @@ function Profile() {
       if (data)
         setTreeData(data || [])
     } catch (error) {
-      console.log(getError(error))
+      console.error(getError(error))
     }
   }
 
@@ -73,7 +73,7 @@ function Profile() {
       const data = res.data
       setTreeCount(data || 0)
     } catch (error) {
-      console.log(getError(error))
+      console.error(getError(error))
     }
   }
 
@@ -193,6 +193,7 @@ function Profile() {
                   setPage={(p) => {
                     setPage(p)
                     getTree(p, 20)
+                    setOpen(-1)
                   }} />
                 {/* } */}
               </div>

@@ -75,14 +75,11 @@ export default NextAuth({
     },
     events: {
         async signIn(e) {
-            console.error(">>>>>signIn", e);
-
             // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
             // if (u_)
             //     await prisma.user.update({ where: { email: e?.user?.email || "" }, data: { lastLogin: new Date() } })
         },
         async createUser(e) {
-            console.error(">>>>>createUser", e);
             if (e?.user?.email) {
                 // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
                 // if (u_ && !u_.password)
@@ -90,7 +87,6 @@ export default NextAuth({
             }
         },
         async session(e) {
-            console.error(">>>>>session", e);
         },
     },
     logger: {
@@ -98,7 +94,6 @@ export default NextAuth({
             console.error(">>>>>Error", code, metadata);
         },
         warn: (code) => {
-            console.warn(">>>>>code", code);
         },
         debug: (code, metadata) => {
         },

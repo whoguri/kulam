@@ -59,7 +59,7 @@ export default function Contact() {
                 setError("Someting went wrong")
             }
         } catch (error) {
-            console.log(error)
+            console.error(error)
             setSending(false)
             toast.error(getError(error))
         }

@@ -29,7 +29,7 @@ export default function UserModal({ onSave, onClose, id }) {
             })
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }

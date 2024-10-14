@@ -45,7 +45,6 @@ export default function Register() {
         }
     }
 
-    console.log(getValues())
     return (<form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="w-full">
             {!code && <div>

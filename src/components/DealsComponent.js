@@ -34,7 +34,7 @@ export default function DealsComponent() {
             setList(res.data || [])
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }

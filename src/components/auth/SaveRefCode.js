@@ -23,7 +23,6 @@ function SaveRefCode_() {
 
     useEffect(() => {
         const localCode = localStorage.getItem("referredBy")
-        console.log(">>>", localCode, status)
 
         if (status === "authenticated") {
             if (user.role === "tbd") {

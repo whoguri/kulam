@@ -60,7 +60,7 @@ function Users() {
             const res = await axios.get(url)
             setCount(res.data)
         } catch (e) {
-            console.log(e)
+            console.error(e)
         }
     }
 
@@ -80,7 +80,7 @@ function Users() {
             setList(res.data || [])
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
         }
     }

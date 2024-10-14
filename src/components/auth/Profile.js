@@ -12,20 +12,28 @@ import { toast } from 'react-toastify'
 import ReferralTree from "./ReferralTree"
 import Input from '../Input'
 import { useForm } from 'react-hook-form'
+import Pagination from "../Pagination"
 
 function Profile() {
   const { status, data } = useSession()
   const sessionUser = data?.user || {}
+  const hasEmail = sessionUser?.email || ''
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
   const [open, setOpen] = useState(-1)
   const [sending, setSending] = useState(false)
+  const [treeData, setTreeData] = useState([])
+  const [treeCount, setTreeCount] = useState(0)
+  const [page, setPage] = useState(0)
+  const limit = 2
   const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
   useEffect(() => {
     if (status === "authenticated") {
       getProfile()
+      getTree(0)
+      getTreeCount()
     } else if (status === "unauthenticated") {
       router.push("/")
     }
@@ -42,8 +50,30 @@ function Profile() {
       setValue("city", data.city)
       setLoading(false)
     } catch (error) {
-      console.log(getError(error))
+      console.error(getError(error))
       setLoading(false)
+    }
+  }
+
+
+  const getTree = async (p) => {
+    try {
+      let res = await axios.get(`/api/auth/tree?page=${p}`)
+      const data = res.data
+      if (data)
+        setTreeData(data || [])
+    } catch (error) {
+      console.error(getError(error))
+    }
+  }
+
+  const getTreeCount = async () => {
+    try {
+      let res = await axios.get("/api/auth/tree/count")
+      const data = res.data
+      setTreeCount(data || 0)
+    } catch (error) {
+      console.error(getError(error))
     }
   }
 
@@ -77,12 +107,12 @@ function Profile() {
                 <div className="text-start capitalize grid md:grid-cols-2 grid-cols-1  md:gap-x-4 gap-x-2">
                   <Input label='שם' errors={errors} isRequired={true}
                     formProps={{ ...register("name", { required: true }) }} />
-                  <Input label='טלפון' errors={errors} isRequired={true}
-                    formProps={{ ...register("phone", { required: true }) }} type='number' />
+                  <Input label='טלפון' errors={errors} isRequired={hasEmail ? false : true}
+                    formProps={{ ...register("phone", { required: hasEmail ? false : true }) }} type='number' />
                   <Input label='עיר' errors={errors} isRequired={true}
                     formProps={{ ...register("city", { required: true }) }} />
-                  <Input label='תעודת זהות' errors={errors} isRequired={true}
-                    formProps={{ ...register("socialId", { required: true }) }} />
+                  <Input label='תעודת זהות' errors={errors} isRequired={false}
+                    formProps={{ ...register("socialId", { required: false }) }} />
                 </div>
                 <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
                   {sending ? "שומר.." : "שמירה"}
@@ -117,13 +147,22 @@ function Profile() {
                   </button>
                 </div>
                 <div className='md:text-end text-center md:w-auto w-full'>
-                  <img
-                    src={sessionUser?.image || "/images/user.svg"}
-                    alt="user"
-                    height={150}
-                    width={150}
-                    className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
-                  />
+                  {sessionUser?.image ?
+                    <Image
+                      src={sessionUser?.image || "/images/user.svg"}
+                      alt="user"
+                      height={150}
+                      width={150}
+                      className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
+                    />
+                    :
+                    <img
+                      src={sessionUser?.image || "/images/user.svg"}
+                      alt="user"
+                      height={150}
+                      width={150}
+                      className="mx-auto border border-black rounded-full 2xl:h-[100px] xl:h-20 2xl:w-[100px] w-20 h-20"
+                    />}
                   <div className='mt-4'>{user?.email || user?.userName}</div>
                 </div>
               </div>
@@ -131,20 +170,33 @@ function Profile() {
             <hr className="border-b border-black my-5" />
             <div>
               <h1 className="paragraph mb-2 text-end">חברים שהצטרפו דרכי</h1>
-              {(user.tree || [])
-                .sort((a, b) =>
-                  a.referrals.length > b.referrals.length ? -1 : 1
-                )
-                .map((e, i) => (
-                  <ReferralTree
-                    index={i}
-                    tree={e}
-                    key={i}
-                    isLast={user.tree.length - 1 === i}
-                    open={open}
-                    setOpen={setOpen}
-                  />
-                ))}
+
+              {/*  .sort((a, b) =>
+                 a.referrals.length > b.referrals.length ? -1 : 1
+              ) */}
+
+              {(treeData || []).map((e, i) => (
+                <ReferralTree
+                  index={i}
+                  tree={e}
+                  key={i}
+                  isLast={treeData.length - 1 === i}
+                  open={open}
+                  setOpen={setOpen}
+                />
+              ))}
+
+              <div style={{ direction: "rtl" }}>
+                {/* {treeCount > 20 &&  */}
+                <Pagination isHide={true} count={treeCount}
+                  limit={limit} page={page}
+                  setPage={(p) => {
+                    setPage(p)
+                    getTree(p, 20)
+                    setOpen(-1)
+                  }} />
+                {/* } */}
+              </div>
             </div>
           </div>
         </div>

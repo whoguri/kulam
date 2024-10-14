@@ -29,7 +29,7 @@ export default function UserModal({ onSave, onClose, id }) {
             })
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }
@@ -64,13 +64,13 @@ export default function UserModal({ onSave, onClose, id }) {
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="תעודת זהות"
-                        formProps={{ ...register("socialId", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                        formProps={{ ...register("socialId", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="מייל"
-                        formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                    <Input label="מייל" type="email" disabled={watch("email")}
+                        formProps={{ ...register("email", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="טלפון"
-                        formProps={{ ...register("phone", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                        formProps={{ ...register("phone", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
                     <SelectBox label="סטאטוס" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>

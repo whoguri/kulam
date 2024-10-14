@@ -43,7 +43,7 @@ export default function DealsModal({ onSave, onClose, id }) {
             })
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }
@@ -94,7 +94,7 @@ export default function DealsModal({ onSave, onClose, id }) {
             const data = res.data
             setAdvertisers(data)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
         }
     }

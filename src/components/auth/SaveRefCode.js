@@ -23,7 +23,6 @@ function SaveRefCode_() {
 
     useEffect(() => {
         const localCode = localStorage.getItem("referredBy")
-        console.log(">>>", localCode, status)
 
         if (status === "authenticated") {
             if (user.role === "tbd") {
@@ -37,9 +36,9 @@ function SaveRefCode_() {
                     localStorage.removeItem("referredBy")
                 if (code)
                     gotoHome()
-                else if (!user?.socialId) {
-                    setOpen(true)
-                }
+                // else if (!user?.socialId) {
+                //     setOpen(true)
+                // }
             }
         } else if (status === "unauthenticated") {
             if (code) {

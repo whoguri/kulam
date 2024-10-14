@@ -45,7 +45,6 @@ export default function Register() {
         }
     }
 
-    console.log(getValues())
     return (<form onSubmit={handleSubmit(onSubmit)} className="">
         <div className="w-full">
             {!code && <div>
@@ -101,8 +100,8 @@ export default function Register() {
                         isRequired={true} errors={errors} />
                     <Input label='מיקום בארץ' formProps={{ ...register("city", { required: true }) }}
                         isRequired={true} errors={errors} />
-                    <Input label='תעודת זהות' formProps={{ ...register("socialId", { required: true }) }}
-                        isRequired={true} errors={errors} />
+                    <Input label='תעודת זהות' formProps={{ ...register("socialId", { required: false }) }}
+                        isRequired={false} errors={errors} />
                 </div>
             </div>
 

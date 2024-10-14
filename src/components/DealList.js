@@ -25,7 +25,7 @@ export default function DealsList() {
                 setLoading(false)
             }
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }

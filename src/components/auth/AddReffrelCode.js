@@ -31,7 +31,7 @@ function AddReffrelCode({ open, setOpenAuthModal, setOpen }) {
             const res = await axios.get(`/api/referral/${referredBy || code}`)
             setRefUser(res.data)
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     }
 

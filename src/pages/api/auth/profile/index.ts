@@ -1,5 +1,5 @@
 import withSession from "@/middlewares/with-session";
-import { USER_SELECT } from "../../../../prisma/select";
+import { USER_SELECT } from "../../../../../prisma/select";
 import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -27,9 +27,12 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(200).json(result);
         } else {
             const result = await prisma.user.findFirst({ where: { "id": id }, select: USER_SELECT });
-            const tree = await getReferralTree(id, 1);
+            // const tree = await getReferralTree(id, 1);
 
-            res.status(200).json({ ...result, tree: tree.referrals });
+            res.status(200).json({
+                ...result,
+                // tree: tree.referrals 
+            });
         }
     } catch (err: any) {
         console.error(err)

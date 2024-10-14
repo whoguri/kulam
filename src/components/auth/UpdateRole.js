@@ -12,6 +12,7 @@ import InputWithValue from '../InputWithValue'
 function UpdateRole({ open }) {
     const { data, status } = useSession()
     const user = data?.user || {}
+    const hasEmail = user?.email || ''
     const [role, setRole] = useState("")
     const [sending, setSending] = useState(false)
     const router = useRouter()
@@ -45,16 +46,12 @@ function UpdateRole({ open }) {
                 toast.error("שם מלא ")
                 return
             }
-            if (!phone) {
+            if (!hasEmail && !phone) {
                 toast.error("מספר נייד")
                 return
             }
             if (!city) {
                 toast.error("עיר")
-                return
-            }
-            if (!socialId) {
-                toast.error("מספר תעודת זהות")
                 return
             }
             setSending(true)

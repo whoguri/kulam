@@ -1,7 +1,7 @@
 import { range } from "../../helper"
 
 export default function Pagination(props) {
-    const { count = 0, limit = 15, page = 0, setPage, setLimit } = props
+    const { count = 0, limit = 15, page = 0, setPage, setLimit, isHide = false } = props
     let pageCount = (count - 1) / limit
     if (pageCount === -0.1) {
         pageCount = 0
@@ -67,7 +67,7 @@ export default function Pagination(props) {
         </div>
         <div>
             <div className="flex items-center gap-2">
-                <select value={limit}
+                {isHide ? "" : <select value={limit}
                     onChange={(e) => {
                         setLimit(parseInt(e.target.value))
                     }}
@@ -76,7 +76,7 @@ export default function Pagination(props) {
                     <option value={20}>20</option>
                     <option value={30}>30</option>
                     <option value={50}>50</option>
-                </select>
+                </select>}
             </div>
         </div>
     </nav>

@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 import ReferralTree from "./ReferralTree"
 import Input from '../Input'
 import { useForm } from 'react-hook-form'
+import Pagination from "../Pagination"
 
 function Profile() {
   const { status, data } = useSession()
@@ -22,11 +23,16 @@ function Profile() {
   const router = useRouter()
   const [open, setOpen] = useState(-1)
   const [sending, setSending] = useState(false)
+  const [treeData, setTreeData] = useState([])
+  const [treeCount, setTreeCount] = useState(0)
+  const [page, setPage] = useState(0)
   const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
   useEffect(() => {
     if (status === "authenticated") {
       getProfile()
+      getTree()
+      getTreeCount()
     } else if (status === "unauthenticated") {
       router.push("/")
     }
@@ -45,6 +51,28 @@ function Profile() {
     } catch (error) {
       console.log(getError(error))
       setLoading(false)
+    }
+  }
+
+
+  const getTree = async (p) => {
+    try {
+      let res = await axios.get(`/api/auth/tree?page=${p || page}`)
+      const data = res.data
+      if (data.referrals)
+        setTreeData(data.referrals || [])
+    } catch (error) {
+      console.log(getError(error))
+    }
+  }
+
+  const getTreeCount = async () => {
+    try {
+      let res = await axios.get("/api/auth/tree/count")
+      const data = res.data
+      setTreeCount(data || 0)
+    } catch (error) {
+      console.log(getError(error))
     }
   }
 
@@ -132,7 +160,7 @@ function Profile() {
             <hr className="border-b border-black my-5" />
             <div>
               <h1 className="paragraph mb-2 text-end">חברים שהצטרפו דרכי</h1>
-              {(user.tree || [])
+              {(treeData || [])
                 .sort((a, b) =>
                   a.referrals.length > b.referrals.length ? -1 : 1
                 )
@@ -141,11 +169,22 @@ function Profile() {
                     index={i}
                     tree={e}
                     key={i}
-                    isLast={user.tree.length - 1 === i}
+                    isLast={treeData.length - 1 === i}
                     open={open}
                     setOpen={setOpen}
                   />
                 ))}
+
+              <div style={{ direction: "rtl" }}>
+                {/* {treeCount > 20 &&  */}
+                <Pagination isHide={true} count={treeCount}
+                  limit={2} page={page}
+                  setPage={(p) => {
+                    setPage(p)
+                    getList(p, 20)
+                  }} />
+                {/* } */}
+              </div>
             </div>
           </div>
         </div>

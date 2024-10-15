@@ -229,26 +229,28 @@ function Profile() {
                  a.referrals.length > b.referrals.length ? -1 : 1
               ) */}
 
-              {treeLoading ? <Loading style={{ height: "auto" }} /> : (treeData || []).map((e, i) => (
-                <ReferralTree
-                  index={i}
-                  tree={e}
-                  key={i}
-                  isLast={treeData.length - 1 === i}
-                  open={open}
-                  setOpen={setOpen}
-                />
-              ))}
+              <div className='min-h-[30vh]'>
+                {treeLoading ? <Loading style={{ height: "auto" }} /> : (treeData || []).map((e, i) => (
+                  <ReferralTree
+                    index={i}
+                    tree={e}
+                    key={i}
+                    isLast={treeData.length - 1 === i}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                ))}
 
-              {treeLoading ? "" : <div style={{ direction: "rtl" }}>
-                {treeCount > 0 ? <Pagination isHide={true} count={treeCount}
-                  limit={limit} page={page}
-                  setPage={(p) => {
-                    setPage(p)
-                    getTree(p, search)
-                    setOpen(-1)
-                  }} /> : ""}
-              </div>}
+                {treeLoading ? "" : <div style={{ direction: "rtl" }}>
+                  {treeCount > 0 ? <Pagination isHide={true} count={treeCount}
+                    limit={limit} page={page}
+                    setPage={(p) => {
+                      setPage(p)
+                      getTree(p, search)
+                      setOpen(-1)
+                    }} /> : ""}
+                </div>}
+              </div>
             </div>
           </div>
         </div>

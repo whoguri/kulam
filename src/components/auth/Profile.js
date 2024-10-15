@@ -14,19 +14,23 @@ import Input from '../Input'
 import { useForm } from 'react-hook-form'
 import Pagination from "../Pagination"
 
+let timeOut = null;
+
 function Profile() {
   const { status, data } = useSession()
   const sessionUser = data?.user || {}
   const hasEmail = sessionUser?.email || ''
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [treeLoading, setTreeLoading] = useState(true)
   const router = useRouter()
   const [open, setOpen] = useState(-1)
   const [sending, setSending] = useState(false)
   const [treeData, setTreeData] = useState([])
   const [treeCount, setTreeCount] = useState(0)
+  const [search, setSearch] = useState("")
   const [page, setPage] = useState(0)
-  const limit = 2
+  const limit = 20
   const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
   useEffect(() => {
@@ -56,20 +60,21 @@ function Profile() {
   }
 
 
-  const getTree = async (p) => {
+  const getTree = async (p, s) => {
     try {
-      let res = await axios.get(`/api/auth/tree?page=${p}`)
+      let res = await axios.get(`/api/auth/tree?page=${p}&s=${s || ""}`)
       const data = res.data
-      if (data)
-        setTreeData(data || [])
+      setTreeData(data || [])
+      setTreeLoading(false)
     } catch (error) {
       console.error(getError(error))
+      setTreeLoading(false)
     }
   }
 
-  const getTreeCount = async () => {
+  const getTreeCount = async (s) => {
     try {
-      let res = await axios.get("/api/auth/tree/count")
+      let res = await axios.get(`/api/auth/tree/count?s=${s || ""}`)
       const data = res.data
       setTreeCount(data || 0)
     } catch (error) {
@@ -93,6 +98,24 @@ function Profile() {
       setSending(false)
       toast.error(getError(error))
     }
+  }
+
+  const searchData = (e) => {
+    if (timeOut) {
+      clearTimeout(timeOut)
+    }
+    setTreeLoading(true)
+
+    timeOut = setTimeout(() => {
+      if (e) {
+        getTree(0, e)
+        getTreeCount(e)
+      } else {
+        getTree(0)
+        getTreeCount()
+        setSearch("")
+      }
+    }, 500);
   }
 
   return (
@@ -171,31 +194,62 @@ function Profile() {
             <div>
               <h1 className="paragraph mb-2 text-end">חברים שהצטרפו דרכי</h1>
 
+              <div className="w-full mb-2 relative">
+                <input type="text" value={search} className="text-end block py-3 ps-8 pe-4 border rounded-lg  w-full z-20 text-sm placeholder:text-light bg-transparent focus-visible:outline-none"
+                  placeholder="Search..."
+                  onChange={(e) => {
+                    searchData(e.target.value)
+                    setSearch(e.target.value)
+                  }}
+                />
+                <span className="absolute text-center top-1/2 -translate-y-1/2 left-0 md:py-2 py-1 px-2 text-xs font-medium">
+                  {search ? <svg className='w-5 h-5 cursor-pointer' onClick={async () => {
+                    setSearch("")
+                    setTreeLoading(true)
+                    await getTreeCount()
+                    await getTree(0)
+                  }}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 56 56"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M10.023 43.023c-.796.797-.82 2.157 0 2.954c.82.796 2.157.796 2.977 0l15-15l15 15c.797.796 2.156.82 2.977 0c.796-.82.796-2.157 0-2.954L30.953 28l15.024-15c.796-.797.82-2.156 0-2.953c-.844-.82-2.18-.82-2.977 0l-15 15l-15-15c-.82-.82-2.18-.844-2.977 0c-.796.82-.796 2.156 0 2.953l15 15Z"
+                    />
+                  </svg> : <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z">
+                    </path>
+                  </svg>}
+                  <span className="sr-only">Search</span>
+                </span>
+              </div>
               {/*  .sort((a, b) =>
                  a.referrals.length > b.referrals.length ? -1 : 1
               ) */}
 
-              {(treeData || []).map((e, i) => (
-                <ReferralTree
-                  index={i}
-                  tree={e}
-                  key={i}
-                  isLast={treeData.length - 1 === i}
-                  open={open}
-                  setOpen={setOpen}
-                />
-              ))}
+              <div className='min-h-[30vh]'>
+                {treeLoading ? <Loading style={{ height: "auto" }} /> : (treeData || []).map((e, i) => (
+                  <ReferralTree
+                    index={i}
+                    tree={e}
+                    key={i}
+                    isLast={treeData.length - 1 === i}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                ))}
 
-              <div style={{ direction: "rtl" }}>
-                {/* {treeCount > 20 &&  */}
-                <Pagination isHide={true} count={treeCount}
-                  limit={limit} page={page}
-                  setPage={(p) => {
-                    setPage(p)
-                    getTree(p, 20)
-                    setOpen(-1)
-                  }} />
-                {/* } */}
+                {treeLoading ? "" : <div style={{ direction: "rtl" }}>
+                  {treeCount > 0 ? <Pagination isHide={true} count={treeCount}
+                    limit={limit} page={page}
+                    setPage={(p) => {
+                      setPage(p)
+                      getTree(p, search)
+                      setOpen(-1)
+                    }} /> : ""}
+                </div>}
               </div>
             </div>
           </div>

@@ -10,6 +10,7 @@ function AddReffrelCode({ open, setOpenAuthModal, setOpen }) {
     const [sending, setSending] = useState(false)
     const [referredBy, setReferredBy] = useState("")
     const [refUser, setRefUser] = useState(null)
+    const [loading, setLoading] = useState(false)
     const search = useSearchParams()
     const code = search.get('ref')
 
@@ -28,17 +29,20 @@ function AddReffrelCode({ open, setOpenAuthModal, setOpen }) {
 
     const getRerUser = async () => {
         try {
+            setLoading(true)
             const res = await axios.get(`/api/referral/${referredBy || code}`)
             setRefUser(res.data)
+            setLoading(false)
         } catch (error) {
+            setLoading(false)
             console.error(error)
         }
     }
 
     return (<>
         {open && <Modal title="Join" closeButton={false}
-            footer={<div className='flex justify-center gap-2 w-full'>
-                {refUser?.name ? <>
+            footer={loading ? "" : <div className='flex justify-center gap-2 w-full'>
+                {(refUser?.name ? <>
                     <button disabled={sending} onClick={() => {
                         setSending(true)
                         setOpenAuthModal(true)
@@ -58,11 +62,11 @@ function AddReffrelCode({ open, setOpenAuthModal, setOpen }) {
                     window.location.href = BASE_URL
                 }} type='button' className=' px-4 py-2 text-red-500 rounded-md text-xl uppercase font-semibold'>
                     Close
-                </button>}
+                </button>)}
             </div>} >
-            {refUser?.name ? <div className=''>
+            {loading ? <div className='text-primary bg-orange-100 px-2 py-2 text-center my-8 rounded-md'>Loading...</div> : (refUser?.name ? <div className=''>
                 Referred By {refUser?.name || "..."}
-            </div> : <div className='text-red-500 bg-red-100 px-2 py-2 text-center rounded-md'>Wrong Referral Code</div>}
+            </div> : <div className='text-red-500 bg-red-100 px-2 py-2 text-center rounded-md'>Wrong Referral Code</div>)}
         </Modal>}
     </>)
 }

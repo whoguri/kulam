@@ -6,7 +6,7 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
     //@ts-ignore
     const id = req.user.id
     try {
-        const limit = 2
+        const limit = 20
         const { page, s }: any = req.query
         // const tree = await getReferralTree(id, 1);
 

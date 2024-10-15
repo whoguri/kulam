@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { getError } from 'helper'
 
 function AuthModal({ onClose }) {
-  const [view, setView] = useState("login")
+  const [view, setView] = useState("register")
   const [sending, setSending] = useState(false)
 
   const googleLogin = async () => {

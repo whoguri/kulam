@@ -107,6 +107,7 @@ function Profile() {
     setTreeLoading(true)
 
     timeOut = setTimeout(() => {
+      setOpen(-1)
       if (e) {
         getTree(0, e)
         getTreeCount(e)

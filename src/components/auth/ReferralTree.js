@@ -1,6 +1,12 @@
 
-function ReferralNode({ node, level, index, isLast, open, setOpen }) {
+function ReferralNode({ node, level, index, isLast, open, setOpen, search }) {
     let referrals = node.referrals || []
+    let expend = open === index // && level === 1
+
+    if (search && level === 1) {
+        expend = referrals.filter(e => e.name.includes(search)).length > 0
+    }
+
     return (<div onClick={() => {
         if (referrals.length > 0)
             if (open === index) {
@@ -21,7 +27,7 @@ function ReferralNode({ node, level, index, isLast, open, setOpen }) {
         {open === index && (referrals.length > 0 && (
             <div className={`grid grid-cols-1 pt-2 text-black`}>
                 {referrals.map(ref => (
-                    <ReferralNode key={ref.id} node={ref} level={level + 1} open={open} setOpen={setOpen} />
+                    <ReferralNode key={ref.id} node={ref} level={level + 1} open={open} search={search} setOpen={setOpen} />
                 ))}
             </div>
         ))}
@@ -29,8 +35,8 @@ function ReferralNode({ node, level, index, isLast, open, setOpen }) {
     );
 }
 
-export default function ReferralTree({ tree, index, isLast, open, setOpen }) {
+export default function ReferralTree({ tree, index, isLast, open, setOpen, search }) {
 
-    return (<ReferralNode node={tree} level={1} index={index} isLast={isLast} open={open} setOpen={setOpen} />
+    return (<ReferralNode node={tree} level={1} index={index} isLast={isLast} open={open} setOpen={setOpen} search={search} />
     );
 }

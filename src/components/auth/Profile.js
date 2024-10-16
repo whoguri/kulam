@@ -238,6 +238,7 @@ function Profile() {
                     key={i}
                     isLast={treeData.length - 1 === i}
                     open={open}
+                    search={search}
                     setOpen={setOpen}
                   />
                 ))}

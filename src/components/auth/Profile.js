@@ -193,7 +193,7 @@ function Profile() {
             </div>
             <hr className="border-b border-black my-5" />
             <div>
-              <h1 className="paragraph mb-2 text-end">חברים שהצטרפו דרכי</h1>
+              <h1 className="paragraph mb-2 text-end"> ({treeCount}) חברים שהצטרפו דרכי</h1>
 
               <div className="w-full mb-2 relative">
                 <input type="text" value={search} className="text-end block py-3 ps-8 pe-4 border rounded-lg  w-full z-20 text-sm placeholder:text-light bg-transparent focus-visible:outline-none"
@@ -235,7 +235,7 @@ function Profile() {
                   <ReferralTree
                     index={i}
                     tree={e}
-                    key={i}
+                    key={e.id}
                     isLast={treeData.length - 1 === i}
                     open={open}
                     search={search}

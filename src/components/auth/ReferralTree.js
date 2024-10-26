@@ -1,3 +1,4 @@
+import { sortArray } from "helper"
 
 function ReferralNode({ node, level, index, isLast, open, setOpen, search }) {
     let referrals = node.referrals || []
@@ -31,11 +32,11 @@ function ReferralNode({ node, level, index, isLast, open, setOpen, search }) {
                     <svg className="inline-flex transition-all" style={{ transform: expend ? "rotate(180deg)" : "rotate(0)" }} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z" /></svg>
                 </button>}
             </div>
-            <h3 className={`capitalize text-end ${level === 1 ? "" : ""}`}><span className="font-normal text-base">₪2000</span> - {node.name || node.userName} </h3>
+            <h3 className={`capitalize text-end ${level === 1 ? "" : ""}`}><span className="font-normal text-base">{(level === 1 && referrals.length > 0) ? "(" + referrals.length + ") " : ""} ₪2000</span> - {node.name || node.userName} </h3>
         </div>
         {expend && (referrals.length > 0 && (
             <div className={`grid grid-cols-1 pt-2 text-black`}>
-                {referrals.map(ref => (
+                {sortArray(referrals).map(ref => (
                     <ReferralNode key={ref.id} node={ref} level={level + 1} open={open} search={search} setOpen={setOpen} />
                 ))}
             </div>

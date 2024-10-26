@@ -131,8 +131,8 @@ export function chunkArray(array, chunkSize) {
 }
 export function sortArray(array = []) {
     return [...array].sort((a, b) => {
-        const aValue = (a.name || a.username || "").toLowerCase();
-        const bValue = (b.name || b.username || "").toLowerCase();
+        const aValue = (a.name || a.userName || "").toLowerCase();
+        const bValue = (b.name || b.userName || "").toLowerCase();
 
         return aValue.localeCompare(bValue);
     });

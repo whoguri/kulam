@@ -28,6 +28,7 @@ function Profile() {
   const [sending, setSending] = useState(false)
   const [treeData, setTreeData] = useState([])
   const [treeCount, setTreeCount] = useState(0)
+  const [allCount, setAllCount] = useState(0)
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(0)
   const limit = 20
@@ -77,6 +78,9 @@ function Profile() {
       let res = await axios.get(`/api/auth/tree/count?s=${s || ""}`)
       const data = res.data
       setTreeCount(data || 0)
+      if (!s) {
+        setAllCount(data)
+      }
     } catch (error) {
       console.error(getError(error))
     }
@@ -193,7 +197,7 @@ function Profile() {
             </div>
             <hr className="border-b border-black my-5" />
             <div>
-              <h1 className="paragraph mb-2 text-end"> ({treeCount}) חברים שהצטרפו דרכי</h1>
+              <h1 className="paragraph mb-2 text-end"> <span className='h-6 min-w-6 rounded-full bg-gradient-to-r from-primary to-primary-dark me-2 inline-flex items-center justify-center px-1 py-1 text-white'>{allCount}</span> חברים שהצטרפו דרכי</h1>
 
               <div className="w-full mb-2 relative">
                 <input type="text" value={search} className="text-end block py-3 ps-8 pe-4 border rounded-lg  w-full z-20 text-sm placeholder:text-light bg-transparent focus-visible:outline-none"

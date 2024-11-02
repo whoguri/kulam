@@ -43,7 +43,7 @@ function ReferralNodeN({ node, level, search }) {
                         <svg className={` transition-all ${shouldExpand ? "rotate-180" : ""}`} xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 256"><path fill="currentColor" d="m216.49 104.49l-80 80a12 12 0 0 1-17 0l-80-80a12 12 0 0 1 17-17L128 159l71.51-71.52a12 12 0 0 1 17 17Z" /></svg>
                     </button>
                 )}</div>
-                <h3 className="capitalize" onClick={() => { setSelectedItem(node) }}>
+                <h3 className="capitalize cursor-pointer" onClick={() => { setSelectedItem(node) }}>
                     <span className="text-[80%] font-normal">{referrals.length > 0 && !search && <span className="h-6 min-w-6 rounded-full bg-gradient-to-r from-primary to-primary-dark me-2 inline-flex items-center justify-center px-1 py-1 text-white">{referrals.length}</span>}
                         ₪2000 </span> - {node.name || node.userName}
                 </h3>

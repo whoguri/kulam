@@ -43,7 +43,7 @@ export default NextAuth({
     ],
     callbacks: {
         async signIn({ account, profile, user }) {
-            console.error("<<<<< signIn", account, profile, user);
+            // console.error("<<<<< signIn", account, profile, user);
             if (account?.provider === 'google') {
             }
             // const u = await prisma.user.findFirst({ where: { email: profile?.email } })
@@ -56,7 +56,7 @@ export default NextAuth({
         },
         //@ts-ignore
         async session({ session, token, user }) {
-            console.error("<<<<< session", session, token, user);
+            // console.error("<<<<< session", session, token, user);
             // if (!token)
             //     return {}
 

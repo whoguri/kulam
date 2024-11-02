@@ -234,7 +234,7 @@ function Profile() {
                  a.referrals.length > b.referrals.length ? -1 : 1
               ) */}
 
-              <div className='min-h-[30vh]'>
+              <div className='min-h-[30vh] border-t'>
                 {treeLoading ? <Loading style={{ height: "auto" }} /> : (treeData || []).map((e, i) => (
                   <ReferralTree
                     index={i}

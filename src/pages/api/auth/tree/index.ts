@@ -16,14 +16,24 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
             { phone: { contains: s, mode: "insensitive" } },
             { name: { contains: s, mode: "insensitive" } },
             { userName: { contains: s, mode: "insensitive" } },
-
             {
                 referrals: {
                     some: {
                         OR: [{ email: { contains: s, mode: "insensitive" } },
                         { phone: { contains: s, mode: "insensitive" } },
                         { name: { contains: s, mode: "insensitive" } },
-                        { userName: { contains: s, mode: "insensitive" } }]
+                        { userName: { contains: s, mode: "insensitive" } },
+                        {
+                            referrals: {
+                                some: {
+                                    OR: [{ email: { contains: s, mode: "insensitive" } },
+                                    { phone: { contains: s, mode: "insensitive" } },
+                                    { name: { contains: s, mode: "insensitive" } },
+                                    { userName: { contains: s, mode: "insensitive" } }]
+                                }
+                            }
+                        }
+                        ]
                     }
                 }
             }]
@@ -39,6 +49,7 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
                 userName: true,
                 email: true,
                 phone: true,
+                city: true,
                 referrals: {
                     select: {
                         id: true,
@@ -46,6 +57,18 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
                         userName: true,
                         email: true,
                         phone: true,
+                        city: true,
+                        referrals: {
+                            select: {
+                                id: true,
+                                name: true,
+                                userName: true,
+                                email: true,
+                                phone: true,
+                                city: true,
+                            },
+                            orderBy: { registerOn: "desc" }
+                        }
                     },
                     orderBy: { registerOn: "desc" }
                 }

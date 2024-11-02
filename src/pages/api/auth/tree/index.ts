@@ -16,22 +16,24 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
             { phone: { contains: s, mode: "insensitive" } },
             { name: { contains: s, mode: "insensitive" } },
             { userName: { contains: s, mode: "insensitive" } },
-
             {
                 referrals: {
                     some: {
                         OR: [{ email: { contains: s, mode: "insensitive" } },
                         { phone: { contains: s, mode: "insensitive" } },
                         { name: { contains: s, mode: "insensitive" } },
-                        { userName: { contains: s, mode: "insensitive" } }],
-                        referrals: {
-                            some: {
-                                OR: [{ email: { contains: s, mode: "insensitive" } },
-                                { phone: { contains: s, mode: "insensitive" } },
-                                { name: { contains: s, mode: "insensitive" } },
-                                { userName: { contains: s, mode: "insensitive" } }]
+                        { userName: { contains: s, mode: "insensitive" } },
+                        {
+                            referrals: {
+                                some: {
+                                    OR: [{ email: { contains: s, mode: "insensitive" } },
+                                    { phone: { contains: s, mode: "insensitive" } },
+                                    { name: { contains: s, mode: "insensitive" } },
+                                    { userName: { contains: s, mode: "insensitive" } }]
+                                }
                             }
                         }
+                        ]
                     }
                 }
             }]

@@ -242,7 +242,7 @@ function Profile() {
                     key={e.id}
                     isLast={treeData.length - 1 === i}
                     open={open}
-                    search={search}
+                    search={search.toLowerCase()}
                     setOpen={setOpen}
                   />
                 ))}

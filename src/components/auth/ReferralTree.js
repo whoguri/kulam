@@ -11,15 +11,28 @@ function ReferralNodeN({ node, level, search }) {
     const convertToLowerCase = (v = "") => v?.toLowerCase() || "";
 
     // Determine if node should be expanded based on the search
-    const shouldExpand = search
-        ? referrals.some(e =>
-            convertToLowerCase(e.name).includes(convertToLowerCase(search)) ||
-            convertToLowerCase(e.userName).includes(convertToLowerCase(search)) ||
-            convertToLowerCase(e.email).includes(convertToLowerCase(search)) ||
-            e.phone?.includes(search)
-        )
-        : isExpanded;
+    let shouldExpand = search
+        ? (convertToLowerCase(node.name).includes(search) ||
+            convertToLowerCase(node.userName).includes(search) ||
+            convertToLowerCase(node.email).includes(search) ||
+            node.phone?.includes(search) ||
+            referrals.some(e =>
+                convertToLowerCase(e.name).includes(search) ||
+                convertToLowerCase(e.userName).includes(search) ||
+                convertToLowerCase(e.email).includes(search) ||
+                e.phone?.includes(search) ||
+                e.referrals?.some(e2 =>
+                    convertToLowerCase(e2.name).includes(search) ||
+                    convertToLowerCase(e2.userName).includes(search) ||
+                    convertToLowerCase(e2.email).includes(search) ||
+                    e2.phone?.includes(search)
+                )
+            ))
+        :
+        isExpanded;
+    if (search) {
 
+    }
 
     return (
         <div className={`border-b ${level === 1 ? "border-x" : ""} ${shouldExpand ? (level === 2 ? "bg-gray-100" : "bg-gray-50") : ""}`} >
@@ -48,11 +61,7 @@ function ReferralNodeN({ node, level, search }) {
 
 
 
-export default function ReferralTree({ tree, index, isLast, open, setOpen, search }) {
-
-    return (<>
-        {/* <ReferralNode node={tree} level={1} index={index} isLast={isLast} open={open} setOpen={setOpen} search={search} /> */}
-        <ReferralNodeN node={tree} level={1} search={search} />
-    </>
+export default function ReferralTree({ tree, search }) {
+    return (<ReferralNodeN node={tree} level={1} search={search} />
     );
 }

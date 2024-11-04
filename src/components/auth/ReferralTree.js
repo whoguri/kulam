@@ -38,7 +38,7 @@ function ReferralNodeN({ node, level, search }) {
     const toggleExpand = () => setIsExpanded(!isExpanded);
 
     return (
-        <div className={`border-b ${level === 1 ? "border-x" : ""} ${isExpanded ? (level !== 1 ? "bg-gray-100" : "bg-gray-50") : ""}`} >
+        <div className={`border-b ${level === 1 ? "border-x" : ""} ${(isExpanded && referrals.length > 0) ? (level === 2 ? "bg-gray-100" : "bg-gray-50") : ""}`} >
             {selectedItem && <InfoModal onClose={() => { setSelectedItem(null); }} data={selectedItem} />}
             <div className={`flex justify-between items-center md:ps-6 ps-4 ${level === 1 ? "text-xl font-bold md:pe-6 pe-4 md:py-6 py-4" : (level === 2 ? "text-lg font-semibold md:py-3 py-1.5 md:pe-10 pe-6" : "text-base font-medium md:pe-14 pe-8 md:py-1.5 py-0.5 ")}`}>
                 <div className="flex">

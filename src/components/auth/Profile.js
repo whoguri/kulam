@@ -113,8 +113,8 @@ function Profile() {
     timeOut = setTimeout(() => {
       setOpen(-1)
       if (e) {
-        getTree(0, e)
-        getTreeCount(e)
+        getTree(0, e.trim())
+        getTreeCount(e.trim())
       } else {
         getTree(0)
         getTreeCount()

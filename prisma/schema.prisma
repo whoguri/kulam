@@ -49,7 +49,7 @@ enum Role {
 model User {
   id            String     @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  email         String?     @unique
+  email         String?    @unique
   emailVerified DateTime?
   image         String?
   status        UserStatus @default(active)
@@ -111,7 +111,7 @@ model AppContent {
 model Poll {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
-  options  String
+  options  String[]
   answer   Answer[]
 }
 

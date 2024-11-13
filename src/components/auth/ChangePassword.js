@@ -6,7 +6,7 @@ import Modal from "../Modal"
 import { useForm } from "react-hook-form"
 import { getError } from "helper"
 
-export default function ChangePassword({ onSave, onClose, id }) {
+export default function ChangePassword({ onClose }) {
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
     const [type, setType] = useState("password")

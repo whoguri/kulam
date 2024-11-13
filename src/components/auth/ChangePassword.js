@@ -16,7 +16,7 @@ export default function ChangePassword({ onClose }) {
         try {
             setSending(true)
             const res = await axios.put("/api/auth/password", data)
-            if (res.status === 200) {
+            if (res.status === 201) {
                 toast.success("Changed Successfully")
                 onClose()
             } else {

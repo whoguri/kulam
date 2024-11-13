@@ -7,6 +7,7 @@ import Pagination from '../Pagination'
 import Layout from '../Layout'
 import AddPollModal from "./AddPollModal"
 import NoData from '../NoData'
+import { getError } from 'helper'
 
 function AdminView() {
     const { status, data } = useSession()
@@ -106,6 +107,7 @@ function AdminView() {
 export default AdminView
 
 const Item = ({ e, onEdit, isExpanded, toggleExpand }) => {
+    const length = e.answer.length
     return <div className="p-4 border-b  text-end">
         <div className='flex justify-between'>
             <button type="button" onClick={toggleExpand}>
@@ -125,18 +127,22 @@ const Item = ({ e, onEdit, isExpanded, toggleExpand }) => {
         </div>
         {isExpanded && <div className="py-2">
             {e.options.map((o, i) => {
+                let n = e.answer.filter(an => an.option === o).length
+                if (n)
+                    n = (n / length) * 100
                 return <div key={i} className='mb-3'>
                     <div className="flex gap-4 items-statr justify-end">
                         <div className='w-full'>
                             <h2 className="paragraph">{o}</h2>
                             <div>
                                 <div className='h-2 bg-background rounded-full overflow-hidden'>
-                                    <div className='me-0 ms-auto h-full bg-gradient-to-r from-primary to-primary-dark w-2/3' />
+                                    <div className='me-0 ms-auto h-full bg-gradient-to-r from-primary to-primary-dark '
+                                        style={{ width: `${n}%` }} />
                                 </div>
                             </div>
                         </div>
-                        <div className='min-w-20 paragraph'>
-                            100%
+                        <div className='min-w-10 paragraph'>
+                            {n}%
                         </div>
                     </div>
                 </div>

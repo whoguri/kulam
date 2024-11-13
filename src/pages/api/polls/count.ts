@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma'
-import withSession from '@/middlewares/with-session';
+import withAdmin from '@/middlewares/with-admin';
 
 const pollsCount = async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
     try {
@@ -27,4 +27,4 @@ const pollsCount = async (req: NextApiRequest & { user?: any }, res: NextApiResp
         res.status(403).json({ error: err?.message || "Error occured." });
     }
 };
-export default withSession(pollsCount)
+export default withAdmin(pollsCount)

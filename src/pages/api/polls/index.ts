@@ -1,12 +1,10 @@
 import prisma from '@/lib/prisma';
-import withSession from '@/middlewares/with-session';
+import withAdmin from '@/middlewares/with-admin';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const polls = async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
     const data = req.body;
     try {
-        const user = req?.user
-        const isAdmin = user?.role === "admin"
         if (req.method === "POST") {
             if (!req.user)
                 res.status(401).json({ error: "Unauthorized" });
@@ -16,11 +14,10 @@ const polls = async (req: NextApiRequest & { user?: any }, res: NextApiResponse)
             const { limit, skip, name }: any = req.query
             const q: any = {
                 where: {},
-                // orderBy: { name: 'desc' },
+                orderBy: { date: 'desc' },
+                include: { answer: { select: { option: true } } }
             }
-            if (!isAdmin) {
-                q.where.advertiserId = user?.id
-            }
+
             if (name) {
                 q.where.name = { contains: name, mode: "insensitive" }
             }
@@ -36,4 +33,4 @@ const polls = async (req: NextApiRequest & { user?: any }, res: NextApiResponse)
         res.status(403).json({ error: err?.message || "Error occured." });
     }
 };
-export default withSession(polls)
+export default withAdmin(polls)

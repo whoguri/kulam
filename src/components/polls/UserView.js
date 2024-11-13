@@ -14,7 +14,7 @@ import NoData from "../NoData";
 export default function PollsComponent() {
     const { status, data } = useSession()
     const user = data?.user || {}
-    const isAdvertiser = user?.role === ADVERTISER
+    const isAdvertiser = user?.role !== ADVERTISER
     const router = useRouter()
     const [loading, setLoading] = useState(false)
     const [list, setList] = useState([])
@@ -32,7 +32,7 @@ export default function PollsComponent() {
     const getList = async () => {
         try {
             setLoading(true)
-            let url = `/api/polls`
+            let url = `/api/polls/my-polls`
             const res = await axios.get(url)
             setList(res.data || [])
             setLoading(false)
@@ -104,8 +104,9 @@ const Item = ({ e, onClickSkip }) => {
             toast.error("Select Option")
             return
         }
-        let data = { pollId: id }
-        //  let res = await axios.post("/api/polls")
+        try {
+            axios.put(`/api/polls/${id}/answer`, { answer: selc })
+        } catch (e) { }
         onClickSkip()
         setSelc("")
     }

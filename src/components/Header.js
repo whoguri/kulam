@@ -49,10 +49,9 @@ export default function Header() {
     MENU.splice(1, 0, { title: ` חשבון אישי   ${userNick} `, link: "/profile" });
   }
 
-  if (status === "authenticated" && !isAdvertiser) {
-    MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
-
-  }
+  // if (status === "authenticated" && !isAdvertiser) {
+  MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
+  // }
 
   if (status === "authenticated" && isAdmin) {
     MENU.push({ title: "משתמשים  - ניהול", link: "/users" })

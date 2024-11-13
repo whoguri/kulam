@@ -1,7 +1,7 @@
 import InputWithValue from "./InputWithValue"
 export default function MultiInput({ label, items, setItems, buttonName, gridCols, containerClass = "" }) {
     return (<div className={` relative ${containerClass}`}>
-        <div className="flex gap-x-2 md:gap-x-4 w-full leading-none items-start">
+        <div className={"flex gap-x-2 md:gap-x-4 w-full leading-none items-start " + (gridCols === 1 ? " flex-col" : "")}>
             <div className="w-[100px] laptop:mb-4 mb-3  relative shrink-0">
                 <label className="text-sm font-bold pb-1">{label} </label>
                 <button

@@ -149,11 +149,11 @@ function Profile() {
                   <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
                     {sending ? "שומר.." : "שמירה"}
                   </button>
-                  <button disabled={sending} type='button'
+                  {sessionUser.loginType === "PASSWORD" && <button disabled={sending} type='button'
                     onClick={() => setOpenPwModal(true)}
                     className='ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4'>
                     Change Password
-                  </button>
+                  </button>}
                 </div>
               </form>
 

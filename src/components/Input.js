@@ -10,24 +10,17 @@ export default function Input({ isRequired,
     formProps,
     errors,
     disabled,
-    step }) {
-    let error = ""
-    if (errors)
-        error = errors[formProps?.name]?.type
-    if (error === "pattern") {
-        error = errors[formProps?.name]?.message
-    }
-    if (error === "minLength") {
-        error = errors[formProps?.name]?.message
-    }
-    if (error === "maxLength") {
-        error = errors[formProps?.name]?.message
-    }
-    if (error === "min") {
-        error = errors[formProps?.name]?.message
-    }
-    if (error === "max") {
-        error = errors[formProps?.name]?.message
+    step,
+    onClickIcon }) {
+    let error = "";
+
+    if (errors && formProps?.name) {
+        const errorMessage = errors[formProps.name]?.message;
+        const errorType = errors[formProps.name]?.type;
+
+        if (errorMessage && ["pattern", "minLength", "maxLength", "min", "max", "validate"].includes(errorType)) {
+            error = errorMessage;
+        }
     }
 
     return (<div className="">
@@ -38,7 +31,11 @@ export default function Input({ isRequired,
                 {...formProps}
                 disabled={disabled}
             />
-            {icon && <Image src={icon} alt="pen" width={16} height={16} className="absolute top-1/2 -translate-y-1/2 right-1" />}
+            {icon && <Image onClick={() => {
+                if (onClickIcon) {
+                    onClickIcon()
+                }
+            }} src={icon} alt="pen" width={16} height={16} className="cursor-pointer absolute top-1/2 -translate-y-1/2 end-1" />}
         </div>
         {error && <div className="input-error">{error}</div>}
 

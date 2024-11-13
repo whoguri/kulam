@@ -75,15 +75,15 @@ export default NextAuth({
     },
     events: {
         async signIn(e) {
-            // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
-            // if (u_)
-            //     await prisma.user.update({ where: { email: e?.user?.email || "" }, data: { lastLogin: new Date() } })
+            const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
+            if (u_)
+                await prisma.user.update({ where: { email: e?.user?.email || "" }, data: { lastLogin: new Date() } })
         },
         async createUser(e) {
             if (e?.user?.email) {
-                // const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
-                // if (u_ && !u_.password)
-                //     await prisma.user.update({ where: { email: e?.user?.email }, data: { registerOn: new Date(), lastLogin: new Date(), loginType: "GOOGLE" } })
+                const u_ = await prisma.user.findFirst({ where: { email: e?.user?.email || "" } })
+                if (u_ && !u_.password)
+                    await prisma.user.update({ where: { email: e?.user?.email }, data: { registerOn: new Date(), lastLogin: new Date(), loginType: "GOOGLE" } })
             }
         },
         async session(e) {

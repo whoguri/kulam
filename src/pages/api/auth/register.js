@@ -25,6 +25,7 @@ const register = async (req, res) => {
             delete data.referredBy
             const code = randomBytes(4).toString('hex')
             data.referralCode = code
+            data.loginType = "PASSWORD"
             const result = await prisma.user.create({ data });
             res.status(200).json(result);
 

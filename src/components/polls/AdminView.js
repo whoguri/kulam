@@ -8,6 +8,7 @@ import Layout from '../Layout'
 import AddPollModal from "./AddPollModal"
 import NoData from '../NoData'
 import { getError } from 'helper'
+import Loading from '../Loading'
 
 function AdminView() {
     const { status, data } = useSession()
@@ -24,11 +25,9 @@ function AdminView() {
     const [isExpanded, setIsExpanded] = useState(-1)
 
     useEffect(() => {
-        if (status === "authenticated" && isAdmin) {
+        if (status === "authenticated") {
             getList(0, limit)
             getCount()
-        } else if (status !== "loading") {
-            router.push("/")
         }
     }, [status])
 
@@ -72,7 +71,7 @@ function AdminView() {
             onSave={() => { getList(0, limit) }}
         />}
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
-            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" >
+            {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" >
                 {(list && list.length > 0) ? <>
                     <div className='w-full overflow-x-auto'>
                         {list.map((e, i) => {
@@ -99,7 +98,7 @@ function AdminView() {
                         />
                     </div>
                 </> : <NoData />}
-            </div>
+            </div>}
         </div>
     </Layout>
 }
@@ -142,7 +141,7 @@ const Item = ({ e, onEdit, isExpanded, toggleExpand }) => {
                             </div>
                         </div>
                         <div className='min-w-10 paragraph'>
-                            {n}%
+                            {Math.round(n)}%
                         </div>
                     </div>
                 </div>

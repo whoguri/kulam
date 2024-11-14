@@ -83,7 +83,7 @@ export default function Contact() {
                         </div>
                         <div>
                             <h3 className="paragraph pt-4 pb-2 text-end">כתובת אי-מייל<span className="text-red-500">*</span></h3>
-                            <input placeholder="Enter your name" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
+                            <input placeholder="Enter your email" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
                                 value={email}
                                 onChange={(e) => {
                                     setError("")

@@ -5,13 +5,12 @@ import withSession from '@/middlewares/with-session';
 const dealsCount = async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
     try {
         const user = req?.user
-        const isAdmin = user?.role === "admin"
         if (req.method === "GET") {
             const { name }: any = req.query
             const q: any = {
                 where: {},
             }
-            if (!isAdmin) {
+            if (user?.role === "advertiser") {
                 q.where.advertiserId = user.id
             }
             if (name) {

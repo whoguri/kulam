@@ -1,7 +1,6 @@
 "use client"
 import axios from "axios";
 import { getError } from "helper";
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -9,38 +8,34 @@ export default function Contact() {
     const [message, setMessage] = useState("")
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
-    const [error, setError] = useState("")
-    const [success, setSuccess] = useState("")
     const [sending, setSending] = useState(false)
     const validEmailRgx = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
     const onSubmit = async () => {
         try {
-            setError("")
             if (!name) {
-                setError("חסר שם");
+                toast.error("חסר שם");
                 return;
             } else if (name.length < 4) {
-                setError("שם קצר מדיי");
+                toast.error("שם קצר מדיי");
                 return;
             }
 
             if (!email) {
-                setError("הכנס מייל")
+                toast.error("הכנס מייל")
                 return
             } if (email && !validEmailRgx.test(email)) {
-                setError("מייל לא תקין")
+                toast.error("מייל לא תקין")
                 return;
             }
 
             if (!message) {
-                setError("הכנס הודעה");
+                toast.error("הכנס הודעה");
                 return;
             } else if (message.length < 4) {
-                setError("Message is short");
+                toast.error("Message is short");
                 return;
             }
-            setSuccess("")
             setSending(true)
             const data = { email, name, message }
 
@@ -48,7 +43,6 @@ export default function Contact() {
             if (res.status === 200) {
                 toast.success("Submitted Successfully")
                 setTimeout(() => {
-                    setSuccess("")
                     setSending(false)
                     setName("")
                     setEmail("")
@@ -56,7 +50,7 @@ export default function Contact() {
                 }, 5000);
             } else {
                 setSending(false)
-                setError("Someting went wrong")
+                toast.error("Someting went wrong")
             }
         } catch (error) {
             console.error(error)
@@ -76,30 +70,24 @@ export default function Contact() {
                             <input placeholder="Enter your name" type="text" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={name}
                                 onChange={(e) => {
-                                    setError("")
                                     setName(e.target.value)
                                 }} />
-                            {(error === "Name is required" || error === "Name is too short") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
                             <h3 className="paragraph pt-4 pb-2 text-end">כתובת אי-מייל<span className="text-red-500">*</span></h3>
                             <input placeholder="Enter your email" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input" type="email"
                                 value={email}
                                 onChange={(e) => {
-                                    setError("")
                                     setEmail(e.target.value)
                                 }} />
-                            {(error === "Enter email" || error === "Invalid email") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div>
                             <h3 className="paragraph pt-4 pb-2 text-end">הודעה<span className="text-red-500">*</span></h3>
                             <textarea rows={4} placeholder="Hint" className="border border-input rounded-xl w-full py-[6px] px-3 focus:outline-none text-end placeholder:text-input"
                                 value={message}
                                 onChange={(e) => {
-                                    setError("")
                                     setMessage(e.target.value)
                                 }} />
-                            {(error === "Message is required" || error === "Message is short") && <div className="text-red-400 text-xs text-end">{error}</div>}
                         </div>
                         <div className="text-end mt-3">
                             <button type="button" disabled={sending} className="bg-gradient-to-r from-primary to-primary-dark rounded-lg p-[1px]"

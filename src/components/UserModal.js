@@ -7,6 +7,7 @@ import Modal from "./Modal"
 import { useForm } from "react-hook-form"
 import SelectBox from "./SelectBox"
 import { ROLES, STATUS } from "@/constents/constArray"
+import { getError } from "helper"
 
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)

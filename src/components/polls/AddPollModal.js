@@ -70,7 +70,9 @@ export default function AddPollModal({ onSave, onClose, id }) {
                 <div className="grid grid-cols-1 gap-3">
                     <Input label="Name"
                         formProps={{ ...register("question", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
-                    <MultiInput items={options} setItems={setOptions} buttonName='options' label="Options" />
+                    <MultiInput items={options} setItems={setOptions} buttonName='options'
+                        gridCols={1}
+                        label="Options" />
                 </div>
 
                 <div className="flex justify-end items-end mt-2">

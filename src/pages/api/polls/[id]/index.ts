@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import withSession from "@/middlewares/with-session";
+import withAdmin from "@/middlewares/with-admin";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const poll = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -22,4 +22,4 @@ const poll = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
 };
-export default withSession(poll)
+export default withAdmin(poll)

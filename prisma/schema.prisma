@@ -112,6 +112,7 @@ model AppContent {
 model Poll {
   id       String   @id @default(auto()) @map("_id") @db.ObjectId
   question String
+  date DateTime? @default(now())
   options  String[]
   answer   Answer[]
 }

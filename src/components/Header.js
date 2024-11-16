@@ -21,6 +21,9 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
+  if (pathname === "/membership") {
+    return <></>
+  }
   // const googleLogin = async () => {
   //   try {
   //     setSending(true);

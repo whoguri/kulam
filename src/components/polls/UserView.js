@@ -1,7 +1,5 @@
 "use client"
-import { ADMIN, ADVERTISER, USER } from "@/constents/constArray";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Loading from "../Loading";
@@ -12,19 +10,14 @@ import { toast } from "react-toastify";
 import NoData from "../NoData";
 
 export default function PollsComponent() {
-    const { status, data } = useSession()
-    const user = data?.user || {}
-    const isAdvertiser = user?.role !== ADVERTISER
-    const router = useRouter()
+    const { status } = useSession()
     const [loading, setLoading] = useState(false)
     const [list, setList] = useState([])
     const [index, setIndex] = useState(0)
     const [allDone, setAllDone] = useState(false)
 
     useEffect(() => {
-        if (status !== "authenticated" || isAdvertiser) {
-            router.push("/")
-        } else if (status === "authenticated") {
+        if (status === "authenticated") {
             getList()
         }
     }, [status])

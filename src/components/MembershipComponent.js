@@ -40,10 +40,10 @@ function MembershipComponent() {
                         <h2 className="text-lg font-semibold text-background">{user?.name || user?.userName}</h2>
                     </div>
                     <div className="mt-4">
-                        <div className="flex justify-between text-sm text-background">
+                        {user?.registerOn && <div className="flex justify-between text-sm text-background">
                             <span>Join on:</span>
                             <span>{formatDate(user.registerOn, "dd/MM/yyyy - HH:mm")}</span>
-                        </div>
+                        </div>}
                         <div className="flex justify-between text-sm text-background mt-2">
                             <span>Email:</span>
                             <span>{user?.email}</span>

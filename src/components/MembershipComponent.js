@@ -24,7 +24,6 @@ function MembershipComponent() {
             <span className='inline-flex'>Back</span>
         </Link>
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-20 h-screen  flex justify-center items-center">
-
             <div className="flex justify-center items-center bg-gray-100 rounded-xl p-3 md:w-auto w-full">
                 <div className="md:w-80 w-full bg-white rounded-lg shadow-lg p-6">
                     {user?.image && <div className="flex justify-center mb-4">

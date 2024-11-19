@@ -8,11 +8,15 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
         if (req.method === "POST") {
-            if (data.phone)
+            if (data.phone || !data.password || !data.userName)
                 return res.status(400).json({ error: "Phone is required" });
+
             const user = await prisma.user.findFirst({ where: { phone: data.phone } });
             if (user)
                 return res.status(400).json({ error: "User already exists with same phone" });
+            const user2 = await prisma.user.findFirst({ where: { phone: data.userName } });
+            if (user2)
+                return res.status(400).json({ error: "User already exists with same userName" });
 
             const hashedPassword = await bcrypt.hash(data.password, 10);
             data.password = hashedPassword

@@ -14,6 +14,7 @@ import Input from '../Input'
 import { useForm } from 'react-hook-form'
 import Pagination from "../Pagination"
 import ChangePassword from "./ChangePassword"
+import AddReferralUser from './AddReferralUser'
 
 let timeOut = null;
 
@@ -29,6 +30,7 @@ function Profile() {
   const [sending, setSending] = useState(false)
   const [treeData, setTreeData] = useState([])
   const [openPwModal, setOpenPwModal] = useState(false)
+  const [openRefrallModal, setOpenRefrallModal] = useState(false)
   const [treeCount, setTreeCount] = useState(0)
   const [allCount, setAllCount] = useState(0)
   const [search, setSearch] = useState("")
@@ -132,6 +134,10 @@ function Profile() {
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
           {openPwModal && <ChangePassword
             onClose={() => { setOpenPwModal(false) }} />}
+          {openRefrallModal && <AddReferralUser
+            onSave={() => { getTree(0) }}
+            onClose={() => { setOpenRefrallModal(false) }}
+          />}
           <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]">
             <div className="md:grid md:grid-cols-2 flex  flex-col-reverse  w-full">
               <form className='md:w-auto w-full md:mt-0 mt-6' onSubmit={handleSubmit(onSubmit)} style={{ direction: "rtl" }}>
@@ -207,8 +213,14 @@ function Profile() {
             </div>
             <hr className="border-b border-black my-5" />
             <div>
-              <h1 className="paragraph mb-2 text-end"> <span className='h-6 min-w-6 rounded-full bg-gradient-to-r from-primary to-primary-dark me-2 inline-flex items-center justify-center px-1 py-1 text-white'>{allCount}</span> חברים שהצטרפו דרכי</h1>
-
+              <div className='flex justify-between mb-4'>
+                <button type='button'
+                  onClick={() => { setOpenRefrallModal(true) }}
+                  className='disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>
+                  Add
+                </button>
+                <h1 className="paragraph mb-2 text-end"> <span className='h-6 min-w-6 rounded-full bg-gradient-to-r from-primary to-primary-dark me-2 inline-flex items-center justify-center px-1 py-1 text-white'>{allCount}</span> חברים שהצטרפו דרכי</h1>
+              </div>
               <div className="w-full mb-2 relative">
                 <input type="text" value={search} className="text-end block py-3 ps-8 pe-4 border rounded-lg  w-full z-20 text-sm placeholder:text-light bg-transparent focus-visible:outline-none"
                   placeholder="Search..."

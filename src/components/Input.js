@@ -18,8 +18,8 @@ export default function Input({ isRequired,
         const errorMessage = errors[formProps.name]?.message;
         const errorType = errors[formProps.name]?.type;
 
-        if (errorMessage && ["pattern", "minLength", "maxLength", "min", "max", "validate"].includes(errorType)) {
-            error = errorMessage;
+        if (errorMessage || ["required", "pattern", "minLength", "maxLength", "min", "max", "validate"].includes(errorType)) {
+            error = errorMessage || errorType;
         }
     }
 

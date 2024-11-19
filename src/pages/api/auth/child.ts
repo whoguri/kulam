@@ -8,7 +8,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     const data = req.body;
     try {
         if (req.method === "POST") {
-            if (data.phone || !data.password || !data.userName)
+            if (!data.phone || !data.password || !data.userName)
                 return res.status(400).json({ error: "Phone is required" });
 
             const user = await prisma.user.findFirst({ where: { phone: data.phone } });

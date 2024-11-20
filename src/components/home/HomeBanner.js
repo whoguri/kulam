@@ -12,7 +12,13 @@ export default function HomeBanner({ deals = [] }) {
 
   return (
     <div className="bg-background relative overflow-hidden">
-      {openAuthModal && <AuthModal onClose={() => { setOpenAuthModal(false) }} />}
+      {openAuthModal && (
+        <AuthModal
+          onClose={() => {
+            setOpenAuthModal(false);
+          }}
+        />
+      )}
       <div className="reys"></div>
       <div className="tv"></div>
       <div className="flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
@@ -22,16 +28,26 @@ export default function HomeBanner({ deals = [] }) {
             קובי כץ מציג
           </h3>
 
-          <motion.h2 animate={{ scale: [1, 1.2, 0.6, 1, 1], rotate: [0, 3, 0] }} transition={{ duration: 1.4 }} className="z-10 xl:text-8xl text-5xl md:text-6xl leading-none uppercase md:py-1 font-bold text-primary text-end">
+          <motion.h2
+            animate={{ scale: [1, 1.2, 0.6, 1, 1], rotate: [0, 3, 0] }}
+            transition={{ duration: 1.4 }}
+            className="z-10 xl:text-8xl text-5xl md:text-6xl leading-none uppercase md:py-1 font-bold text-primary text-end"
+          >
             כולם בשביל כולם
           </motion.h2>
 
           <motion.div
             animate={{ scale: [1, 0.5, 1.1, 1] }}
             transition={{ duration: 1.4 }}
-          // className="animate-breathing"
+            // className="animate-breathing"
           >
-            <Image src="/images/handshaketr.png" alt="logo" width={333} height={112} className="pt-2" />
+            <Image
+              src="/images/handshaketr.png"
+              alt="logo"
+              width={333}
+              height={112}
+              className="pt-2"
+            />
           </motion.div>
         </div>
 
@@ -39,38 +55,130 @@ export default function HomeBanner({ deals = [] }) {
           יחד נוזיל את יוקר המחיה
         </h3>
         <div className="text-white flex flex-col gap-5 pt-0 w-full items-center xl:hidden md:hidden ">
-          {status === "unauthenticated" && <button
-            className="cursor-pointer mx-auto relative overflow-hidden rounded-lg"
-            onClick={() => {
-              setOpenAuthModal(true)
-            }}>
-            <span className="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
+          {status === "unauthenticated" && (
+            <button
+              className="cursor-pointer mx-auto relative overflow-hidden rounded-lg"
+              onClick={() => {
+                setOpenAuthModal(true);
+              }}
+            >
+              <span className="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
 
-            <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
-              {status === "authenticated" ? "יציאה" : "כניסה"}
-            </span>
-          </button>}
+              <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
+                {status === "authenticated" ? "יציאה" : "כניסה"}
+              </span>
+            </button>
+          )}
           <p className="text-center 2xl:text-lg xl:text-base text-sm">
             הצטרפו אלינו ותהנו מהטבות והצעות מיוחדות
           </p>
+          <div className="text-right rtl">
+            <p>
+              הסיבה להקמת ארגון כולם בשביל כולם הוא לפתור בעיה קיימת שבה כל
+              המחירים מסביב עולים חוץ מהמשכורות ואיך על ידי נתינת אפשרויות
+              להכנסה נוספת והוזלת העלויות על ידי קנייה כמותית.
+            </p>
+            <button
+              className="text-blue-500 hover:underline"
+              onClick={() => {
+                const content = document.getElementById("moreContent");
+                const button = document.getElementById("readMoreButton");
+                if (content && button) {
+                  if (
+                    content.style.display === "none" ||
+                    content.style.display === ""
+                  ) {
+                    content.style.display = "block";
+                    button.innerText = "הסתר";
+                  } else {
+                    content.style.display = "none";
+                    button.innerText = "קרא עוד";
+                  }
+                }
+              }}
+              id="readMoreButton"
+            >
+              קרא עוד
+            </button>
+            <div id="moreContent" className="text-right hidden">
+              <p>
+                עמוד 2 הדרך והסיבה שקוראים לארגון כולם בשביל כולם הוא בגלל
+                שהארגון בנוי על שיתוף פעולה בין כל חברי הארגון גם בהגדלת הארגון
+                על ידי הוספת כל החברים והאנשים שחברי הארגון מכירים וגם בהקשבה
+                לצרכי הארגון ומה הכי בוער להוזיל כרגע.
+              </p>
+              <p>
+                עמוד שלוש כל דבר שקשור בגדילת הארגון וההוזלות יוצר עזרה אמיתית
+                לכולם בהוזלת יוקר המחיה כרגע ההצטרפות למועדון הלקוחות הוא חינם
+                ויתחיל לעלות 10 שח בחודש רק ברגע בוא הארגון יתן הנחות משמעותיות
+                לחבריו שיעלו בהרבה מהעלות החודשית.
+              </p>
+              <p>
+                עמוד ארבע מכיוון שבשביל לייצר הוזלות משמעותיות צריכים ארגון גדול
+                מאוד כלומר אלפים עשרות אלפים ועוד אז קודם כל צריך לייצר את
+                הארגון ולכן פונה לכל מי שאכפת לו מיוקר המחיה להצטרף ולצרף כל מי
+                שהוא מכיר על מנת שנוכל לעזור לכמה שיותר אנשים.
+              </p>
+              <p>
+                עמוד חמש הצירוף לארגון הוא פשוט נרשמים כלקוח חדש והם מקבלים לינק
+                שאפשר לשלוח לכל החברים עם הסבר קצר על החברה אליה מצטרפים שמטרתה
+                הוזלת יוקר המחיה או למי שלא יכול להירשם לבד יש אפשרות לרשום אותו
+                בעצמכם.
+              </p>
+              <p>
+                עמוד שש כל מי שנרשם לארגון נרשם כיחידה משפחתית וזכאי לכל ההטבות
+                שהארגון נותן יש לציין שארגון בא למטרה לעזור לכולם בכל תחומי
+                החיים ולא רק בקניית מוצרי מזון פרטים תוכלו לראות באתר ולקבל
+                אינפורמציה עם הזמן.
+              </p>
+              <p>
+                עמוד 7 מאחל לכולנו שיתוף פעולה מעניין ופורה ושנצליח להגיע לכמה
+                שיותר אנשים כדי שנוכל באמת לשנות את המציאות במדינה בהצלחה לכולנו
+              </p>
+            </div>
+          </div>
 
           {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
         </div>
-        <div className="grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20" style={{ direction: "rtl" }}>
+        <div
+          className="grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
+          style={{ direction: "rtl" }}
+        >
           {deals.map((e, i) => {
-            return <button key={i} className="md:px-4 px-2 md:py-[6px] py-1 md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing">
-              <span className="line-clamp-1">{e.name}</span>
-            </button>
+            return (
+              <button
+                key={i}
+                className="md:px-4 px-2 md:py-[6px] py-1 md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing"
+              >
+                <span className="line-clamp-1">{e.name}</span>
+              </button>
+            );
           })}
         </div>
-        <img src="/images/title.svg" alt="kulam" width={50} height={50} className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]" />
+        <img
+          src="/images/title.svg"
+          alt="kulam"
+          width={50}
+          height={50}
+          className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]"
+        />
       </div>
 
       <img
-        src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-10 z-10 left-0" />
+        src="/images/title2.svg"
+        alt="kulam"
+        width={50}
+        height={50}
+        className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-10 z-10 left-0"
+      />
 
       <img
-        src="/images/title2.svg" alt="kulam" width={50} height={50} className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180" />
+        src="/images/title2.svg"
+        alt="kulam"
+        width={50}
+        height={50}
+        className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180"
+      />
     </div>
   );
 }

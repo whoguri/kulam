@@ -156,7 +156,7 @@ function Profile() {
             />
           )}
           {/* card */}
-          <div className="d:p-8 p-4 bg-white rounded-xl md:w-[10%] w-full mx-auto 2xl:min-h-[10vh] xl:min-h-[50vh] min-h-[10vh] mb-8 text-right">
+          <div className="d:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[10vh] xl:min-h-[10vh] min-h-[10vh] mb-8 text-right">
             <div className="md:text-xl text-base capitalize"> עמוד אישי ומידע</div>
             <div className="md:text-base text-sm capitalize">
               <div className="text-right rtl">

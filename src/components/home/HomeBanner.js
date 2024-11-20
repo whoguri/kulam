@@ -54,92 +54,69 @@ export default function HomeBanner({ deals = [] }) {
         <h3 className="text-center xl:text-end z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
           יחד נוזיל את יוקר המחיה
         </h3>
-        <div className="text-white flex flex-col gap-5 pt-0 w-full items-center xl:hidden md:hidden ">
-          {status === "unauthenticated" && (
-            <button
-              className="cursor-pointer mx-auto relative overflow-hidden rounded-lg"
-              onClick={() => {
-                setOpenAuthModal(true);
-              }}
-            >
-              <span className="absolute inset-0 w-4 h-4 bg-white animate-sparkle rounded-full transform rotate-45"></span>
-
-              <span className=" inline-block px-8 2xl:py-[6px] xl:py-[6px] py-2 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm">
-                {status === "authenticated" ? "יציאה" : "כניסה"}
-              </span>
-            </button>
-          )}
-          <p className="text-center 2xl:text-lg xl:text-base text-sm">
-            הצטרפו אלינו ותהנו מהטבות והצעות מיוחדות
+        <div className="text-right rt text-white l">
+          <p>
+            כל הנתונים מתייחסים למצב בו משלמים את המינימום החודשי של 10 שח לחודש
+            ומתחיל מהיום הראשון שהחברות במועדון תעלה כסף ותתחיל לחסוך כסף
+            משמעותי לחברי האירגון
           </p>
-          <div className="text-right rtl">
+          <button
+            className="text-blue-500 hover:underline"
+            onClick={() => {
+              const content = document.getElementById("moreContent");
+              if (content) {
+                content.style.display =
+                  content.style.display === "none" ? "block" : "none";
+              }
+              const button = document.getElementById("readMoreButton");
+              if (button) {
+                button.textContent =
+                  button.textContent === "קרא עוד" ? "הסתר" : "קרא עוד";
+              }
+            }}
+            id="readMoreButton"
+          >
+            קרא עוד
+          </button>
+          <div id="moreContent" style={{ display: "none" }}>
+            <p>במידה ומשלמים יותר גם הבונוס גדל בהתאמה:</p>
+            <p>דור 1 25% מוגבל ל-100 איש לכן 250 שח</p>
+            <p>דור 2 15% מוגבל ל-1,000 איש לכן 1,500 שח</p>
+            <p>דור 3 10% מוגבל ל-10,000 איש לכן 10,000 שח</p>
+            <p>סך הכל 3 דורות 11,750 שח</p>
+            <p>תוכנית התגמולים:</p>
             <p>
-              הסיבה להקמת ארגון כולם בשביל כולם הוא לפתור בעיה קיימת שבה כל
-              המחירים מסביב עולים חוץ מהמשכורות ואיך על ידי נתינת אפשרויות
-              להכנסה נוספת והוזלת העלויות על ידי קנייה כמותית.
+              הדרך בה אני מחלק 50% מהכנסות הארגון לכל האנשים שעוזרים ביום יום
+              להגדלתו והדרך ליצור מזה גם כסף:
             </p>
-            <button
-              className="text-blue-500 hover:underline"
-              onClick={() => {
-                const content = document.getElementById("moreContent");
-                const button = document.getElementById("readMoreButton");
-                if (content && button) {
-                  if (
-                    content.style.display === "none" ||
-                    content.style.display === ""
-                  ) {
-                    content.style.display = "block";
-                    button.innerText = "הסתר";
-                  } else {
-                    content.style.display = "none";
-                    button.innerText = "קרא עוד";
-                  }
-                }
-              }}
-              id="readMoreButton"
-            >
-              קרא עוד
-            </button>
-            <div id="moreContent" className="text-right hidden">
-              <p>
-                עמוד 2 הדרך והסיבה שקוראים לארגון כולם בשביל כולם הוא בגלל
-                שהארגון בנוי על שיתוף פעולה בין כל חברי הארגון גם בהגדלת הארגון
-                על ידי הוספת כל החברים והאנשים שחברי הארגון מכירים וגם בהקשבה
-                לצרכי הארגון ומה הכי בוער להוזיל כרגע.
-              </p>
-              <p>
-                עמוד שלוש כל דבר שקשור בגדילת הארגון וההוזלות יוצר עזרה אמיתית
-                לכולם בהוזלת יוקר המחיה כרגע ההצטרפות למועדון הלקוחות הוא חינם
-                ויתחיל לעלות 10 שח בחודש רק ברגע בוא הארגון יתן הנחות משמעותיות
-                לחבריו שיעלו בהרבה מהעלות החודשית.
-              </p>
-              <p>
-                עמוד ארבע מכיוון שבשביל לייצר הוזלות משמעותיות צריכים ארגון גדול
-                מאוד כלומר אלפים עשרות אלפים ועוד אז קודם כל צריך לייצר את
-                הארגון ולכן פונה לכל מי שאכפת לו מיוקר המחיה להצטרף ולצרף כל מי
-                שהוא מכיר על מנת שנוכל לעזור לכמה שיותר אנשים.
-              </p>
-              <p>
-                עמוד חמש הצירוף לארגון הוא פשוט נרשמים כלקוח חדש והם מקבלים לינק
-                שאפשר לשלוח לכל החברים עם הסבר קצר על החברה אליה מצטרפים שמטרתה
-                הוזלת יוקר המחיה או למי שלא יכול להירשם לבד יש אפשרות לרשום אותו
-                בעצמכם.
-              </p>
-              <p>
-                עמוד שש כל מי שנרשם לארגון נרשם כיחידה משפחתית וזכאי לכל ההטבות
-                שהארגון נותן יש לציין שארגון בא למטרה לעזור לכולם בכל תחומי
-                החיים ולא רק בקניית מוצרי מזון פרטים תוכלו לראות באתר ולקבל
-                אינפורמציה עם הזמן.
-              </p>
-              <p>
-                עמוד 7 מאחל לכולנו שיתוף פעולה מעניין ופורה ושנצליח להגיע לכמה
-                שיותר אנשים כדי שנוכל באמת לשנות את המציאות במדינה בהצלחה לכולנו
-              </p>
-            </div>
+            <p>
+              1. 25% על הדור הראשון (כלומר צרופים אישיים למועדון) עד 100 אנשים
+              (100×2.5=250)
+            </p>
+            <p>
+              2. 15% על הדור השני (אנשים שמצרפים האישיים צירפו למועדון) עד 1,000
+              איש (1,000×1.5=1,500)
+            </p>
+            <p>
+              3. 10% על הדור השלישי (מצורפים שצורפו על ידי מצורפים של מצורפים
+              אישיים בארגון) עד 10,000 איש (10,000×1=10,000)
+            </p>
+            <p>
+              4. בונוס שייכנס בעתיד הרחוק יותר כרגע אין צורך לייחס לו חשיבות -
+              10% מסך הנקודות של הרגל הקטנה בעסק (העסק בנוי בצורה בינארית כל אדם
+              בארגון מקבל שתי זוגות רגליים בהם הוא מצרף אנשים, ועל מנת לתגמל
+              אנשים על איזון בין שני המרכזים העסקיים שלהם אני מתגמל על פי הרגל
+              הקטנה). בונוס זה אינו מוגבל בסכום לעת עתה ובונוס זה כרגע במצב
+              ניסיוני.
+            </p>
+            <p>בעתיד בכולם בשביל כולם:</p>
+            <p>
+              נגיע לכל החנויות ולאנשים פרטיים, נעזור לכולם בהוזלת הסחורות
+              המגיעות לחנויות ולקונה הפרטי.
+            </p>
           </div>
-
-          {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
         </div>
+
         <div
           className="grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
           style={{ direction: "rtl" }}

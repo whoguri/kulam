@@ -11,7 +11,7 @@ export default function ServiceComponent({ description }) {
     const isAdmin = user?.role === ADMIN
     const [openUser, setOpenUser] = useState(false)
 
-    return <Layout title="more services"
+    return <Layout title="שירותים נוספים"
         buttonTitle={isAdmin && "edit"}
         onClickButton={() => { setOpenUser(true) }}>
 

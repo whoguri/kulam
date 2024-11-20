@@ -7,6 +7,7 @@ import Modal from "./Modal"
 import { useForm } from "react-hook-form"
 import SelectBox from "./SelectBox"
 import { ROLES, STATUS } from "@/constents/constArray"
+import { getError } from "helper"
 
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
@@ -29,7 +30,7 @@ export default function UserModal({ onSave, onClose, id }) {
             })
             setLoading(false)
         } catch (e) {
-            console.log(e)
+            console.error(e)
             toast.error(getError(e))
             // setLoading(false)
         }
@@ -38,7 +39,7 @@ export default function UserModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            const res = await axios.put("/api/users", + id, data)
+            const res = await axios.put("/api/users/" + id, data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
@@ -63,26 +64,26 @@ export default function UserModal({ onSave, onClose, id }) {
                     <Input label="Name"
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="Social Id"
-                        formProps={{ ...register("socialId", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                    <Input label="תעודת זהות"
+                        formProps={{ ...register("socialId", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="email"
-                        formProps={{ ...register("email", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                    <Input label="מייל" type="email" disabled={watch("email")}
+                        formProps={{ ...register("email", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="Phone"
-                        formProps={{ ...register("phone", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} type="number" clearErrors={clearErrors} />
+                    <Input label="טלפון"
+                        formProps={{ ...register("phone", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <SelectBox label="Status" clearErrors={clearErrors}
+                    <SelectBox label="סטאטוס" clearErrors={clearErrors}
                         formProps={{ ...register("status", { required: true }) }} isRequired={true} errors={errors}>
                         {STATUS.map((e, i) => {
                             return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
 
-                    <Input label="City"
+                    <Input label="עיר"
                         formProps={{ ...register("city", { required: true, }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                    <SelectBox label="Role" clearErrors={clearErrors}
+                    <SelectBox label="תפקיד" clearErrors={clearErrors}
                         formProps={{ ...register("role", { required: true }) }} isRequired={true} errors={errors}>
                         {ROLES.map((e, i) => {
                             return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>

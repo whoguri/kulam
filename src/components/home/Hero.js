@@ -3,19 +3,32 @@ import Image from "next/image";
 import Slider from "react-slick";
 import MobileImageSlider from "./MobileImageSlider";
 import DesktopSideImages from "./DesktopSideImages";
+import { useState } from "react";
 
 export default function Hero() {
+  const [index, setIndex] = useState(0)
   const settings = {
     dots: true,
     infinite: true,
     speed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplaySpeed: 5500,
+    autoplaySpeed: 4500,
     autoplay: true,
     arrows: false,
-    pauseOnHover: true, // Stop sliding on hover
-    pauseOnFocus: true, // Stop sliding on focus
+    pauseOnHover: true,
+    pauseOnFocus: true,
+    afterChange: i => (
+      setIndex(i)
+    ),
+    // appendDots: dots => (
+    //   <div className="p-1" >
+    //     <ul className="m-0"> {dots} </ul>
+    //   </div>
+    // ),
+    customPaging: i => (<div className="mx-[2px]">
+      <div className={`bg-white ${i === index ? "px-3" : "px-2"} rounded-xl`}>{i + 1}</div>
+    </div>)
   };
 
   const PROJECTS = [
@@ -58,8 +71,18 @@ export default function Hero() {
     },
   ];
 
-  const IMAGES_1 = ["1.jpeg", "2.jpeg", "3.jpeg", "4.jpeg"];
-  const IMAGES_2 = ["5.jpeg", "6.jpeg", "7.jpeg", "8.jpeg"];
+  const IMAGES_1 = [
+    { title: "ביטוחים", img: "1.jpeg" },
+    { title: "משכנתאות", img: "2.jpeg" },
+    { title: "טיסות", img: "3.jpeg" },
+    { title: "בתי מלון", img: "4.jpeg" },
+  ];
+  const IMAGES_2 = [
+    { title: "דלק", img: "5.jpeg" },
+    { title: "סופר מרקטים", img: "6.jpeg" },
+    { title: "מוצרי אלקטרוניקה", img: "7.jpeg" },
+    { title: "רהיטים", img: "8.jpeg" },
+  ];
   return (
     <>
       <div>
@@ -76,11 +99,17 @@ export default function Hero() {
                   <div key={i} className="px-[2px]">
                     <div className="min-h-[42px] md:min-h-[500px] md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl h-96">
                       <div className="md:w-[30%] w-full">
-                        <Image src={`${e.img}`} alt={`/images/${i + 1}.png`} width={150} height={200} className="object-fill mx-auto" />
+                        <Image
+                          src={`${e.img}`}
+                          alt={`/images/${i + 1}.png`}
+                          width={150}
+                          height={200}
+                          className="object-fill mx-auto"
+                        />
                       </div>
                       <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                         <h2 className="subheading">{e.title}</h2>
-                        <div className=" md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-right rtl">
+                        <div className=" md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-end rtl">
                           {e.subtitle.split("\n\n").map((paragraph, pIndex) => (
                             <p key={pIndex} className="mb-4">
                               {paragraph.trim()}
@@ -91,7 +120,6 @@ export default function Hero() {
                     </div>
                   </div>
                 ))}
-
 
                 {/* <div className="md:!flex justify-between gap-5 md:p-8 p-4 bg-white rounded-xl">
                                 <div className="md:w-[30%] w-full">

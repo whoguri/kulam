@@ -7,7 +7,7 @@ export const USER_SELECT = {
     referralCode: true,
     registerOn: true,
     lastLogin: true,
-    // loginType: true
+    loginType: true,
     phone: true,
     city: true,
     socialId: true

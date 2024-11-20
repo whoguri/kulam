@@ -1,5 +1,5 @@
 import withSession from "@/middlewares/with-session";
-import { USER_SELECT } from "../../../../prisma/select";
+import { USER_SELECT } from "../../../../../prisma/select";
 import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -9,14 +9,15 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
     const id = req.user.id
     try {
         if (req.method === "PUT") {
-            if (data.email) {
-                const user = await prisma.user.findFirst({ where: { email: data.email, id: { not: id } } });
+            if (data.userName) {
+                const user = await prisma.user.findFirst({ where: { userName: data.userName, id: { not: id } } });
                 if (user)
-                    return res.status(400).json({ error: "User already exists with same email" });
+                    return res.status(400).json({ error: "User already exists with same user name" });
             }
             const newData: any = {}
             Object.entries(data).forEach(item => {
-                newData[item[0]] = item[1]
+                if (["socialId", "phone", "city", "userName", "image", "name"].includes(item[0]))
+                    newData[item[0]] = item[1]
             })
 
             const result = await prisma.user.update({ where: { "id": id }, data: newData });
@@ -25,10 +26,13 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
 
             res.status(200).json(result);
         } else {
-            const result = await prisma.user.findUnique({ where: { "id": id }, select: USER_SELECT });
-            const tree = await getReferralTree(id);
+            const result = await prisma.user.findFirst({ where: { "id": id }, select: USER_SELECT });
+            // const tree = await getReferralTree(id, 1);
 
-            res.status(200).json({ ...result, tree: tree.referrals });
+            res.status(200).json({
+                ...result,
+                // tree: tree.referrals 
+            });
         }
     } catch (err: any) {
         console.error(err)
@@ -37,8 +41,8 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
 
 };
 
-async function getReferralTree(userId: string) {
-    const user = await prisma.user.findUnique({
+async function getReferralTree(userId: string, n: number) {
+    const user = await prisma.user.findFirst({
         where: { id: userId },
         include: {
             referrals: true,
@@ -49,9 +53,9 @@ async function getReferralTree(userId: string) {
 
     const tree: any = {
         id: user.id,
-        name: user.name,
+        name: user.name || user.userName,
         email: user.email,
-        referrals: await Promise.all(user.referrals.map(ref => getReferralTree(ref.id))),
+        referrals: n < 3 ? await Promise.all(user.referrals.map(ref => getReferralTree(ref.id, n + 1))) : [],
     };
 
     return tree;

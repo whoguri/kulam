@@ -10,13 +10,13 @@ const users = async (req, res) => {
             return res.status(401).json({ error: "Unauthorized" });
 
         if (req.method === "POST") {
-            const user = await prisma.user.findFirst({ where: { email: data.email } });
-            if (user)
-                return res.status(400).json({ error: "User already exists with same email" });
-            data.registerOn = new Date()
-            data.loginType = "EMAIL"
-            const result = await prisma.user.create({ data });
-            res.status(200).json(result);
+            // const user = await prisma.user.findFirst({ where: { email: data.email } });
+            // if (user)
+            //     return res.status(400).json({ error: "User already exists with same email" });
+            // data.registerOn = new Date()
+            // data.loginType = "EMAIL"
+            // const result = await prisma.user.create({ data });
+            res.status(405).json(null);
 
         } else {
             const { limit, skip, name, email, status, role } = req.query

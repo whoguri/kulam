@@ -3,11 +3,11 @@ import ContactComponent from "../../components/ContactComponent"
 import { APP_NAME } from "@/constents/constArray";
 
 export const metadata = {
-    title: `Contact | ${APP_NAME}`, description: "",
+    title: `יצירת קשר | ${APP_NAME}`, description: "",
 };
 
 export default function Contact() {
-    return <Layout title="Contact">
+    return <Layout title="יצירת קשר">
         <ContactComponent />
     </Layout>
 }

@@ -10,33 +10,58 @@ import { getError } from 'helper'
 import Loading from "../Loading"
 import { toast } from 'react-toastify'
 import ReferralTree from "./ReferralTree"
+import Input from '../Input'
+import { useForm } from 'react-hook-form'
+import Pagination from "../Pagination"
+import ChangePassword from "./ChangePassword"
+import AddReferralUser from './AddReferralUser'
+
+let timeOut = null;
 
 function Profile() {
-    const { status, data } = useSession()
-    const sessionUser = data?.user || {}
-    const [user, setUser] = useState(null)
-    const [loading, setLoading] = useState(true)
-    const router = useRouter()
-
-    useEffect(() => {
-        if (status === "authenticated") {
-            getProfile()
-        } else if (status === "unauthenticated") {
-            router.push("/")
-        }
-    }, [status])
-
-    const getProfile = async () => {
-        try {
-            setLoading(true)
-            let res = await axios.get("/api/auth/profile")
-            setUser(res.data)
-            setLoading(false)
-        } catch (error) {
-            console.log(getError(error))
-            setLoading(false)
-        }
+  const { status, data } = useSession()
+  const sessionUser = data?.user || {}
+  const hasEmail = sessionUser?.email || ''
+  const [user, setUser] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [treeLoading, setTreeLoading] = useState(true)
+  const router = useRouter()
+  const [open, setOpen] = useState(-1)
+  const [sending, setSending] = useState(false)
+  const [treeData, setTreeData] = useState([])
+  const [openPwModal, setOpenPwModal] = useState(false)
+  const [openRefrallModal, setOpenRefrallModal] = useState(false)
+  const [treeCount, setTreeCount] = useState(0)
+  const [allCount, setAllCount] = useState(0)
+  const [search, setSearch] = useState("")
+  const [page, setPage] = useState(0)
+  const limit = 20
+  const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
+  useEffect(() => {
+    if (status === "authenticated") {
+      getProfile()
+      getTree(0)
+      getTreeCount()
+    } else if (status === "unauthenticated") {
+      router.push("/")
     }
+  }, [status])
+
+  const getProfile = async () => {
+    try {
+      let res = await axios.get("/api/auth/profile")
+      const data = res.data
+      setUser(data)
+      setValue("name", data.name)
+      setValue("phone", data.phone)
+      setValue("socialId", data.socialId)
+      setValue("city", data.city)
+      setLoading(false)
+    } catch (error) {
+      console.error(getError(error))
+      setLoading(false)
+    }
+  }
 
 
   const getTree = async (p, s) => {
@@ -144,7 +169,7 @@ function Profile() {
                     חבר החל מ
                   </div>
                   <div className="capitalize md:text-base text-sm">
-                    {/* {formatDate(user?.registerOn, "MMM yyyy")} TODO: fix this */}
+                    {formatDate(user?.registerOn, "MMM yyyy")}
                   </div>
                   <div className="capitalize md:text-xl text-base mt-4">
                     ההכנסות שלי

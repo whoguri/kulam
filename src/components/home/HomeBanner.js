@@ -1,28 +1,14 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { signIn, useSession } from "next-auth/react";
-import { getError } from "helper";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { toast } from "react-toastify";
+import AuthModal from "../auth/AuthModal";
 
 export default function HomeBanner({ deals = [] }) {
-  const { status } = useSession()
-  const [sending, setSending] = useState(false)
+  const { status } = useSession();
+  const [openAuthModal, setOpenAuthModal] = useState(false);
 
-  const googleLogin = async () => {
-    try {
-      setSending(true)
-      const res = await signIn("google", { callbackUrl: "/" })
-      if (res?.status === 200) {
-        window.location.reload()
-      }
-    } catch (e) {
-      console.error(e)
-      toast.error(getError(e))
-      setSending(false)
-    }
-  }
   return (
     <div className="bg-background relative overflow-hidden">
       {openAuthModal && (
@@ -37,7 +23,7 @@ export default function HomeBanner({ deals = [] }) {
       <div className="flex flex-col  2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto md:pt-10 pt-1 relative z-20">
         <div className="flex flex-col items-center xl:items-end md:gap-5 gap-0">
           {/* <hr className="md:w-44 w-16" /> */}
-          <h3 className="md:text-sm text-sm md:text-right text-primary tracking-widest">
+          <h3 className="md:text-sm text-sm md:text-end text-primary tracking-widest">
             קובי כץ מציג
           </h3>
 
@@ -64,7 +50,7 @@ export default function HomeBanner({ deals = [] }) {
           </motion.div>
         </div>
 
-        <h3 className="text-center xl:text-right z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
+        <h3 className="text-center xl:text-end z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
           יחד נוזיל את יוקר המחיה
         </h3>
         <div className="text-white flex flex-col gap-5 pt-0 w-full items-center xl:hidden md:hidden ">
@@ -85,71 +71,6 @@ export default function HomeBanner({ deals = [] }) {
           <p className="text-center 2xl:text-lg xl:text-base text-sm">
             הצטרפו אלינו ותהנו מהטבות והצעות מיוחדות
           </p>
-          <div className="text-right rtl">
-            <p>
-              הסיבה להקמת ארגון כולם בשביל כולם הוא לפתור בעיה קיימת שבה כל
-              המחירים מסביב עולים חוץ מהמשכורות ואיך על ידי נתינת אפשרויות
-              להכנסה נוספת והוזלת העלויות על ידי קנייה כמותית.
-            </p>
-            <button
-              className="text-blue-500 hover:underline"
-              onClick={() => {
-                const content = document.getElementById("moreContent");
-                const button = document.getElementById("readMoreButton");
-                if (content && button) {
-                  if (
-                    content.style.display === "none" ||
-                    content.style.display === ""
-                  ) {
-                    content.style.display = "block";
-                    button.innerText = "הסתר";
-                  } else {
-                    content.style.display = "none";
-                    button.innerText = "קרא עוד";
-                  }
-                }
-              }}
-              id="readMoreButton"
-            >
-              קרא עוד
-            </button>
-            <div id="moreContent" style={{ display: "none" }}>
-              <p>
-                עמוד 2 הדרך והסיבה שקוראים לארגון כולם בשביל כולם הוא בגלל
-                שהארגון בנוי על שיתוף פעולה בין כל חברי הארגון גם בהגדלת הארגון
-                על ידי הוספת כל החברים והאנשים שחברי הארגון מכירים וגם בהקשבה
-                לצרכי הארגון ומה הכי בוער להוזיל כרגע.
-              </p>
-              <p>
-                עמוד שלוש כל דבר שקשור בגדילת הארגון וההוזלות יוצר עזרה אמיתית
-                לכולם בהוזלת יוקר המחיה כרגע ההצטרפות למועדון הלקוחות הוא חינם
-                ויתחיל לעלות 10 שח בחודש רק ברגע בוא הארגון יתן הנחות משמעותיות
-                לחבריו שיעלו בהרבה מהעלות החודשית.
-              </p>
-              <p>
-                עמוד ארבע מכיוון שבשביל לייצר הוזלות משמעותיות צריכים ארגון גדול
-                מאוד כלומר אלפים עשרות אלפים ועוד אז קודם כל צריך לייצר את
-                הארגון ולכן פונה לכל מי שאכפת לו מיוקר המחיה להצטרף ולצרף כל מי
-                שהוא מכיר על מנת שנוכל לעזור לכמה שיותר אנשים.
-              </p>
-              <p>
-                עמוד חמש הצירוף לארגון הוא פשוט נרשמים כלקוח חדש והם מקבלים לינק
-                שאפשר לשלוח לכל החברים עם הסבר קצר על החברה אליה מצטרפים שמטרתה
-                הוזלת יוקר המחיה או למי שלא יכול להירשם לבד יש אפשרות לרשום אותו
-                בעצמכם.
-              </p>
-              <p>
-                עמוד שש כל מי שנרשם לארגון נרשם כיחידה משפחתית וזכאי לכל ההטבות
-                שהארגון נותן יש לציין שארגון בא למטרה לעזור לכולם בכל תחומי
-                החיים ולא רק בקניית מוצרי מזון פרטים תוכלו לראות באתר ולקבל
-                אינפורמציה עם הזמן.
-              </p>
-              <p>
-                עמוד 7 מאחל לכולנו שיתוף פעולה מעניין ופורה ושנצליח להגיע לכמה
-                שיותר אנשים כדי שנוכל באמת לשנות את המציאות במדינה בהצלחה לכולנו
-              </p>
-            </div>
-          </div>
 
           {/* <button className="border border-white px-4 py-[6px] rounded-lg hover:bg-gradient-to-t from-[#F5BC46] to-[#ee7b31]">Sign Up</button> */}
         </div>

@@ -129,3 +129,11 @@ export function chunkArray(array, chunkSize) {
     }
     return chunks;
 }
+export function sortArray(array = []) {
+    return [...array].sort((a, b) => {
+        const aValue = (a.name || a.userName || "").toLowerCase();
+        const bValue = (b.name || b.userName || "").toLowerCase();
+
+        return aValue.localeCompare(bValue);
+    });
+}

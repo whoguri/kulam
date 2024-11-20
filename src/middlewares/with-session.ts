@@ -5,11 +5,10 @@ import { getToken } from "next-auth/jwt";
 const withSession = (handler: any): any => {
     return async (req: NextApiRequest & { user?: any }, res: NextApiResponse) => {
         const session: any = await getToken({ req, secret: process.env.NEXT_AUTH_SECRET });
-
         if (!session) {
             // return res.status(401).json({ error: 'Unauthorized' })
         } else {
-            const user = await prisma.user.findUnique({ where: { email: session.email } })
+            const user = await prisma.user.findFirst({ where: { id: session.sub } })
             if (user && user?.status !== "active")
                 return res.status(401).json({ error: 'Unauthorized' })
             req.user = user

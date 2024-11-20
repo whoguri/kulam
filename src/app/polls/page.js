@@ -1,5 +1,4 @@
-import Layout from "@/components/Layout";
-import PollsCompnent from "../../components/PollsComponent"
+import PollsCompnent from "../../components/polls/PollsComponent"
 import { APP_NAME } from "@/constents/constArray";
 
 export const metadata = {
@@ -7,7 +6,5 @@ export const metadata = {
 };
 
 export default function Polls() {
-    return <Layout title="Polls">
-        <PollsCompnent />
-    </Layout>
+    return <PollsCompnent />
 }

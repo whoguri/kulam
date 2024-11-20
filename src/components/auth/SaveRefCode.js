@@ -10,6 +10,7 @@ import { BASE_URL } from '@/constents/constArray'
 import { toast } from 'react-toastify'
 import { getError } from 'helper'
 import axios from 'axios'
+import AuthModal from './AuthModal'
 
 function SaveRefCode_() {
     const { status, data } = useSession()
@@ -18,11 +19,10 @@ function SaveRefCode_() {
     const code = search.get('ref')
     const [openRefModal, setOpenRefModal] = useState(false)
     const [open, setOpen] = useState(false)
-
+    const [openAuthModal, setOpenAuthModal] = useState(false)
 
     useEffect(() => {
         const localCode = localStorage.getItem("referredBy")
-        console.log(">>>", localCode, status)
 
         if (status === "authenticated") {
             if (user.role === "tbd") {
@@ -36,9 +36,9 @@ function SaveRefCode_() {
                     localStorage.removeItem("referredBy")
                 if (code)
                     gotoHome()
-                else if (!user?.socialId) {
-                    setOpen(true)
-                }
+                // else if (!user?.socialId) {
+                //     setOpen(true)
+                // }
             }
         } else if (status === "unauthenticated") {
             if (code) {
@@ -61,7 +61,8 @@ function SaveRefCode_() {
         }
     }
     return (<>
-        <AddReffrelCode open={openRefModal} setOpen={setOpenRefModal} />
+        {openAuthModal && <AuthModal onClose={() => { setOpenAuthModal(false) }} />}
+        <AddReffrelCode open={openRefModal} setOpen={setOpenRefModal} setOpenAuthModal={setOpenAuthModal} />
         {open && <UpdateRole open={open} setOpen={setOpen} />}
     </>)
 }

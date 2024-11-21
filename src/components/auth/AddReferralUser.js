@@ -11,6 +11,7 @@ import Modal from '../Modal'
 export default function AddReferralUser({ onClose, onSave }) {
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, getValues, formState: { errors } } = useForm({ defaultValues: { role: "user" } })
+    const [info, setInfo] = useState(null)
 
     const onSubmit = async (data) => {
         try {
@@ -20,13 +21,14 @@ export default function AddReferralUser({ onClose, onSave }) {
             data.password = data.password.trim()
             data.phone = data.phone.trim()
             data.role = "user"
-            await axios.post("/api/auth/child", data)
-            onSave()
-            let copiedText = `Username: ${data.userName} | Password: ${data.password}`
-            navigator.clipboard.writeText(copiedText)
-            toast.success("Username  and password is copied")
-            onClose()
-            setSending(false)
+            const res = await axios.post("/api/auth/child", data)
+            if (res.status === 200) {
+                setInfo(res.data)
+                onSave()
+                let copiedText = `Username: ${data.userName} | Password: ${data.password}`
+                navigator.clipboard.writeText(copiedText)
+                toast.success("Username  and password is copied")
+            }
         } catch (e) {
             setSending(false)
             toast.error(getError(e))
@@ -72,5 +74,9 @@ export default function AddReferralUser({ onClose, onSave }) {
                 </button>
             </div>
         </form>
+        {info && <div className='mt-4'>
+            {info?.userName && <div>User Name: <span className="font-normal">{info?.userName}</span></div>}
+            {info?.orgPassword && <div>Password: <span className="font-normal">{info?.orgPassword}</span></div>}
+        </div>}
     </Modal>)
 }

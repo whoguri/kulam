@@ -6,6 +6,7 @@ export default function InfoModal({ onClose, data = {} }) {
         <div className="grid grid-cols-1 gap-y-4 font-semibold md:text-xl text-base" >
             {data.name && <div>Name: <span className="font-normal">{data.name}</span></div>}
             {data.userName && <div>User Name: <span className="font-normal">{data.userName}</span></div>}
+            {data.orgPassword && <div>Password: <span className="font-normal">{data.orgPassword}</span></div>}
             {data.email && <div>Email: <span className="font-normal">{data.email}</span></div>}
             {data.phone && <div>Phone: <span className="font-normal">{data.phone}</span></div>}
         </div>

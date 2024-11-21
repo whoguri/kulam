@@ -19,12 +19,14 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ error: "User already exists with same userName" });
 
             const hashedPassword = await bcrypt.hash(data.password, 10);
+            data.orgPassword = data.password
             data.password = hashedPassword
             data.registerOn = new Date()
             //@ts-ignore
             data.referredByUser = { connect: { id: req.user?.id } }
             data.role = "user"
-
+            //@ts-ignore
+            data.addedBy = req.user?.id
             const code = randomBytes(4).toString('hex')
             data.referralCode = code
 

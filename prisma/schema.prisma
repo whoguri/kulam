@@ -59,9 +59,11 @@ model User {
   socialId      String?
   phone         String?
   password      String?
+  orgPassword   String?
   city          String?
   userName      String?
   loginType     String?
+  addedBy       String?
 
   referralCode String? @unique
   referredBy   String? @db.ObjectId
@@ -110,9 +112,9 @@ model AppContent {
 }
 
 model Poll {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
   question String
-  date DateTime? @default(now())
+  date     DateTime? @default(now())
   options  String[]
   answer   Answer[]
 }

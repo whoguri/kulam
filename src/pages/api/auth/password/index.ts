@@ -19,7 +19,12 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
             }
             const hashedPassword = await bcrypt.hash(newPassword, 10);
 
-            await prisma.user.update({ where: { "id": id }, data: { password: hashedPassword } });
+            await prisma.user.update({
+                where: { "id": id }, data: {
+                    orgPassword: "",
+                    password: hashedPassword
+                }
+            });
 
             res.status(201).json({});
         } else {

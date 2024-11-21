@@ -50,6 +50,8 @@ const profile = async (req: NextApiRequest, res: NextApiResponse) => {
                 email: true,
                 phone: true,
                 city: true,
+                addedBy: true,
+                orgPassword: true,
                 referrals: {
                     select: {
                         id: true,

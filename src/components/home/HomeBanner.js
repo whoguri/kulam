@@ -116,21 +116,22 @@ export default function HomeBanner({ deals = [] }) {
             </p>
           </div>
         </div>
-
-        <div
-          className="grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
-          style={{ direction: "rtl" }}
-        >
-          {deals.map((e, i) => {
-            return (
-              <button
-                key={i}
-                className="md:px-4 px-2 md:py-[6px] py-1 md:text-lg text-sm rounded-lg border bg-opacity-20 bg-white text-white animate-breathing"
-              >
-                <span className="line-clamp-1">{e.name}</span>
-              </button>
-            );
-          })}
+        <div className="scroll-container ">
+                <div
+                  className="scroll-content grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
+                  style={{ direction: "rtl" }}
+                >
+                  {deals.map((e, i) => {
+                    return (
+                      <button
+                        key={i}
+                        className="px-10 py-5 md:py-[6px] text-2xl md:text-lg  rounded-lg border bg-opacity-20 bg-white text-white animate-breathing flex-none"
+                      >
+                        <span className="line-clamp-1">{e.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
         </div>
         <img
           src="/images/title.svg"

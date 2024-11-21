@@ -219,3 +219,26 @@
 .editor .ql-toolbar.ql-snow .ql-formats {
   @apply !me-5 !ms-0
 }
+
+/* styles/globals.css or your component's CSS file */
+
+.scroll-container {
+  width: 100%; /* Container width for the viewport */
+  overflow: hidden; /* Hide the content that scrolls outside of the viewport */
+  position: relative; /* Ensure it's in a controlled position */
+}
+
+.scroll-content {
+  display: flex;
+  animation: scroll-left 20s linear infinite;
+  gap: 1rem; /* Adjust this value to add spacing between buttons */
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%); /* Start from right outside of view */
+  }
+  100% {
+    transform: translateX(-100%); /* Move to the left outside of view */
+  }
+}

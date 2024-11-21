@@ -9,7 +9,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const deals = await prisma.deal.findMany({ take: 5, where: {} })
+  const deals = await prisma.deal.findMany({ take: 10, where: {} })
 
   return (<>
     <Header />

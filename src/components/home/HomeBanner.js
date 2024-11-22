@@ -54,7 +54,7 @@ export default function HomeBanner({ deals = [] }) {
         <h3 className="text-center xl:text-end z-50 font-thin text-[1.8rem] md:text-4xl text-white tracking-widest pb-4 w-full">
           יחד נוזיל את יוקר המחיה
         </h3>
-        <div className="text-right rt text-white l">
+        {/* <div className="text-right rt text-white l">
           <p>
             כל הנתונים מתייחסים למצב בו משלמים את המינימום החודשי של 10 שח לחודש
             ומתחיל מהיום הראשון שהחברות במועדון תעלה כסף ותתחיל לחסוך כסף
@@ -115,7 +115,7 @@ export default function HomeBanner({ deals = [] }) {
               המגיעות לחנויות ולקונה הפרטי.
             </p>
           </div>
-        </div>
+        </div> */}
         <div className="scroll-container ">
                 <div
                   className="scroll-content grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"

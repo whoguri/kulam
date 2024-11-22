@@ -52,7 +52,10 @@ export default function DealsModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-
+            if (!image && !watch("image")) {
+                toast.error("Select Image")
+                return
+            }
             if (image) {
                 const array = image.name.split(".")
                 const ext = array[array.length - 1]

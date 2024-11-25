@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import Pagination from "../Pagination";
 import ChangePassword from "./ChangePassword";
 import AddReferralUser from "./AddReferralUser";
+import Link from "next/link";
 
 let timeOut = null;
 
@@ -308,6 +309,7 @@ function Profile() {
                   >
                     העתק קישור להזמנה
                   </button>
+                  <Link href="/membership" className="mt-2 block text-[#0039CC] underline">View Memebership Card</Link>
                 </div>
                 <div className="md:text-end text-center md:w-auto w-full">
                   {sessionUser?.image ? (

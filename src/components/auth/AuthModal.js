@@ -83,8 +83,8 @@ function AuthModal({ onClose }) {
           </button>
         </div>
         <div>
-          {view === "login" && <Login setView={setView} />}
-          {view === "register" && <Register setView={setView} />}
+          {view === "login" && <Login setView={setView} sending={sending} setSending={setSending} />}
+          {view === "register" && <Register setView={setView} sending={sending} setSending={setSending} />}
 
           <div className="relative my-8 text-center border-t">
             <span className="absolute top-1/2 -translate-y-1/2 left-0 right-0">

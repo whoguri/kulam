@@ -9,8 +9,7 @@ import { toast } from 'react-toastify'
 import { BASE_URL, ROLES } from '@/constents/constArray'
 import InputWithValue from '../InputWithValue'
 
-export default function Register() {
-    const [sending, setSending] = useState(false)
+export default function Register({ setSending, sending }) {
     const { register, handleSubmit, setValue, watch, getValues, formState: { errors } } = useForm({ defaultValues: { role: "user" } })
     const code = localStorage.getItem("referredBy")
 

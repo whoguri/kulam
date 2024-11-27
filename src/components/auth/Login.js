@@ -7,8 +7,7 @@ import { getError } from 'helper'
 import { toast } from 'react-toastify'
 import { BASE_URL } from '@/constents/constArray'
 
-export default function Login() {
-    const [sending, setSending] = useState(false)
+export default function Login({ setSending, sending }) {
     const { register, handleSubmit, formState: { errors } } = useForm({})
 
     const onSubmit = async (data) => {

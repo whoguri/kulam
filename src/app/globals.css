@@ -6,6 +6,10 @@
   background-image: linear-gradient(to right, #F5BC46, #ee7b31);
 }
 
+.gradient-bg2 {
+  background-image: linear-gradient(to top, #0000005e, #0000005e);
+}
+
 .poppins {
   font-family: "Assistant";
   font-style: normal;
@@ -223,22 +227,29 @@
 /* styles/globals.css or your component's CSS file */
 
 .scroll-container {
-  width: 100%; /* Container width for the viewport */
-  overflow: hidden; /* Hide the content that scrolls outside of the viewport */
-  position: relative; /* Ensure it's in a controlled position */
+  width: 100%;
+  /* Container width for the viewport */
+  overflow: hidden;
+  /* Hide the content that scrolls outside of the viewport */
+  position: relative;
+  /* Ensure it's in a controlled position */
 }
 
 .scroll-content {
   display: flex;
   animation: scroll-left 20s linear infinite;
-  gap: 1rem; /* Adjust this value to add spacing between buttons */
+  gap: 1rem;
+  /* Adjust this value to add spacing between buttons */
 }
 
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%); /* Start from right outside of view */
+    transform: translateX(100%);
+    /* Start from right outside of view */
   }
+
   100% {
-    transform: translateX(-100%); /* Move to the left outside of view */
+    transform: translateX(-100%);
+    /* Move to the left outside of view */
   }
 }

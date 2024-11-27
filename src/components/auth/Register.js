@@ -109,7 +109,13 @@ export default function Register() {
         </div>
         <div className="!w-full flex flex-col justify-center gap-4  mt-5">
             <button type='submit' className="disabled:pointer-events-none disabled:opacity-80 border border-primary-dark  block px-4 2xl:py-[6px] xl:py-[6px] py-1 rounded-lg bg-gradient-to-r from-primary to-primary-dark hover:from-white hover:to-white hover:text-primary-dark 2xl:text-base text-sm"
-                disabled={sending}>הרשמה
+                disabled={sending}>
+                {sending ? <span className='flex items-center justify-center'> <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+                    <g fill="currentColor">
+                        <path fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" clip-rule="evenodd" opacity="0.2" />
+                        <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
+                    </g>
+                </svg></span> : "הרשמה"}
             </button>
         </div>
     </form>

@@ -54,7 +54,7 @@ function AuthModal({ onClose }) {
         </div>
         <div className="flex gap-2 items-center justify-center mb-5 md:text-xl text-base font-semibold text-background">
           <button
-            className="relative px-4 pb-1 bg-orange-300 rounded-t-lg "
+            className="relative px-4 pb-1 bg-orange-300 rounded-t-lg"
             type="button"
             onClick={() => {
               setView("register");
@@ -65,6 +65,8 @@ function AuthModal({ onClose }) {
               className={`absolute h-0.5 top-full bg-background inset-0 mx-auto transition-all ${view === "register" ? "w-full" : "w-0"
                 }`}
             />
+
+
           </button>
           <button
             className="relative px-4 pb-1 bg-orange-300 rounded-t-lg"
@@ -98,8 +100,14 @@ function AuthModal({ onClose }) {
             onClick={googleLogin}
             disabled={sending}
           >
+            {sending ? <span className='flex items-center justify-center'> <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
+              <g fill="currentColor">
+                <path fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" clip-rule="evenodd" opacity="0.2" />
+                <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
+              </g>
+            </svg></span> : "עם חשבון Google"}
             {" "}
-            עם חשבון Google
+            {/* עם חשבון Google */}
           </button>
         </div>
       </div>

@@ -8,20 +8,20 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function DealsList() {
+export default function DiscountList() {
     const { id } = useParams()
-    const [deal, setDeal] = useState()
+    const [discount, setDiscount] = useState()
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         if (id)
-            getDeals()
+            getDiscount()
     }, [id])
 
-    const getDeals = async () => {
+    const getDiscount = async () => {
         try {
             if (id) {
-                const res = await axios.get("/api/deals/" + id)
-                setDeal(res.data)
+                const res = await axios.get("/api/discounts/" + id)
+                setDiscount(res.data)
                 setLoading(false)
             }
         } catch (e) {
@@ -31,17 +31,17 @@ export default function DealsList() {
         }
     }
 
-    return <Layout title={deal?.name || "loading..."}>
+    return <Layout title={discount?.name || "loading..."}>
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
             {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh] md:w-[70%] w-full mx-auto">
-                <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name}</div>
-                {deal.image &&
+                <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{discount.name}</div>
+                {discount.image &&
                     <div className="py-4">
-                        <Image src={deal.image} alt="deal" height={266} width={350} placeholder="empty" className="mx-auto rounded-md w-auto h-[266px]" />
+                        <Image src={discount.image} alt="discount" height={266} width={350} placeholder="empty" className="mx-auto rounded-md w-auto h-[266px]" />
                     </div>}
                 <div className="ql-snow">
                     <div className="ql-editor">
-                        <div className="ql-direction-rtl" dangerouslySetInnerHTML={{ __html: deal.description || "" }} />
+                        <div className="ql-direction-rtl" dangerouslySetInnerHTML={{ __html: discount.description || "" }} />
                     </div>
                 </div>
             </div>}

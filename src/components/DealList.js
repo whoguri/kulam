@@ -34,7 +34,10 @@ export default function DealsList() {
     return <Layout title={deal?.name || "loading..."}>
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto pt-10 pb-20">
             {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh] md:w-[70%] w-full mx-auto">
-                <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name}</div>
+                <div className="flex items-center justify-center gap-2">
+                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name} :</div>
+                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">₪{deal.amount}</div>
+                </div>
                 {deal.image &&
                     <div className="py-4">
                         <Image src={deal.image} alt="deal" height={266} width={350} placeholder="empty" className="mx-auto rounded-md w-auto h-[266px]" />

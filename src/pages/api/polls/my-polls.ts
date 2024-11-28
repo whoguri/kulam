@@ -8,7 +8,8 @@ const polls = async (req: NextApiRequest & { user?: any }, res: NextApiResponse)
             where: {
                 answer: { none: { userId: req.user.id } }
             },
-            orderBy: { date: "desc" }, take: 10
+            orderBy: { date: "desc" }, take: 15,
+            include: { answer: { select: { option: true } } }
         });
         res.status(200).json(result);
     } catch (err: any) {

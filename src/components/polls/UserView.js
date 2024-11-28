@@ -81,7 +81,7 @@ export default function PollsComponent() {
                                     }} />
                             })}
                         </Slider>}
-                </> : (allDone ? <AllDone /> : <NoData />))}
+                </> : (allDone ? <AllDone /> : <NoData text="No polls to vote" />))}
             </div>
         </div>
     </Layout>
@@ -91,6 +91,9 @@ export default function PollsComponent() {
 const Item = ({ e, onClickSkip }) => {
     let id = e.id
     const [selc, setSelc] = useState("")
+    const [answered, setAnswered] = useState(false)
+    const [answers, setAnswers] = useState(e.answer || [])
+
 
     const onSave = async (id) => {
         if (!selc) {
@@ -98,15 +101,19 @@ const Item = ({ e, onClickSkip }) => {
             return
         }
         try {
+            setAnswers(oa => [...oa, { option: selc }])
+            setAnswered(true)
             axios.put(`/api/polls/${id}/answer`, { answer: selc })
         } catch (e) { }
-        onClickSkip()
+        // onClickSkip()
         setSelc("")
     }
+    const length = answers.length
+
     return <div className="md:p-8 p-4 bg-white rounded-xl text-end">
         <h2 className="subheading">{e.question}</h2>
         <div className="py-6">
-            {e.options.map((o, i) => {
+            {!answered ? <div > {e.options.map((o, i) => {
                 return <label htmlFor={o} key={o} className="cursor-pointer flex gap-7 items-center justify-end">
                     <h2 className="paragraph">{o}</h2>
                     <input onChange={(e) => {
@@ -115,16 +122,52 @@ const Item = ({ e, onClickSkip }) => {
                     }} type="radio" name={id} id={o} value={o} className="border border-background py-3 px-3 rounded-full" />
                 </label>
             })}
+            </div>
+                : <div >
+                    {e.options.map((o, i) => {
+                        let n = answers.filter(an => an.option === o).length
+                        if (n)
+                            n = (n / length) * 100
+
+                        return <div key={i} className='mb-3'>
+                            <div className="flex gap-4 items-statr justify-end">
+                                <div className='w-full'>
+                                    <h2 className="paragraph">{o}</h2>
+                                    <div>
+                                        <div className='h-2 bg-background rounded-full overflow-hidden'>
+                                            <div className='me-0 ms-auto h-full bg-gradient-to-r from-primary to-primary-dark '
+                                                style={{ width: `${n}%` }} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='min-w-10 paragraph'>
+                                    {Math.round(n)}%
+                                </div>
+                            </div>
+                        </div>
+                    })}
+                </div>}
         </div>
-        <button
-            onClick={() => {
-                setSelc("")
-                onClickSkip()
-            }}
-            className="border border-transparent md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-background md:text-lg text-sm font-medium me-2 hover:bg-slate-50">Skip</button>
-        <button onClick={() => {
-            onSave(id)
-        }} className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Save</button>
+        {!answered ? <div>
+            <button
+                onClick={() => {
+                    setSelc("")
+                    onClickSkip()
+                }}
+                className="border border-transparent md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-background md:text-lg text-sm font-medium me-2 hover:bg-slate-50">Skip</button>
+            <button onClick={() => {
+                onSave(id)
+            }} className="border border-white gradient-bg md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-white md:text-lg text-sm font-medium">Save</button>
+        </div> :
+            <div>
+                <button
+                    onClick={() => {
+                        setSelc("")
+                        onClickSkip()
+                    }}
+                    className="border border-text md:py-[6px] py-1 md:px-10 px-5 rounded-lg text-background md:text-lg text-sm font-medium me-2 hover:bg-slate-50 ">Next</button>
+            </div>
+        }
     </div>
 }
 

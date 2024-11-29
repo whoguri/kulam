@@ -98,7 +98,7 @@ export default function DiscountsComponent() {
 }
 
 function Item({ isAdmin, isAdvertiser, setSelId, setOpenDiscount, e, i }) {
-    return <div key={i} className="group relative bg-white overflow-hidden  text-center rounded-lg">
+    return <div key={i} className="group relative bg-white overflow-hidden text-center rounded-lg">
         {(isAdmin || isAdvertiser) && <button type="button" className="z-[2] absolute end-2 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm"
             onClick={() => {
                 setSelId(e.id)

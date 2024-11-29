@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import AuthModal from "../auth/AuthModal";
-
+import DiscountCards from "../home/DiscountCards"
 export default function HomeBanner({ deals = [] }) {
   const { status } = useSession()
   const [openAuthModal, setOpenAuthModal] = useState(false)
@@ -39,7 +39,7 @@ export default function HomeBanner({ deals = [] }) {
           <motion.div
             animate={{ scale: [1, 0.5, 1.1, 1] }}
             transition={{ duration: 1.4 }}
-            // className="animate-breathing"
+          // className="animate-breathing"
           >
             <Image
               src="/images/handshaketr.png"
@@ -116,12 +116,13 @@ export default function HomeBanner({ deals = [] }) {
             </p>
           </div>
         </div> */}
-        <div className="scroll-container ">
-                <div
-                  className="scroll-content grid lg:grid-cols-5 grid-cols-3 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
-                  style={{ direction: "rtl" }}
-                >
-                  {deals.map((e, i) => {
+        {/* <div className="scroll-container">
+          <div
+            className="scroll-content flex 2xl:w-[70%] w-full mx-auto md:gap-6 gap-3 items-center justify-center md:pt-16 pt-10 md:pb-12 pb-8 relative z-20"
+            style={{ direction: "rtl" }}
+          > */}
+        <DiscountCards />
+        {/* {deals.map((e, i) => {
                     return (
                       <button
                         key={i}
@@ -130,9 +131,9 @@ export default function HomeBanner({ deals = [] }) {
                         <span className="line-clamp-1">{e.name}</span>
                       </button>
                     );
-                  })}
-                </div>
-        </div>
+                  })} */}
+        {/* </div>
+        </div> */}
         <img
           src="/images/title.svg"
           alt="kulam"

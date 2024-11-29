@@ -151,6 +151,7 @@ const Item = ({ e, onClickSkip }) => {
         {!answered ? <div>
             <button
                 onClick={() => {
+                    setAnswered(false)
                     setSelc("")
                     onClickSkip()
                 }}
@@ -162,6 +163,7 @@ const Item = ({ e, onClickSkip }) => {
             <div>
                 <button
                     onClick={() => {
+                        setAnswered(false)
                         setSelc("")
                         onClickSkip()
                     }}

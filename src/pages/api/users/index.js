@@ -19,17 +19,17 @@ const users = async (req, res) => {
             res.status(405).json(null);
 
         } else {
-            const { limit, skip, name, email, status, role } = req.query
+            const { limit, skip, name, email, status, role, orderBy } = req.query
             const q = {
                 where: {},
                 orderBy: { registerOn: 'desc' },
                 select: USER_SELECT
             }
             if (name) {
-                q.where.OR = [{ name: { contains: name, mode: "insensitive" } }]
+                q.where.name = { contains: name, mode: "insensitive" }
             }
             if (email) {
-                q.where.OR = [{ email: { contains: email, mode: "insensitive" } }]
+                q.where.email = { contains: email, mode: "insensitive" }
             }
 
             if (limit) q.take = parseInt(limit)
@@ -37,6 +37,12 @@ const users = async (req, res) => {
 
             if (status) q.where.status = status
             if (role) q.where.role = role
+
+            if (orderBy === "name") {
+                q.orderBy = { name: "asc" }
+            } if (orderBy === "total-a") {
+                q.orderBy = { total: "asc" }
+            }
 
             const result = await prisma.user.findMany(q);
             res.status(200).json(result);

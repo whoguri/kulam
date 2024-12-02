@@ -138,7 +138,7 @@ export default function UserModal({ onSave, onClose, id }) {
                 <hr className='border-b border-gray-200 mt-4' />
 
                 <div className="flex items-start justify-between w-ful my-5">
-                    <div className="flex items-center gap-20">
+                    <div className="flex items-center md:flex-nowrap flex-wrap md:gap-20 gap-4">
                         {registerOn && <div>
                             <div className="text-sm font-bold">Joining Date</div>
                             <span className="text-base">{formatDate(registerOn, "dd/MM/yyyy")}</span>

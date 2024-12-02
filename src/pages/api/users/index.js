@@ -26,10 +26,10 @@ const users = async (req, res) => {
                 select: USER_SELECT
             }
             if (name) {
-                q.where.OR = [{ name: { contains: name, mode: "insensitive" } }]
+                q.where.name = { contains: name, mode: "insensitive" }
             }
             if (email) {
-                q.where.OR = [{ email: { contains: email, mode: "insensitive" } }]
+                q.where.email = { contains: email, mode: "insensitive" }
             }
 
             if (limit) q.take = parseInt(limit)

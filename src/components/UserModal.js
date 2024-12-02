@@ -8,12 +8,18 @@ import { useForm } from "react-hook-form"
 import SelectBox from "./SelectBox"
 import { ROLES, STATUS } from "@/constents/constArray"
 import { getError } from "helper"
+import NoData from "./NoData"
+import { formatDate } from "date-fns"
+import { useSession } from "next-auth/react"
 
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
+    const { status, data } = useSession()
     const [sending, setSending] = useState(false)
     const [paySending, setPaySending] = useState(false)
     const [pays, setPays] = useState(false)
+    const user = data?.user || {}
+
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
@@ -112,21 +118,30 @@ export default function UserModal({ onSave, onClose, id }) {
                         })}
                     </SelectBox>
 
+                    <div></div>
                     <div className="mt-1">
                         <div className="text-sm font-bold pb-1">Joining Date</div>
                         <div className="relative">
                             <div className="disabled:bg-gray-200 w-full py-[18px] px-3 rounded-xl focus-visible:outline-none first-letter:capitalize placeholder:capitalize border border-input text-sm"></div>
                         </div>
                     </div>
-                    <Input label="Balance"
-                        formProps={{ ...register("balance", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} type="number" />
 
+                    <div className="mt-1">
+                        <div className="text-sm font-bold pb-1">Balance</div>
+                        <div className="relative">
+                            <div className="disabled:bg-gray-200 w-full py-[18px] px-3 rounded-xl focus-visible:outline-none first-letter:capitalize placeholder:capitalize border border-input text-sm"></div>
+                        </div>
+                    </div>
 
-                    <Input label="Total"
-                        formProps={{ ...register("total", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} type="number" />
+                    <div className="mt-1">
+                        <div className="text-sm font-bold pb-1">Total</div>
+                        <div className="relative">
+                            <div className="disabled:bg-gray-200 w-full py-[18px] px-3 rounded-xl focus-visible:outline-none first-letter:capitalize placeholder:capitalize border border-input text-sm"></div>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="flex items-center justify-end gap-5">
+                <div className="flex items-center justify-end gap-5 my-5">
                     <div className="flex justify-end items-end">
                         <button type="button" disabled={paySending} onClick={markedPaid} className='disabled:pointer-events-none bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                             Marked paid
@@ -138,50 +153,32 @@ export default function UserModal({ onSave, onClose, id }) {
                         </button>
                     </div>
 
+                </div>
 
 
+                <div className='w-full overflow-x-auto'>
+                    <table className='md:w-full w-max'>
+                        <thead>
+                            <tr>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Type
+                                </th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Date</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Amount </th>
+                            </tr>
+                        </thead>
+                        <tbody>  {loading ? <tr><td colSpan={2} className='text-center'><Loading /></td></tr> : (
+                            (pays && pays.length > 0) ? pays.map((e, index) => {
 
+                                return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
+                                    <td className='py-2 px-3 md:overflow-hidden'>{e.type}</td>
 
-
-
-
-
-                    {/* <div className='w-full overflow-x-auto'>
-                        <table className='md:w-full w-max'>
-                            <thead>
-                                <tr>
-                                    <th className='py-2 px-3 font-bold text-start align-top'>Position </th>
-                                    <th className='py-2 px-3 font-bold text-start align-top'>Name </th>
-                                    <th className='py-2 px-3 font-bold text-start align-top'>Phone </th>
-                                    <th className='py-2 px-3 font-bold text-start align-top'>identity card
-                                    </th>
-
-                                    <th className='py-2 px-3 font-bold text-start align-top'>Email</th>
-                                    <th className='py-2 px-3 font-bold text-start align-top'>City</th>
-
-                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Total</th>
-                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Joining Date</th>
-                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Balance</th>
+                                    <td className='py-2 px-3'>{formatDate(Date(), "dd/MM/yyyy")}</td>
+                                    <td className='py-2 px-3 md:overflow-hidden'>{e.amount}</td>
                                 </tr>
-                            </thead>
-                            <tbody>  {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
-                                (pays && pays.length > 0) ? pays.map((e, index) => {
-                                    const role = ROLES.find(el => el.value === e.role)
-                                    return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`} onClick={() => { setOpenUser(e.id) }}>
-                                        <td className='py-2 px-3'>{e.socialId}</td>
-                                        <td className='py-2 px-3 md:overflow-hidden'>{e.name}</td>
-                                        <td className='py-2 px-3 md:overflow-hidden'>{e.email}</td>
-                                        <td className='py-2 px-3'>{e.city}</td>
-                                        <td className='py-2 px-3'>{role?.label}</td>
-                                        <td className='py-2 px-3'>0</td>
-                                        <td className='py-2 px-3'>0</td>
-                                        <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>
-                                    </tr>
-                                }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
-                            )}
-                            </tbody>
-                        </table>
-                    </div> */}
+                            }) : <tr><td colSpan={2} className='text-center'><NoData /></td></tr>
+                        )}
+                        </tbody>
+                    </table>
                 </div>
             </form>}
 

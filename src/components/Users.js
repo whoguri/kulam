@@ -185,7 +185,7 @@ function Users() {
                                     <td className='py-2 px-3 md:overflow-hidden'>{e.name}</td>
                                     <td className='py-2 px-3 md:overflow-hidden'>{e.email}</td>
                                     <td className='py-2 px-3'>{e.city}</td>
-                                    <td className='py-2 px-3'>{e.role} || {role?.label}</td>
+                                    <td className='py-2 px-3'>{role?.label}</td>
                                     <td className='py-2 px-3'>0</td>
                                     <td className='py-2 px-3'>0</td>
                                     <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>

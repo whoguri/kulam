@@ -19,7 +19,7 @@ const users = async (req, res) => {
             res.status(405).json(null);
 
         } else {
-            const { limit, skip, name, email, status, role } = req.query
+            const { limit, skip, name, email, status, role, orderBy } = req.query
             const q = {
                 where: {},
                 orderBy: { registerOn: 'desc' },
@@ -37,6 +37,12 @@ const users = async (req, res) => {
 
             if (status) q.where.status = status
             if (role) q.where.role = role
+
+            if (orderBy === "name") {
+                q.orderBy = { name: "asc" }
+            } if (orderBy === "total-a") {
+                q.orderBy = { total: "asc" }
+            }
 
             const result = await prisma.user.findMany(q);
             res.status(200).json(result);

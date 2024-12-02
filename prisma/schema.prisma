@@ -64,8 +64,6 @@ model User {
   userName      String?
   loginType     String?
   addedBy       String?
-  isSubscribed  Boolean? @default(false)
-  isAutoRenew   Boolean? @default(false)
 
   balance Float? @default(0.0)
   total   Float? @default(0.0)

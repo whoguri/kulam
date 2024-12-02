@@ -74,12 +74,13 @@ model User {
   referredByUser User?  @relation("UserToReferrals", fields: [referredBy], references: [id], onDelete: NoAction, onUpdate: NoAction)
   referrals      User[] @relation("UserToReferrals")
 
-  accounts  Account[]
-  sessions  Session[]
-  deals     Deal[]
-  discounts Discount[]
-  answer    Answer[]
-  payLogs   PayLog[]
+  accounts      Account[]
+  sessions      Session[]
+  deals         Deal[]
+  discounts     Discount[]
+  answer        Answer[]
+  payLogs       PayLog[]
+  subscriptions Subscription[]
 }
 
 model Deal {
@@ -149,10 +150,10 @@ model PayLog {
 }
 
 model Subscription {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId     String   @db.ObjectId
-  user       User     @relation(fields: [userId], references: [id])
-  amount     Float
-  date       DateTime
-  expiry     DateTime
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId String   @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  amount Float
+  date   DateTime
+  expiry DateTime
 }

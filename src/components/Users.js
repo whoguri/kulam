@@ -12,6 +12,8 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import Pagination from "./Pagination"
 import { getError } from 'helper'
+import SelectBox from './SelectBox'
+import { formatDate } from 'date-fns'
 let timeout = null
 
 function Users() {
@@ -99,23 +101,29 @@ function Users() {
             onSave={() => { getList(page, limit) }}
         />}
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
-            <div className="md:p-8 p-4 bg-white rounded-xl md:w-[70%] w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
+            <div className="md:p-8 p-4 bg-white rounded-xl w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
+                <div className='flex items-center justify-between w-full'>
+
+                    <div className='text-base font-bold'>Count : {count}</div>
+                    <SelectBox></SelectBox>
+                </div>
+                <hr className='border-b border-gray-200 my-3' />
+
                 <div className='w-full overflow-x-auto'>
-                    <table className='md:w-full w-max md:table-fixed'>
+                    <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold text-start md:w-[12%] align-top'>תעודת זהות</th>
-
-                                <th className=' py-2 px-3 font-bold text-start md:w-[23%]'>שם
+                                <th className='py-2 px-3 font-bold text-start align-top'>תעודת זהות</th>
+                                <th className=' py-2 px-3 font-bold text-start'>שם
                                     <input className='text-start disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={name}
                                         onChange={(e) => {
                                             setName(e.target.value)
                                         }} />
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start md:w-[25%] align-top'>Email</th>
-                                <th className='py-2 px-3 font-bold text-start md:w-[15%] align-top'>City</th>
-                                <th className='py-2 px-3 font-bold text-start md:w-[15%]'>Role
+                                <th className='py-2 px-3 font-bold text-start align-top'>Email</th>
+                                <th className='py-2 px-3 font-bold text-start align-top'>City</th>
+                                <th className='py-2 px-3 font-bold text-start '>Role
                                     <select className='disabled:bg-gray-200 w-full capitalize py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={role}
                                         onChange={(e) => {
@@ -127,6 +135,8 @@ function Users() {
                                         })}
                                     </select>
                                 </th>
+
+
                                 <th className='py-2 px-3 font-bold text-start capitalize align-top md:w-[10%]'>הכנסות
                                     {/* <input className='disabled:bg-gray-200 w-full py-1 px-3 rounded focus-visible:outline-none first-letter:capitalize text-gray-500 border border-input text-sm font-normal'
                                         value={balance}
@@ -134,6 +144,8 @@ function Users() {
                                             setBalance(e.target.value)
                                         }} /> */}
                                 </th>
+                                <th className='py-2 px-3 font-bold text-start capitalize align-top'>Total</th>
+                                <th className='py-2 px-3 font-bold text-start capitalize align-top'>Joining Date</th>
                             </tr>
                         </thead>
                         <tbody>  {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
@@ -146,6 +158,8 @@ function Users() {
                                     <td className='py-2 px-3'>{e.city}</td>
                                     <td className='py-2 px-3'>{role?.label}</td>
                                     <td className='py-2 px-3'>0</td>
+                                    <td className='py-2 px-3'>0</td>
+                                    <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>
                                 </tr>
                             }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
                         )}

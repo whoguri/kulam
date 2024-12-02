@@ -60,7 +60,7 @@ export default function UserModal({ onSave, onClose, id }) {
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading /> :
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
+                <div className="grid md:grid-cols-4 grid-cols-1 gap-3">
                     <Input label="Name"
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
@@ -89,10 +89,23 @@ export default function UserModal({ onSave, onClose, id }) {
                             return <option value={e.value} key={e.value} className="capitalize">{e.label}</option>
                         })}
                     </SelectBox>
+
+                    <div className="mt-1">
+                        <div className="text-sm font-bold pb-1">Joining Date</div>
+                        <div className="relative">
+                            <div className="disabled:bg-gray-200 w-full py-[18px] px-3 rounded-xl focus-visible:outline-none first-letter:capitalize placeholder:capitalize border border-input text-sm"></div>
+                        </div>
+                    </div>
+                    <Input label="Balance"
+                        formProps={{ ...register("balance", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} type="number" />
+
+
+                    <Input label="Total"
+                        formProps={{ ...register("total", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} type="number" />
                 </div>
 
                 <div className="flex justify-end items-end">
-                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                    <button disabled={sending} type='submit' className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                         {sending ? "Saving" : "Save"}
                     </button>
                 </div>

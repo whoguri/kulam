@@ -21,6 +21,7 @@ export default function UserModal({ onSave, onClose, id }) {
     const user = data?.user || {}
 
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
+    const [email, setEmail] = useState("")
 
     useEffect(() => {
         if (id) {
@@ -37,6 +38,7 @@ export default function UserModal({ onSave, onClose, id }) {
                     setValue(e, data[e])
                 }
             })
+            setEmail(data.email)
             const payRes = await axios.get("/api/users/" + id + "/pays")
             setPays(payRes.data)
             setLoading(false)
@@ -95,7 +97,7 @@ export default function UserModal({ onSave, onClose, id }) {
                     <Input label="תעודת זהות"
                         formProps={{ ...register("socialId", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
-                    <Input label="מייל" type="email" disabled={watch("email")}
+                    <Input label="מייל" type="email" disabled={email}
                         formProps={{ ...register("email", { required: false }) }} isRequired={false} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="טלפון"

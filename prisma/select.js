@@ -10,5 +10,7 @@ export const USER_SELECT = {
     loginType: true,
     phone: true,
     city: true,
-    socialId: true
+    socialId: true,
+    total: true,
+    balance: true
 }

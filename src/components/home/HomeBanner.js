@@ -139,7 +139,7 @@ export default function HomeBanner({ deals = [] }) {
           alt="kulam"
           width={50}
           height={50}
-          className="w-[400px] mx-auto absolute bottom-0 right-0 z-10 left-0 max-h-[70px]"
+          className="w-[400px] mx-auto bottom-0 right-0 z-10 left-0 max-h-[70px]"
         />
       </div>
 

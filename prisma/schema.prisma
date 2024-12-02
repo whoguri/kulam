@@ -64,6 +64,8 @@ model User {
   userName      String?
   loginType     String?
   addedBy       String?
+  isSubscribed  Boolean? @default(false)
+  isAutoRenew   Boolean? @default(false)
 
   balance Float? @default(0.0)
   total   Float? @default(0.0)
@@ -146,4 +148,13 @@ model PayLog {
   type       PayType
   amount     Float
   date       DateTime
+}
+
+model Subscription {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
+  amount     Float
+  date       DateTime
+  expiry     DateTime
 }

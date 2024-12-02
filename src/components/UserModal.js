@@ -12,11 +12,14 @@ import { getError } from "helper"
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
+    const [paySending, setPaySending] = useState(false)
+    const [pays, setPays] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
-        if (id)
+        if (id) {
             getUser()
+        }
     }, [id])
 
     const getUser = async () => {
@@ -28,6 +31,8 @@ export default function UserModal({ onSave, onClose, id }) {
                     setValue(e, data[e])
                 }
             })
+            const payRes = await axios.get("/api/users/" + id + "/pays")
+            setPays(payRes.data)
             setLoading(false)
         } catch (e) {
             console.error(e)
@@ -46,13 +51,30 @@ export default function UserModal({ onSave, onClose, id }) {
                 onClose()
                 // setSending(false)
             }
-
             else {
                 toast.error("Something went wrong")
                 setSending(false)
             }
         } catch (error) {
             setSending(false)
+            toast.error(getError(error))
+        }
+    }
+
+    const markedPaid = async () => {
+        try {
+            setPaySending(true)
+            const res = await axios.post("/api/users/" + id + "/paid", {})
+            if (res.status === 201) {
+                toast.success("Updated Successfully")
+                setPaySending(false)
+            }
+            else {
+                toast.error("Something went wrong")
+                setPaySending(false)
+            }
+        } catch (error) {
+            setPaySending(false)
             toast.error(getError(error))
         }
     }
@@ -106,17 +128,60 @@ export default function UserModal({ onSave, onClose, id }) {
 
                 <div className="flex items-center justify-end gap-5">
                     <div className="flex justify-end items-end">
-                        <button type="button" className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                        <button type="button" disabled={paySending} onClick={markedPaid} className='disabled:pointer-events-none bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
                             Marked paid
                         </button>
                     </div>
                     <div className="flex justify-end items-end">
-                        <button disabled={sending} type='submit' className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold'>
+                        <button disabled={sending} type='submit' className='bg-primary px-4 py-2 border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold min-w-[150px]'>
                             {sending ? "Saving" : "Save"}
                         </button>
                     </div>
 
 
+
+
+
+
+
+
+
+                    {/* <div className='w-full overflow-x-auto'>
+                        <table className='md:w-full w-max'>
+                            <thead>
+                                <tr>
+                                    <th className='py-2 px-3 font-bold text-start align-top'>Position </th>
+                                    <th className='py-2 px-3 font-bold text-start align-top'>Name </th>
+                                    <th className='py-2 px-3 font-bold text-start align-top'>Phone </th>
+                                    <th className='py-2 px-3 font-bold text-start align-top'>identity card
+                                    </th>
+
+                                    <th className='py-2 px-3 font-bold text-start align-top'>Email</th>
+                                    <th className='py-2 px-3 font-bold text-start align-top'>City</th>
+
+                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Total</th>
+                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Joining Date</th>
+                                    <th className='py-2 px-3 font-bold text-start capitalize align-top'>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>  {loading ? <tr><td colSpan={6} className='text-center'><Loading /></td></tr> : (
+                                (pays && pays.length > 0) ? pays.map((e, index) => {
+                                    const role = ROLES.find(el => el.value === e.role)
+                                    return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`} onClick={() => { setOpenUser(e.id) }}>
+                                        <td className='py-2 px-3'>{e.socialId}</td>
+                                        <td className='py-2 px-3 md:overflow-hidden'>{e.name}</td>
+                                        <td className='py-2 px-3 md:overflow-hidden'>{e.email}</td>
+                                        <td className='py-2 px-3'>{e.city}</td>
+                                        <td className='py-2 px-3'>{role?.label}</td>
+                                        <td className='py-2 px-3'>0</td>
+                                        <td className='py-2 px-3'>0</td>
+                                        <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>
+                                    </tr>
+                                }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
+                            )}
+                            </tbody>
+                        </table>
+                    </div> */}
                 </div>
             </form>}
 

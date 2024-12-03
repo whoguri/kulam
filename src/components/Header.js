@@ -56,8 +56,13 @@ export default function Header() {
     MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
   }
 
+
+
   if (status === "authenticated" && isAdmin) {
     MENU.push({ title: "משתמשים  - ניהול", link: "/users" })
+  }
+  if (status === "authenticated" && isAdmin) {
+    MENU.push({ title: "Settings", link: "/settings" })
   }
   return (
     <>

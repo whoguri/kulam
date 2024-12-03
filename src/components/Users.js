@@ -188,7 +188,7 @@ function Users() {
                                     <td className='py-2 px-3'>{role?.label}</td>
                                     <td className='py-2 px-3'>0</td>
                                     <td className='py-2 px-3'>0</td>
-                                    <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>
+                                    <td className='py-2 px-3'>{e.registerOn ? formatDate(e.registerOn, "dd/MM/yyyy") : ""}</td>
                                 </tr>
                             }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
                         )}

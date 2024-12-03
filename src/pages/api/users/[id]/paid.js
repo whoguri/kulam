@@ -6,8 +6,8 @@ const user = async (req, res) => {
     try {
         if (req.method === "POST") {
             const user = await prisma.user.findFirst({ where: { "id": id } });
-            // if (!user.balance)
-            //     return res.status(400).json({ error: "No balance" });
+            if (!user.balance)
+                return res.status(400).json({ error: "No balance" });
             await prisma.payLog.create({
                 data: {
                     user: { connect: { id: id } }, date: new Date(), amount: user.balance || 0, type: "WITHDRAW",

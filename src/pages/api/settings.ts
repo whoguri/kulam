@@ -1,0 +1,27 @@
+import prisma from "@/lib/prisma";
+import withAdmin from "@/middlewares/with-admin";
+import { NextApiRequest, NextApiResponse } from "next";
+
+const settings = async (req: NextApiRequest, res: NextApiResponse) => {
+    try {
+        if (req.method === "PUT") {
+            const { amount, gen_1, gen_2, gen_3 }: any = req.body;
+            await prisma.setting.upsert({
+                where: { v: 0 },
+                update: { amount, gen_1, gen_2, gen_3 },
+                create: { amount, gen_1, gen_2, gen_3, v: 0 }
+            });
+            res.status(201).json(null);
+        } else if (req.method === "GET") {
+            const result = await prisma.setting.findFirst({ where: { v: 0 } });
+            res.status(200).json(result);
+        } else {
+            res.status(404).json(null);
+        }
+    } catch (err: any) {
+        console.error(err)
+        res.status(500).json({ error: err?.message || "Error occured." });
+    }
+
+};
+export default withAdmin(settings)

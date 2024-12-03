@@ -25,17 +25,19 @@ function GetSubscriptionModal() {
 
     const onSubscribe = async () => {
         try {
+            setSending(true)
             let res = await axios.post(`api/auth/subscription`, { date: new Date(), expiry: (endOfDay(endOfMonth(new Date()))) })
             if (res.status === 201) {
                 toast.success("Subscribed Successfully")
                 window.location.reload()
             }
         } catch (error) {
+            setSending(false)
             console.log(error)
             toast.error(getError(error))
         }
     }
-    return (<Modal title="Subscription">
+    return (<Modal title="Subscription" closeButton={false} >
         <div>
 
         </div>

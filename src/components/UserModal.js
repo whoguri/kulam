@@ -77,7 +77,7 @@ export default function UserModal({ onSave, onClose, id }) {
         }
     }
 
-    const markedPaid = async () => {
+    const markPaid = async () => {
         try {
             setPaySending(true)
             const res = await axios.post("/api/users/" + id + "/paid", {})
@@ -156,7 +156,7 @@ export default function UserModal({ onSave, onClose, id }) {
                     </div>
                     <div className="flex items-center justify-end gap-5">
                         <div className="flex justify-end items-end">
-                            <button type="button" disabled={paySending} onClick={markedPaid} className='disabled:pointer-events-none disabled:bg-gray-400 disabled:border-gray-400 bg-background px-2 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold'>Marked paid</button>
+                            <button type="button" disabled={paySending} onClick={markPaid} className='disabled:pointer-events-none disabled:bg-gray-400 disabled:border-gray-400 bg-background px-2 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold'>Mark paid</button>
                         </div>
                     </div>
                 </div>
@@ -167,17 +167,17 @@ export default function UserModal({ onSave, onClose, id }) {
                     <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Type
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Type
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Date</th>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm'>Amount</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Date</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Amount</th>
                             </tr>
                         </thead>
                         <tbody> {(pays && pays.length > 0) ? pays.map((e, index) => {
                             return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
-                                <td className='py-2 px-3 md:overflow-hidden'>{e.type}</td>
-                                <td className='py-2 px-3'>{formatDate(Date(), "dd/MM/yyyy")}</td>
-                                <td className='py-2 px-3 md:overflow-hidden'>{e.amount}</td>
+                                <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type}</td>
+                                <td className='py-2 px-3 border border-gray-300'>{formatDate(Date(), "dd/MM/yyyy")}</td>
+                                <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.amount}</td>
                             </tr>
                         }) : <tr><td colSpan={3} className='text-center'><NoData /></td></tr>}
                         </tbody>

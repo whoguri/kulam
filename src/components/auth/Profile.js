@@ -296,7 +296,11 @@ function Profile() {
                   <div className="capitalize md:text-xl text-base mt-4">
                     ההכנסות שלי
                   </div>
-                  <div className="capitalize md:text-base text-sm">₪2000</div>
+                  <div className="capitalize md:text-base text-sm">₪{user?.total || 0}</div>
+                  <div className="capitalize md:text-xl text-base mt-4">
+                    Balance
+                  </div>
+                  <div className="capitalize md:text-base text-sm">₪{user?.balance || 0}</div>
                   <button
                     type="button"
                     onClick={() => {

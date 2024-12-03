@@ -171,6 +171,7 @@ export default function UserModal({ onSave, onClose, id }) {
                                 </th>
                                 <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Date</th>
                                 <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Amount</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Detail</th>
                             </tr>
                         </thead>
                         <tbody> {(pays && pays.length > 0) ? pays.map((e, index) => {
@@ -178,8 +179,9 @@ export default function UserModal({ onSave, onClose, id }) {
                                 <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type}</td>
                                 <td className='py-2 px-3 border border-gray-300'>{formatDate(Date(), "dd/MM/yyyy")}</td>
                                 <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.amount}</td>
+                                <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.details}</td>
                             </tr>
-                        }) : <tr><td colSpan={3} className='text-center'><NoData /></td></tr>}
+                        }) : <tr><td colSpan={4} className='text-center'><NoData /></td></tr>}
                         </tbody>
                     </table>
                 </div>

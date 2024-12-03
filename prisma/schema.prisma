@@ -157,3 +157,12 @@ model Subscription {
   date   DateTime
   expiry DateTime
 }
+
+model Setting {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  v      Int @unique
+  amount Float
+  gen_1  Int
+  gen_2  Int
+  gen_3  Int
+}

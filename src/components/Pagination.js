@@ -13,10 +13,10 @@ export default function Pagination(props) {
     if (start < 0) {
         start = 0
     }
-    let end = start + 14
+    let end = start + 9
     if (end > pageCount) {
         end = pageCount
-        start = end - 14
+        start = end - 9
         if (start < 0) {
             start = 0
         }
@@ -76,6 +76,7 @@ export default function Pagination(props) {
                     <option value={20}>20</option>
                     <option value={30}>30</option>
                     <option value={50}>50</option>
+                    <option value={100}>100</option>
                 </select>}
             </div>
         </div>

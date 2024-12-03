@@ -118,16 +118,17 @@ function Users() {
                     <div className='text-base font-bold'>Count : {count}</div>
                     <SelectBox defaultOption="Sort By" onChange={(e) => {
                         setSortBy(e.target.value)
-                    }} value={sortBy} def>
-                        {[{ title: "Low to high - Joining Date", value: "registerOn-a" },
-                        { title: "High to Low - Joining Date", value: "registerOn-d" },
-                        { title: "Low to high - Total", value: "total-a" },
-                        { title: "High to Low - Total", value: "total-d" },
-                        { title: "Low to high - Balance", value: "balance-a" },
-                        { title: "High to low - Balance", value: "balance-d" },
-                        { title: "Name", value: "name" }].map((e, i) => {
-                            return <option value={e.value} key={e.value}>{e.title}</option>
-                        })}
+                    }} value={sortBy} >
+                        {[
+                            { title: "Newest First - Joining Date", value: "registerOn-d" },
+                            { title: "Oldest First - Joining Date", value: "registerOn-a" },
+                            { title: "Low to high - Total", value: "total-a" },
+                            { title: "High to Low - Total", value: "total-d" },
+                            { title: "Low to high - Balance", value: "balance-a" },
+                            { title: "High to low - Balance", value: "balance-d" },
+                            { title: "Name", value: "name" }].map((e, i) => {
+                                return <option value={e.value} key={e.value}>{e.title}</option>
+                            })}
                     </SelectBox>
                 </div>
                 <hr className='border-b border-gray-200 my-3' />
@@ -186,9 +187,9 @@ function Users() {
                                     <td className='py-2 px-3 md:overflow-hidden'>{e.email}</td>
                                     <td className='py-2 px-3'>{e.city}</td>
                                     <td className='py-2 px-3'>{role?.label}</td>
-                                    <td className='py-2 px-3'>0</td>
-                                    <td className='py-2 px-3'>0</td>
-                                    <td className='py-2 px-3'>{formatDate(user.registerOn, "dd/MM/yyyy")}</td>
+                                    <td className='py-2 px-3'>{e.balance}</td>
+                                    <td className='py-2 px-3'>{e.total}</td>
+                                    <td className='py-2 px-3'>{e.registerOn ? formatDate(e.registerOn, "dd/MM/yyyy") : ""}</td>
                                 </tr>
                             }) : <tr><td colSpan={6} className='text-center'><NoData /></td></tr>
                         )}

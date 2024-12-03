@@ -147,6 +147,7 @@ model PayLog {
   type       PayType
   amount     Float
   date       DateTime
+  details    String?
 }
 
 model Subscription {

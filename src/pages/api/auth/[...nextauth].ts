@@ -61,7 +61,11 @@ export default NextAuth({
             //     return {}
 
             //@ts-ignore
-            const u = await prisma.user.findFirst({ where: { id: token?.sub } })
+            const u = await prisma.user.findFirst({
+                where: { id: token?.sub }, include: {
+                    subscriptions: { take: 1, where: { expiry: { gte: new Date() } } }
+                }
+            })
             if (!u)
                 return {}
 

@@ -11,7 +11,7 @@ const user = async (req, res) => {
             await prisma.payLog.create({
                 data: {
                     user: { connect: { id: id } }, date: new Date(), amount: user.balance || 0, type: "WITHDRAW",
-                    fromUserId: req.user.id
+                    fromUserId: req.user.id, details: "By Admin"
                 }
             });
             await prisma.user.update({ where: { "id": id }, data: { balance: 0 } });

@@ -15,7 +15,23 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
 
             //verify payment
 
-            const user = await prisma.user.findUnique({ where: { id } });
+            const user = await prisma.user.findUnique({
+                where: { id }, select: {
+                    referredByUser: {
+                        select: {
+                            status: true, id: true,
+                            referredByUser: {
+                                select: {
+                                    status: true, id: true,
+                                    referredByUser: {
+                                        select: { status: true, id: true, }
+                                    }
+                                }
+                            },
+                        }
+                    }
+                }
+            });
             await prisma.subscription.create({
                 data: {
                     user: { connect: { id } },
@@ -24,7 +40,6 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
                     expiry: new Date(expiry),
                 }
             });
-
             res.status(201).json(null);
         } else {
             res.status(404).json(null);

@@ -165,4 +165,9 @@ model Setting {
   gen_1  Int
   gen_2  Int
   gen_3  Int
+
+  gen_1_p  Float
+  gen_2_p  Float
+  gen_3_p  Float
+
 }

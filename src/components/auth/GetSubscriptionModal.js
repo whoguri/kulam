@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { getError } from 'helper'
 
 function GetSubscriptionModal() {
-    const { data, status, update } = useSession()
+    const { data, status } = useSession()
     const subscriptions = data?.user?.subscriptions || []
     const [open, setOpen] = useState(false)
     const [sending, setSending] = useState(false)

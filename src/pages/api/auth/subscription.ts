@@ -10,9 +10,12 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ error: "Invalid data" });
             //@ts-ignore
             const id = req.user.id
+            const setting = await prisma.setting.findFirst({ where: { v: 0 } })
+            if (!setting)
+                return res.status(400).json({ error: "Invalid settings" });
 
             //verify payment
-            const amount = 10
+            const amount = setting!.amount
             const user = await prisma.user.findUnique({
                 where: { id }, select: {
                     status: true, id: true,
@@ -40,49 +43,51 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             });
             if (user?.referredByUser && user?.referredByUser?.status === "active") {
+                const p = amount * (setting.gen_1_p / 100)
                 await prisma.payLog.create({
                     data: {
-                        user: { connect: { id: user?.referredByUser.id } }, date: new Date(), amount: amount / 10, type: "EARN",
-                        fromUserId: id, details: `10%`
+                        user: { connect: { id: user?.referredByUser.id } }, date: new Date(), amount: p, type: "EARN",
+                        fromUserId: id, details: `${setting.gen_1_p}%`
                     }
                 });
                 await prisma.user.update({
                     where: { id: user?.referredByUser.id },
                     data: {
-                        balance: { increment: amount / 10 }
+                        balance: { increment: p }
                     }
                 });
 
             }
             if (user?.referredByUser?.referredByUser && user?.referredByUser?.referredByUser?.status === "active") {
+                const p = amount * (setting.gen_2_p / 100)
                 await prisma.payLog.create({
                     data: {
-                        user: { connect: { id: user?.referredByUser?.referredByUser?.id } }, date: new Date(), amount: amount / 2, type: "EARN",
-                        fromUserId: id, details: `2%`
+                        user: { connect: { id: user?.referredByUser?.referredByUser?.id } }, date: new Date(), amount: p, type: "EARN",
+                        fromUserId: id, details: `${setting.gen_2_p}%`
                     }
                 });
                 await prisma.user.update({
                     where: { id: user?.referredByUser.referredByUser.id },
                     data: {
-                        balance: { increment: amount / 2 }
+                        balance: { increment: p }
                     }
                 });
             }
             if (user?.referredByUser?.referredByUser?.referredByUser && user?.referredByUser?.referredByUser?.referredByUser?.status === "active") {
+                const p = amount * (setting.gen_3_p / 100)
                 await prisma.payLog.create({
                     data: {
-                        user: { connect: { id: user?.referredByUser.referredByUser.referredByUser.id } }, date: new Date(), amount: amount / 1, type: "EARN",
-                        fromUserId: id, details: `1%`
+                        user: { connect: { id: user?.referredByUser.referredByUser.referredByUser.id } }, date: new Date(), amount: p, type: "EARN",
+                        fromUserId: id, details: `${setting.gen_3_p}%`
                     }
                 });
                 await prisma.user.update({
                     where: { id: user?.referredByUser.referredByUser.referredByUser.id },
                     data: {
-                        balance: { increment: amount / 1 }
+                        balance: { increment: p }
                     }
                 });
             }
-
 
             res.status(201).json(null);
         } else {

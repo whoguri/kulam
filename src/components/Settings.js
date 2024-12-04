@@ -72,9 +72,10 @@ export default function Settings() {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid md:grid-cols-3 grid-cols-1 gap-3">
                             <div></div>
-                            <div></div>
-                            <Input label="Amount" type="number" step={0.01}
-                                formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                            <Input label="Monthly Subscription" type="number" step={0.01}
+                                formProps={{ ...register("amountMonth", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+                            <Input label="Yearly Subscription" type="number" step={0.01}
+                                formProps={{ ...register("amountYear", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                             <Input label="generation 3" type="number"
                                 formProps={{ ...register("gen_3", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
@@ -97,7 +98,7 @@ export default function Settings() {
                         </div>
 
                         <div className="flex justify-end items-end">
-                            <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-60 bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold mt-5'>Submit</button>
+                            <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-60 bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold mt-5'>Save</button>
                         </div>
                     </form>
                 }

@@ -5,11 +5,11 @@ import { NextApiRequest, NextApiResponse } from "next";
 const settings = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === "PUT") {
-            const { amount, gen_1, gen_2, gen_3, gen_1_p, gen_2_p, gen_3_p }: any = req.body;
+            const { amountMonth, amountYear, gen_1, gen_2, gen_3, gen_1_p, gen_2_p, gen_3_p }: any = req.body;
             await prisma.setting.upsert({
                 where: { v: 0 },
-                update: { amount, gen_1, gen_2, gen_3, gen_1_p, gen_2_p, gen_3_p },
-                create: { amount, gen_1, gen_2, gen_3, v: 0, gen_1_p, gen_2_p, gen_3_p }
+                update: { amountYear, amountMonth, gen_1, gen_2, gen_3, gen_1_p, gen_2_p, gen_3_p },
+                create: { amountYear, amountMonth, gen_1, gen_2, gen_3, v: 0, gen_1_p, gen_2_p, gen_3_p }
             });
             res.status(201).json(null);
         } else if (req.method === "GET") {

@@ -15,7 +15,7 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(400).json({ error: "Invalid settings" });
 
             //verify payment
-            const amount = setting!.amount
+            const amount = setting!.amountMonth
             const user = await prisma.user.findUnique({
                 where: { id }, select: {
                     status: true, id: true,

@@ -78,20 +78,23 @@ export default function UserModal({ onSave, onClose, id }) {
     }
 
     const markPaid = async () => {
-        try {
-            setPaySending(true)
-            const res = await axios.post("/api/users/" + id + "/paid", {})
-            if (res.status === 201) {
-                toast.success("Updated Successfully")
-                getPays()
-            }
-            else {
-                toast.error("Something went wrong")
+        const b = confirm("Are you sure to mark this as paid?")
+        if (b) {
+            try {
+                setPaySending(true)
+                const res = await axios.post("/api/users/" + id + "/paid", {})
+                if (res.status === 201) {
+                    toast.success("Updated Successfully")
+                    getPays()
+                }
+                else {
+                    toast.error("Something went wrong")
+                    setPaySending(false)
+                }
+            } catch (error) {
                 setPaySending(false)
+                toast.error(getError(error))
             }
-        } catch (error) {
-            setPaySending(false)
-            toast.error(getError(error))
         }
     }
     const registerOn = watch("registerOn")

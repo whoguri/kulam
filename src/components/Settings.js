@@ -35,7 +35,7 @@ export default function Settings() {
             if (res.status === 201) {
                 toast.success("Updated Successfully")
                 // onSave()
-                // setSending(false)
+                setSending(false)
             }
             else {
                 toast.error("Something went wrong")
@@ -71,34 +71,33 @@ export default function Settings() {
 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="grid md:grid-cols-3 grid-cols-1 gap-3">
-
-                            <Input label="generation2" type="number"
-                                formProps={{ ...register("gen_2", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
-
-                            <Input label="generation1" type="number"
-                                formProps={{ ...register("gen_1", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
-
+                            <div></div>
+                            <div></div>
                             <Input label="Amount" type="number" step={0.01}
                                 formProps={{ ...register("amount", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                            <Input label="generation2_%" type="number" step={0.01}
-                                formProps={{ ...register("gen_2_p", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
-
-                            <Input label="generation1_%" type="number" step={0.01}
-                                formProps={{ ...register("gen_1_p", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
-
-                            <Input label="generation3" type="number"
+                            <Input label="generation 3" type="number"
                                 formProps={{ ...register("gen_3", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                            <div></div>
-                            <div></div>
+                            <Input label="generation 2" type="number"
+                                formProps={{ ...register("gen_2", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
-                            <Input label="generation3_%" type="number" step={0.01}
+                            <Input label="generation 1" type="number"
+                                formProps={{ ...register("gen_1", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+
+                            <Input label="generation 3%" type="number" step={0.01}
                                 formProps={{ ...register("gen_3_p", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+
+
+                            <Input label="generation 2%" type="number" step={0.01}
+                                formProps={{ ...register("gen_2_p", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
+
+                            <Input label="generation 1%" type="number" step={0.01}
+                                formProps={{ ...register("gen_1_p", { required: true, valueAsNumber: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
                         </div>
 
                         <div className="flex justify-end items-end">
-                            <button disabled={sending} type='submit' className='bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold mt-5'>Submit</button>
+                            <button disabled={sending} type='submit' className='disabled:pointer-events-none disabled:opacity-60 bg-primary px-4 py-2  border border-primary text-white rounded-md text-xl uppercase hover:bg-white hover:text-primary font-semibold mt-5'>Submit</button>
                         </div>
                     </form>
                 }

@@ -165,7 +165,7 @@ export default function UserModal({ onSave, onClose, id }) {
                 </div>
             </form>
 
-            <div className="pb-8">
+            <div className="pb-8" >
                 <div className='w-full overflow-x-auto'>
                     <table className='md:w-full w-max'>
                         <thead>

@@ -16,6 +16,7 @@ import Pagination from "../Pagination";
 import ChangePassword from "./ChangePassword";
 import AddReferralUser from "./AddReferralUser";
 import Link from "next/link";
+import NoData from "../NoData";
 
 let timeOut = null;
 
@@ -36,6 +37,9 @@ function Profile() {
   const [allCount, setAllCount] = useState(0);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(0);
+  const [tab, setTab] = useState(0);
+  const [pays, setPays] = useState(false)
+
   const limit = 20;
   const {
     register,
@@ -50,6 +54,7 @@ function Profile() {
       getProfile();
       getTree(0);
       getTreeCount();
+      getPays()
     } else if (status === "unauthenticated") {
       router.push("/");
     }
@@ -95,6 +100,16 @@ function Profile() {
       console.error(getError(error));
     }
   };
+
+  const getPays = async () => {
+    try {
+      const payRes = await axios.get("/api/users/" + sessionUser?.id + "/pays")
+      setPays(payRes.data)
+    } catch (error) {
+      console.error(e)
+      toast.error(getError(e))
+    }
+  }
 
   const onSubmit = async (data) => {
     try {
@@ -301,19 +316,6 @@ function Profile() {
                     Balance
                   </div>
                   <div className="capitalize md:text-base text-sm">₪{user?.balance || 0}</div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        BASE_URL + "?ref=" + user?.referralCode
-                      );
-                      toast.success("Copied");
-                    }}
-                    className="md:text-base text-sm md:text-start text-end font-semibold text-[#0039CC] underline underline-offset-8 pt-1 whitespace-pre"
-                  >
-                    העתק קישור להזמנה
-                  </button>
-                  <Link href="/membership" className="mt-2 block text-[#0039CC] underline">View Memebership Card</Link>
                 </div>
                 <div className="md:text-end text-center md:w-auto w-full">
                   {sessionUser?.image ? (
@@ -334,12 +336,34 @@ function Profile() {
                     />
                   )}
                   <div className="mt-4">{user?.email || user?.userName}</div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        BASE_URL + "?ref=" + user?.referralCode
+                      );
+                      toast.success("Copied");
+                    }}
+                    className="md:text-base text-sm md:text-start text-end font-semibold text-[#0039CC] underline underline-offset-4  whitespace-pre"
+                  >
+                    העתק קישור להזמנה
+                  </button>
+                  <Link href="/membership" className="mt-1 block text-[#0039CC] underline">View Memebership Card</Link>
+
                 </div>
               </div>
             </div>
             <hr className="border-b border-black my-5" />
-            <div>
-              <div className="flex justify-between mb-4">
+            <div className="text-end">
+              <div className="inline-flex mb-4">
+                <button type="button" onClick={() => { setTab(1) }}
+                  className={`${tab === 1 ? "bg-primary text-white border-primary" : "bg-gray-100 hover:bg-primary hover:bg-opacity-5  hover:border-primary border-gray-100"} border-e-0 rounded-s-lg border font-medium min-w-36 px-2 py-2`}>Earnings</button>
+                <button type="button" onClick={() => { setTab(0) }}
+                  className={`${tab === 0 ? "bg-primary text-white border-primary" : "bg-gray-100 hover:bg-primary hover:bg-opacity-5  hover:border-primary border-gray-100"} border-s-0 rounded-e-lg border font-medium min-w-36 px-2 py-2`}>חברים שהצטרפו דרכי</button>
+              </div>
+            </div>
+            {tab === 0 && <div>
+              <div className="flex md:flex-row flex-col md:justify-between justify-end gap-4 mb-4">
                 <button
                   type="button"
                   onClick={() => {
@@ -451,7 +475,32 @@ function Profile() {
                   </div>
                 )}
               </div>
-            </div>
+            </div>}
+
+            {tab === 1 && <div className="pb-8" style={{ direction: "rtl" }} >
+              <div className='w-full overflow-x-auto'>
+                <table className='md:w-full w-max'>
+                  <thead>
+                    <tr>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Type
+                      </th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Date</th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Amount</th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Detail</th>
+                    </tr>
+                  </thead>
+                  <tbody> {(pays && pays.length > 0) ? pays.map((e, index) => {
+                    return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
+                      <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type}</td>
+                      <td className='py-2 px-3 border border-gray-300'>{formatDate(Date(), "dd/MM/yyyy")}</td>
+                      <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.amount}</td>
+                      <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.details}</td>
+                    </tr>
+                  }) : <tr><td colSpan={4} className='text-center'><NoData /></td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            </div>}
           </div>
         </div>
       )}

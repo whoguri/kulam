@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { currency } from "../constents/constArray"
 
 export default function DiscountList() {
     const { id } = useParams()
@@ -37,7 +38,7 @@ export default function DiscountList() {
 
                 <div className="flex items-center justify-center gap-2">
                     <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{discount.name} :</div>
-                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">₪{discount.amount}</div>
+                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{currency}{discount.amount}</div>
                 </div>
                 {discount.image &&
                     <div className="py-4">

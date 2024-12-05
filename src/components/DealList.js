@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
+import { currency } from "../constents/constArray"
 export default function DealsList() {
     const { id } = useParams()
     const [deal, setDeal] = useState()
@@ -36,7 +36,7 @@ export default function DealsList() {
             {loading ? <Loading /> : <div className="md:p-8 p-4 bg-white rounded-xl 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh] md:w-[70%] w-full mx-auto">
                 <div className="flex items-center justify-center gap-2">
                     <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{deal.name} :</div>
-                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">₪{deal.amount}</div>
+                    <div className="text-center md:text-[46px] text-3xl leading-normal font-bold capitalize">{currency}{deal.amount}</div>
                 </div>
                 {deal.image &&
                     <div className="py-4">

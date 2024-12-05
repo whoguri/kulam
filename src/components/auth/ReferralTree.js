@@ -1,6 +1,7 @@
 import { sortArray } from "helper";
 import { useState, useEffect } from "react";
 import InfoModal from './InfoModal';
+import { currency } from "@/constents/constArray";
 
 function ReferralNodeN({ node, level, search }) {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -57,7 +58,7 @@ function ReferralNodeN({ node, level, search }) {
                                 {referrals.length}
                             </span>
                         )}
-                        ₪2000
+                        {currency}2000
                     </span> - {node.name || node.userName}
                 </h3>
             </div>

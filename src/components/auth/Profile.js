@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { formatDate } from "date-fns";
 import { useRouter } from "next/navigation";
-import { BASE_URL } from "@/constents/constArray";
+import { BASE_URL, currency } from "@/constents/constArray";
 import axios from "axios";
 import { getError } from "helper";
 import Loading from "../Loading";
@@ -17,7 +17,7 @@ import ChangePassword from "./ChangePassword";
 import AddReferralUser from "./AddReferralUser";
 import Link from "next/link";
 import NoData from "../NoData";
-
+import GetSubscriptionModal from "./GetSubscriptionModal"
 let timeOut = null;
 
 function Profile() {
@@ -32,6 +32,7 @@ function Profile() {
   const [sending, setSending] = useState(false);
   const [treeData, setTreeData] = useState([]);
   const [openPwModal, setOpenPwModal] = useState(false);
+  const [openSubsriptionModal, setOpenSubsriptionModal] = useState(false);
   const [openRefrallModal, setOpenRefrallModal] = useState(false);
   const [treeCount, setTreeCount] = useState(0);
   const [allCount, setAllCount] = useState(0);
@@ -39,7 +40,7 @@ function Profile() {
   const [page, setPage] = useState(0);
   const [tab, setTab] = useState(0);
   const [pays, setPays] = useState(false)
-
+  const [isSubscribed, setIsSubscribed] = useState(false)
   const limit = 20;
   const {
     register,
@@ -55,6 +56,9 @@ function Profile() {
       getTree(0);
       getTreeCount();
       getPays()
+      if (sessionUser?.subscriptions.length > 0) {
+        setIsSubscribed(true)
+      }
     } else if (status === "unauthenticated") {
       router.push("/");
     }
@@ -148,12 +152,28 @@ function Profile() {
     }, 500);
   };
 
+  const cancelSubscription = async () => {
+    try {
+      let yes = confirm("Are you sure to cancel your subscriptions?")
+      if (yes) {
+        setIsSubscribed(false)
+        let res = await axios.delete("/api/auth/subscription")
+        toast.success("Subscription Cancelled")
+      }
+    } catch (error) {
+      toast.error(getError(error))
+    }
+  }
   return (
     <div>
       {loading ? (
         <Loading />
       ) : (
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-10">
+          {openSubsriptionModal && <GetSubscriptionModal
+            onClose={() => {
+              setOpenSubsriptionModal(false)
+            }} />}
           {openPwModal && (
             <ChangePassword
               onClose={() => {
@@ -277,7 +297,7 @@ function Profile() {
                     formProps={{ ...register("socialId", { required: false }) }}
                   />
                 </div>
-                <div>
+                <div className="flex gap-2">
                   <button
                     disabled={sending}
                     type="submit"
@@ -285,16 +305,7 @@ function Profile() {
                   >
                     {sending ? "שומר.." : "שמירה"}
                   </button>
-                  {sessionUser.loginType === "PASSWORD" && (
-                    <button
-                      disabled={sending}
-                      type="button"
-                      onClick={() => setOpenPwModal(true)}
-                      className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4"
-                    >
-                      Change Password
-                    </button>
-                  )}
+
                 </div>
               </form>
 
@@ -311,11 +322,11 @@ function Profile() {
                   <div className="capitalize md:text-xl text-base mt-4">
                     ההכנסות שלי
                   </div>
-                  <div className="capitalize md:text-base text-sm">₪{user?.total || 0}</div>
+                  <div className="capitalize md:text-base text-sm">{currency}{currency}{user?.total || 0}</div>
                   <div className="capitalize md:text-xl text-base mt-4">
                     Balance
                   </div>
-                  <div className="capitalize md:text-base text-sm">₪{user?.balance || 0}</div>
+                  <div className="capitalize md:text-base text-sm">{currency}{user?.balance || 0}</div>
                 </div>
                 <div className="md:text-end text-center md:w-auto w-full">
                   {sessionUser?.image ? (
@@ -352,6 +363,33 @@ function Profile() {
 
                 </div>
               </div>
+            </div>
+            <div className="flex justify-center mt-4">
+              {sessionUser.loginType === "PASSWORD" && (
+                <button
+                  disabled={sending}
+                  type="button"
+                  onClick={() => setOpenPwModal(true)}
+                  className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4"
+                >
+                  Change Password
+                </button>
+              )}
+
+              <button
+                disabled={sending}
+                type="button"
+                onClick={() => {
+                  if (isSubscribed) {
+                    cancelSubscription()
+                  } else {
+                    setOpenSubsriptionModal(true)
+                  }
+                }}
+                className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4"
+              >
+                {isSubscribed ? "Cancel" : "Start"} Subscription
+              </button>
             </div>
             <hr className="border-b border-black my-5" />
             <div className="text-end">
@@ -493,7 +531,7 @@ function Profile() {
                     return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
                       <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type}</td>
                       <td className='py-2 px-3 border border-gray-300'>{formatDate(Date(), "dd/MM/yyyy")}</td>
-                      <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.amount}</td>
+                      <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{currency}{e.amount}</td>
                       <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.details}</td>
                     </tr>
                   }) : <tr><td colSpan={4} className='text-center'><NoData /></td></tr>}

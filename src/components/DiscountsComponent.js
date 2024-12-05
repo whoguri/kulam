@@ -12,6 +12,7 @@ import Layout from "./Layout";
 import NoData from "./NoData";
 import Link from "next/link";
 import Image from "next/image";
+import { currency } from "../constents/constArray"
 
 export default function DiscountsComponent() {
     const { data } = useSession()
@@ -111,12 +112,12 @@ function Item({ isAdmin, isAdvertiser, setSelId, setOpenDiscount, e, i }) {
             <Image src={e.image || "/placeholder.webp"} width={200} height={200} className="group-hover:scale-110 transition-all w-full h-36 object-cover object-center" placeholder="empty" />
             <div className="group">
                 <div className="absolute inset-0 top-24 bg-background bg-opacity-70 group-hover:hidden pb-3 pt-[2px]">
-                    <h2 className="text-base font-bold text-white">₪{e.amount}</h2>
+                    <h2 className="text-base font-bold text-white">{currency}{e.amount}</h2>
                     <p className="text-base font-semibold text-white leading-[1]">{e.name}</p>
                 </div>
             </div>
             <div className="group-hover:opacity-100 opacity-0 absolute inset-0 bg-background bg-opacity-70 text-white flex justify-center items-center flex-col transition-all duration-300">
-                <h2 className="subheading">₪{e.amount}</h2>
+                <h2 className="subheading">{currency}{e.amount}</h2>
                 <p className="paragraph">{e.name}</p>
             </div>
         </Link>

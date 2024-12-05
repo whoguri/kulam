@@ -1,10 +1,13 @@
 import prisma from "@/lib/prisma";
-import withAdmin from "@/middlewares/with-admin";
+import withSession from "@/middlewares/with-session";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const settings = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === "PUT") {
+            //@ts-ignore
+            if (req.user.role !== "admin")
+                return res.status(401).json(null);
             const { amountMonth, amountYear, gen_1, gen_2, gen_3, gen_1_p, gen_2_p, gen_3_p }: any = req.body;
             await prisma.setting.upsert({
                 where: { v: 0 },
@@ -24,4 +27,4 @@ const settings = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
 };
-export default withAdmin(settings)
+export default withSession(settings)

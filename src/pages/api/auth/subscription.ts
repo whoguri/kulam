@@ -90,6 +90,8 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
             }
 
             res.status(201).json(null);
+        } if (req.method === "DELETE") {
+            res.status(201).json(null);
         } else {
             res.status(404).json(null);
         }

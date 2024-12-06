@@ -28,8 +28,8 @@ function MembershipComponent() {
                     <svg className='md:w-5 md:h-5' xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="m4.296 12l8.492-8.727a.75.75 0 1 0-1.075-1.046l-9 9.25a.75.75 0 0 0 0 1.046l9 9.25a.75.75 0 1 0 1.075-1.046z" /></svg>            </span>
                 <span className='inline-flex'>Back</span>
             </Link>
-            {isSubscribed ? <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-20 h-screen flex justify-center items-center">
-                <div className="flex justify-center items-center bg-gray-100 rounded-xl p-3 md:w-auto w-full">
+            <div className="2xl:max-w-7xl xl:max-w-6xl max-w-[90%] mx-auto py-20 h-screen flex justify-center items-center">
+                {isSubscribed ? <div className="flex justify-center items-center bg-gray-100 rounded-xl p-3 md:w-auto w-full">
                     <div className="md:w-80 w-full bg-white rounded-lg shadow-lg px-6 py-20">
                         <div className='flex items-center justify-center gap-5 mb-4'>
 
@@ -77,10 +77,10 @@ function MembershipComponent() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div> : <div>
-                Start a subscription to get membership card
-            </div>}
+                </div> : <div>
+                    Start a subscription to get membership card
+                </div>}
+            </div>
         </div>}
     </div>
     )

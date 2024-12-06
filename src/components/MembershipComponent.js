@@ -11,7 +11,7 @@ function MembershipComponent() {
     const { data, status } = useSession()
     const router = useRouter()
     const user = data?.user || {}
-    const isSubscribed = user?.subscriptions.length > 0
+    const isSubscribed = user?.subscriptions?.length > 0
 
     useEffect(() => {
         if (status === "unauthenticated") {

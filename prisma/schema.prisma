@@ -150,26 +150,36 @@ model PayLog {
   details    String?
 }
 
+enum SubscriptionType {
+  FREE
+  MONTHLY
+  YEARLY
+}
+
 model Subscription {
-  id     String   @id @default(auto()) @map("_id") @db.ObjectId
-  userId String   @db.ObjectId
-  user   User     @relation(fields: [userId], references: [id])
-  amount Float
-  date   DateTime
-  expiry DateTime
+  id           String           @id @default(auto()) @map("_id") @db.ObjectId
+  userId       String           @db.ObjectId
+  user         User             @relation(fields: [userId], references: [id])
+  amount       Float
+  type         SubscriptionType
+  date         DateTime
+  expiry       DateTime
+  isCanceled   Boolean          @default(false)
+  isAutoRenew  Boolean
+  paymentToken String?
+  isManual     Boolean
 }
 
 model Setting {
-  id     String @id @default(auto()) @map("_id") @db.ObjectId
-  v      Int @unique
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  v           Int    @unique
   amountMonth Float
-  amountYear Float
-  gen_1  Int
-  gen_2  Int
-  gen_3  Int
+  amountYear  Float
+  gen_1       Int
+  gen_2       Int
+  gen_3       Int
 
-  gen_1_p  Float
-  gen_2_p  Float
-  gen_3_p  Float
-
+  gen_1_p Float
+  gen_2_p Float
+  gen_3_p Float
 }

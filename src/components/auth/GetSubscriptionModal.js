@@ -3,17 +3,16 @@ import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import Modal from '../Modal'
 import axios from 'axios'
-import { endOfDay, endOfMonth } from 'date-fns'
+import { addMonths, addYears, endOfDay, endOfMonth, subDays } from 'date-fns'
 import { toast } from 'react-toastify'
 import { getError } from 'helper'
-import Loading from '../Loading'
 import { currency } from '@/constents/constArray'
 
 function GetSubscriptionModal({ onClose }) {
     const [sending, setSending] = useState(false)
     const [prices, setPrices] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [selprice, setSelPrice] = useState('')
+    const [type, setSelPrice] = useState('')
 
     useEffect(() => {
         getPrices()
@@ -21,12 +20,27 @@ function GetSubscriptionModal({ onClose }) {
 
     const onSubscribe = async () => {
         try {
-            if (!selprice) {
-                toast.error("Select A Plan")
+            if (!type) {
+                toast.error("Select a plan")
                 return
             }
             setSending(true)
-            let res = await axios.post(`api/auth/subscription`, { amount: selprice, date: new Date(), expiry: (endOfDay(endOfMonth(new Date()))) })
+            let expiry = null
+            let amount = null
+            if (type === "MONTHLY") {
+                expiry = endOfDay(addMonths(new Date(), 1))
+                amount = prices.amountMonth
+            } else {
+                expiry = endOfDay(addYears(new Date(), 1))
+                amount = prices.amountYear
+            }
+            expiry = subDays(expiry, 1)
+
+            let res = await axios.post(`api/auth/subscription`, {
+                amount, date: new Date(),
+                expiry,
+                type: type
+            })
             if (res.status === 201) {
                 toast.success("Subscribed Successfully")
                 window.location.reload()
@@ -59,14 +73,14 @@ function GetSubscriptionModal({ onClose }) {
         </div> : <>
             <div className='grid grid-cols-2 gap-4 mb-6 mt-4'>
                 <button
-                    onClick={() => { setSelPrice(prices.amountMonth) }}
-                    className={`${selprice === prices.amountMonth ? "gradient-bg text-white " : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
+                    onClick={() => { setSelPrice("MONTHLY") }}
+                    className={`${type === "MONTHLY" ? "gradient-bg text-white " : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
                     <div> Monthly</div>
                     <div className='text-2xl font-medium'>{currency}{prices.amountMonth}</div>
                 </button>
                 <button
-                    onClick={() => { setSelPrice(prices.amountYear) }}
-                    className={`${selprice === prices.amountYear ? "gradient-bg text-white" : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
+                    onClick={() => { setSelPrice("YEARLY") }}
+                    className={`${type === "YEARLY" ? "gradient-bg text-white" : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
                     <div> Yearly</div>
                     <div className='text-2xl font-medium'>{currency}{prices.amountYear}</div>
                 </button>

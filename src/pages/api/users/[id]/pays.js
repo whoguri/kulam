@@ -1,10 +1,12 @@
 import prisma from "../../../../lib/prisma";
-import withAdmin from "../../../../middlewares/with-admin";
+import withSession from "../../../../middlewares/with-session";
 
 const user = async (req, res) => {
-    const id = req.query.id
+    let id = req.query.id
     try {
         if (req.method === "GET") {
+            if (req.user.role !== "admin")
+                id = req.user.id
             const pays = await prisma.payLog.findMany({
                 where: { userId: id }
             });
@@ -18,4 +20,4 @@ const user = async (req, res) => {
     }
 
 };
-export default withAdmin(user)
+export default withSession(user)

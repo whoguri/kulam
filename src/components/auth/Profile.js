@@ -41,6 +41,8 @@ function Profile() {
   const [tab, setTab] = useState(0);
   const [pays, setPays] = useState(false)
   const [isSubscribed, setIsSubscribed] = useState(false)
+  const subscription = (sessionUser?.subscriptions || [])[0]
+
   const limit = 20;
   const {
     register,
@@ -156,9 +158,10 @@ function Profile() {
     try {
       let yes = confirm("Are you sure to cancel your subscriptions?")
       if (yes) {
-        setIsSubscribed(false)
+        // setIsSubscribed(false)
         let res = await axios.delete("/api/auth/subscription")
         toast.success("Subscription Cancelled")
+        window.location.reload()
       }
     } catch (error) {
       toast.error(getError(error))
@@ -305,7 +308,16 @@ function Profile() {
                   >
                     {sending ? "שומר.." : "שמירה"}
                   </button>
-
+                  {sessionUser.loginType === "PASSWORD" && (
+                    <button
+                      disabled={sending}
+                      type="button"
+                      onClick={() => setOpenPwModal(true)}
+                      className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-background px-4 py-1  border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold mt-4"
+                    >
+                      Change Password
+                    </button>
+                  )}
                 </div>
               </form>
 
@@ -364,19 +376,8 @@ function Profile() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center mt-4">
-              {sessionUser.loginType === "PASSWORD" && (
-                <button
-                  disabled={sending}
-                  type="button"
-                  onClick={() => setOpenPwModal(true)}
-                  className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4"
-                >
-                  Change Password
-                </button>
-              )}
-
-              <button
+            <div className="flex justify-between items-center mt-4 p-4 border-grey border rounded-lg bg-gray-100 ">
+              {(!isSubscribed || subscription?.isAutoRenew) ? <button
                 disabled={sending}
                 type="button"
                 onClick={() => {
@@ -386,10 +387,13 @@ function Profile() {
                     setOpenSubsriptionModal(true)
                   }
                 }}
-                className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold mt-4"
+                className="disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold "
               >
                 {isSubscribed ? "Cancel" : "Start"} Subscription
-              </button>
+              </button> : <div></div>}
+              <div className="">
+                {isSubscribed ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : "No active Subscription"}
+              </div>
             </div>
             <hr className="border-b border-black my-5" />
             <div className="text-end">

@@ -9,8 +9,9 @@ import SelectBox from "./SelectBox"
 import { ROLES, STATUS } from "@/constents/constArray"
 import { getError } from "helper"
 import NoData from "./NoData"
-import { formatDate } from "date-fns"
+import { addMonths, endOfDay, formatDate, subDays } from "date-fns"
 import { useSession } from "next-auth/react"
+import { type } from "os"
 
 export default function UserModal({ onSave, onClose, id }) {
     const [loading, setLoading] = useState(true)
@@ -60,6 +61,7 @@ export default function UserModal({ onSave, onClose, id }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
+            delete data.subscriptions
             const res = await axios.put("/api/users/" + id, data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
@@ -98,7 +100,49 @@ export default function UserModal({ onSave, onClose, id }) {
         }
     }
     const registerOn = watch("registerOn")
+    const subscription = (watch("subscriptions") || [])[0]
+    const cancelSubscription = async () => {
+        try {
+            let yes = confirm("Are you sure to cancel subscriptions?")
+            if (yes) {
+                setSending(true)
+                let res = await axios.delete(`/api/users/${id}/subscription`)
+                toast.success("Subscription Cancelled")
+                setSending(false)
+                getUser()
+            }
+        } catch (error) {
+            setSending(false)
+            toast.error(getError(error))
+        }
+    }
+    const startSubscription = async () => {
+        try {
+            let yes = confirm("Are you sure to start subscriptions?")
+            if (yes) {
+                setSending(true)
+                let expiry = null
+                let amount = null
+                let type = "MONTHLY"
+                if (type === "MONTHLY") {
+                    expiry = endOfDay(addMonths(new Date(), 1))
+                    amount = 0//prices.amountMonth
+                } else {
+                    expiry = endOfDay(addYears(new Date(), 1))
+                    amount = 0//prices.amountYear
+                }
+                expiry = subDays(expiry, 1)
 
+                let res = await axios.post(`/api/users/${id}/subscription`, { date: new Date(), amount, expiry, type })
+                toast.success("Subscription Cancelled")
+                setSending(false)
+                getUser()
+            }
+        } catch (error) {
+            setSending(false)
+            toast.error(getError(error))
+        }
+    }
     return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading /> : <>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -137,6 +181,26 @@ export default function UserModal({ onSave, onClose, id }) {
                     <button disabled={sending} type='submit' className='bg-primary px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>
                         {sending ? "Saving" : "Save"}
                     </button>
+                </div>
+                <hr className='border-b border-gray-200 mt-4' />
+                <div className="flex justify-between items-center mt-4 p-4 border-grey border rounded-lg bg-gray-100 ">
+                    <div className="">
+                        {subscription ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : "No active Subscription"}
+                    </div>
+                    {<button
+                        disabled={sending}
+                        type="button"
+                        onClick={() => {
+                            if (subscription)
+                                cancelSubscription()
+                            else
+                                startSubscription()
+                        }}
+                        className="disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold "
+                    >
+                        {subscription ? "Cancel" : "Start"} Subscription
+                    </button>}
+
                 </div>
                 <hr className='border-b border-gray-200 mt-4' />
 

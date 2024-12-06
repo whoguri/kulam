@@ -4,15 +4,25 @@ import withSession from "@/middlewares/with-session";
 
 const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
+        //@ts-ignore
+        const id = req.user.id
         if (req.method === "POST") {
-            const { date, expiry } = req.body;
+            const { date, expiry, type } = req.body;
             if (!date || !expiry)
                 return res.status(400).json({ error: "Invalid data" });
-            //@ts-ignore
-            const id = req.user.id
+
             const setting = await prisma.setting.findFirst({ where: { v: 0 } })
             if (!setting)
                 return res.status(400).json({ error: "Invalid settings" });
+            const subscription = await prisma.subscription.findFirst({
+                where: {
+                    userId: id, isAutoRenew: true, isCanceled: false,
+                    date: { lte: new Date() },
+                    expiry: { gte: new Date() }
+                },
+            });
+            if (subscription)
+                res.status(400).json({ error: "Already has an Active subscription" });
 
             //verify payment
             const amount = setting!.amountMonth
@@ -38,10 +48,14 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
                 data: {
                     user: { connect: { id } },
                     amount,
+                    type,
+                    isManual: true,
+                    isAutoRenew: true,
                     date: new Date(date),
                     expiry: new Date(expiry),
                 }
             });
+
             if (user?.referredByUser && user?.referredByUser?.status === "active") {
                 const p = amount * (setting.gen_1_p / 100)
                 await prisma.payLog.create({
@@ -91,6 +105,27 @@ const subscription_ = async (req: NextApiRequest, res: NextApiResponse) => {
 
             res.status(201).json(null);
         } if (req.method === "DELETE") {
+            const user = await prisma.user.findUnique({
+                where: { id }, select: {
+                    status: true, id: true
+                }
+            });
+            const subscription = await prisma.subscription.findFirst({
+                where: {
+                    userId: id, isAutoRenew: true, isCanceled: false,
+                    date: { lte: new Date() },
+                    expiry: { gte: new Date() }
+                },
+            });
+            if (!subscription)
+                res.status(400).json({ error: "No active subscription" });
+
+            await prisma.subscription.updateMany({
+                where: {
+                    userId: id, isAutoRenew: true, isCanceled: false, date: { lte: new Date() },
+                    expiry: { gte: new Date() }
+                }, data: { isAutoRenew: false }
+            });
             res.status(201).json(null);
         } else {
             res.status(404).json(null);

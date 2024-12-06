@@ -25,7 +25,18 @@ const user = async (req, res) => {
             res.status(200).json(null);
         } else {
             const result = await prisma.user.findFirst({
-                where: { "id": id }, select: USER_SELECT
+                where: { "id": id },
+                // select: USER_SELECT,
+                include: {
+                    subscriptions: {
+                        take: 1,
+                        where: {
+                            isCanceled: false,
+                            date: { lte: new Date() },
+                            expiry: { gte: new Date() }
+                        }
+                    }
+                }
             });
             res.status(200).json(result);
         }

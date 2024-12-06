@@ -77,7 +77,7 @@ function MembershipComponent() {
                             </div>
                         </div>
                     </div>
-                </div> : <div className='py-4 px-10 text-xl text-red-600 text-center border border-gray-400 rounded-md bg-gray-100'>
+                </div> : <div className='md:py-4 py-3 md:px-10 px-4 md:text-xl text-lg whitespace-pre text-red-600 text-center border border-gray-400 rounded-md bg-gray-100'>
                     Start a subscription to get membership card
                 </div>}
             </div>

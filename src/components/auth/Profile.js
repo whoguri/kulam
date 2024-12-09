@@ -32,7 +32,7 @@ function Profile() {
   const [sending, setSending] = useState(false);
   const [treeData, setTreeData] = useState([]);
   const [openPwModal, setOpenPwModal] = useState(false);
-  const [openSubsriptionModal, setOpenSubsriptionModal] = useState(false);
+  const [openSubsriptionModal, setOpenSubsriptionModal] = useState(true);
   const [openRefrallModal, setOpenRefrallModal] = useState(false);
   const [treeCount, setTreeCount] = useState(0);
   const [allCount, setAllCount] = useState(0);

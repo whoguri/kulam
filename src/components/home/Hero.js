@@ -4,9 +4,16 @@ import Slider from "react-slick";
 import MobileImageSlider from "./MobileImageSlider";
 import DesktopSideImages from "./DesktopSideImages";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
+import GetSubscriptionModal from "../auth/GetSubscriptionModal";
 
 export default function Hero() {
   const [index, setIndex] = useState(0)
+  const { status, data } = useSession();
+  const sessionUser = data?.user || {};
+  const showSubscription = ((sessionUser?.subscriptions || []).length === 0 && status === "authenticated")
+  const [openSubsriptionModal, setOpenSubsriptionModal] = useState(false);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -87,9 +94,29 @@ export default function Hero() {
     { title: "מוצרי אלקטרוניקה", img: "7.jpeg" },
     { title: "רהיטים", img: "8.jpeg" },
   ];
+
   return (
     <>
       <div>
+        {openSubsriptionModal && <GetSubscriptionModal
+          onClose={() => {
+            setOpenSubsriptionModal(false)
+          }} />}
+
+        {showSubscription && <div className="2xl:max-w-7xl xl:max-w-6xl max-w-full mx-auto pt-10">
+          <div className="md:p-10 p-4 bg-white bg-opacity-65 rounded-xl md:w-[70%] w-[90%] mx-auto">
+            <div className="flex md:flex-row flex-col-reverse items-center justify-between">
+              <button
+                type="button"
+                onClick={() => {
+                  setOpenSubsriptionModal(true)
+                }} className="disabled:pointer-events-none disabled:opacity-80 bg-background px-6 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:bg-opacity-25 hover:text-background font-semiboldlg md:mt-0 mt-2">Start Subscription</button>
+
+              <div className="md:text-4xl text-xl">Start subscription to get benefits</div>
+            </div>
+          </div>
+        </div>}
+
         <div className="2xl:max-w-7xl xl:max-w-6xl max-w-full mx-auto py-10">
           <div className="md:flex gap-10 w-full">
             <div className="md:w-[15%] w-full flex md:flex-col flex-row md:gap-10 gap-3 justify-between md:mb-0 mb-5 overflow-hidden">
@@ -113,7 +140,7 @@ export default function Hero() {
                       </div>
                       <div className="text-end md:w-[70%] w-full md:pt-0 pt-1">
                         <h2 className="subheading">{e.title}</h2>
-                        <div className=" md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-end rtl">
+                        <div className="md:text-xl md:font-thin paragraph 2xl:pt-4 xl:pt-4 pt-2 text-end rtl">
                           {e.subtitle.split("\n\n").map((paragraph, pIndex) => (
                             <p key={pIndex} className="mb-4">
                               {paragraph.trim()}

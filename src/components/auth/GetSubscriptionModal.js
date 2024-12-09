@@ -7,6 +7,7 @@ import { addMonths, addYears, endOfDay, endOfMonth, subDays } from 'date-fns'
 import { toast } from 'react-toastify'
 import { getError } from 'helper'
 import { currency } from '@/constents/constArray'
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js'
 
 function GetSubscriptionModal({ onClose }) {
     const [sending, setSending] = useState(false)
@@ -61,6 +62,38 @@ function GetSubscriptionModal({ onClose }) {
             toast.error(getError(error))
         }
     }
+    const initialOptions = {
+        clientId: "Abd-8Fo6S2lA0w4qoKuceeUemYAZKjGNkGZ4P6F_fH9rXuqW7bHz9z59ahJkpQULzXhplGYPrWqavm7I",
+        vault: true,
+        intent: "subscription",
+        environment: "sandbox",
+        currency: "IRS"
+
+    };
+    const styles = {
+        shape: "rect",
+        layout: "vertical",
+    };
+    const createSubscription = (data, actions) => {
+        console.log(data)
+        return actions.subscription.create({
+            "plan_id": "P-5KU0996439509601VM5LMD2Q"
+        });
+    }
+
+    const onApprove = (data) => {
+        console.log(data)
+        alert(`You have successfully subscribed to ${data.subscriptionID}`); // Optional message given to subscriber
+    }
+    const onError = (err) => {
+        console.log(err)
+        alert(`error ${err}`); // Optional message given to subscriber
+    }
+    const onCancel = (cc) => {
+        console.log(cc)
+        alert(`onCancel ${cc}`); // Optional message given to subscriber
+    }
+
     return (<Modal title="Subscription" onClose={onClose} >
         {loading ? <div>
             <span className='flex items-center justify-center my-10'>
@@ -85,8 +118,17 @@ function GetSubscriptionModal({ onClose }) {
                     <div className='text-2xl font-medium'>{currency}{prices.amountYear}</div>
                 </button>
             </div>
-            <button type='button' disabled={sending} onClick={() => { onSubscribe() }}
-                className='bg-primary mb-4 px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>Save</button>
+            {!type ? "Select Plan" : <PayPalScriptProvider
+                options={initialOptions}>
+                <PayPalButtons style={styles}
+                    createSubscription={createSubscription}
+                    onApprove={onApprove}
+                    onError={onError}
+                    onCancel={onCancel}
+                />
+            </PayPalScriptProvider>}
+            {/* <button type='button' disabled={sending} onClick={() => { onSubscribe() }}
+                className='bg-primary mb-4 px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>Save</button> */}
         </>}
     </Modal>
     )

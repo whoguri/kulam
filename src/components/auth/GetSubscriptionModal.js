@@ -106,13 +106,13 @@ function GetSubscriptionModal({ onClose }) {
                 <button
                     onClick={() => { setSelPrice("MONTHLY") }}
                     className={`${type === "MONTHLY" ? "gradient-bg text-white " : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
-                    <div> Monthly</div>
+                    <div>Monthly</div>
                     <div className='text-2xl font-medium'>{currency}{prices.amountMonth}</div>
                 </button>
                 <button
                     onClick={() => { setSelPrice("YEARLY") }}
                     className={`${type === "YEARLY" ? "gradient-bg text-white" : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
-                    <div> Yearly</div>
+                    <div>Yearly</div>
                     <div className='text-2xl font-medium'>{currency}{prices.amountYear}</div>
                 </button>
             </div>

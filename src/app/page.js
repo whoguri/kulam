@@ -3,7 +3,6 @@ import Header from "@/components/Header"
 import HomeBanner from "@/components/home/HomeBanner"
 import { APP_NAME } from "@/constents/constArray";
 import prisma from "@/lib/prisma";
-
 export const metadata = {
   title: ` ${APP_NAME}`, description: "",
 };

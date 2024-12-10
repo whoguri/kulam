@@ -66,9 +66,7 @@ function GetSubscriptionModal({ onClose }) {
         clientId: "Abd-8Fo6S2lA0w4qoKuceeUemYAZKjGNkGZ4P6F_fH9rXuqW7bHz9z59ahJkpQULzXhplGYPrWqavm7I",
         vault: true,
         intent: "subscription",
-        environment: "sandbox",
-        currency: "IRS"
-
+        // currency: "USD"
     };
     const styles = {
         shape: "rect",
@@ -77,7 +75,7 @@ function GetSubscriptionModal({ onClose }) {
     const createSubscription = (data, actions) => {
         console.log(data)
         return actions.subscription.create({
-            "plan_id": "P-5KU0996439509601VM5LMD2Q"
+            "plan_id": "P-9X755875SJ295634JM5MBNCQ"
         });
     }
 

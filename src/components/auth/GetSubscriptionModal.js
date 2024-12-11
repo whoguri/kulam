@@ -73,22 +73,22 @@ function GetSubscriptionModal({ onClose }) {
         layout: "vertical",
     };
     const createSubscription = (data, actions) => {
-        console.log(data)
+        console.log("createSubscription", data)
         return actions.subscription.create({
             "plan_id": "P-9X755875SJ295634JM5MBNCQ"
         });
     }
 
     const onApprove = (data) => {
-        console.log(data)
+        console.log("appp", data)
         alert(`You have successfully subscribed to ${data.subscriptionID}`); // Optional message given to subscriber
     }
     const onError = (err) => {
-        console.log(err)
+        console.log("errr", err)
         alert(`error ${err}`); // Optional message given to subscriber
     }
     const onCancel = (cc) => {
-        console.log(cc)
+        console.log("calce", cc)
         alert(`onCancel ${cc}`); // Optional message given to subscriber
     }
 

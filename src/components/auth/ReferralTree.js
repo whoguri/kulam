@@ -58,7 +58,7 @@ function ReferralNodeN({ node, level, search }) {
                                 {referrals.length}
                             </span>
                         )}
-                        {currency}2000
+                        {currency}0
                     </span> - {node.name || node.userName}
                 </h3>
             </div>

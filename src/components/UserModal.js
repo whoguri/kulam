@@ -87,6 +87,7 @@ export default function UserModal({ onSave, onClose, id }) {
                 const res = await axios.post("/api/users/" + id + "/paid", {})
                 if (res.status === 201) {
                     toast.success("Updated Successfully")
+                    getUser()
                     getPays()
                 }
                 else {

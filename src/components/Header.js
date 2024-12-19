@@ -62,7 +62,7 @@ export default function Header() {
     MENU.push({ title: "משתמשים  - ניהול", link: "/users" })
   }
   if (status === "authenticated" && isAdmin) {
-    MENU.push({ title: "Settings", link: "/settings" })
+    MENU.push({ title: "הגדרות", link: "/settings" })
   }
   return (
     <>

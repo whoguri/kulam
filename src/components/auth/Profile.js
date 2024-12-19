@@ -371,7 +371,7 @@ function Profile() {
                   >
                     העתק קישור להזמנה
                   </button>
-                  <Link href="/membership" className="mt-1 block text-[#0039CC] underline">View Memebership Card</Link>
+                  <Link href="/membership" className="mt-1 block text-[#0039CC] underline">הצג כרטיס חבר  </Link>
 
                 </div>
               </div>

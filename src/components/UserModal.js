@@ -186,7 +186,7 @@ export default function UserModal({ onSave, onClose, id }) {
                 <hr className='border-b border-gray-200 mt-4' />
                 <div className="flex justify-between items-center mt-4 p-4 border-grey border rounded-lg bg-gray-100 ">
                     <div className="">
-                        {subscription ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : "No active Subscription"}
+                        {subscription ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : " פעיל ללא מנוי"}
                     </div>
                     {<button
                         disabled={sending}

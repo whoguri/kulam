@@ -315,7 +315,7 @@ function Profile() {
                       onClick={() => setOpenPwModal(true)}
                       className="ms-2 disabled:pointer-events-none disabled:opacity-80 bg-background px-4 py-1  border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold mt-4"
                     >
-                      Change Password
+                      שינוי סיסמה
                     </button>
                   )}
                 </div>
@@ -336,7 +336,7 @@ function Profile() {
                   </div>
                   <div className="capitalize md:text-base text-sm">{currency}{currency}{user?.total || 0}</div>
                   <div className="capitalize md:text-xl text-base mt-4">
-                    Balance
+                    יתרה
                   </div>
                   <div className="capitalize md:text-base text-sm">{currency}{user?.balance || 0}</div>
                 </div>
@@ -371,7 +371,7 @@ function Profile() {
                   >
                     העתק קישור להזמנה
                   </button>
-                  <Link href="/membership" className="mt-1 block text-[#0039CC] underline">View Memebership Card</Link>
+                  <Link href="/membership" className="mt-1 block text-[#0039CC] underline">הצג כרטיס חבר  </Link>
 
                 </div>
               </div>
@@ -389,17 +389,17 @@ function Profile() {
                 }}
                 className="disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold "
               >
-                {isSubscribed ? "Cancel" : "Start"} Subscription
+                {isSubscribed ? "בטל" : "התחל"} חברות
               </button> : <div></div>}
               <div className="">
-                {isSubscribed ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : "No active Subscription"}
+                {isSubscribed ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : "לא נמצא מנוי פעיל"}
               </div>
             </div>
             <hr className="border-b border-black my-5" />
             <div className="text-end">
               <div className="inline-flex mb-4">
                 <button type="button" onClick={() => { setTab(1) }}
-                  className={`${tab === 1 ? "bg-primary text-white border-primary" : "bg-gray-100 hover:bg-primary hover:bg-opacity-5  hover:border-primary border-gray-100"} border-e-0 rounded-s-lg border font-medium min-w-36 px-2 py-2`}>Earnings</button>
+                  className={`${tab === 1 ? "bg-primary text-white border-primary" : "bg-gray-100 hover:bg-primary hover:bg-opacity-5  hover:border-primary border-gray-100"} border-e-0 rounded-s-lg border font-medium min-w-36 px-2 py-2`}>הכנסות</button>
                 <button type="button" onClick={() => { setTab(0) }}
                   className={`${tab === 0 ? "bg-primary text-white border-primary" : "bg-gray-100 hover:bg-primary hover:bg-opacity-5  hover:border-primary border-gray-100"} border-s-0 rounded-e-lg border font-medium min-w-36 px-2 py-2`}>חברים שהצטרפו דרכי</button>
               </div>
@@ -524,11 +524,11 @@ function Profile() {
                 <table className='md:w-full w-max'>
                   <thead>
                     <tr>
-                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Type
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>סוג
                       </th>
-                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Date</th>
-                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Amount</th>
-                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Detail</th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>תאריך</th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>סכום</th>
+                      <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>פרטים</th>
                     </tr>
                   </thead>
                   <tbody> {(pays && pays.length > 0) ? pays.map((e, index) => {

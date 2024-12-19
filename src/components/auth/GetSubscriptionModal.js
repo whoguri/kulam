@@ -92,44 +92,81 @@ function GetSubscriptionModal({ onClose }) {
         alert(`onCancel ${cc}`); // Optional message given to subscriber
     }
 
-    return (<Modal title="Subscription" onClose={onClose} >
-        {loading ? <div>
-            <span className='flex items-center justify-center my-10'>
-                <svg className="animate-spin text-primary h-20 w-20" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                    <g fill="currentColor">
-                        <path fill-rule="evenodd" d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10" clip-rule="evenodd" opacity="0.2" />
-                        <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
-                    </g>
-                </svg></span>
-        </div> : <>
-            <div className='grid grid-cols-2 gap-4 mb-6 mt-4'>
-                <button
-                    onClick={() => { setSelPrice("MONTHLY") }}
-                    className={`${type === "MONTHLY" ? "gradient-bg text-white " : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
-                    <div>Monthly</div>
-                    <div className='text-2xl font-medium'>{currency}{prices.amountMonth}</div>
-                </button>
-                <button
-                    onClick={() => { setSelPrice("YEARLY") }}
-                    className={`${type === "YEARLY" ? "gradient-bg text-white" : ""} px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}>
-                    <div>Yearly</div>
-                    <div className='text-2xl font-medium'>{currency}{prices.amountYear}</div>
-                </button>
+    return (
+      <Modal title="הרשמה מאובטחת" onClose={onClose}>
+        {loading ? (
+          <div>
+            <span className="flex items-center justify-center my-10">
+              <svg
+                className="animate-spin text-primary h-20 w-20"
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 24 24"
+              >
+                <g fill="currentColor">
+                  <path
+                    fill-rule="evenodd"
+                    d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"
+                    clip-rule="evenodd"
+                    opacity="0.2"
+                  />
+                  <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
+                </g>
+              </svg>
+            </span>
+          </div>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 gap-4 mb-6 mt-4">
+              <button
+                onClick={() => {
+                  setSelPrice("MONTHLY");
+                }}
+                className={`${
+                  type === "MONTHLY" ? "gradient-bg text-white " : ""
+                } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
+              >
+                <div>חודשי</div>
+                <div className="text-2xl font-medium">
+                  {currency}
+                  {prices.amountMonth}
+                </div>
+              </button>
+              <button
+                onClick={() => {
+                  setSelPrice("YEARLY");
+                }}
+                className={`${
+                  type === "YEARLY" ? "gradient-bg text-white" : ""
+                } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
+              >
+                <div>שנתי</div>
+                <div className="text-2xl font-medium">
+                  {currency}
+                  {prices.amountYear}
+                </div>
+              </button>
             </div>
-            {!type ? "Select Plan" : <PayPalScriptProvider
-                options={initialOptions}>
-                <PayPalButtons style={styles}
-                    createSubscription={createSubscription}
-                    onApprove={onApprove}
-                    onError={onError}
-                    onCancel={onCancel}
+            {!type ? (
+              " בחירת חבילה"
+            ) : (
+              <PayPalScriptProvider options={initialOptions}>
+                <PayPalButtons
+                  style={styles}
+                  createSubscription={createSubscription}
+                  onApprove={onApprove}
+                  onError={onError}
+                  onCancel={onCancel}
                 />
-            </PayPalScriptProvider>}
+              </PayPalScriptProvider>
+            )}
             {/* <button type='button' disabled={sending} onClick={() => { onSubscribe() }}
                 className='bg-primary mb-4 px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>Save</button> */}
-        </>}
-    </Modal>
-    )
+          </>
+        )}
+      </Modal>
+    );
 }
 
 export default GetSubscriptionModal

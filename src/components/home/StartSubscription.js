@@ -18,9 +18,11 @@ export default function StartSubscription() {
                         type="button"
                         onClick={() => {
                             setOpenSubsriptionModal(true)
-                        }} className="disabled:pointer-events-none disabled:opacity-80 bg-background px-6 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:bg-opacity-25 hover:text-background font-semiboldlg md:mt-0 mt-2">Start Subscription</button>
+                        }} className="disabled:pointer-events-none disabled:opacity-80 bg-background px-6 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:bg-opacity-25 hover:text-background font-semiboldlg md:mt-0 mt-2">הרשמה כחבר</button>
 
-                    <div className="md:text-4xl text-xl">Start subscription to get benefits</div>
+                    <div className="md:text-4xl text-xl">
+                       הרשם כחבר ותהנה מהטבות
+                    </div>
                 </div>
             </div>
         </div>

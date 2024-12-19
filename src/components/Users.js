@@ -115,18 +115,18 @@ function Users() {
             <div className="md:p-8 p-4 bg-white rounded-xl w-full mx-auto 2xl:min-h-[70vh] xl:min-h-[50vh] min-h-[60vh]" style={{ direction: "rtl" }}>
                 <div className='flex items-center justify-between w-full'>
 
-                    <div className='text-base font-bold'>Count : {count}</div>
-                    <SelectBox defaultOption="Sort By" onChange={(e) => {
+                    <div className='text-base font-bold'>סה״כ : {count}</div>
+                    <SelectBox defaultOption="מיון לפי:" onChange={(e) => {
                         setSortBy(e.target.value)
                     }} value={sortBy} >
                         {[
-                            { title: "Newest First - Joining Date", value: "registerOn-d" },
-                            { title: "Oldest First - Joining Date", value: "registerOn-a" },
-                            { title: "Low to high - Total", value: "total-a" },
-                            { title: "High to Low - Total", value: "total-d" },
-                            { title: "Low to high - Balance", value: "balance-a" },
-                            { title: "High to low - Balance", value: "balance-d" },
-                            { title: "Name", value: "name" }].map((e, i) => {
+                            { title: "חדשים קודם - תאריך הצטרפות", value: "registerOn-d" },
+                            { title: "ישנים קודם - תאריך הצטרפות", value: "registerOn-a" },
+                            { title: "סיכום מנמוך לגבוה", value: "total-a" },
+                            { title: "סיכום מגבוה לנמוך", value: "total-d" },
+                            { title: "יתרה מנמוך לגבוה", value: "balance-a" },
+                            { title: "יתרה מגבוה לנמוך", value: "balance-d" },
+                            { title: "שם", value: "name" }].map((e, i) => {
                                 return <option value={e.value} key={e.value}>{e.title}</option>
                             })}
                     </SelectBox>

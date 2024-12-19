@@ -119,7 +119,7 @@ export default function UserModal({ onSave, onClose, id }) {
     }
     const startSubscription = async () => {
         try {
-            let yes = confirm("Are you sure to start subscriptions?")
+            let yes = confirm("האם להרשם כחבר?")
             if (yes) {
                 setSending(true)
                 let expiry = null
@@ -144,11 +144,11 @@ export default function UserModal({ onSave, onClose, id }) {
             toast.error(getError(error))
         }
     }
-    return (<Modal title="User" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="פרטי משתמש" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading /> : <>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid md:grid-cols-4 grid-cols-1 gap-3">
-                    <Input label="Name"
+                    <Input label="שם משתמש"
                         formProps={{ ...register("name", { required: true }) }} isRequired={true} errors={errors} clearErrors={clearErrors} />
 
                     <Input label="תעודת זהות"
@@ -180,13 +180,13 @@ export default function UserModal({ onSave, onClose, id }) {
                 </div>
                 <div className="flex items-end my-5">
                     <button disabled={sending} type='submit' className='bg-primary px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>
-                        {sending ? "Saving" : "Save"}
+                        {sending ? "שומר.." : "שמירה"}
                     </button>
                 </div>
                 <hr className='border-b border-gray-200 mt-4' />
                 <div className="flex justify-between items-center mt-4 p-4 border-grey border rounded-lg bg-gray-100 ">
                     <div className="">
-                        {subscription ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(AutoRenew)" : "(No AutoRenew)"}` : " פעיל ללא מנוי"}
+                        {subscription ? `Active subscription ${formatDate(subscription?.date, "dd/MM/yyyy")} - ${formatDate(subscription?.expiry, "dd/MM/yyyy")} ${subscription?.isAutoRenew ? "(חידוש אוטומטי)" : "(ללא חידוש אוטומטי)"}` : " פעיל ללא מנוי"}
                     </div>
                     {<button
                         disabled={sending}
@@ -199,7 +199,7 @@ export default function UserModal({ onSave, onClose, id }) {
                         }}
                         className="disabled:pointer-events-none disabled:opacity-80 bg-primary px-4 py-1  border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold "
                     >
-                        {subscription ? "Cancel" : "Start"} Subscription
+                        {subscription ? "ביטול" : "הרשמה ל"}מנוי
                     </button>}
 
                 </div>
@@ -208,23 +208,23 @@ export default function UserModal({ onSave, onClose, id }) {
                 <div className="flex items-start justify-between w-ful my-5">
                     <div className="flex items-center md:flex-nowrap flex-wrap md:gap-20 gap-4">
                         {registerOn && <div>
-                            <div className="text-sm font-bold">Joining Date</div>
+                            <div className="text-sm font-bold">תאריך הצטרפות</div>
                             <span className="text-base">{formatDate(registerOn, "dd/MM/yyyy")}</span>
                         </div>}
 
                         <div>
-                            <div className="text-sm font-bold">Balance</div>
+                            <div className="text-sm font-bold">יתרה</div>
                             <span className="text-base">{watch("balance") || 0}</span>
                         </div>
 
                         <div>
-                            <div className="text-sm font-bold">Total</div>
+                            <div className="text-sm font-bold">סה״כ</div>
                             <span className="text-base">{watch("total") || 0}</span>
                         </div>
                     </div>
                     <div className="flex items-center justify-end gap-5">
                         <div className="flex justify-end items-end">
-                            <button type="button" disabled={paySending} onClick={markPaid} className='disabled:pointer-events-none disabled:bg-gray-400 disabled:border-gray-400 bg-background px-2 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold'>Mark paid</button>
+                            <button type="button" disabled={paySending} onClick={markPaid} className='disabled:pointer-events-none disabled:bg-gray-400 disabled:border-gray-400 bg-background px-2 py-1 border border-background text-white rounded-md text-base uppercase hover:bg-white hover:text-background font-semibold'>שנה לשולם </button>
                         </div>
                     </div>
                 </div>
@@ -235,16 +235,16 @@ export default function UserModal({ onSave, onClose, id }) {
                     <table className='md:w-full w-max'>
                         <thead>
                             <tr>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Type
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>סוג
                                 </th>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Date</th>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Amount</th>
-                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>Detail</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>תאריך</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>סך</th>
+                                <th className='py-2 px-3 font-bold text-start align-top text-sm border border-gray-300'>פרטים</th>
                             </tr>
                         </thead>
                         <tbody> {(pays && pays.length > 0) ? pays.map((e, index) => {
                             return <tr key={e.id} className={`${index % 2 === 0 ? "bg-[#F9F9F9]" : "bg-white"} cursor-pointer text-sm`}>
-                                <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type}</td>
+                                <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.type === "EARN" ? "הכנסה" : "משיכה"}</td>
                                 <td className='py-2 px-3 border border-gray-300'>{formatDate(Date(), "dd/MM/yyyy")}</td>
                                 <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.amount}</td>
                                 <td className='py-2 px-3 md:overflow-hidden border border-gray-300'>{e.details}</td>

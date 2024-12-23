@@ -4,53 +4,35 @@ import { NextApiRequest, NextApiResponse } from "next";
 const pp = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         console.log(req.method)
-        console.log(req.body);
-
-        const s = {
-            id: 'WH-19973937YW279670F-02S63370HL636500Y',
+        console.log(">>>>>", req.body.toString());
+        const data = req.body;
+        const a = {
+            id: 'WH-18E47623P43947638-8DB26843Y1048423E',
             event_version: '1.0',
-            create_time: '2016-04-28T11:29:31Z',
-            resource_type: 'Agreement',
+            create_time: '2024-12-23T07:09:02.115Z',
+            resource_type: 'subscription',
+            resource_version: '2.0',
             event_type: 'BILLING.SUBSCRIPTION.CREATED',
-            summary: 'A billing subscription was created',
+            summary: 'Subscription created',
             resource: {
-                id: 'I-PE7JWXKGVN0R',
-                shipping_address: {
-                    recipient_name: 'Cool Buyer',
-                    line1: '3rd st',
-                    line2: 'cool',
-                    city: 'San Jose',
-                    state: 'CA',
-                    postal_code: '95112',
-                    country_code: 'US'
-                },
-                plan: {
-                    curr_code: 'USD',
-                    links: [],
-                    payment_definitions: [Array],
-                    merchant_preferences: [Object]
-                },
-                payer: {
-                    payment_method: 'paypal',
-                    status: 'verified',
-                    payer_info: [Object]
-                },
-                agreement_details: {
-                    outstanding_balance: [Object],
-                    num_cycles_remaining: '5',
-                    num_cycles_completed: '0',
-                    final_payment_due_date: '2017-11-30T10:00:00Z',
-                    failed_payment_count: '0'
-                },
-                description: 'desc',
-                state: 'Pending',
-                links: [[Object]],
-                start_date: '2016-04-30T07:00:00Z'
+                start_time: '2024-12-23T07:09:01Z',
+                quantity: '1',
+                create_time: '2024-12-23T07:09:01Z',
+                links: [[Object], [Object], [Object]],
+                id: 'I-5PDN2S7GJY1S',
+                plan_overridden: false,
+                plan_id: 'P-9X755875SJ295634JM5MBNCQ',
+                status: 'APPROVAL_PENDING'
             },
 
         }
 
 
+        // need user Id
+        console.log(">>>>>", data.resource.status, data.resource.custom_id);
+
+        // a.resource.status: 'APPROVAL_PENDING' | ''
+        // a.resource.custom_id
 
         res.status(201).json(true);
 

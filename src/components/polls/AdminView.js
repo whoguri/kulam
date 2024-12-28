@@ -89,9 +89,10 @@ function AdminView() {
                     </div>
 
                     <div style={{ direction: "rtl" }}>
-                        <Pagination count={count} limit={limit} page={page} setLimit={(l) => {
-                            getList(0, l)
-                        }}
+                        <Pagination count={count} limit={limit} page={page}
+                            setLimit={(l) => {
+                                getList(0, l)
+                            }}
                             setPage={(p) => {
                                 getList(p, limit)
                             }}

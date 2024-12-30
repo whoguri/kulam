@@ -29,7 +29,6 @@ export default function DealsComponent() {
         getList()
     }, [])
 
-
     const getList = async () => {
         try {
             const res = await axios.get("/api/deals")
@@ -87,7 +86,7 @@ export default function DealsComponent() {
                         <Slider {...settings}>
                             {chunkedList.map((chunk, chunkIndex) => (
                                 <div key={chunkIndex} className="!grid md:grid-cols-4 grid-cols-2 2xl:gap-5 xl:gap-5 gap-4">
-                                    {chunk.map((e, i) => <Item isAdmin={isAdmin} isAdvertiser={isAdvertiser} setSelId={setSelId}
+                                    {chunk.map((e, i) => <Item isAdmin={isAdmin} isAdvertiser={isAdvertiser} setSelId={setSelId} getList={getList}
                                         setOpenDeal={setOpenDeal} e={e} i={i} key={i} />)}
                                 </div>))}
                         </Slider>)
@@ -98,15 +97,44 @@ export default function DealsComponent() {
     </Layout >
 }
 
-function Item({ isAdmin, isAdvertiser, setSelId, setOpenDeal, e, i }) {
+function Item({ isAdmin, isAdvertiser, setSelId, setOpenDeal, e, i, getList }) {
+    let id = e.id
+    const [sending, setSending] = useState(false)
+
+    const deletDeal = async () => {
+        try {
+            let yes = confirm("Are you sure to delete Deal?")
+            if (yes) {
+                setSending(true)
+                let res = await axios.delete(`/api/deals/${id}`)
+                toast.success("Deal Deleted")
+                setSending(false)
+                getList()
+            }
+        } catch (error) {
+            setSending(false)
+            toast.error(getError(error))
+        }
+    }
     return <div key={i} className="group relative bg-white overflow-hidden  text-center rounded-lg">
-        {(isAdmin || isAdvertiser) && <button type="button" className="z-[2] absolute end-2 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm"
-            onClick={() => {
-                setSelId(e.id)
-                setOpenDeal(true)
-            }}>
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" width="1em" height="1em" viewBox="0 0 36 36"><path fill="currentColor" d="M33.87 8.32L28 2.42a2.07 2.07 0 0 0-2.92 0L4.27 23.2l-1.9 8.2a2.06 2.06 0 0 0 2 2.5a2 2 0 0 0 .43 0l8.29-1.9l20.78-20.76a2.07 2.07 0 0 0 0-2.92M12.09 30.2l-7.77 1.63l1.77-7.62L21.66 8.7l6 6ZM29 13.25l-6-6l3.48-3.46l5.9 6Z" className="clr-i-outline clr-i-outline-path-1" /><path fill="none" d="M0 0h36v36H0z" /></svg>
-        </button>}
+        {(isAdmin || isAdvertiser) && <div className="flex items-center gap-2">
+            <button type="button" className="z-[2] absolute end-2 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm"
+                onClick={() => {
+                    setSelId(e.id)
+                    setOpenDeal(true)
+                }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" width="1em" height="1em" viewBox="0 0 36 36"><path fill="currentColor" d="M33.87 8.32L28 2.42a2.07 2.07 0 0 0-2.92 0L4.27 23.2l-1.9 8.2a2.06 2.06 0 0 0 2 2.5a2 2 0 0 0 .43 0l8.29-1.9l20.78-20.76a2.07 2.07 0 0 0 0-2.92M12.09 30.2l-7.77 1.63l1.77-7.62L21.66 8.7l6 6ZM29 13.25l-6-6l3.48-3.46l5.9 6Z" className="clr-i-outline clr-i-outline-path-1" /><path fill="none" d="M0 0h36v36H0z" /></svg>
+            </button>
+
+            <button type="button" className="z-[2] absolute end-10 top-2 inline-flex justify-center items-center p-1 rounded-lg border border-primary-dark text-primary-dark 2xl:text-base text-sm"
+                disabled={sending}
+                onClick={() => {
+                    deletDeal()
+                }}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M7.616 20q-.672 0-1.144-.472T6 18.385V6H5V5h4v-.77h6V5h4v1h-1v12.385q0 .69-.462 1.153T16.384 20zM17 6H7v12.385q0 .269.173.442t.443.173h8.769q.23 0 .423-.192t.192-.424zM9.808 17h1V8h-1zm3.384 0h1V8h-1zM7 6v13z" /></svg>
+            </button>
+        </div>}
+
         {/* <Link href={`/deals/${e.id}`} className="block" >
             <Image src={e.image || "/placeholder.webp"} width={200} height={200} className="group-hover:scale-125 transition-all w-full h-36 object-cover object-center" placeholder="empty" />
             <div className="group-hover:opacity-100 opacity-0 absolute inset-0 bg-background bg-opacity-70 text-white flex justify-center items-center flex-col transition-all duration-300">

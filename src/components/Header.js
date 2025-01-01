@@ -43,7 +43,6 @@ export default function Header() {
     { title: "דילים", link: "/deals" },
     { title: "הנחות", link: "/discounts" },
     { title: "דרושים", link: "/hiring" },
-    { title: "Weekly Post", link: "/weekly-post" },
     { title: "שירותים", link: "/services" },
     { title: "צור קשר", link: "/contact" },
 
@@ -57,8 +56,9 @@ export default function Header() {
     MENU.splice(2, 0, { title: "סקרים", link: "/polls" })
   }
 
-
-
+  if (isAdmin) {
+    MENU.push({ title: "Weekly Post", link: "/weekly-post" })
+  }
   if (status === "authenticated" && isAdmin) {
     MENU.push({ title: "משתמשים  - ניהול", link: "/users" })
   }

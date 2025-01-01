@@ -11,7 +11,7 @@ export default function WeeklyPostComponent({ description }) {
     const isAdmin = user?.role === ADMIN
     const [openUser, setOpenUser] = useState(false)
 
-    return <Layout title="Post"
+    return <Layout title=" Weekly Post"
         buttonTitle={isAdmin && "edit"}
         onClickButton={() => { setOpenUser(true) }} >
 

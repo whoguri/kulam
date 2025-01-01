@@ -19,7 +19,7 @@ export default function ServiceModal({ onSave, onClose }) {
     const getService = async () => {
         try {
             const res = await axios.get("/api/services")
-            const data = res.data
+            const data = res.data || {}
             Object.keys(data || {}).forEach((e) => {
                 if (e !== "id") {
                     setValue(e, data[e])

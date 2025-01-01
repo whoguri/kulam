@@ -158,6 +158,6 @@ export default function HomeBanner({ deals = [] }) {
         height={50}
         className="md:w-[100px] w-[60px] max-h-20 mx-auto absolute top-0 z-10 md:-right-14 -right-8 rotate-180"
       />
-    </div>
+    </div >
   );
 }

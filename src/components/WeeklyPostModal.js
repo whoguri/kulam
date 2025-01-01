@@ -7,18 +7,18 @@ import { useForm } from "react-hook-form"
 import { getError } from "helper"
 import Loading from "./Loading"
 
-export default function HiringModal({ onSave, onClose }) {
+export default function WeeklyPostModal({ onSave, onClose }) {
     const [loading, setLoading] = useState(true)
     const [sending, setSending] = useState(false)
     const { register, handleSubmit, setValue, watch, clearErrors, formState: { errors } } = useForm({})
 
     useEffect(() => {
-        getHiring()
+        getPost()
     }, [])
 
-    const getHiring = async () => {
+    const getPost = async () => {
         try {
-            const res = await axios.get("/api/hiring")
+            const res = await axios.get("/api/post")
             const data = res.data || {}
             Object.keys(data).forEach((e) => {
                 if (e !== "id") {
@@ -36,7 +36,7 @@ export default function HiringModal({ onSave, onClose }) {
     const onSubmit = async (data) => {
         try {
             setSending(true)
-            const res = await axios.put("/api/hiring", data)
+            const res = await axios.put("/api/post", data)
             if (res.status === 200) {
                 toast.success("Updated Successfully")
                 onSave()
@@ -53,7 +53,7 @@ export default function HiringModal({ onSave, onClose }) {
         }
     }
 
-    return (<Modal title="Hiring" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="Weekly" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading style={{ background: "transparent", height: "400px" }} /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-7">

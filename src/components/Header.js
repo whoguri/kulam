@@ -43,6 +43,7 @@ export default function Header() {
     { title: "דילים", link: "/deals" },
     { title: "הנחות", link: "/discounts" },
     { title: "דרושים", link: "/hiring" },
+    { title: "Weekly Post", link: "/weekly-post" },
     { title: "שירותים", link: "/services" },
     { title: "צור קשר", link: "/contact" },
 

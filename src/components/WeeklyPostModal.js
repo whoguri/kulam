@@ -53,7 +53,7 @@ export default function WeeklyPostModal({ onSave, onClose }) {
         }
     }
 
-    return (<Modal title="Weekly" maxWidth="max-w-[800px]" onClose={onClose}>
+    return (<Modal title="Weekly Post" maxWidth="max-w-[800px]" onClose={onClose}>
         {loading ? <Loading style={{ background: "transparent", height: "400px" }} /> :
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-7">

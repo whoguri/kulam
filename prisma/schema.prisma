@@ -108,6 +108,7 @@ model Discount {
 enum AC_TYPE {
   HIRING
   SERVICES
+  WEEKLY_POST
 }
 
 model AppContent {

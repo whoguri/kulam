@@ -34,7 +34,7 @@ const pp = async (req: NextApiRequest, res: NextApiResponse) => {
         // a.resource.status: 'APPROVAL_PENDING' | ''
         // a.resource.custom_id
 
-        res.status(201).json(true);
+        res.status(200).json({ custom_id: "xx", status: "success" });
 
     } catch (err: any) {
         console.error(err.response?.data)

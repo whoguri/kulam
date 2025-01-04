@@ -63,7 +63,8 @@ function GetSubscriptionModal({ onClose }) {
     }
   }
   const initialOptions = {
-    clientId: "Abd-8Fo6S2lA0w4qoKuceeUemYAZKjGNkGZ4P6F_fH9rXuqW7bHz9z59ahJkpQULzXhplGYPrWqavm7I",
+    clientId: "ActmwXMlbK7OaYvesGH6RlYJV9YbimFXY7057NuVCCQ9kK7oRckK47TQX3mr_E0Nr9YCtT0tK1zVPTUn",
+    // "Abd-8Fo6S2lA0w4qoKuceeUemYAZKjGNkGZ4P6F_fH9rXuqW7bHz9z59ahJkpQULzXhplGYPrWqavm7I",
     vault: true,
     intent: "subscription",
     // currency: "USD"
@@ -75,9 +76,9 @@ function GetSubscriptionModal({ onClose }) {
   const createSubscription = (data, actions) => {
     console.log("createSubscription", data)
     return actions.subscription.create({
-      "plan_id": "P-9X755875SJ295634JM5MBNCQ",
-      "uid": "1234567890",
-      "custom_id": "1234567890"
+      // "plan_id": "P-9X755875SJ295634JM5MBNCQ",
+      "plan_id": "P-5GV5199009134610RM54R3GY",
+      "custom_id": "1234567890_M"
     });
   }
 

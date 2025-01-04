@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 const pp = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         console.log(req.method)
-        console.log(">>>>>", req.body.toString());
+        console.log(">>>>>", JSON.stringify(req.body.toString()));
         const data = req.body;
         const a = {
             id: 'WH-18E47623P43947638-8DB26843Y1048423E',
@@ -29,7 +29,7 @@ const pp = async (req: NextApiRequest, res: NextApiResponse) => {
 
 
         // need user Id
-        console.log(">>>>>", data.resource.status, data.resource.custom_id);
+        console.log(">>>>>", data.resource?.status, data.resource?.custom_id);
 
         // a.resource.status: 'APPROVAL_PENDING' | ''
         // a.resource.custom_id

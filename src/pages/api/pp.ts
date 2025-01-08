@@ -1,10 +1,14 @@
-import prisma from "@/lib/prisma";
+// import prisma from "@/lib/prisma";
 import { NextApiRequest, NextApiResponse } from "next";
+import { send } from "@/mailer";
+
 
 const pp = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        console.log(req.method)
-        console.log(">>>>>", JSON.stringify(req.body.toString()));
+        console.log(">>>>>", req.method)
+        console.log(">>>>>", JSON.stringify(req.body));
+        send("whoguri@fkointech.com", "pp data", `<div>${req.method}: ${JSON.stringify(req.body)}</div>`)
+
         const data = req.body;
         const a = {
             id: 'WH-18E47623P43947638-8DB26843Y1048423E',

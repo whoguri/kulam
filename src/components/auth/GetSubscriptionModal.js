@@ -14,6 +14,7 @@ function GetSubscriptionModal({ onClose }) {
   const [prices, setPrices] = useState(null)
   const [loading, setLoading] = useState(true)
   const [type, setSelPrice] = useState('')
+  const [view, setView] = useState("payment")
 
   useEffect(() => {
     getPrices()
@@ -83,91 +84,104 @@ function GetSubscriptionModal({ onClose }) {
   }
 
   const onApprove = (data) => {
-    console.log("appp", data)
-    alert(`You have successfully subscribed to ${data.subscriptionID}`); // Optional message given to subscriber
+    setView("processing")
+    setTimeout(() => {
+      setView("thanks")
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000 * 5);
+    }, 1000 * 5);
   }
+
   const onError = (err) => {
-    console.log("errr", err)
-    alert(`error ${err}`); // Optional message given to subscriber
+    toast.error("Payment failed. Try again after sometime."); // Optional message given to subscriber
   }
   const onCancel = (cc) => {
-    console.log("calce", cc)
-    alert(`onCancel ${cc}`); // Optional message given to subscriber
+    // alert(`onCancel ${cc}`); // Optional message given to subscriber
   }
 
   return (
-    <Modal title="הרשמה מאובטחת" onClose={onClose}>
-      {loading ? (
-        <div>
-          <span className="flex items-center justify-center my-10">
-            <svg
-              className="animate-spin text-primary h-20 w-20"
-              xmlns="http://www.w3.org/2000/svg"
-              width="1em"
-              height="1em"
-              viewBox="0 0 24 24"
-            >
-              <g fill="currentColor">
-                <path
-                  fill-rule="evenodd"
-                  d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"
-                  clip-rule="evenodd"
-                  opacity="0.2"
+    <Modal title="הרשמה מאובטחת" onClose={onClose} closeButton={view === "payment" ? true : false}>
+      {view === "payment" && <>
+        {loading ? <Loading /> : (
+          <>
+            <div className="grid grid-cols-2 gap-4 mb-6 mt-4">
+              <button
+                onClick={() => {
+                  setSelPrice("MONTHLY");
+                }}
+                className={`${type === "MONTHLY" ? "gradient-bg text-white " : ""
+                  } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
+              >
+                <div>חודשי</div>
+                <div className="text-2xl font-medium">
+                  {currency}
+                  {prices.amountMonth}
+                </div>
+              </button>
+              <button
+                onClick={() => {
+                  setSelPrice("YEARLY");
+                }}
+                className={`${type === "YEARLY" ? "gradient-bg text-white" : ""
+                  } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
+              >
+                <div>שנתי</div>
+                <div className="text-2xl font-medium">
+                  {currency}
+                  {prices.amountYear}
+                </div>
+              </button>
+            </div>
+            {!type ? (
+              " בחירת חבילה"
+            ) : (
+              <PayPalScriptProvider options={initialOptions}>
+                <PayPalButtons
+                  style={styles}
+                  createSubscription={createSubscription}
+                  onApprove={onApprove}
+                  onError={onError}
+                  onCancel={onCancel}
                 />
-                <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
-              </g>
-            </svg>
-          </span>
-        </div>
-      ) : (
-        <>
-          <div className="grid grid-cols-2 gap-4 mb-6 mt-4">
-            <button
-              onClick={() => {
-                setSelPrice("MONTHLY");
-              }}
-              className={`${type === "MONTHLY" ? "gradient-bg text-white " : ""
-                } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
-            >
-              <div>חודשי</div>
-              <div className="text-2xl font-medium">
-                {currency}
-                {prices.amountMonth}
-              </div>
-            </button>
-            <button
-              onClick={() => {
-                setSelPrice("YEARLY");
-              }}
-              className={`${type === "YEARLY" ? "gradient-bg text-white" : ""
-                } px-4 py-6 border rounded-lg border-primary hover:bg-slate-100`}
-            >
-              <div>שנתי</div>
-              <div className="text-2xl font-medium">
-                {currency}
-                {prices.amountYear}
-              </div>
-            </button>
-          </div>
-          {!type ? (
-            " בחירת חבילה"
-          ) : (
-            <PayPalScriptProvider options={initialOptions}>
-              <PayPalButtons
-                style={styles}
-                createSubscription={createSubscription}
-                onApprove={onApprove}
-                onError={onError}
-                onCancel={onCancel}
-              />
-            </PayPalScriptProvider>
-          )}
-          {/* <button type='button' disabled={sending} onClick={() => { onSubscribe() }}
+              </PayPalScriptProvider>
+            )}
+            {/* <button type='button' disabled={sending} onClick={() => { onSubscribe() }}
                 className='bg-primary mb-4 px-4 py-1 border border-primary text-white rounded-md text-base uppercase hover:bg-white hover:text-primary font-semibold'>Save</button> */}
-        </>
-      )}
+          </>
+        )}
+      </>}
+      {view === "processing" && <Loading />}
+      {view === "thanks" && <div className='text-lg text-center py-10'>
+        You have successfully subscribed.
+      </div>}
     </Modal>
   );
 }
 
 export default GetSubscriptionModal
+
+
+const Loading = () => {
+  return <div>
+    <span className="flex items-center justify-center my-10">
+      <svg
+        className="animate-spin text-primary h-20 w-20"
+        xmlns="http://www.w3.org/2000/svg"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+      >
+        <g fill="currentColor">
+          <path
+            fill-rule="evenodd"
+            d="M12 19a7 7 0 1 0 0-14a7 7 0 0 0 0 14m0 3c5.523 0 10-4.477 10-10S17.523 2 12 2S2 6.477 2 12s4.477 10 10 10"
+            clip-rule="evenodd"
+            opacity="0.2"
+          />
+          <path d="M2 12C2 6.477 6.477 2 12 2v3a7 7 0 0 0-7 7z" />
+        </g>
+      </svg>
+    </span>
+  </div>
+}
